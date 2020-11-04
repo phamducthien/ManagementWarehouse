@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{733477E2-DEB4-463A-86D0-CE108CE8B094}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WH.Service</RootNamespace>
+    <AssemblyName>WH.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.0.5022.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.1.0\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelLibrary">
+      <HintPath>..\DLL\ExcelLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="LinqKit, Version=1.1.8.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqKit.1.1.8.0\lib\net45\LinqKit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Service\NhapXuatService.cs" />
+    <Compile Include="Repository\HOADONNHAPXUATCHITIETRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\HOADONNHAPXUATRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\ExcelHoaDonModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\CARepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\CHIETKHAULOAIMATHANGRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\CHUCNANGRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\CONFIG_PRINTERRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Core\UnitOfWorkFactory.cs" />
+    <Compile Include="Repository\DONVIRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\HOADONHAPKHOCHITIETRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\HOADONNHAPKHORepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\HOADONXUATKHOCHITIETRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\HOADONXUATKHORepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\KHACHHANGKHUVUCRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\KHACHHANGNHOMRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\KHACHHANGRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\KHACHHANGTHEODOIDOANHTHURepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\KHOMATHANGRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\KHORepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\LOAIKHACHHANGRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\LOAIMATHANGRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\LOAINHANVIENRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\MATHANGKHUYENMAIRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\MATHANGRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\NGUOIDUNGRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\NGUOIDUNG_QUYENHANRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\NHACUNGCAPRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\NHANVIENRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\PHIEUCHIRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\PHIEUTHURepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\QUANLYTHETHEOKHACHHANGRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\CaRepositoryExtend.cs" />
+    <Compile Include="Repository\ChucNangRepositoryExtend.cs" />
+    <Compile Include="Repository\NguoiDungRepositoryExtend.cs" />
+    <Compile Include="Repository\NguoiDungQuyenHanRepositoryExtend.cs" />
+    <Compile Include="Repository\SETDATETIMERepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\TEMP_HOADONHAPKHOCHITIETRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\TEMP_HOADONNHAPKHORepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\TEMP_HOADONXUATKHOCHITIETRepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\TEMP_HOADONXUATKHORepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\THONGTINTHERepository.cs">
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\WH.Service.Repository.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WH.Service.Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\CAService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\CaServiceExtend.cs" />
+    <Compile Include="Service\CHIETKHAULOAIMATHANGService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\CHUCNANGService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\ConfigurationService.cs" />
+    <Compile Include="Service\CONFIG_PRINTERService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\ContextService.cs" />
+    <Compile Include="Service\DONVIService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\ExcelService.cs" />
+    <Compile Include="Service\HOADONHAPKHOCHITIETService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\HOADONNHAPKHOService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\HOADONNHAPXUATCHITIETService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\HOADONNHAPXUATService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\HOADONXUATKHOCHITIETService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\HOADONXUATKHOService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\KHACHHANGKHUVUCService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\KhachHangModelService.cs" />
+    <Compile Include="Service\KHACHHANGNHOMService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\KHACHHANGService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\KHACHHANGTHEODOIDOANHTHUService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\KHOMATHANGService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\KHOService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\LOAIKHACHHANGService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\LOAIMATHANGService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\LOAINHANVIENService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\MATHANGKHUYENMAIService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\MatHangModelService.cs" />
+    <Compile Include="Service\MATHANGService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\NGUOIDUNGService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\NGUOIDUNG_QUYENHANService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\NHACUNGCAPService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\NHANVIENService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\KhachTraHangService.cs" />
+    <Compile Include="Service\TienLaiService.cs" />
+    <Compile Include="Service\XuatKhoService.cs" />
+    <Compile Include="Service\NhapKhoService.cs" />
+    <Compile Include="Service\PHIEUCHIService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\PHIEUTHUService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\QUANLYTHETHEOKHACHHANGService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\SessionService.cs" />
+    <Compile Include="Service\SETDATETIMEService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\TEMP_HOADONHAPKHOCHITIETService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\TEMP_HOADONNHAPKHOService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\TEMP_HOADONXUATKHOCHITIETService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\TEMP_HOADONXUATKHOService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\THONGTINTHEService.cs">
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\WH.Service.Service.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WH.Service.Service.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Repository.Pattern.Ef6\Repository.Pattern.Ef6.csproj">
+      <Project>{f68a1d19-93fb-47c1-a22b-42bea3e4fd8c}</Project>
+      <Name>Repository.Pattern.Ef6</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Repository.Pattern\Repository.Pattern.csproj">
+      <Project>{6e682a14-c872-4813-b620-76e108dea683}</Project>
+      <Name>Repository.Pattern</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Service.Pattern\Service.Pattern.csproj">
+      <Project>{4efba6da-2e78-4ca6-90d6-782772b160cd}</Project>
+      <Name>Service.Pattern</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Util.Pattern\Util.Pattern.csproj">
+      <Project>{19B9A83D-7B8B-4842-B53F-CAF44FFCAAC6}</Project>
+      <Name>Util.Pattern</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WH.Entity\WH.Entity.csproj">
+      <Project>{6e0bba11-c557-498e-9c0d-d50215bdd17f}</Project>
+      <Name>WH.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WH.Model\WH.Model.csproj">
+      <Project>{ff1ffc67-4d1a-41b7-8e94-739fa7f52d33}</Project>
+      <Name>WH.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Repository\WH.Service.Repository.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>WH.Service.Repository.cs</LastGenOutput>
+    </Content>
+    <None Include="Resources\status1.png" />
+    <None Include="Resources\status2.png" />
+    <None Include="Resources\status3.png" />
+    <Content Include="Service\WH.Service.Service.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>WH.Service.Service.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

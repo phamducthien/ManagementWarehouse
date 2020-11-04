@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\MYLOVE\.Rider2017.3\system\resharper-host\local\Transient\ReSharperHost\v11\SolutionCaches\_QuanLyKhoV3.1356841400.00" t="ExcludeRecursive" />
+    <e p="D:\Projects\QLKho\ql-kho-ban-le\Source\QuanLyKhoV3" t="IncludeFlat">
+      <e p="Framework" t="Include">
+        <e p="Repository.Pattern" t="IncludeRecursive">
+          <e p="App_project.config" t="Include" />
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="DataContext" t="Include">
+            <e p="IDataContext.cs" t="Include" />
+            <e p="IDataContextAsync.cs" t="Include" />
+          </e>
+          <e p="Infrastructure" t="Include">
+            <e p="IObjectState.cs" t="Include" />
+            <e p="ObjectState.cs" t="Include" />
+          </e>
+          <e p="obj" t="ExcludeRecursive" />
+          <e p="packages.config" t="Include" />
+          <e p="Properties" t="Include">
+            <e p="Annotations.cs" t="Include" />
+            <e p="AssemblyInfo.cs" t="Include" />
+          </e>
+          <e p="Repositories" t="Include">
+            <e p="IQueryFluent.cs" t="Include" />
+            <e p="IQueryObject.cs" t="Include" />
+            <e p="IRepository.cs" t="Include" />
+            <e p="IRepositoryAsync.cs" t="Include" />
+          </e>
+          <e p="Repository.Pattern.csproj" t="IncludeRecursive" />
+          <e p="UnitOfWork" t="Include">
+            <e p="IUnitOfWork.cs" t="Include" />
+            <e p="IUnitOfWorkAsync.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Repository.Pattern.Ef6" t="IncludeRecursive">
+          <e p="App_project.config" t="Include" />
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="DataContext.cs" t="Include" />
+          <e p="Entity.cs" t="Include" />
+          <e p="Entity_Extend.cs" t="Include" />
+          <e p="FakeDbContext.cs" t="Include" />
+          <e p="FakeDbSet.cs" t="Include" />
+          <e p="obj" t="ExcludeRecursive" />
+          <e p="packages.config" t="Include" />
+          <e p="Properties" t="Include">
+            <e p="AssemblyInfo.cs" t="Include" />
+          </e>
+          <e p="QueryFluent.cs" t="Include" />
+          <e p="QueryObject.cs" t="Include" />
+          <e p="Repository.cs" t="Include" />
+          <e p="Repository.Pattern.Ef6.csproj" t="IncludeRecursive" />
+          <e p="StateHelper.cs" t="Include" />
+          <e p="UnitOfWork.cs" t="Include" />
+        </e>
+        <e p="Service.Pattern" t="IncludeRecursive">
+          <e p="App_project.config" t="Include" />
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="ErrorProvider.cs" t="Include" />
+          <e p="ILogWriter.cs" t="Include" />
+          <e p="MethodResult.cs" t="Include" />
+          <e p="obj" t="ExcludeRecursive" />
+          <e p="packages.config" t="Include" />
+          <e p="Properties" t="Include">
+            <e p="AssemblyInfo.cs" t="Include" />
+          </e>
+          <e p="Service.cs" t="Include" />
+          <e p="Service.Pattern.csproj" t="IncludeRecursive" />
+        </e>
+        <e p="Util.Pattern" t="IncludeRecursive">
+          <e p="App_project.config" t="Include" />
+          <e p="AppSetting.cs" t="Include" />
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="Connection" t="Include">
+            <e p="DbConnectionUtil.cs" t="Include" />
+            <e p="EntityConnectionUtil.cs" t="Include" />
+            <e p="ISqlConnectionUtil.cs" t="Include" />
+            <e p="SqlServerConnectionUtil.cs" t="Include" />
+          </e>
+          <e p="ConverterUtil.cs" t="Include" />
+          <e p="DateTimeUtil" t="Include">
+            <e p="DateTimeExtend.cs" t="Include" />
+          </e>
+          <e p="DynamicDictionary.cs" t="Include" />
+          <e p="EmbeddedInstall.cs" t="Include" />
+          <e p="Encryptor" t="Include">
+            <e p="FileCryptographyUtil.cs" t="Include" />
+            <e p="Security.cs" t="Include" />
+            <e p="StringCryptographyUtil.cs" t="Include" />
+          </e>
+          <e p="EnumUtil.cs" t="Include" />
+          <e p="ExtendMethod.cs" t="Include" />
+          <e p="HardwareInfo.cs" t="Include" />
+          <e p="ImageUtil.cs" t="Include" />
+          <e p="InternetChecker.cs" t="Include" />
+          <e p="obj" t="ExcludeRecursive" />
+          <e p="OsInfo.cs" t="Include" />
+          <e p="packages.config" t="Include" />
+          <e p="Printer" t="Include">
+            <e p="PrintByDriver.cs" t="Include" />
+            <e p="Printer_Util.cs" t="Include" />
+            <e p="PrinterStatus_Msg.cs" t="Include" />
+          </e>
+          <e p="Properties" t="Include">
+            <e p="AssemblyInfo.cs" t="Include" />
+          </e>
+          <e p="RunApplication.cs" t="Include" />
+          <e p="RuntimePolicyHelper.cs" t="Include" />
+          <e p="SQLServerHelper.cs" t="Include" />
+          <e p="Util.Pattern.csproj" t="IncludeRecursive" />
+        </e>
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="QuanLyKhoV3" t="IncludeRecursive">
+        <e p="app.config" t="Include" />
+        <e p="app.manifest" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+          <e p="Settings.Designer.cs" t="Include" />
+          <e p="Settings.settings" t="Include" />
+        </e>
+        <e p="QuanLyKhoV3.csproj" t="IncludeRecursive" />
+        <e p="sale.ico" t="Include" />
+      </e>
+      <e p="QuanLyKhoV3.sln" t="IncludeFlat" />
+      <e p="WH.Entity" t="IncludeRecursive">
+        <e p="app.config" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="CA.cs" t="Include" />
+        <e p="CHIETKHAULOAIMATHANG.cs" t="Include" />
+        <e p="CHUCNANG.cs" t="Include" />
+        <e p="CONFIG_PRINTER.cs" t="Include" />
+        <e p="DONVI.cs" t="Include" />
+        <e p="EntityExtends" t="Include">
+          <e p="EntityExtend.cs" t="Include" />
+          <e p="KHACHHANG.cs" t="Include" />
+          <e p="MATHANG.cs" t="Include" />
+        </e>
+        <e p="HOADONHAPKHOCHITIET.cs" t="Include" />
+        <e p="HOADONNHAPKHO.cs" t="Include" />
+        <e p="HOADONNHAPXUAT.cs" t="Include" />
+        <e p="HOADONNHAPXUATCHITIET.cs" t="Include" />
+        <e p="HOADONXUATKHO.cs" t="Include" />
+        <e p="HOADONXUATKHOCHITIET.cs" t="Include" />
+        <e p="KHACHHANG.cs" t="Include" />
+        <e p="KHACHHANGKHUVUC.cs" t="Include" />
+        <e p="KHACHHANGNHOM.cs" t="Include" />
+        <e p="KHACHHANGTHEODOIDOANHTHU.cs" t="Include" />
+        <e p="KHO.cs" t="Include" />
+        <e p="KHOMATHANG.cs" t="Include" />
+        <e p="LOAIKHACHHANG.cs" t="Include" />
+        <e p="LOAIMATHANG.cs" t="Include" />
+        <e p="LOAINHANVIEN.cs" t="Include" />
+        <e p="MATHANG.cs" t="Include" />
+        <e p="MATHANGKHUYENMAI.cs" t="Include" />
+        <e p="NGUOIDUNG.cs" t="Include" />
+        <e p="NGUOIDUNG_QUYENHAN.cs" t="Include" />
+        <e p="NHACUNGCAP.cs" t="Include" />
+        <e p="NHANVIEN.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="PHIEUCHI.cs" t="Include" />
+        <e p="PHIEUTHU.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="QUANLYTHETHEOKHACHHANG.cs" t="Include" />
+        <e p="SETDATETIME.cs" t="Include" />
+        <e p="StoredProcedureRepository.cs" t="Include" />
+        <e p="TEMP_HOADONHAPKHOCHITIET.cs" t="Include" />
+        <e p="TEMP_HOADONNHAPKHO.cs" t="Include" />
+        <e p="TEMP_HOADONXUATKHO.cs" t="Include" />
+        <e p="TEMP_HOADONXUATKHOCHITIET.cs" t="Include" />
+        <e p="THONGTINTHE.cs" t="Include" />
+        <e p="WarehouseManagementEntities.cs" t="Include" />
+        <e p="WH.Entity.csproj" t="IncludeRecursive" />
+        <e p="WHEntities.Context.cs" t="Include" />
+        <e p="WHEntities.Context.tt" t="Include" />
+        <e p="WHEntities.cs" t="Include" />
+        <e p="WHEntities.Designer.cs" t="Include" />
+        <e p="WHEntities.edmx" t="Include" />
+        <e p="WHEntities.edmx.diagram" t="Include" />
+        <e p="WHEntities.tt" t="Include" />
+      </e>
+      <e p="WH.GUI" t="IncludeRecursive">
+        <e p="app.config" t="Include" />
+        <e p="BaoCao" t="Include" />
+        <e p="BaseFrom" t="Include">
+          <e p="BaseForm.cs" t="Include" />
+          <e p="ExcelService.cs" t="Include" />
+          <e p="FrmBase.cs" t="Include" />
+          <e p="FrmBase.Designer.cs" t="Include" />
+          <e p="FrmBase.resx" t="Include" />
+          <e p="frmFlash.cs" t="Include" />
+          <e p="FrmFlash.designer.cs" t="Include" />
+          <e p="FrmFlash.resx" t="Include" />
+          <e p="FrmFlashChild.cs" t="Include" />
+          <e p="FrmFlashChild.designer.cs" t="Include" />
+          <e p="FrmFlashChild.resx" t="Include" />
+          <e p="InformationCompany.cs" t="Include" />
+          <e p="MsgBox.cs" t="Include" />
+          <e p="MsgBox.resx" t="Include" />
+          <e p="SplashScreen.cs" t="Include" />
+          <e p="SplashScreen.Designer.cs" t="Include" />
+          <e p="SplashScreen.resx" t="Include" />
+          <e p="SplashScreenChild.cs" t="Include" />
+          <e p="SplashScreenChild.Designer.cs" t="Include" />
+          <e p="SplashScreenChild.resx" t="Include" />
+          <e p="UIHelper.cs" t="Include" />
+          <e p="usrcBase.cs" t="Include" />
+          <e p="usrcBase.Designer.cs" t="Include" />
+          <e p="usrcBase.resx" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="CRReport" t="Include">
+          <e p="CRNhapKho.cs" t="Include" />
+          <e p="CRNhapKho.rpt" t="Include" />
+          <e p="CRXuatKho.cs" t="Include" />
+          <e p="CRXuatKho.rpt" t="Include" />
+          <e p="CRXuatKho1.cs" t="Include" />
+          <e p="CRXuatKho1.rpt" t="Include" />
+          <e p="DSNhapKho.Designer.cs" t="Include" />
+          <e p="DSNhapKho.xsc" t="Include" />
+          <e p="DSNhapKho.xsd" t="Include" />
+          <e p="DSNhapKho.xss" t="Include" />
+          <e p="DSXuatKho.cs" t="Include" />
+          <e p="DSXuatKho.Designer.cs" t="Include" />
+          <e p="DSXuatKho.xsc" t="Include" />
+          <e p="DSXuatKho.xsd" t="Include" />
+          <e p="DSXuatKho.xss" t="Include" />
+          <e p="FrmReportViewer.cs" t="Include" />
+          <e p="FrmReportViewer.Designer.cs" t="Include" />
+          <e p="FrmReportViewer.resx" t="Include" />
+        </e>
+        <e p="DanhMuc" t="Include">
+          <e p="FrmDonVi.cs" t="Include" />
+          <e p="FrmDonVi.Designer.cs" t="Include" />
+          <e p="FrmDonVi.resx" t="Include" />
+          <e p="FrmKhachHang.cs" t="Include" />
+          <e p="FrmKhachHang.Designer.cs" t="Include" />
+          <e p="FrmKhachHang.resx" t="Include" />
+          <e p="FrmKhuVuc.cs" t="Include" />
+          <e p="FrmKhuVuc.Designer.cs" t="Include" />
+          <e p="FrmKhuVuc.resx" t="Include" />
+          <e p="FrmLoaiMatHang.cs" t="Include" />
+          <e p="FrmLoaiMatHang.Designer.cs" t="Include" />
+          <e p="FrmLoaiMatHang.resx" t="Include" />
+          <e p="FrmMatHang.cs" t="Include" />
+          <e p="FrmMatHang.Designer.cs" t="Include" />
+          <e p="FrmMatHang.resx" t="Include" />
+          <e p="FrmNhaCungCap.cs" t="Include" />
+          <e p="FrmNhaCungCap.Designer.cs" t="Include" />
+          <e p="FrmNhaCungCap.resx" t="Include" />
+          <e p="FrmSelectDonVi.cs" t="Include" />
+          <e p="FrmSelectDonVi.Designer.cs" t="Include" />
+          <e p="FrmSelectDonVi.resx" t="Include" />
+          <e p="FrmSelectKhachHang.cs" t="Include" />
+          <e p="FrmSelectKhachHang.Designer.cs" t="Include" />
+          <e p="FrmSelectKhachHang.resx" t="Include" />
+          <e p="FrmSelectKhuVucKH.cs" t="Include" />
+          <e p="FrmSelectKhuVucKH.Designer.cs" t="Include" />
+          <e p="FrmSelectKhuVucKH.resx" t="Include" />
+          <e p="FrmSelectLoaiMatHang.cs" t="Include" />
+          <e p="FrmSelectLoaiMatHang.Designer.cs" t="Include" />
+          <e p="FrmSelectLoaiMatHang.resx" t="Include" />
+          <e p="FrmSelectNhaCungCap.cs" t="Include" />
+          <e p="FrmSelectNhaCungCap.Designer.cs" t="Include" />
+          <e p="FrmSelectNhaCungCap.resx" t="Include" />
+        </e>
+        <e p="HeThong" t="Include">
+          <e p="FrmCauHinhKetNoi.cs" t="Include" />
+          <e p="FrmCauHinhKetNoi.designer.cs" t="Include" />
+          <e p="FrmCauHinhKetNoi.resx" t="Include" />
+          <e p="FrmLogin.cs" t="Include" />
+          <e p="FrmLogin.Designer.cs" t="Include" />
+          <e p="FrmLogin.resx" t="Include" />
+          <e p="FrmMayInBill.cs" t="Include" />
+          <e p="FrmMayInBill.Designer.cs" t="Include" />
+          <e p="FrmMayInBill.resx" t="Include" />
+          <e p="FrmPhanQuyen.cs" t="Include" />
+          <e p="FrmPhanQuyen.Designer.cs" t="Include" />
+          <e p="FrmPhanQuyen.resx" t="Include" />
+          <e p="FrmSelectMayIn.cs" t="Include" />
+          <e p="FrmSelectMayIn.Designer.cs" t="Include" />
+          <e p="FrmSelectMayIn.resx" t="Include" />
+        </e>
+        <e p="Main" t="Include">
+          <e p="FrmMain.cs" t="Include" />
+          <e p="FrmMain.Designer.cs" t="Include" />
+          <e p="FrmMain.resx" t="Include" />
+          <e p="FrmMain1.cs" t="Include" />
+          <e p="FrmMain1.Designer.cs" t="Include" />
+          <e p="FrmMain1.resx" t="Include" />
+          <e p="FrmUserControl.cs" t="Include" />
+          <e p="FrmUserControl.Designer.cs" t="Include" />
+          <e p="FrmUserControl.resx" t="Include" />
+          <e p="UrcBaoCao.cs" t="Include" />
+          <e p="UrcBaoCao.Designer.cs" t="Include" />
+          <e p="UrcBaoCao.resx" t="Include" />
+          <e p="UrcQuanLyChung.cs" t="Include" />
+          <e p="UrcQuanLyChung.Designer.cs" t="Include" />
+          <e p="UrcQuanLyChung.resx" t="Include" />
+        </e>
+        <e p="NghiepVu" t="Include">
+          <e p="FrmCongNoKhachHang.cs" t="Include" />
+          <e p="FrmCongNoKhachHang.Designer.cs" t="Include" />
+          <e p="FrmCongNoKhachHang.resx" t="Include" />
+          <e p="FrmHoaDonNhapKho.cs" t="Include" />
+          <e p="FrmHoaDonNhapKho.Designer.cs" t="Include" />
+          <e p="FrmHoaDonNhapKho.resx" t="Include" />
+          <e p="FrmHoaDonTraHang.cs" t="Include" />
+          <e p="FrmHoaDonTraHang.Designer.cs" t="Include" />
+          <e p="FrmHoaDonTraHang.resx" t="Include" />
+          <e p="FrmHoaDonXuatKho.cs" t="Include" />
+          <e p="FrmHoaDonXuatKho.Designer.cs" t="Include" />
+          <e p="FrmHoaDonXuatKho.resx" t="Include" />
+          <e p="FrmImportExcelHoaDon.cs" t="Include" />
+          <e p="FrmImportExcelHoaDon.Designer.cs" t="Include" />
+          <e p="FrmImportExcelHoaDon.resx" t="Include" />
+          <e p="FrmInputNumberExport.cs" t="Include" />
+          <e p="FrmInputNumberExport.Designer.cs" t="Include" />
+          <e p="FrmInputNumberExport.resx" t="Include" />
+          <e p="FrmInputNumberExportByLoai_Extend.cs" t="Include" />
+          <e p="FrmInputNumberExportByLoai_Extend.Designer.cs" t="Include" />
+          <e p="FrmInputNumberExportByLoai_Extend.resx" t="Include" />
+          <e p="FrmInputNumberHangTra.cs" t="Include" />
+          <e p="FrmInputNumberHangTra.Designer.cs" t="Include" />
+          <e p="FrmInputNumberHangTra.resx" t="Include" />
+          <e p="FrmInputNumberImport.cs" t="Include" />
+          <e p="FrmInputNumberImport.Designer.cs" t="Include" />
+          <e p="FrmInputNumberImport.resx" t="Include" />
+          <e p="FrmNhapKho.cs" t="Include" />
+          <e p="FrmNhapKho.Designer.cs" t="Include" />
+          <e p="FrmNhapKho.resx" t="Include" />
+          <e p="FrmThanhToanNhapKho.cs" t="Include" />
+          <e p="FrmThanhToanNhapKho.Designer.cs" t="Include" />
+          <e p="FrmThanhToanNhapKho.resx" t="Include" />
+          <e p="FrmThanhToanXuatKho.cs" t="Include" />
+          <e p="FrmThanhToanXuatKho.Designer.cs" t="Include" />
+          <e p="FrmThanhToanXuatKho.resx" t="Include" />
+          <e p="FrmThanhToanXuatKhoCongNo.cs" t="Include" />
+          <e p="FrmThanhToanXuatKhoCongNo.Designer.cs" t="Include" />
+          <e p="FrmThanhToanXuatKhoCongNo.resx" t="Include" />
+          <e p="FrmTraHang.cs" t="Include" />
+          <e p="FrmTraHang.Designer.cs" t="Include" />
+          <e p="FrmTraHang.resx" t="Include" />
+          <e p="FrmXuatKho.cs" t="Include" />
+          <e p="FrmXuatKho.Designer.cs" t="Include" />
+          <e p="FrmXuatKho.resx" t="Include" />
+          <e p="ucMatHangXuatKho.cs" t="Include" />
+          <e p="ucMatHangXuatKho.Designer.cs" t="Include" />
+          <e p="ucMatHangXuatKho.resx" t="Include" />
+          <e p="usrcDgvMatHang.cs" t="Include" />
+          <e p="usrcDgvMatHang.Designer.cs" t="Include" />
+          <e p="usrcDgvMatHang.resx" t="Include" />
+          <e p="usrcListMatHang.cs" t="Include" />
+          <e p="usrcListMatHang.Designer.cs" t="Include" />
+          <e p="usrcListMatHang.resx" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+          <e p="DataSources" t="Include" />
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+          <e p="Settings.Designer.cs" t="Include" />
+          <e p="Settings.settings" t="Include" />
+        </e>
+        <e p="Resources" t="Include">
+          <e p="add_black.png" t="Include" />
+          <e p="Application.ico" t="Include" />
+          <e p="arrow_left.png" t="Include" />
+          <e p="arrow_right.png" t="Include" />
+          <e p="Back.png" t="Include" />
+          <e p="Backspace.png" t="Include" />
+          <e p="BackspaceWhite.png" t="Include" />
+          <e p="Backup.png" t="Include" />
+          <e p="bg.jpg" t="Include" />
+          <e p="calc.png" t="Include" />
+          <e p="Cancel.png" t="Include" />
+          <e p="cancel_dgv.png" t="Include" />
+          <e p="DanhMuc.png" t="Include" />
+          <e p="Database.png" t="Include" />
+          <e p="Delete.png" t="Include" />
+          <e p="DeleteLon.png" t="Include" />
+          <e p="DeleteNho.png" t="Include" />
+          <e p="desktop.ini" t="Include" />
+          <e p="Down.png" t="Include" />
+          <e p="Down2.png" t="Include" />
+          <e p="Edit.png" t="Include" />
+          <e p="Error.ico" t="Include" />
+          <e p="Excel.png" t="Include" />
+          <e p="Exclamation.ico" t="Include" />
+          <e p="Exit.png" t="Include" />
+          <e p="Export.png" t="Include" />
+          <e p="ExportLon.png" t="Include" />
+          <e p="Header.png" t="Include" />
+          <e p="HocSinh.png" t="Include" />
+          <e p="ic_supervisor_account_white_36pt.png" t="Include" />
+          <e p="Import.png" t="Include" />
+          <e p="Info.ico" t="Include" />
+          <e p="KetNoi.png" t="Include" />
+          <e p="Key.png" t="Include" />
+          <e p="KeyBack.png" t="Include" />
+          <e p="KhachHang.png" t="Include" />
+          <e p="Left.png" t="Include" />
+          <e p="Lich.png" t="Include" />
+          <e p="List.png" t="Include" />
+          <e p="ListCheck.png" t="Include" />
+          <e p="Load.gif" t="Include" />
+          <e p="Loader.gif" t="Include" />
+          <e p="logodemo.jpg" t="Include" />
+          <e p="MayInLon.png" t="Include" />
+          <e p="MayInNho.png" t="Include" />
+          <e p="Menu.png" t="Include" />
+          <e p="Money.png" t="Include" />
+          <e p="more.png" t="Include" />
+          <e p="New.png" t="Include" />
+          <e p="NoImage.jpg" t="Include" />
+          <e p="Note.png" t="Include" />
+          <e p="OrangeTheme.jpg" t="Include" />
+          <e p="Print.png" t="Include" />
+          <e p="Product.png" t="Include" />
+          <e p="Promotion.png" t="Include" />
+          <e p="Question.ico" t="Include" />
+          <e p="Quit.png" t="Include" />
+          <e p="Refresh.png" t="Include" />
+          <e p="Register.png" t="Include" />
+          <e p="remove_black.png" t="Include" />
+          <e p="Right.png" t="Include" />
+          <e p="Save.png" t="Include" />
+          <e p="SaveAndClose.png" t="Include" />
+          <e p="Select.png" t="Include" />
+          <e p="SelectNho.png" t="Include" />
+          <e p="Server.png" t="Include" />
+          <e p="Shield.ico" t="Include" />
+          <e p="SoaLuu.png" t="Include" />
+          <e p="status1.png" t="Include" />
+          <e p="status2.png" t="Include" />
+          <e p="status3.png" t="Include" />
+          <e p="Sua.png" t="Include" />
+          <e p="SysLogin.png" t="Include" />
+          <e p="System.png" t="Include" />
+          <e p="ThanhToan.png" t="Include" />
+          <e p="Them.png" t="Include" />
+          <e p="ThemLon.png" t="Include" />
+          <e p="Thoat_2.png" t="Include" />
+          <e p="ThoatLon.png" t="Include" />
+          <e p="ThongKe.png" t="Include" />
+          <e p="ThongTin.png" t="Include" />
+          <e p="ThuNho.png" t="Include" />
+          <e p="TimKiem.png" t="Include" />
+          <e p="TimKiemNho.png" t="Include" />
+          <e p="Up.png" t="Include" />
+          <e p="Users.png" t="Include" />
+          <e p="Warning.ico" t="Include" />
+          <e p="Xoa.png" t="Include" />
+        </e>
+        <e p="TemplateExcel" t="Include">
+          <e p="DoanhThuKhachHang.xlsx" t="Include" />
+          <e p="DSDoiTacTemplate.xlsx" t="Include" />
+          <e p="DSMatHangKhoTemplate.xlsx" t="Include" />
+          <e p="DSMatHangTemplate.xlsx" t="Include" />
+        </e>
+        <e p="WH.GUI.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="WH.Model" t="IncludeRecursive">
+        <e p="app.config" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="ConfigurationModel.cs" t="Include" />
+        <e p="Enums.cs" t="Include" />
+        <e p="FixedStrings.cs" t="Include" />
+        <e p="GlobalContext.cs" t="Include" />
+        <e p="MatHangModel.cs" t="Include" />
+        <e p="MenuSettingModel.cs" t="Include" />
+        <e p="NguoiDungModel.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="PrefixContext.cs" t="Include" />
+        <e p="PriceCalculateModel.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+          <e p="Resources1.Designer.cs" t="Include" />
+        </e>
+        <e p="QuyenHanModel.cs" t="Include" />
+        <e p="Resources" t="Include">
+          <e p="icon_buy.png" t="Include" />
+          <e p="status1.png" t="Include" />
+          <e p="status2.png" t="Include" />
+          <e p="status3.png" t="Include" />
+        </e>
+        <e p="SessionModel.cs" t="Include" />
+        <e p="StaticGlobalVariables.cs" t="Include" />
+        <e p="uc_ButtonMatHang.cs" t="Include" />
+        <e p="uc_ButtonMatHang.designer.cs" t="Include" />
+        <e p="uc_ButtonMatHang.resx" t="Include" />
+        <e p="WH.Model.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="WH.Report" t="IncludeRecursive">
+        <e p="app.config" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="frmReportMain.cs" t="Include" />
+        <e p="frmReportMain.Designer.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="OpenXMLExcel" t="Include" />
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+          <e p="DataSources" t="Include">
+            <e p="WH.Entity.HOADONXUATKHOCHITIET.datasource" t="Include" />
+          </e>
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+          <e p="Settings.Designer.cs" t="Include" />
+          <e p="Settings.settings" t="Include" />
+        </e>
+        <e p="ReportForm" t="Include">
+          <e p="AnimateMsgBox.cs" t="Include" />
+          <e p="frmChiTietBanLe.cs" t="Include" />
+          <e p="frmChiTietBanLe.designer.cs" t="Include" />
+          <e p="frmChiTietBanLe.resx" t="Include" />
+          <e p="frmChiTietBanSi.cs" t="Include" />
+          <e p="frmChiTietBanSi.designer.cs" t="Include" />
+          <e p="frmChiTietBanSi.resx" t="Include" />
+          <e p="frmChiTietHoaDonBanHang.cs" t="Include" />
+          <e p="frmChiTietHoaDonBanHang.Designer.cs" t="Include" />
+          <e p="frmChiTietHoaDonBanHang.resx" t="Include" />
+          <e p="frmChiTietHoaDonLaiLo.cs" t="Include" />
+          <e p="frmChiTietHoaDonLaiLo.Designer.cs" t="Include" />
+          <e p="frmChiTietHoaDonLaiLo.resx" t="Include" />
+          <e p="frmChiTietHoaDonNhapHang.cs" t="Include" />
+          <e p="frmChiTietHoaDonNhapHang.Designer.cs" t="Include" />
+          <e p="frmChiTietHoaDonNhapHang.resx" t="Include" />
+          <e p="frmChiTietHoaDonNhapXuat.cs" t="Include" />
+          <e p="frmChiTietHoaDonNhapXuat.Designer.cs" t="Include" />
+          <e p="frmChiTietHoaDonNhapXuat.resx" t="Include" />
+          <e p="frmChiTietMuaSi.cs" t="Include" />
+          <e p="frmChiTietMuaSi.designer.cs" t="Include" />
+          <e p="frmChiTietMuaSi.resx" t="Include" />
+          <e p="frmChiTietSanPhamDaBan.cs" t="Include" />
+          <e p="frmChiTietSanPhamDaBan.Designer.cs" t="Include" />
+          <e p="frmChiTietSanPhamDaBan.resx" t="Include" />
+          <e p="frmChiTietSanPhamTraHang.cs" t="Include" />
+          <e p="frmChiTietSanPhamTraHang.Designer.cs" t="Include" />
+          <e p="frmChiTietSanPhamTraHang.resx" t="Include" />
+          <e p="frmChonKhachHangByGrid.cs" t="Include" />
+          <e p="frmChonKhachHangByGrid.designer.cs" t="Include" />
+          <e p="frmChonKhachHangByGrid.resx" t="Include" />
+          <e p="frmCongNoKhangHang.cs" t="Include" />
+          <e p="frmCongNoKhangHang.designer.cs" t="Include" />
+          <e p="frmCongNoKhangHang.resx" t="Include" />
+          <e p="frmCongNoNhaCungCap.cs" t="Include" />
+          <e p="frmCongNoNhaCungCap.designer.cs" t="Include" />
+          <e p="frmCongNoNhaCungCap.resx" t="Include" />
+          <e p="frmDM_ExportExcel.cs" t="Include" />
+          <e p="frmDM_ExportExcel.designer.cs" t="Include" />
+          <e p="frmDM_ExportExcel.resx" t="Include" />
+          <e p="frmDoanhThuNhanVien.cs" t="Include" />
+          <e p="frmDoanhThuNhanVien.designer.cs" t="Include" />
+          <e p="frmDoanhThuNhanVien.resx" t="Include" />
+          <e p="frmFlash.cs" t="Include" />
+          <e p="FrmFlash.designer.cs" t="Include" />
+          <e p="FrmFlash.resx" t="Include" />
+          <e p="frmHangTraKhachHang.cs" t="Include" />
+          <e p="frmHangTraKhachHang.Designer.cs" t="Include" />
+          <e p="frmHangTraKhachHang.resx" t="Include" />
+          <e p="frmPhieuChiNhaCungCap.cs" t="Include" />
+          <e p="frmPhieuChiNhaCungCap.designer.cs" t="Include" />
+          <e p="frmPhieuChiNhaCungCap.resx" t="Include" />
+          <e p="frmPhieuThuKhachHang.cs" t="Include" />
+          <e p="frmPhieuThuKhachHang.designer.cs" t="Include" />
+          <e p="frmPhieuThuKhachHang.resx" t="Include" />
+          <e p="frmPosPhieuThuKhachHang.cs" t="Include" />
+          <e p="frmPosPhieuThuKhachHang.designer.cs" t="Include" />
+          <e p="frmPosPhieuThuKhachHang.resx" t="Include" />
+          <e p="frmPosTopProfix.cs" t="Include" />
+          <e p="frmPosTopProfix.designer.cs" t="Include" />
+          <e p="frmPosTopProfix.resx" t="Include" />
+          <e p="frmSanPhamHoanTra.cs" t="Include" />
+          <e p="frmSanPhamHoanTra.designer.cs" t="Include" />
+          <e p="frmSanPhamHoanTra.resx" t="Include" />
+          <e p="frmSelectDate.cs" t="Include" />
+          <e p="frmSelectDate.designer.cs" t="Include" />
+          <e p="frmSelectDate.resx" t="Include" />
+          <e p="FrmSelectKhachHang.cs" t="Include" />
+          <e p="FrmSelectKhachHang.Designer.cs" t="Include" />
+          <e p="FrmSelectKhachHang.resx" t="Include" />
+          <e p="FrmSelectNhaCungCap.cs" t="Include" />
+          <e p="FrmSelectNhaCungCap.Designer.cs" t="Include" />
+          <e p="FrmSelectNhaCungCap.resx" t="Include" />
+          <e p="FrmSelectTop.cs" t="Include" />
+          <e p="FrmSelectTop.designer.cs" t="Include" />
+          <e p="FrmSelectTop.resx" t="Include" />
+          <e p="frmTienLai.cs" t="Include" />
+          <e p="frmTienLai.designer.cs" t="Include" />
+          <e p="frmTienLai.resx" t="Include" />
+          <e p="LoaiPhieu.cs" t="Include" />
+          <e p="MsgBox.cs" t="Include" />
+          <e p="MsgBox.resx" t="Include" />
+          <e p="SearchProvider.cs" t="Include" />
+          <e p="UIHelper.cs" t="Include" />
+        </e>
+        <e p="ReportFunction" t="Include">
+          <e p="ReportRules.cs" t="Include" />
+        </e>
+        <e p="ReportTemplate" t="Include" />
+        <e p="Resources" t="Include">
+          <e p="ajax_loader.gif" t="Include" />
+          <e p="Application.ico" t="Include" />
+          <e p="Error.ico" t="Include" />
+          <e p="Exclamation.ico" t="Include" />
+          <e p="Exit.png" t="Include" />
+          <e p="Info.ico" t="Include" />
+          <e p="ListCheck.png" t="Include" />
+          <e p="MayIn1.png" t="Include" />
+          <e p="Question.ico" t="Include" />
+          <e p="Quit.png" t="Include" />
+          <e p="Refresh.png" t="Include" />
+          <e p="Right.png" t="Include" />
+          <e p="Select.png" t="Include" />
+          <e p="Shield.ico" t="Include" />
+          <e p="TimKiem.png" t="Include" />
+          <e p="TimKiemNho.png" t="Include" />
+          <e p="Warning.ico" t="Include" />
+        </e>
+        <e p="ucMain.cs" t="Include" />
+        <e p="ucMain.Designer.cs" t="Include" />
+        <e p="ucMain.resx" t="Include" />
+        <e p="WH.Report.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="WH.Service" t="IncludeRecursive">
+        <e p="app.config" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+        </e>
+        <e p="Repository" t="Include">
+          <e p="CARepository.cs" t="Include" />
+          <e p="CaRepositoryExtend.cs" t="Include" />
+          <e p="CHIETKHAULOAIMATHANGRepository.cs" t="Include" />
+          <e p="CHUCNANGRepository.cs" t="Include" />
+          <e p="ChucNangRepositoryExtend.cs" t="Include" />
+          <e p="CONFIG_PRINTERRepository.cs" t="Include" />
+          <e p="Core" t="Include">
+            <e p="UnitOfWorkFactory.cs" t="Include" />
+          </e>
+          <e p="DONVIRepository.cs" t="Include" />
+          <e p="HOADONHAPKHOCHITIETRepository.cs" t="Include" />
+          <e p="HOADONNHAPKHORepository.cs" t="Include" />
+          <e p="HOADONNHAPXUATCHITIETRepository.cs" t="Include" />
+          <e p="HOADONNHAPXUATRepository.cs" t="Include" />
+          <e p="HOADONXUATKHOCHITIETRepository.cs" t="Include" />
+          <e p="HOADONXUATKHORepository.cs" t="Include" />
+          <e p="KHACHHANGKHUVUCRepository.cs" t="Include" />
+          <e p="KHACHHANGNHOMRepository.cs" t="Include" />
+          <e p="KHACHHANGRepository.cs" t="Include" />
+          <e p="KHACHHANGTHEODOIDOANHTHURepository.cs" t="Include" />
+          <e p="KHOMATHANGRepository.cs" t="Include" />
+          <e p="KHORepository.cs" t="Include" />
+          <e p="LOAIKHACHHANGRepository.cs" t="Include" />
+          <e p="LOAIMATHANGRepository.cs" t="Include" />
+          <e p="LOAINHANVIENRepository.cs" t="Include" />
+          <e p="MATHANGKHUYENMAIRepository.cs" t="Include" />
+          <e p="MATHANGRepository.cs" t="Include" />
+          <e p="NGUOIDUNG_QUYENHANRepository.cs" t="Include" />
+          <e p="NguoiDungQuyenHanRepositoryExtend.cs" t="Include" />
+          <e p="NGUOIDUNGRepository.cs" t="Include" />
+          <e p="NguoiDungRepositoryExtend.cs" t="Include" />
+          <e p="NHACUNGCAPRepository.cs" t="Include" />
+          <e p="NHANVIENRepository.cs" t="Include" />
+          <e p="PHIEUCHIRepository.cs" t="Include" />
+          <e p="PHIEUTHURepository.cs" t="Include" />
+          <e p="QUANLYTHETHEOKHACHHANGRepository.cs" t="Include" />
+          <e p="SETDATETIMERepository.cs" t="Include" />
+          <e p="TEMP_HOADONHAPKHOCHITIETRepository.cs" t="Include" />
+          <e p="TEMP_HOADONNHAPKHORepository.cs" t="Include" />
+          <e p="TEMP_HOADONXUATKHOCHITIETRepository.cs" t="Include" />
+          <e p="TEMP_HOADONXUATKHORepository.cs" t="Include" />
+          <e p="THONGTINTHERepository.cs" t="Include" />
+          <e p="WH.Service.Repository.cs" t="Include" />
+          <e p="WH.Service.Repository.tt" t="Include" />
+        </e>
+        <e p="Resources" t="Include">
+          <e p="status1.png" t="Include" />
+          <e p="status2.png" t="Include" />
+          <e p="status3.png" t="Include" />
+        </e>
+        <e p="Service" t="Include">
+          <e p="CAService.cs" t="Include" />
+          <e p="CaServiceExtend.cs" t="Include" />
+          <e p="CHIETKHAULOAIMATHANGService.cs" t="Include" />
+          <e p="CHUCNANGService.cs" t="Include" />
+          <e p="CONFIG_PRINTERService.cs" t="Include" />
+          <e p="ConfigurationService.cs" t="Include" />
+          <e p="ContextService.cs" t="Include" />
+          <e p="DONVIService.cs" t="Include" />
+          <e p="ExcelHoaDonModel.cs" t="Include" />
+          <e p="ExcelService.cs" t="Include" />
+          <e p="HOADONHAPKHOCHITIETService.cs" t="Include" />
+          <e p="HOADONNHAPKHOService.cs" t="Include" />
+          <e p="HOADONNHAPXUATCHITIETService.cs" t="Include" />
+          <e p="HOADONNHAPXUATService.cs" t="Include" />
+          <e p="HOADONXUATKHOCHITIETService.cs" t="Include" />
+          <e p="HOADONXUATKHOService.cs" t="Include" />
+          <e p="KHACHHANGKHUVUCService.cs" t="Include" />
+          <e p="KhachHangModelService.cs" t="Include" />
+          <e p="KHACHHANGNHOMService.cs" t="Include" />
+          <e p="KHACHHANGService.cs" t="Include" />
+          <e p="KHACHHANGTHEODOIDOANHTHUService.cs" t="Include" />
+          <e p="KhachTraHangService.cs" t="Include" />
+          <e p="KHOMATHANGService.cs" t="Include" />
+          <e p="KHOService.cs" t="Include" />
+          <e p="LOAIKHACHHANGService.cs" t="Include" />
+          <e p="LOAIMATHANGService.cs" t="Include" />
+          <e p="LOAINHANVIENService.cs" t="Include" />
+          <e p="MATHANGKHUYENMAIService.cs" t="Include" />
+          <e p="MatHangModelService.cs" t="Include" />
+          <e p="MATHANGService.cs" t="Include" />
+          <e p="NGUOIDUNG_QUYENHANService.cs" t="Include" />
+          <e p="NGUOIDUNGService.cs" t="Include" />
+          <e p="NHACUNGCAPService.cs" t="Include" />
+          <e p="NHANVIENService.cs" t="Include" />
+          <e p="NhapKhoService.cs" t="Include" />
+          <e p="NhapXuatService.cs" t="Include" />
+          <e p="PHIEUCHIService.cs" t="Include" />
+          <e p="PHIEUTHUService.cs" t="Include" />
+          <e p="QUANLYTHETHEOKHACHHANGService.cs" t="Include" />
+          <e p="SessionService.cs" t="Include" />
+          <e p="SETDATETIMEService.cs" t="Include" />
+          <e p="TEMP_HOADONHAPKHOCHITIETService.cs" t="Include" />
+          <e p="TEMP_HOADONNHAPKHOService.cs" t="Include" />
+          <e p="TEMP_HOADONXUATKHOCHITIETService.cs" t="Include" />
+          <e p="TEMP_HOADONXUATKHOService.cs" t="Include" />
+          <e p="THONGTINTHEService.cs" t="Include" />
+          <e p="TienLaiService.cs" t="Include" />
+          <e p="WH.Service.Service.cs" t="Include" />
+          <e p="WH.Service.Service.tt" t="Include" />
+          <e p="XuatKhoService.cs" t="Include" />
+        </e>
+        <e p="WH.Service.csproj" t="IncludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>

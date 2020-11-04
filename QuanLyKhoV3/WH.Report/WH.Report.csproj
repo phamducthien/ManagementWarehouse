@@ -1,0 +1,504 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{00DD8CBC-2029-419B-B147-21505D1B81E3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WH.Report</RootNamespace>
+    <AssemblyName>WH.Report</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.72.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.72.0\lib\net40-client\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Design, Version=4.4.1.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <HintPath>..\packages\KryptonWinFormControls.4.4.1.0\lib\net40\ComponentFactory.Krypton.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Docking, Version=4.4.1.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <HintPath>..\packages\KryptonWinFormControls.4.4.1.0\lib\net40\ComponentFactory.Krypton.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Navigator, Version=4.4.1.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <HintPath>..\packages\KryptonWinFormControls.4.4.1.0\lib\net40\ComponentFactory.Krypton.Navigator.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Ribbon, Version=4.4.1.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <HintPath>..\packages\KryptonWinFormControls.4.4.1.0\lib\net40\ComponentFactory.Krypton.Ribbon.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Toolkit, Version=4.4.1.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <HintPath>..\packages\KryptonWinFormControls.4.4.1.0\lib\net40\ComponentFactory.Krypton.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Workspace, Version=4.4.1.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <HintPath>..\packages\KryptonWinFormControls.4.4.1.0\lib\net40\ComponentFactory.Krypton.Workspace.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.0.5022.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.1.0\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\ExcelLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="HLVControl">
+      <HintPath>..\DLL\HLVControl.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework">
+      <HintPath>..\DLL\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design">
+      <HintPath>..\DLL\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts">
+      <HintPath>..\DLL\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroUI">
+      <HintPath>..\DLL\MetroUI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\DLL\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.DDF">
+      <HintPath>..\DLL\NPOI.DDF.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.HPSF">
+      <HintPath>..\DLL\NPOI.HPSF.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.HSSF">
+      <HintPath>..\DLL\NPOI.HSSF.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.POIFS">
+      <HintPath>..\DLL\NPOI.POIFS.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.Util">
+      <HintPath>..\DLL\NPOI.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmReportMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportMain.Designer.cs">
+      <DependentUpon>frmReportMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmChiTietHoaDonLaiLo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmChiTietHoaDonLaiLo.Designer.cs">
+      <DependentUpon>frmChiTietHoaDonLaiLo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmChiTietSanPhamTraHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmChiTietSanPhamTraHang.Designer.cs">
+      <DependentUpon>frmChiTietSanPhamTraHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmTienLai.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmTienLai.designer.cs">
+      <DependentUpon>frmTienLai.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmSanPhamHoanTra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmSanPhamHoanTra.designer.cs">
+      <DependentUpon>frmSanPhamHoanTra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmChiTietHoaDonNhapXuat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmChiTietHoaDonNhapXuat.Designer.cs">
+      <DependentUpon>frmChiTietHoaDonNhapXuat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmChiTietSanPhamDaBan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmChiTietSanPhamDaBan.Designer.cs">
+      <DependentUpon>frmChiTietSanPhamDaBan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmChiTietHoaDonNhapHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmChiTietHoaDonNhapHang.Designer.cs">
+      <DependentUpon>frmChiTietHoaDonNhapHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmHangTraKhachHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmHangTraKhachHang.Designer.cs">
+      <DependentUpon>frmHangTraKhachHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\FrmSelectKhachHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\FrmSelectKhachHang.Designer.cs">
+      <DependentUpon>FrmSelectKhachHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportForm\AnimateMsgBox.cs" />
+    <Compile Include="ReportForm\frmChiTietBanLe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmChiTietBanLe.designer.cs">
+      <DependentUpon>frmChiTietBanLe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmChiTietBanSi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmChiTietBanSi.designer.cs">
+      <DependentUpon>frmChiTietBanSi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmChiTietHoaDonBanHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmChiTietHoaDonBanHang.Designer.cs">
+      <DependentUpon>frmChiTietHoaDonBanHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmChiTietMuaSi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmChiTietMuaSi.designer.cs">
+      <DependentUpon>frmChiTietMuaSi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmChonKhachHangByGrid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmChonKhachHangByGrid.designer.cs">
+      <DependentUpon>frmChonKhachHangByGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmCongNoKhangHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmCongNoKhangHang.designer.cs">
+      <DependentUpon>frmCongNoKhangHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmCongNoNhaCungCap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmCongNoNhaCungCap.designer.cs">
+      <DependentUpon>frmCongNoNhaCungCap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmDM_ExportExcel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmDM_ExportExcel.designer.cs">
+      <DependentUpon>frmDM_ExportExcel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmDoanhThuNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmDoanhThuNhanVien.designer.cs">
+      <DependentUpon>frmDoanhThuNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmFlash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmFlash.designer.cs">
+      <DependentUpon>frmFlash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmPhieuChiNhaCungCap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmPhieuChiNhaCungCap.designer.cs">
+      <DependentUpon>frmPhieuChiNhaCungCap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmPhieuThuKhachHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmPhieuThuKhachHang.designer.cs">
+      <DependentUpon>frmPhieuThuKhachHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmPosPhieuThuKhachHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmPosPhieuThuKhachHang.designer.cs">
+      <DependentUpon>frmPosPhieuThuKhachHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmPosTopProfix.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmPosTopProfix.designer.cs">
+      <DependentUpon>frmPosTopProfix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\frmSelectDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmSelectDate.designer.cs">
+      <DependentUpon>frmSelectDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\FrmSelectNhaCungCap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\FrmSelectNhaCungCap.Designer.cs">
+      <DependentUpon>FrmSelectNhaCungCap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\FrmSelectTop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\FrmSelectTop.designer.cs">
+      <DependentUpon>FrmSelectTop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForm\LoaiPhieu.cs" />
+    <Compile Include="ReportForm\MsgBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\SearchProvider.cs" />
+    <Compile Include="ReportForm\UIHelper.cs" />
+    <Compile Include="ReportFunction\ReportRules.cs" />
+    <Compile Include="ucMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucMain.Designer.cs">
+      <DependentUpon>ucMain.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ReportForm\frmChiTietHoaDonLaiLo.resx">
+      <DependentUpon>frmChiTietHoaDonLaiLo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmChiTietSanPhamTraHang.resx">
+      <DependentUpon>frmChiTietSanPhamTraHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmTienLai.resx">
+      <DependentUpon>frmTienLai.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmSanPhamHoanTra.resx">
+      <DependentUpon>frmSanPhamHoanTra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmChiTietHoaDonNhapXuat.resx">
+      <DependentUpon>frmChiTietHoaDonNhapXuat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmChiTietSanPhamDaBan.resx">
+      <DependentUpon>frmChiTietSanPhamDaBan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmChiTietHoaDonNhapHang.resx">
+      <DependentUpon>frmChiTietHoaDonNhapHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmHangTraKhachHang.resx">
+      <DependentUpon>frmHangTraKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\FrmSelectKhachHang.resx">
+      <DependentUpon>FrmSelectKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="ReportForm\frmChiTietBanLe.resx">
+      <DependentUpon>frmChiTietBanLe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmChiTietBanSi.resx">
+      <DependentUpon>frmChiTietBanSi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmChiTietHoaDonBanHang.resx">
+      <DependentUpon>frmChiTietHoaDonBanHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmChiTietMuaSi.resx">
+      <DependentUpon>frmChiTietMuaSi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmChonKhachHangByGrid.resx">
+      <DependentUpon>frmChonKhachHangByGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmCongNoKhangHang.resx">
+      <DependentUpon>frmCongNoKhangHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmCongNoNhaCungCap.resx">
+      <DependentUpon>frmCongNoNhaCungCap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmDM_ExportExcel.resx">
+      <DependentUpon>frmDM_ExportExcel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmDoanhThuNhanVien.resx">
+      <DependentUpon>frmDoanhThuNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmFlash.resx">
+      <DependentUpon>frmFlash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmPhieuChiNhaCungCap.resx">
+      <DependentUpon>frmPhieuChiNhaCungCap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmPhieuThuKhachHang.resx">
+      <DependentUpon>frmPhieuThuKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmPosPhieuThuKhachHang.resx">
+      <DependentUpon>frmPosPhieuThuKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmPosTopProfix.resx">
+      <DependentUpon>frmPosTopProfix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmSelectDate.resx">
+      <DependentUpon>frmSelectDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\FrmSelectNhaCungCap.resx">
+      <DependentUpon>FrmSelectNhaCungCap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\FrmSelectTop.resx">
+      <DependentUpon>FrmSelectTop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\MsgBox.resx">
+      <DependentUpon>MsgBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucMain.resx">
+      <DependentUpon>ucMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\WH.Entity.HOADONXUATKHOCHITIET.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="OpenXMLExcel\" />
+    <Folder Include="ReportTemplate\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Application.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Error.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exclamation.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Info.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Question.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shield.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Warning.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Repository.Pattern.Ef6\Repository.Pattern.Ef6.csproj">
+      <Project>{f68a1d19-93fb-47c1-a22b-42bea3e4fd8c}</Project>
+      <Name>Repository.Pattern.Ef6</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Repository.Pattern\Repository.Pattern.csproj">
+      <Project>{6e682a14-c872-4813-b620-76e108dea683}</Project>
+      <Name>Repository.Pattern</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Service.Pattern\Service.Pattern.csproj">
+      <Project>{4efba6da-2e78-4ca6-90d6-782772b160cd}</Project>
+      <Name>Service.Pattern</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Util.Pattern\Util.Pattern.csproj">
+      <Project>{19b9a83d-7b8b-4842-b53f-caf44ffcaac6}</Project>
+      <Name>Util.Pattern</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WH.Entity\WH.Entity.csproj">
+      <Project>{6e0bba11-c557-498e-9c0d-d50215bdd17f}</Project>
+      <Name>WH.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WH.Model\WH.Model.csproj">
+      <Project>{ff1ffc67-4d1a-41b7-8e94-739fa7f52d33}</Project>
+      <Name>WH.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WH.Service\WH.Service.csproj">
+      <Project>{733477e2-deb4-463a-86d0-ce108ce8b094}</Project>
+      <Name>WH.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Quit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TimKiem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MayIn1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ajax_loader.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TimKiemNho.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Select.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ListCheck.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

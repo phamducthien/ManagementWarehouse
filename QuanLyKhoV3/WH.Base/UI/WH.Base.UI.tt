@@ -1,0 +1,1450 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true"#>
+<#@ include file="EF6.Utility.CS.ttinclude"#>
+<#@ output extension=".cs"#>
+<#
+const string inputFile = @"C:\Users\MYLOVE\Documents\Visual Studio 2015\Projects\QuanLyKhoV3\WH.Entity\WHEntities.edmx";
+var FilePathSave = this;
+var textTransform = DynamicTextTransformation.Create(this);
+var code = new CodeGenerationTools(this);
+var ef = new MetadataTools(this);
+var typeMapper = new TypeMapper(code, ef, textTransform.Errors);
+var	fileManager = EntityFrameworkTemplateFileManager.Create(FilePathSave);
+var itemCollection = new EdmMetadataLoader(textTransform.Host, textTransform.Errors).CreateEdmItemCollection(inputFile);
+var codeStringGenerator = new CodeStringGenerator(code, typeMapper, ef);
+
+if (!typeMapper.VerifyCaseInsensitiveTypeUniqueness(typeMapper.GetAllGlobalItems(itemCollection), inputFile))
+{
+	return string.Empty;
+}
+
+
+WriteHeader(codeStringGenerator, fileManager);
+string entityName ="";
+foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection))
+{
+	var simpleProperties = typeMapper.GetSimpleProperties(entity);
+
+	var edmProperty = simpleProperties.ToList()[0];
+	fileManager.StartNewFile("Base"+entity.Name + "UI.cs");
+	BeginNamespace(code);
+	entityName = "'"+code.Escape(entity).ToString()+"'";
+#>
+public partial interface IBase<#=code.Escape(entity)#>UI : IBaseForm
+{
+
+}
+
+public partial class Base<#=code.Escape(entity)#>UI : BaseForm, IBase<#=code.Escape(entity)#>UI
+{
+	public <#=code.Escape(entity)#> Model;
+	public List<<#=code.Escape(entity)#>> dataList = null;
+	public ThaoTac _ThaoTac = ThaoTac.MacDinh;
+	public bool IsSelect = false;
+	public bool IsShowListSelect = false;
+	public DataGridViewRow CurrentRow;
+	public KryptonTextBox txtcode;
+	public KryptonDataGridView dgvData;
+	public MetroForm Frm;
+	public KryptonTextBox txtSearch;
+	public KryptonButton btnAdd;
+	public KryptonButton btnEdit;
+	public KryptonButton btnDelete;
+	public KryptonButton btnExportExcel;
+	public KryptonButton btnImportExcel;
+	public KryptonButton btnExit;
+	public KryptonButton btnSave;
+	public KryptonButton btnCancel;
+	public ButtonSpecAny btnSearch;
+	public ButtonSpecAny btnAll;
+	public KryptonButton btnSelect;
+	public KryptonLabel labNameForm;
+	public KryptonLabel labID;
+	public List<Control> listControlInfo = new List<Control>();
+	public List<KryptonTextBox> listKryptonTextBox = new List<KryptonTextBox>();
+	public Dictionary<Control, List<object>> listObjects;
+	
+	public Base<#=code.Escape(entity)#>UI( MetroForm _Frm, KryptonLabel _labNameForm, KryptonLabel _labID, KryptonTextBox _txtcode, KryptonDataGridView _dgvData, KryptonTextBox _txtSearch, KryptonButton _btnAdd, KryptonButton _btnEdit, KryptonButton _btnDelete, KryptonButton _btnExportExcel, KryptonButton _btnImportExcel, KryptonButton _btnExit, KryptonButton _btnSave, KryptonButton _btnCancel, ButtonSpecAny _btnSearch, ButtonSpecAny _btnAll,Dictionary<Control, List<object>> _listObjects): base()
+	{
+		txtcode = _txtcode;
+		dgvData = _dgvData;
+		Frm = _Frm;
+		txtSearch = _txtSearch;
+		btnAdd = _btnAdd;
+		btnEdit = _btnEdit;
+		btnDelete = _btnDelete;
+		 btnSave = _btnSave;
+		btnExportExcel = _btnExportExcel;
+		btnImportExcel = _btnImportExcel;
+		btnExit = _btnExit;
+		btnCancel = _btnCancel;
+		btnSearch = _btnSearch;
+		btnAll = _btnAll;
+		labNameForm = _labNameForm;
+		labID = _labID;
+		listObjects = _listObjects;
+ 
+		if(listObjects!=null)
+		{
+			listControlInfo = _listObjects.Keys.ToList();
+			GetListKryptonTextBox(); 
+		}
+		CreateEvent();     
+	}
+
+	public Base<#=code.Escape(entity)#>UI(MetroForm _Frm, KryptonLabel _labNameForm, KryptonDataGridView _dgvData, KryptonTextBox _txtSearch,  KryptonButton _btnExit, ButtonSpecAny _btnSearch, ButtonSpecAny _btnAll,KryptonButton _btnSelect,Dictionary<Control, List<object>> _listObjects) : base()
+	{
+		dgvData = _dgvData;
+		Frm = _Frm;
+		txtSearch = _txtSearch;
+		btnExit = _btnExit;
+		btnSearch = _btnSearch;
+		btnAll = _btnAll;
+		btnSelect = _btnSelect;
+		labNameForm = _labNameForm;
+
+		if (listObjects != null)
+		{
+			listControlInfo = _listObjects.Keys.ToList();
+			GetListKryptonTextBox();
+		}
+		CreateEvent();
+		IsShowListSelect = true;
+	}
+
+	#region Events
+	public void CreateEvent()
+	{
+		Frm.Load += Frm_Load;
+		if(btnAdd!=null) btnAdd.Click += BtnAdd_Click;
+		if(btnEdit!=null) btnEdit.Click += BtnEdit_Click;
+		if(btnCancel!=null) btnCancel.Click += BtnCancel_Click;
+		if(btnAll!=null) btnAll.Click += BtnAll_Click;
+
+		if(btnDelete!=null) btnDelete.Click += BtnDelete_Click;
+		if(btnExit!=null) btnExit.Click += BtnExit_Click;
+		if(btnExportExcel!=null) btnExportExcel.Click += BtnExportExcel_Click;
+		if(btnImportExcel!=null) btnImportExcel.Click += BtnImportExcel_Click;
+		if(btnSave!=null) btnSave.Click += BtnSave_Click;
+		if(btnSearch!=null) btnSearch.Click += BtnSearch_Click;
+
+		if(dgvData!=null) dgvData.SelectionChanged += DgvData_SelectionChanged;
+		if(dgvData!=null) dgvData.RowPrePaint += DgvData_RowPrePaint;
+		if(dgvData!=null) dgvData.CellMouseClick += DgvData_CellMouseClick;
+		if (dgvData != null) dgvData.CellMouseDoubleClick += DgvData_CellMouseDoubleClick; 
+
+		if(txtSearch!=null) txtSearch.Enter += txt_Enter;
+		if(txtSearch!=null) txtSearch.Leave += txt_Leave;
+		if(txtSearch!=null) txtSearch.KeyPress += txt_KeyPress;
+		if(btnSelect!=null) btnSelect.Click += BtnSelect_Click;
+
+		if (listKryptonTextBox != null)
+		{
+			foreach (KryptonTextBox txt in listKryptonTextBox)
+			{
+				txt.Enter += txt_Enter;
+				txt.Leave += txt_Leave;
+				txt.KeyPress += txt_KeyPress;
+			}
+		}
+	}
+
+	private void GetListKryptonTextBox()
+	{
+		foreach (KryptonTextBox txt in listControlInfo.OfType<KryptonTextBox>())
+		{
+			listKryptonTextBox.Add(txt);
+		}
+	}
+
+	private void BtnSelect_Click(object sender, EventArgs e)
+	{
+		if (IsSelect)
+		{
+			GetDataFromDgv();
+			ActionExit();
+		}
+	}
+
+	private void txt_KeyPress(object sender, KeyPressEventArgs e)
+	{
+		var txt = sender as KryptonTextBox;
+		int count = listKryptonTextBox.Count()-1;
+
+			if (count > 0)
+			{
+				for (int i = 0; i < count; i++)
+				{
+					if (txt != null && txt.Name == listKryptonTextBox[i].Name)
+						UiHelper.txt_KeyPress(sender, listKryptonTextBox[i + 1], e);
+				}
+			}
+
+			if (txt != null && txt.Name == listKryptonTextBox[count].Name)
+				UiHelper.txt_KeyPress(sender, btnSave, e);
+
+			if (txt != null && txt.Name == txtSearch.Name)
+				UiHelper.txt_KeyPress(sender, btnSearch, e);
+	}
+
+	private void txt_Enter(object sender, EventArgs e)
+	{
+		UiHelper.txt_Enter(sender, e);
+	}
+
+	private void txt_Leave(object sender, EventArgs e)
+	{
+		UiHelper.txt_Leave(sender, e);
+	}
+
+	private void DgvData_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+	{
+		if (IsSelect && IsShowListSelect)
+		{
+			GetDataFromDgv();
+			ActionExit();
+		}
+	}
+
+	private void DgvData_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+	{
+		GetDataFromDgv();
+	}
+
+	private void DgvData_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+	{
+		dgvData.Rows[e.RowIndex].Cells[0].Value = e.RowIndex + 1;
+	}
+	
+	private void DgvData_SelectionChanged(object sender, EventArgs e)
+	{
+		if(IsSelect)
+			GetDataFromDgv();
+	}
+	
+	private void BtnSearch_Click(object sender, EventArgs e)
+	{
+		ControlAction(ThaoTac.TimKiem);
+	}
+	
+	private void BtnSave_Click(object sender, EventArgs e)
+	{
+		ControlAction(ThaoTac.Luu);
+	}
+	
+	private void BtnImportExcel_Click(object sender, EventArgs e)
+	{
+		ControlAction(ThaoTac.NhapExcel);
+	}
+	
+	private void BtnExportExcel_Click(object sender, EventArgs e)
+	{
+		ControlAction(ThaoTac.XuatExcel);
+	}
+	
+	private void BtnExit_Click(object sender, EventArgs e)
+	{
+		ControlAction(ThaoTac.Thoat);
+	}
+	
+	private void BtnDelete_Click(object sender, EventArgs e)
+	{
+		ControlAction(ThaoTac.Xoa);
+	}
+
+	private void BtnAll_Click(object sender, EventArgs e)
+	{
+		ControlAction(ThaoTac.Load);
+	}
+
+	private void BtnCancel_Click(object sender, EventArgs e)
+	{
+		ControlAction(ThaoTac.Huy);
+	}
+	
+	private void BtnEdit_Click(object sender, EventArgs e)
+	{
+		ControlAction(ThaoTac.Sua);
+	}
+	
+	private void BtnAdd_Click(object sender, EventArgs e)
+	{
+		ControlAction(ThaoTac.Them);
+	}
+	
+	private void Frm_Load(object sender, EventArgs e)
+	{
+		ActionLoadForm();
+	}
+
+	#endregion
+	
+	#region Actions
+	public void ActionLoadAll()
+	{
+		LoadDataAll();
+	}
+
+	public void ActionSearchData()
+	{
+		string textSearch = txtSearch.Text;
+		 ReloadUnitOfWork();
+		I<#=code.Escape(entity)#>Service service = new <#=code.Escape(entity)#>Service(this.UnitOfWorkAsync);
+		List<<#=code.Escape(entity)#>> list = service.Search(textSearch);
+		LoadData(list);
+	}
+
+	public void ActionLoadForm()
+	{
+		try
+		{
+			//Frm.Hide();
+			//FrmFlash.ShowSplash();
+			//Application.DoEvents();
+			LoadDataAll();
+			ControlAction(ThaoTac.Xem);
+			//FrmFlash.CloseSplash();
+			//Frm.Show();
+		}
+		catch (Exception exception)
+		{
+			ErrMsg = exception.Message;
+			//FrmFlash.CloseSplash();
+			//Frm.Show();
+		}
+	}
+
+	private void ActionXem()
+	{
+		SetStateButton(true);
+		SetTextReadOnly(true);
+		GetDataFromDgv();
+		UiHelper.LoadFocus(txtSearch);
+	}
+
+	private void ActionThem()
+	{
+			MethodResult result = MethodResult.Failed;
+			 if (!SetGuiToData()) return;
+			ReloadUnitOfWork();
+			I<#=code.Escape(entity)#>Service service = new <#=code.Escape(entity)#>Service(this.UnitOfWorkAsync);
+			if (Model == null) return;
+			result = service.Add(Model);
+			if (result!=MethodResult.Succeed)
+			{
+				IsChange = false;
+				IsSuccessfuly = false;
+				ShowMessage(IconMessageBox.Error, service.ErrMsg);
+				return;
+			}
+	
+			IsChange = true;
+			IsSuccessfuly = true;
+			LoadDataAll();
+			SelectedRow(dgvData.Rows[dgvData.RowCount - 1]);
+			SetDataToGui();
+			SetDataDefault();
+			SetTextReadOnly(true);
+			SetStateButton(true);
+	}
+
+	private void ActionSua()
+	{
+		MethodResult result = MethodResult.Failed;
+		if (!SetGuiToData()) return;
+		if (Model == null) return;
+		ReloadUnitOfWork();
+		I<#=code.Escape(entity)#>Service service = new <#=code.Escape(entity)#>Service(this.UnitOfWorkAsync);
+		result = service.Modify(Model);
+		if (result != MethodResult.Succeed)
+		{
+			IsChange = false;
+			IsSuccessfuly = false;
+			ShowMessage(IconMessageBox.Error, service.ErrMsg);
+			return;
+		}
+		int index = CurrentRow.Index;
+		IsChange = true;
+		IsSuccessfuly = true;
+		LoadDataAll();
+
+		if(index >= 0)
+		{
+			SelectedRow(dgvData.Rows[index]);
+		}
+
+		SetDataToGui();
+		SetTextReadOnly(true);
+		SetStateButton(true);
+	}
+
+	private void ActionXoa()
+	{
+		MethodResult result = MethodResult.Failed;
+		if (!SetGuiToData()) return;
+		if (Model == null) return;
+		ReloadUnitOfWork();
+		I<#=code.Escape(entity)#>Service service = new <#=code.Escape(entity)#>Service(this.UnitOfWorkAsync);
+		result = service.Remove(Model);
+		if (result != MethodResult.Succeed)
+		{
+			IsChange = false;
+			IsSuccessfuly = false;
+			ShowMessage(IconMessageBox.Warning, "Không thể xóa vì dữ liệu này đang được sử dụng!");
+			//ShowMessage(IconMessageBox.Error, service.ErrMsg);
+			return;
+		}
+
+		IsChange = true;
+		IsSuccessfuly = true;
+		LoadDataAll();
+		SelectedRow(dgvData.Rows[0]);
+		SetDataToGui();
+		SetTextReadOnly(true);
+		SetStateButton(true);
+	}
+
+	private void ActionLuu(ThaoTac thaoTac)
+	{
+		switch (thaoTac)
+		{
+			case ThaoTac.Them:
+				ActionThem();
+				break;
+	
+			case ThaoTac.Sua:
+				ActionSua();
+				break;
+	
+			default:
+				//Debug.Assert(false);
+				break;
+		}
+	}
+
+	private void ControlAction(ThaoTac thaoTac)
+	{
+			switch (thaoTac)
+			{
+				case ThaoTac.Xem:
+					ActionXem();
+					break;
+
+				case ThaoTac.Them:
+					SetTextReadOnly(false);
+					SetStateButton(false);
+					SetDataDefault();
+					_ThaoTac = ThaoTac.Them;
+					UiHelper.LoadFocus(listControlInfo[1]);
+					break;
+
+				case ThaoTac.Sua:
+					SetTextReadOnly(false);
+					SetStateButton(false);
+					GetDataFromDgv();
+					_ThaoTac = ThaoTac.Sua;
+					//txtTen
+					UiHelper.LoadFocus(listControlInfo[1]);
+					break;
+
+				case ThaoTac.Luu:
+					ActionLuu(_ThaoTac);
+					break;
+
+				case ThaoTac.Xoa:
+					ActionXoa();
+					break;
+
+				case ThaoTac.Huy:
+					ActionCancel();
+					break;
+
+				case ThaoTac.Load:
+					ActionLoadAll();
+					break;
+
+				case ThaoTac.TimKiem:
+					ActionSearchData();
+					break;
+				case ThaoTac.Thoat:
+					ActionExit();
+					break;
+				case ThaoTac.MacDinh:
+					break;
+
+				default:
+					break;
+			}
+	}
+
+	public void ActionCancel()
+	{
+		 if (Model != null)
+			{
+				SetDataToGui();
+			}
+			else
+			{
+				SetDataDefault();
+			}
+			SetTextReadOnly(true);
+			SetStateButton(true);
+			UiHelper.LoadFocus(txtSearch);
+			this.IsSuccessfuly = false;
+		this.IsSuccessfuly = false;
+	}
+
+	public void ActionExit()
+	{
+		Frm.Close();
+	}
+	#endregion
+
+	#region Functions
+	private bool GetDataFromDgv()
+	{
+		try
+		{
+				if (_ThaoTac != ThaoTac.Them)
+				{
+					if (dgvData.SelectedRows.Count > 0)
+					{
+						var row = dgvData.SelectedRows[0];
+						if (row == null) return false;
+
+						var sId = row.Cells["IDUnit"].Value.ToString();
+						if (sId == "") return false;
+						ReloadUnitOfWork();
+						I<#=code.Escape(entity)#>Service service = new <#=code.Escape(entity)#>Service(this.UnitOfWorkAsync);
+						Model = service.Find(sId);
+						CurrentRow = row;
+						if(!IsShowListSelect && IsSelect)
+							SetDataToGui();
+					}
+				}
+		}
+		catch
+		{
+			return false;
+		}
+		return true;
+	}
+
+	private void SetDataToGui()
+	{
+		foreach (var key in listObjects)
+		{
+			var info = GetPropValue(Model, key.Value[0].ToString());
+			if (info != null)
+				{
+					if (key.Key is KryptonNumericUpDown)
+					{
+						KryptonNumericUpDown obj =
+							listObjects.Keys.OfType<KryptonNumericUpDown>().FirstOrDefault(s => s.Name == key.Key.Name);
+						obj.Value = info.ToString().ToIntOrDefault();
+					}
+					else if (key.Key is KryptonCheckBox)
+					{
+						KryptonCheckBox obj =
+						   listObjects.Keys.OfType<KryptonCheckBox>().FirstOrDefault(s => s.Name == key.Key.Name);
+						obj.Checked = info.ToString().ToBoolOrDefault();
+					}
+					else if (key.Key is KryptonCheckButton)
+					{
+						KryptonCheckButton obj =
+						   listObjects.Keys.OfType<KryptonCheckButton>().FirstOrDefault(s => s.Name == key.Key.Name);
+						obj.Checked = info.ToString().ToBoolOrDefault();
+					}
+					else
+					{
+						key.Key.Text = info.ToString();
+					}
+				}
+		} 
+
+		//if (CurrentRow != null)
+		//{
+		//	SelectedRow(CurrentRow);
+		//}             
+	}
+
+	private bool SetGuiToData()
+	{
+			List<object> listCondition;
+			foreach (var txt in listKryptonTextBox)
+			{
+				listObjects.TryGetValue(txt, out listCondition);
+				if (txt.Text == "" && Equals(listCondition[2], StateObject.NOTNULL))
+				{
+					ShowMessage(IconMessageBox.Warning, "Vui lòng điền thông tin " + listCondition[1]);
+					GetDataFromDgv();
+					return false;
+				}
+			}
+	
+			ReloadUnitOfWork();
+			I<#=code.Escape(entity)#>Service service = new <#=code.Escape(entity)#>Service(this.UnitOfWorkAsync);
+			if (Model == null)
+			{
+				Model = service.CreateNew();
+			}
+			else
+			{
+				Model = service.Find(Model.IDUnit);
+			}
+	
+			foreach (var key in listObjects)
+			{
+				if(key.Key is KryptonNumericUpDown)
+				{
+					KryptonNumericUpDown obj =
+						listObjects.Keys.OfType<KryptonNumericUpDown>().FirstOrDefault(s => s.Name == key.Key.Name);
+					SetPropValue(Model, key.Value[0].ToString(), obj.Value.ToString());
+				}
+				else if (key.Key is KryptonCheckBox)
+				{
+					KryptonCheckBox obj =
+					   listObjects.Keys.OfType<KryptonCheckBox>().FirstOrDefault(s => s.Name == key.Key.Name);
+					SetPropValue(Model, key.Value[0].ToString(), obj.Checked.ToString());
+				}
+				else if (key.Key is KryptonCheckButton)
+				{
+					KryptonCheckButton obj =
+					   listObjects.Keys.OfType<KryptonCheckButton>().FirstOrDefault(s => s.Name == key.Key.Name);
+					SetPropValue(Model, key.Value[0].ToString(), obj.Checked.ToString());
+				}
+				else
+				{
+					SetPropValue(Model, key.Value[0].ToString(), key.Key.Text.Trim());
+				}
+			}
+			return true;
+	}
+	
+	private object GetPropValue(object src, string propName)
+	{
+		try
+		{
+    		if (propName != null && propName != "") return src.GetType().GetProperty(propName).GetValue(src, null);
+		}
+		catch
+		{ }
+		return null;
+	}
+
+	private void SetPropValue(object src, string propName, string value)
+	{
+			PropertyInfo info = src.GetType().GetProperties().FirstOrDefault(s => s.Name == propName);
+			 if (info != null && info.CanWrite == true)
+			{
+				if (info.PropertyType == typeof (string))
+				{
+					info.SetValue(src, value, null);
+					return;
+				}
+
+				if (info.PropertyType == typeof (int) || info.PropertyType.FullName.Contains("Int32"))
+				{
+					info.SetValue(src, value.ToIntOrDefault(), null);
+					return;
+				}
+
+				if (info.PropertyType == typeof (decimal))
+				{
+					info.SetValue(src, value.ToDecimalOrDefault(), null);
+					return;
+				}
+
+				if (info.PropertyType == typeof (double))
+				{
+					info.SetValue(src, value.ToDoubleOrDefault(), null);
+					return;
+				}
+
+
+				if (info.PropertyType == typeof (bool))if (info.PropertyType == typeof (bool) || info.PropertyType.FullName.Contains("Boolean"))
+				{
+					info.SetValue(src, value.ToBoolOrDefault(), null);
+					return;
+				}
+
+				if (info.PropertyType == typeof (Guid))
+				{
+					info.SetValue(src, value.ToGuidOrDefault(), null);
+					return;
+				} 
+			}
+	}
+
+	private void SetTextReadOnly(bool isReadOnly)
+	{
+			txtSearch.ReadOnly = !isReadOnly;
+			foreach (KryptonTextBox obj in listObjects.Keys.OfType<KryptonTextBox>())
+			{
+				obj.ReadOnly = isReadOnly;
+				foreach (ButtonSpecAny btn in obj.ButtonSpecs)
+				{
+					btn.Enabled = isReadOnly ? ButtonEnabled.False : ButtonEnabled.True;
+				}
+			}
+
+			foreach (ButtonSpecAny obj in listObjects.Keys.OfType<ButtonSpecAny>())
+			{
+				obj.Enabled = isReadOnly ? ButtonEnabled.False : ButtonEnabled.True;
+			}
+			foreach (var obj in listObjects.Keys)
+			{
+				if (obj is KryptonTextBox) continue;
+				obj.Enabled = !isReadOnly;
+			}
+	}
+	
+	private void SetDataDefault()
+	{
+			foreach (KryptonTextBox obj in listObjects.Keys.OfType<KryptonTextBox>())
+			{
+				obj.Text = "";
+			}
+
+			foreach (KryptonLabel obj in listObjects.Keys.OfType<KryptonLabel>())
+			{
+				obj.Text = @"0";
+			}
+
+			foreach (KryptonNumericUpDown obj in listObjects.Keys.OfType<KryptonNumericUpDown>())
+			{
+				obj.Value = obj.Minimum;
+				//obj.ResetText();
+			}
+
+			foreach (KryptonCheckBox obj in listObjects.Keys.OfType<KryptonCheckBox>())
+			{
+				obj.CheckState = CheckState.Checked;
+			}
+
+			foreach (KryptonCheckButton obj in listObjects.Keys.OfType<KryptonCheckButton>())
+			{
+				obj.Checked = false;
+			}
+
+			txtSearch.Select();
+			_ThaoTac = ThaoTac.Xem;            
+	}
+
+	private void SetStateButton(bool isButtonFuntion)
+	{
+		btnAdd.Visible = isButtonFuntion;
+		btnEdit.Visible = isButtonFuntion;
+		btnDelete.Visible = isButtonFuntion;
+		btnSave.Visible = !isButtonFuntion;
+		btnCancel.Visible = !isButtonFuntion;
+	}
+
+	public void LoadData(List<<#=code.Escape(entity)#>> list)
+	{
+		try
+		{
+			IsSelect = false;
+			dgvData.AutoGenerateColumns = false;
+			dgvData.SuspendLayout();
+			dgvData.DataSource = list;
+			dgvData.Refresh();
+			dgvData.ResumeLayout();
+			IsSelect = true;
+		}
+		catch (Exception exception)
+		{
+			this.ErrMsg = exception.Message;
+		}
+	}
+
+	public void LoadDataAll()
+	{
+		ReloadUnitOfWork();
+		I<#=code.Escape(entity)#>Service service = new <#=code.Escape(entity)#>Service(this.UnitOfWorkAsync);
+		dataList = service.FindAll();
+		LoadData(dataList);
+	}
+
+	public void SelectedRow(DataGridViewRow rowData)
+	{
+		if (rowData == null) throw new ArgumentNullException("rowData");
+		if (dgvData.RowCount <= 0)
+			return;
+		dgvData.Rows[rowData.Index].Selected = true;
+		dgvData.FirstDisplayedScrollingRowIndex = rowData.Index;
+		dgvData.Refresh();
+	}
+
+	public bool CmdKey(Keys keyData)
+	{
+			switch (keyData)
+			{
+				case Keys.Enter:
+					if (txtSearch.Focused)
+						btnSearch.PerformClick();
+
+					if (btnSave.Visible)
+						btnSave.PerformClick();
+
+					if (dgvData.Focused && !btnSave.Visible)
+						btnEdit.PerformClick();
+					return true;
+
+				case Keys.Tab:
+					dgvData.Select();
+					return true;
+
+				case Keys.Escape:
+					if (btnCancel.Visible)
+						btnCancel.PerformClick();
+					else
+						btnExit.PerformClick();
+					return true;
+			}
+			return false;
+	}
+	#endregion
+	<#
+	var complexProperties = typeMapper.GetComplexProperties(entity);
+	if (complexProperties.Any())
+	{
+		foreach(var aa in complexProperties)
+		{
+			#>
+			//<#= aa.ToString() #>
+			<#
+        }
+    }
+	#>
+	}
+<#
+	EndNamespace(code);
+}
+
+foreach (var complex in typeMapper.GetItemsToGenerate<ComplexType>(itemCollection))
+{
+	fileManager.StartNewFile(complex.Name + ".cs");
+	BeginNamespace(code);
+#>
+<#=codeStringGenerator.UsingDirectives(inHeader: false, includeCollections: false)#>
+<#=Accessibility.ForType(complex)#> partial class <#=code.Escape(complex)#>
+{
+<#
+	var complexProperties = typeMapper.GetComplexProperties(complex);
+	var propertiesWithDefaultValues = typeMapper.GetPropertiesWithDefaultValues(complex);
+
+	if (propertiesWithDefaultValues.Any() || complexProperties.Any())
+	{
+#>
+	public <#=code.Escape(complex)#>()
+	{
+<#
+		foreach (var edmProperty in propertiesWithDefaultValues)
+		{
+#>
+		this.<#=code.Escape(edmProperty)#> = <#=typeMapper.CreateLiteral(edmProperty.DefaultValue)#>;
+<#
+		}
+
+		foreach (var complexProperty in complexProperties)
+		{
+#>
+		this.<#=code.Escape(complexProperty)#> = new <#=typeMapper.GetTypeName(complexProperty.TypeUsage)#>();
+<#
+		}
+#>
+	}
+
+<#
+	}
+
+	var simpleProperties = typeMapper.GetSimpleProperties(complex);
+	if (simpleProperties.Any())
+	{
+		foreach(var edmProperty in simpleProperties)
+		{
+#>
+	<#=codeStringGenerator.Property(edmProperty)#>
+<#
+		}
+	}
+
+	if (complexProperties.Any())
+	{
+#>
+
+<#
+		foreach(var edmProperty in complexProperties)
+		{
+#>
+	<#=codeStringGenerator.Property(edmProperty)#>
+<#
+		}
+	}
+#>
+}
+<#
+	EndNamespace(code);
+}
+
+foreach (var enumType in typeMapper.GetEnumItemsToGenerate(itemCollection))
+{
+	fileManager.StartNewFile(enumType.Name + ".cs");
+	BeginNamespace(code);
+#>
+<#=codeStringGenerator.UsingDirectives(inHeader: false, includeCollections: false)#>
+<#
+	if (typeMapper.EnumIsFlags(enumType))
+	{
+#>
+[Flags]
+<#
+	}
+#>
+<#=codeStringGenerator.EnumOpening(enumType)#>
+{
+<#
+	var foundOne = false;
+	
+	foreach (MetadataItem member in typeMapper.GetEnumMembers(enumType))
+	{
+		foundOne = true;
+#>
+	<#=code.Escape(typeMapper.GetEnumMemberName(member))#> = <#=typeMapper.GetEnumMemberValue(member)#>,
+<#
+	}
+
+	if (foundOne)
+	{
+		this.GenerationEnvironment.Remove(this.GenerationEnvironment.Length - 3, 1);
+	}
+#>
+}
+<#
+	EndNamespace(code);
+}
+
+fileManager.Process();
+
+#>
+<#+
+
+public void WriteHeader(CodeStringGenerator codeStringGenerator, EntityFrameworkTemplateFileManager fileManager)
+{
+	fileManager.StartHeader();
+#>
+//------------------------------------------------------------------------------
+// <auto-generated>
+// BaseUI Generated
+// </auto-generated>
+//------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using Service.Pattern;
+using System.Windows.Forms;
+using System.Linq;
+using System.Reflection;
+using ComponentFactory.Krypton.Toolkit;
+using MetroUI.Forms;
+using WH.Entity;
+using WH.Model;
+using WH.Service.Service;
+using Util.Pattern;
+
+<#+
+	fileManager.EndBlock();
+}
+
+public void BeginNamespace(CodeGenerationTools code)
+{
+	var codeNamespace = code.VsNamespaceSuggestion();
+	if (!String.IsNullOrEmpty(codeNamespace))
+	{
+#>
+namespace <#=code.EscapeNamespace(codeNamespace)#>
+{
+<#+
+		PushIndent("    ");
+	}
+}
+
+public void EndNamespace(CodeGenerationTools code)
+{
+	if (!String.IsNullOrEmpty(code.VsNamespaceSuggestion()))
+	{
+		PopIndent();
+#>
+}
+<#+
+	}
+}
+
+public const string TemplateId = "CSharp_DbContext_Types_EF6";
+
+public class CodeStringGenerator
+{
+	private readonly CodeGenerationTools _code;
+	private readonly TypeMapper _typeMapper;
+	private readonly MetadataTools _ef;
+
+	public CodeStringGenerator(CodeGenerationTools code, TypeMapper typeMapper, MetadataTools ef)
+	{
+		ArgumentNotNull(code, "code");
+		ArgumentNotNull(typeMapper, "typeMapper");
+		ArgumentNotNull(ef, "ef");
+
+		_code = code;
+		_typeMapper = typeMapper;
+		_ef = ef;
+	}
+
+	public string Property(EdmProperty edmProperty)
+	{
+		return string.Format(
+			CultureInfo.InvariantCulture,
+			"{0} {1} {2} {{ {3}get; {4}set; }}",
+			Accessibility.ForProperty(edmProperty),
+			_typeMapper.GetTypeName(edmProperty.TypeUsage),
+			_code.Escape(edmProperty),
+			_code.SpaceAfter(Accessibility.ForGetter(edmProperty)),
+			_code.SpaceAfter(Accessibility.ForSetter(edmProperty)));
+	}
+
+	public string NavigationProperty(NavigationProperty navProp)
+	{
+		var endType = _typeMapper.GetTypeName(navProp.ToEndMember.GetEntityType());
+		return string.Format(
+			CultureInfo.InvariantCulture,
+			"{0} {1} {2} {{ {3}get; {4}set; }}",
+			AccessibilityAndVirtual(Accessibility.ForNavigationProperty(navProp)),
+			navProp.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many ? ("ICollection<" + endType + ">") : endType,
+			_code.Escape(navProp),
+			_code.SpaceAfter(Accessibility.ForGetter(navProp)),
+			_code.SpaceAfter(Accessibility.ForSetter(navProp)));
+	}
+	
+	public string AccessibilityAndVirtual(string accessibility)
+	{
+		return accessibility + (accessibility != "private" ? " virtual" : "");
+	}
+	
+	public string EntityClassOpening(EntityType entity)
+	{
+		return string.Format(
+			CultureInfo.InvariantCulture,
+			"{0} {1}partial class {2}{3}",
+			Accessibility.ForType(entity),
+			_code.SpaceAfter(_code.AbstractOption(entity)),
+			_code.Escape(entity),
+			_code.StringBefore(" : ", _typeMapper.GetTypeName(entity.BaseType)));
+	}
+	
+	public string EnumOpening(SimpleType enumType)
+	{
+		return string.Format(
+			CultureInfo.InvariantCulture,
+			"{0} enum {1} : {2}",
+			Accessibility.ForType(enumType),
+			_code.Escape(enumType),
+			_code.Escape(_typeMapper.UnderlyingClrType(enumType)));
+		}
+	
+	public void WriteFunctionParameters(EdmFunction edmFunction, Action<string, string, string, string> writeParameter)
+	{
+		var parameters = FunctionImportParameter.Create(edmFunction.Parameters, _code, _ef);
+		foreach (var parameter in parameters.Where(p => p.NeedsLocalVariable))
+		{
+			var isNotNull = parameter.IsNullableOfT ? parameter.FunctionParameterName + ".HasValue" : parameter.FunctionParameterName + " != null";
+			var notNullInit = "new ObjectParameter(\"" + parameter.EsqlParameterName + "\", " + parameter.FunctionParameterName + ")";
+			var nullInit = "new ObjectParameter(\"" + parameter.EsqlParameterName + "\", typeof(" + TypeMapper.FixNamespaces(parameter.RawClrTypeName) + "))";
+			writeParameter(parameter.LocalVariableName, isNotNull, notNullInit, nullInit);
+		}
+	}
+	
+	public string ComposableFunctionMethod(EdmFunction edmFunction, string modelNamespace)
+	{
+		var parameters = _typeMapper.GetParameters(edmFunction);
+		
+		return string.Format(
+			CultureInfo.InvariantCulture,
+			"{0} IQueryable<{1}> {2}({3})",
+			AccessibilityAndVirtual(Accessibility.ForMethod(edmFunction)),
+			_typeMapper.GetTypeName(_typeMapper.GetReturnType(edmFunction), modelNamespace),
+			_code.Escape(edmFunction),
+			string.Join(", ", parameters.Select(p => TypeMapper.FixNamespaces(p.FunctionParameterType) + " " + p.FunctionParameterName).ToArray()));
+	}
+	
+	public string ComposableCreateQuery(EdmFunction edmFunction, string modelNamespace)
+	{
+		var parameters = _typeMapper.GetParameters(edmFunction);
+		
+		return string.Format(
+			CultureInfo.InvariantCulture,
+			"return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<{0}>(\"[{1}].[{2}]({3})\"{4});",
+			_typeMapper.GetTypeName(_typeMapper.GetReturnType(edmFunction), modelNamespace),
+			edmFunction.NamespaceName,
+			edmFunction.Name,
+			string.Join(", ", parameters.Select(p => "@" + p.EsqlParameterName).ToArray()),
+			_code.StringBefore(", ", string.Join(", ", parameters.Select(p => p.ExecuteParameterName).ToArray())));
+	}
+	
+	public string FunctionMethod(EdmFunction edmFunction, string modelNamespace, bool includeMergeOption)
+	{
+		var parameters = _typeMapper.GetParameters(edmFunction);
+		var returnType = _typeMapper.GetReturnType(edmFunction);
+
+		var paramList = String.Join(", ", parameters.Select(p => TypeMapper.FixNamespaces(p.FunctionParameterType) + " " + p.FunctionParameterName).ToArray());
+		if (includeMergeOption)
+		{
+			paramList = _code.StringAfter(paramList, ", ") + "MergeOption mergeOption";
+		}
+
+		return string.Format(
+			CultureInfo.InvariantCulture,
+			"{0} {1} {2}({3})",
+			AccessibilityAndVirtual(Accessibility.ForMethod(edmFunction)),
+			returnType == null ? "int" : "ObjectResult<" + _typeMapper.GetTypeName(returnType, modelNamespace) + ">",
+			_code.Escape(edmFunction),
+			paramList);
+	}
+	
+	public string ExecuteFunction(EdmFunction edmFunction, string modelNamespace, bool includeMergeOption)
+	{
+		var parameters = _typeMapper.GetParameters(edmFunction);
+		var returnType = _typeMapper.GetReturnType(edmFunction);
+
+		var callParams = _code.StringBefore(", ", String.Join(", ", parameters.Select(p => p.ExecuteParameterName).ToArray()));
+		if (includeMergeOption)
+		{
+			callParams = ", mergeOption" + callParams;
+		}
+		
+		return string.Format(
+			CultureInfo.InvariantCulture,
+			"return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction{0}(\"{1}\"{2});",
+			returnType == null ? "" : "<" + _typeMapper.GetTypeName(returnType, modelNamespace) + ">",
+			edmFunction.Name,
+			callParams);
+	}
+	
+	public string DbSet(EntitySet entitySet)
+	{
+		return string.Format(
+			CultureInfo.InvariantCulture,
+			"{0} virtual DbSet<{1}> {2} {{ get; set; }}",
+			Accessibility.ForReadOnlyProperty(entitySet),
+			_typeMapper.GetTypeName(entitySet.ElementType),
+			_code.Escape(entitySet));
+	}
+
+	public string UsingDirectives(bool inHeader, bool includeCollections = true)
+	{
+		return inHeader == string.IsNullOrEmpty(_code.VsNamespaceSuggestion())
+			? string.Format(
+				CultureInfo.InvariantCulture,
+				"{0}using System;{1}" +
+				"{2}",
+				inHeader ? Environment.NewLine : "",
+				includeCollections ? (Environment.NewLine + "using System.Collections.Generic;") : "",
+				inHeader ? "" : Environment.NewLine)
+			: "";
+	}
+}
+
+public class TypeMapper
+{
+	private const string ExternalTypeNameAttributeName = @"http://schemas.microsoft.com/ado/2006/04/codegeneration:ExternalTypeName";
+
+	private readonly System.Collections.IList _errors;
+	private readonly CodeGenerationTools _code;
+	private readonly MetadataTools _ef;
+
+	public TypeMapper(CodeGenerationTools code, MetadataTools ef, System.Collections.IList errors)
+	{
+		ArgumentNotNull(code, "code");
+		ArgumentNotNull(ef, "ef");
+		ArgumentNotNull(errors, "errors");
+
+		_code = code;
+		_ef = ef;
+		_errors = errors;
+	}
+
+	public static string FixNamespaces(string typeName)
+	{
+		return typeName.Replace("System.Data.Spatial.", "System.Data.Entity.Spatial.");
+	}
+
+	public string GetTypeName(TypeUsage typeUsage)
+	{
+		return typeUsage == null ? null : GetTypeName(typeUsage.EdmType, _ef.IsNullable(typeUsage), modelNamespace: null);
+	}
+
+	public string GetTypeName(EdmType edmType)
+	{
+		return GetTypeName(edmType, isNullable: null, modelNamespace: null);
+	}
+
+	public string GetTypeName(TypeUsage typeUsage, string modelNamespace)
+	{
+		return typeUsage == null ? null : GetTypeName(typeUsage.EdmType, _ef.IsNullable(typeUsage), modelNamespace);
+	}
+
+	public string GetTypeName(EdmType edmType, string modelNamespace)
+	{
+		return GetTypeName(edmType, isNullable: null, modelNamespace: modelNamespace);
+	}
+
+	public string GetTypeName(EdmType edmType, bool? isNullable, string modelNamespace)
+	{
+		if (edmType == null)
+		{
+			return null;
+		}
+
+		var collectionType = edmType as CollectionType;
+		if (collectionType != null)
+		{
+			return String.Format(CultureInfo.InvariantCulture, "ICollection<{0}>", GetTypeName(collectionType.TypeUsage, modelNamespace));
+		}
+
+		var typeName = _code.Escape(edmType.MetadataProperties
+								.Where(p => p.Name == ExternalTypeNameAttributeName)
+								.Select(p => (string)p.Value)
+								.FirstOrDefault())
+			?? (modelNamespace != null && edmType.NamespaceName != modelNamespace ?
+				_code.CreateFullName(_code.EscapeNamespace(edmType.NamespaceName), _code.Escape(edmType)) :
+				_code.Escape(edmType));
+
+		if (edmType is StructuralType)
+		{
+			return typeName;
+		}
+
+		if (edmType is SimpleType)
+		{
+			var clrType = UnderlyingClrType(edmType);
+			if (!IsEnumType(edmType))
+			{
+				typeName = _code.Escape(clrType);
+			}
+
+			typeName = FixNamespaces(typeName);
+
+			return clrType.IsValueType && isNullable == true ?
+				String.Format(CultureInfo.InvariantCulture, "Nullable<{0}>", typeName) :
+				typeName;
+		}
+
+		throw new ArgumentException("edmType");
+	}
+	
+	public Type UnderlyingClrType(EdmType edmType)
+	{
+		ArgumentNotNull(edmType, "edmType");
+
+		var primitiveType = edmType as PrimitiveType;
+		if (primitiveType != null)
+		{
+			return primitiveType.ClrEquivalentType;
+		}
+
+		if (IsEnumType(edmType))
+		{
+			return GetEnumUnderlyingType(edmType).ClrEquivalentType;
+		}
+
+		return typeof(object);
+	}
+	
+	public object GetEnumMemberValue(MetadataItem enumMember)
+	{
+		ArgumentNotNull(enumMember, "enumMember");
+		
+		var valueProperty = enumMember.GetType().GetProperty("Value");
+		return valueProperty == null ? null : valueProperty.GetValue(enumMember, null);
+	}
+	
+	public string GetEnumMemberName(MetadataItem enumMember)
+	{
+		ArgumentNotNull(enumMember, "enumMember");
+		
+		var nameProperty = enumMember.GetType().GetProperty("Name");
+		return nameProperty == null ? null : (string)nameProperty.GetValue(enumMember, null);
+	}
+
+	public System.Collections.IEnumerable GetEnumMembers(EdmType enumType)
+	{
+		ArgumentNotNull(enumType, "enumType");
+
+		var membersProperty = enumType.GetType().GetProperty("Members");
+		return membersProperty != null 
+			? (System.Collections.IEnumerable)membersProperty.GetValue(enumType, null)
+			: Enumerable.Empty<MetadataItem>();
+	}
+	
+	public bool EnumIsFlags(EdmType enumType)
+	{
+		ArgumentNotNull(enumType, "enumType");
+		
+		var isFlagsProperty = enumType.GetType().GetProperty("IsFlags");
+		return isFlagsProperty != null && (bool)isFlagsProperty.GetValue(enumType, null);
+	}
+
+	public bool IsEnumType(GlobalItem edmType)
+	{
+		ArgumentNotNull(edmType, "edmType");
+
+		return edmType.GetType().Name == "EnumType";
+	}
+
+	public PrimitiveType GetEnumUnderlyingType(EdmType enumType)
+	{
+		ArgumentNotNull(enumType, "enumType");
+
+		return (PrimitiveType)enumType.GetType().GetProperty("UnderlyingType").GetValue(enumType, null);
+	}
+
+	public string CreateLiteral(object value)
+	{
+		if (value == null || value.GetType() != typeof(TimeSpan))
+		{
+			return _code.CreateLiteral(value);
+		}
+
+		return string.Format(CultureInfo.InvariantCulture, "new TimeSpan({0})", ((TimeSpan)value).Ticks);
+	}
+	
+	public bool VerifyCaseInsensitiveTypeUniqueness(IEnumerable<string> types, string sourceFile)
+	{
+		ArgumentNotNull(types, "types");
+		ArgumentNotNull(sourceFile, "sourceFile");
+		
+		var hash = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
+		if (types.Any(item => !hash.Add(item)))
+		{
+			_errors.Add(
+				new CompilerError(sourceFile, -1, -1, "6023",
+					String.Format(CultureInfo.CurrentCulture, CodeGenerationTools.GetResourceString("Template_CaseInsensitiveTypeConflict"))));
+			return false;
+		}
+		return true;
+	}
+	
+	public IEnumerable<SimpleType> GetEnumItemsToGenerate(IEnumerable<GlobalItem> itemCollection)
+	{
+		return GetItemsToGenerate<SimpleType>(itemCollection)
+			.Where(e => IsEnumType(e));
+	}
+	
+	public IEnumerable<T> GetItemsToGenerate<T>(IEnumerable<GlobalItem> itemCollection) where T: EdmType
+	{
+		return itemCollection
+			.OfType<T>()
+			.Where(i => !i.MetadataProperties.Any(p => p.Name == ExternalTypeNameAttributeName))
+			.OrderBy(i => i.Name);
+	}
+
+	public IEnumerable<string> GetAllGlobalItems(IEnumerable<GlobalItem> itemCollection)
+	{
+		return itemCollection
+			.Where(i => i is EntityType || i is ComplexType || i is EntityContainer || IsEnumType(i))
+			.Select(g => GetGlobalItemName(g));
+	}
+
+	public string GetGlobalItemName(GlobalItem item)
+	{
+		if (item is EdmType)
+		{
+			return ((EdmType)item).Name;
+		}
+		else
+		{
+			return ((EntityContainer)item).Name;
+		}
+	}
+
+	public IEnumerable<EdmProperty> GetSimpleProperties(EntityType type)
+	{
+		return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type);
+	}
+	
+	public IEnumerable<EdmProperty> GetSimpleProperties(ComplexType type)
+	{
+		return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type);
+	}
+	
+	public IEnumerable<EdmProperty> GetComplexProperties(EntityType type)
+	{
+		return type.Properties.Where(p => p.TypeUsage.EdmType is ComplexType && p.DeclaringType == type);
+	}
+	
+	public IEnumerable<EdmProperty> GetComplexProperties(ComplexType type)
+	{
+		return type.Properties.Where(p => p.TypeUsage.EdmType is ComplexType && p.DeclaringType == type);
+	}
+
+	public IEnumerable<EdmProperty> GetPropertiesWithDefaultValues(EntityType type)
+	{
+		return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type && p.DefaultValue != null);
+	}
+	
+	public IEnumerable<EdmProperty> GetPropertiesWithDefaultValues(ComplexType type)
+	{
+		return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type && p.DefaultValue != null);
+	}
+
+	public IEnumerable<NavigationProperty> GetNavigationProperties(EntityType type)
+	{
+		return type.NavigationProperties.Where(np => np.DeclaringType == type);
+	}
+	
+	public IEnumerable<NavigationProperty> GetCollectionNavigationProperties(EntityType type)
+	{
+		return type.NavigationProperties.Where(np => np.DeclaringType == type && np.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many);
+	}
+	
+	public FunctionParameter GetReturnParameter(EdmFunction edmFunction)
+	{
+		ArgumentNotNull(edmFunction, "edmFunction");
+
+		var returnParamsProperty = edmFunction.GetType().GetProperty("ReturnParameters");
+		return returnParamsProperty == null
+			? edmFunction.ReturnParameter
+			: ((IEnumerable<FunctionParameter>)returnParamsProperty.GetValue(edmFunction, null)).FirstOrDefault();
+	}
+
+	public bool IsComposable(EdmFunction edmFunction)
+	{
+		ArgumentNotNull(edmFunction, "edmFunction");
+
+		var isComposableProperty = edmFunction.GetType().GetProperty("IsComposableAttribute");
+		return isComposableProperty != null && (bool)isComposableProperty.GetValue(edmFunction, null);
+	}
+
+	public IEnumerable<FunctionImportParameter> GetParameters(EdmFunction edmFunction)
+	{
+		return FunctionImportParameter.Create(edmFunction.Parameters, _code, _ef);
+	}
+
+	public TypeUsage GetReturnType(EdmFunction edmFunction)
+	{
+		var returnParam = GetReturnParameter(edmFunction);
+		return returnParam == null ? null : _ef.GetElementType(returnParam.TypeUsage);
+	}
+	
+	public bool GenerateMergeOptionFunction(EdmFunction edmFunction, bool includeMergeOption)
+	{
+		var returnType = GetReturnType(edmFunction);
+		return !includeMergeOption && returnType != null && returnType.EdmType.BuiltInTypeKind == BuiltInTypeKind.EntityType;
+	}
+}
+
+public static void ArgumentNotNull<T>(T arg, string name) where T : class
+{
+	if (arg == null)
+	{
+		throw new ArgumentNullException(name);
+	}
+}
+#>

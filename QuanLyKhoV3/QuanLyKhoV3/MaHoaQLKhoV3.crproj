@@ -1,0 +1,17 @@
+<project outputDir="D:\Projects\QLKho\ql-kho-ban-le\Source\QuanLyKhoV3\QuanLyKhoV3\bin\Release\Confused" baseDir="D:\Projects\QLKho\ql-kho-ban-le\Source\QuanLyKhoV3\QuanLyKhoV3\bin\Release" xmlns="http://confuser.codeplex.com">
+  <module path="WH.Entity.dll">
+    <rule pattern="true" preset="maximum" inherit="false" />
+  </module>
+  <module path="WH.GUI.dll">
+    <rule pattern="true" preset="maximum" inherit="false" />
+  </module>
+  <module path="WH.Model.dll">
+    <rule pattern="true" preset="maximum" inherit="false" />
+  </module>
+  <module path="WH.Report.dll">
+    <rule pattern="true" preset="maximum" inherit="false" />
+  </module>
+  <module path="WH.Service.dll">
+    <rule pattern="true" preset="maximum" inherit="false" />
+  </module>
+</project>

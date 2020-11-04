@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B675D4E4-0820-4C3D-B1AE-835F37745973}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WH.Base.UI</RootNamespace>
+    <AssemblyName>WH.Base.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ComponentFactory.Krypton.Toolkit, Version=4.4.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\ComponentFactory.Krypton.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml">
+      <HintPath>..\DLL\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelLibrary">
+      <HintPath>..\DLL\ExcelLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember, Version=1.0.0.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastMember.1.1.0-beta1\lib\net40\FastMember.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LinqKit, Version=1.1.3.1, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqKit.1.1.3.1\lib\net45\LinqKit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MetroFramework">
+      <HintPath>..\DLL\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design">
+      <HintPath>..\DLL\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts">
+      <HintPath>..\DLL\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroUI">
+      <HintPath>..\DLL\MetroUI.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DanhMuc\FrmNhaCungCap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DanhMuc\FrmNhaCungCap.designer.cs">
+      <DependentUpon>FrmNhaCungCap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DanhMuc\FrmDonVi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DanhMuc\FrmDonVi.designer.cs">
+      <DependentUpon>FrmDonVi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DanhMuc\FrmKhachHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DanhMuc\FrmKhachHang.designer.cs">
+      <DependentUpon>FrmKhachHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DanhMuc\FrmKhuVuc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DanhMuc\FrmKhuVuc.designer.cs">
+      <DependentUpon>FrmKhuVuc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DanhMuc\FrmLoaiMatHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DanhMuc\FrmLoaiMatHang.designer.cs">
+      <DependentUpon>FrmLoaiMatHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DanhMuc\FrmMatHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DanhMuc\FrmMatHang.Designer.cs">
+      <DependentUpon>FrmMatHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HeThong\FrmMayIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HeThong\FrmMayIn.designer.cs">
+      <DependentUpon>FrmMayIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DanhMuc\FrmSelectDonVi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DanhMuc\FrmSelectDonVi.Designer.cs">
+      <DependentUpon>FrmSelectDonVi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DanhMuc\FrmSelectKhuVuc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DanhMuc\FrmSelectKhuVuc.designer.cs">
+      <DependentUpon>FrmSelectKhuVuc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DanhMuc\FrmSelectLoaiMatHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DanhMuc\FrmSelectLoaiMatHang.Designer.cs">
+      <DependentUpon>FrmSelectLoaiMatHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HeThong\FrmCauHinhKetNoi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HeThong\FrmCauHinhKetNoi.designer.cs">
+      <DependentUpon>FrmCauHinhKetNoi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HeThong\FrmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HeThong\FrmLogin.Designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main\FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main\UrcBaoCao.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Main\UrcBaoCao.Designer.cs">
+      <DependentUpon>UrcBaoCao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main\UrcQuanLyChung.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Main\UrcQuanLyChung.Designer.cs">
+      <DependentUpon>UrcQuanLyChung.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NghiepVu\FrmNhapKho.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NghiepVu\FrmNhapKho.Designer.cs">
+      <DependentUpon>FrmNhapKho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NghiepVu\LoadDataForm.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ExcelService.cs" />
+    <Compile Include="UI\FrmFlashChild.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FrmFlashChild.designer.cs">
+      <DependentUpon>FrmFlashChild.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FrmFlash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FrmFlash.designer.cs">
+      <DependentUpon>FrmFlash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\InformationCompany.cs" />
+    <Compile Include="UI\MsgBox.cs" />
+    <Compile Include="UI\UIHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="Resources\Application.ico" />
+    <None Include="Resources\Backspace.png" />
+    <None Include="Resources\BackspaceWhite.png" />
+    <None Include="Resources\Backup.png" />
+    <None Include="Resources\Database.png" />
+    <None Include="Resources\DeleteLon.png" />
+    <None Include="Resources\DeleteNho.png" />
+    <None Include="Resources\Down.png" />
+    <None Include="Resources\Down2.png" />
+    <None Include="Resources\Error.ico" />
+    <None Include="Resources\Excel.png" />
+    <None Include="Resources\Exclamation.ico" />
+    <None Include="Resources\Exit.png" />
+    <None Include="Resources\Export.png" />
+    <None Include="Resources\ExportLon.png" />
+    <None Include="Resources\Header.png" />
+    <None Include="Resources\Import.png" />
+    <None Include="Resources\Info.ico" />
+    <None Include="Resources\KetNoi.png" />
+    <None Include="Resources\Key.png" />
+    <None Include="Resources\KeyBack.png" />
+    <None Include="Resources\Left.png" />
+    <None Include="Resources\Lich.png" />
+    <None Include="Resources\List.png" />
+    <None Include="Resources\ListCheck.png" />
+    <None Include="Resources\Load.gif" />
+    <None Include="Resources\Loader.gif" />
+    <None Include="Resources\MayInLon.png" />
+    <None Include="Resources\MayInNho.png" />
+    <None Include="Resources\Menu.png" />
+    <None Include="Resources\Money.png" />
+    <None Include="Resources\NoImage.jpg" />
+    <None Include="Resources\OrangeTheme.jpg" />
+    <None Include="Resources\Promotion.png" />
+    <None Include="Resources\Question.ico" />
+    <None Include="Resources\Quit.png" />
+    <None Include="Resources\Register.png" />
+    <None Include="Resources\Right.png" />
+    <None Include="Resources\Save.png" />
+    <None Include="Resources\Server.png" />
+    <None Include="Resources\Shield.ico" />
+    <None Include="Resources\SoaLuu.png" />
+    <None Include="Resources\Sua.png" />
+    <None Include="Resources\SysLogin.png" />
+    <None Include="Resources\System.png" />
+    <None Include="Resources\ThanhToan.png" />
+    <None Include="Resources\Them.png" />
+    <None Include="Resources\ThemLon.png" />
+    <None Include="Resources\ThoatLon.png" />
+    <None Include="Resources\ThongTin.png" />
+    <None Include="Resources\ThuNho.png" />
+    <None Include="Resources\TimKiem.png" />
+    <None Include="Resources\TimKiemNho.png" />
+    <None Include="Resources\Up.png" />
+    <None Include="Resources\Users.png" />
+    <None Include="Resources\Warning.ico" />
+    <None Include="Resources\desktop.ini" />
+    <None Include="Resources\logodemo.jpg" />
+    <None Include="Resources\bg.jpg" />
+    <None Include="Resources\Select.png" />
+    <Content Include="TemplateExcel\DSDoiTacTemplate.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TemplateExcel\DSMatHangTemplate.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="TemplateExcel\DSMatHangKhoTemplate.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\BaseForm.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Repository.Pattern.Ef6\Repository.Pattern.Ef6.csproj">
+      <Project>{f68a1d19-93fb-47c1-a22b-42bea3e4fd8c}</Project>
+      <Name>Repository.Pattern.Ef6</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Repository.Pattern\Repository.Pattern.csproj">
+      <Project>{6e682a14-c872-4813-b620-76e108dea683}</Project>
+      <Name>Repository.Pattern</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Service.Pattern\Service.Pattern.csproj">
+      <Project>{4efba6da-2e78-4ca6-90d6-782772b160cd}</Project>
+      <Name>Service.Pattern</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Util.Pattern\Util.Pattern.csproj">
+      <Project>{19b9a83d-7b8b-4842-b53f-caf44ffcaac6}</Project>
+      <Name>Util.Pattern</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WH.Entity\WH.Entity.csproj">
+      <Project>{6e0bba11-c557-498e-9c0d-d50215bdd17f}</Project>
+      <Name>WH.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WH.Model\WH.Model.csproj">
+      <Project>{ff1ffc67-4d1a-41b7-8e94-739fa7f52d33}</Project>
+      <Name>WH.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WH.Service\WH.Service.csproj">
+      <Project>{733477e2-deb4-463a-86d0-ce108ce8b094}</Project>
+      <Name>WH.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DanhMuc\FrmNhaCungCap.resx">
+      <DependentUpon>FrmNhaCungCap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DanhMuc\FrmDonVi.resx">
+      <DependentUpon>FrmDonVi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DanhMuc\FrmKhachHang.resx">
+      <DependentUpon>FrmKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DanhMuc\FrmKhuVuc.resx">
+      <DependentUpon>FrmKhuVuc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DanhMuc\FrmLoaiMatHang.resx">
+      <DependentUpon>FrmLoaiMatHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DanhMuc\FrmMatHang.resx">
+      <DependentUpon>FrmMatHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HeThong\FrmMayIn.resx">
+      <DependentUpon>FrmMayIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DanhMuc\FrmSelectDonVi.resx">
+      <DependentUpon>FrmSelectDonVi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DanhMuc\FrmSelectKhuVuc.resx">
+      <DependentUpon>FrmSelectKhuVuc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DanhMuc\FrmSelectLoaiMatHang.resx">
+      <DependentUpon>FrmSelectLoaiMatHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HeThong\FrmCauHinhKetNoi.resx">
+      <DependentUpon>FrmCauHinhKetNoi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HeThong\FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\UrcBaoCao.resx">
+      <DependentUpon>UrcBaoCao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\UrcQuanLyChung.resx">
+      <DependentUpon>UrcQuanLyChung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NghiepVu\FrmNhapKho.resx">
+      <DependentUpon>FrmNhapKho.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FrmFlashChild.resx">
+      <DependentUpon>FrmFlashChild.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FrmFlash.resx">
+      <DependentUpon>FrmFlash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MsgBox.resx">
+      <DependentUpon>MsgBox.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BaoCao\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MetroFramework.txt" />
+    <None Include="Resources\Product.png" />
+    <None Include="Resources\Xoa.png" />
+    <None Include="Resources\ThongKe.png" />
+    <None Include="Resources\Thoat_2.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\KhachHang.png" />
+    <None Include="Resources\HocSinh.png" />
+    <None Include="Resources\DanhMuc.png" />
+    <None Include="Resources\Note.png" />
+    <None Include="Resources\Print.png" />
+    <None Include="Resources\SaveAndClose.png" />
+    <None Include="Resources\Cancel.png" />
+    <None Include="Resources\Delete.png" />
+    <None Include="Resources\Edit.png" />
+    <None Include="Resources\New.png" />
+    <None Include="Resources\ic_supervisor_account_white_36pt.png" />
+    <None Include="Resources\more.png" />
+    <None Include="Resources\arrow_left.png" />
+    <None Include="Resources\arrow_right.png" />
+    <None Include="Resources\add_black.png" />
+    <None Include="Resources\remove_black.png" />
+    <None Include="Resources\calc.png" />
+    <None Include="Resources\cancel_dgv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\codecracker.CSharp.1.0.0\analyzers\dotnet\cs\CodeCracker.Common.dll" />
+    <Analyzer Include="..\packages\codecracker.CSharp.1.0.0\analyzers\dotnet\cs\CodeCracker.CSharp.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
