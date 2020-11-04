@@ -2,6 +2,7 @@
 using Service.Pattern;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using Util.Pattern;
@@ -20,9 +21,6 @@ namespace WH.GUI
             CreateEvent();
 
         }
-
-
-
 
         #region Init
 
@@ -783,8 +781,10 @@ namespace WH.GUI
             }).ToList();
 
             LoadData2(list);
-            var tongTien = XuatKhoService.CalTotalAmount(MaHoaDon);
-            labTongTien.Values.ExtraText = tongTien == 0 ? "0" : tongTien.ToString("N2");
+            var totalAmount = XuatKhoService.CalTotalAmount(MaHoaDon);
+            labTongTien.Values.ExtraText = totalAmount == 0
+                ? "0"
+                : Math.Round(totalAmount, 1, MidpointRounding.AwayFromZero).ToString(CultureInfo.InvariantCulture);
             txtTienChi.Text = labTongTien.Values.ExtraText;
             txtTimKiem.SelectAll();
             txtTimKiem.Select();
