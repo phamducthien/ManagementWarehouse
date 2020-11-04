@@ -45,6 +45,9 @@ namespace WH.Service
         string CreateMaHoaDon();
 
         decimal CalTotalAmount(string maHoaDon);
+
+        double Adjust(double value);
+
         decimal CalTongTienTruocChietKhau(string maHoaDon);
         List<TEMP_HOADONXUATKHOCHITIET> LoadHoaDonTam(string maHoaDon);
         TEMP_HOADONXUATKHOCHITIET GetModelChiTietTam(string maChiTiet);
@@ -1272,6 +1275,25 @@ namespace WH.Service
         public List<HOADONXUATKHO> GetListHoaDonXuatKhoTheoNgay(DateTime BatDau, DateTime KetThuc)
         {
             return _hoadonxuatkhoService.Search(p => p.NGAYTAOHOADON >= BatDau && p.NGAYTAOHOADON <= KetThuc).ToList();
+        }
+
+        public double Adjust(double value)
+        {
+            double whole = Math.Truncate(value);
+            double remainder = value - whole;
+            if (remainder < 0.5)
+            {
+                remainder = 0;
+            }
+            else if (remainder == 0.5)
+            {
+                remainder = 0.5;
+            }
+            else
+            {
+                remainder = 1;
+            }
+            return whole + remainder;
         }
     }
 }

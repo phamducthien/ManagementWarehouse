@@ -784,7 +784,7 @@ namespace WH.GUI
             var totalAmount = XuatKhoService.CalTotalAmount(MaHoaDon);
             labTongTien.Values.ExtraText = totalAmount == 0
                 ? "0"
-                : Math.Round(totalAmount, 1, MidpointRounding.AwayFromZero).ToString(CultureInfo.InvariantCulture);
+                : XuatKhoService.Adjust(decimal.ToDouble(totalAmount)).ToString(CultureInfo.InvariantCulture);
             txtTienChi.Text = labTongTien.Values.ExtraText;
             txtTimKiem.SelectAll();
             txtTimKiem.Select();
