@@ -1115,7 +1115,7 @@
             // 
             this.HoaDon_STT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.Format = "N0";
             dataGridViewCellStyle2.NullValue = "0";
             this.HoaDon_STT.DefaultCellStyle = dataGridViewCellStyle2;
             this.HoaDon_STT.HeaderText = "Stt";
