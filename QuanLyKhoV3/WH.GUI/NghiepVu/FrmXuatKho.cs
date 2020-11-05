@@ -372,7 +372,6 @@ namespace WH.GUI
                     MaHoaDon = xuatKhoService.CreateMaHoaDon();
                 else
                 {
-
                     if (!listct.isNullOrZero())
                     {
                         soluong = listct.OrderBy(s => s.GHICHU.ToInt()).Last().GHICHU
@@ -674,7 +673,7 @@ namespace WH.GUI
                     labTongTien.Values.ExtraText = 0.ToString("N2");
                     txtTienChi.Text = 0.ToString("N2");
                     txtGhiChu.Text = string.Empty;
-                    KhachHangModel = null; //XuatKhoService.GetModelKhachHang("56DBC32E-11D7-4175-A7AC-608CCBF962D7");
+                    KhachHangModel = null;
                     LoadKhToGui(KhachHangModel);
                     LoadDataAllMatHang();
                     dtpNgayTaoHD.Value = DateTime.Now;
@@ -756,18 +755,23 @@ namespace WH.GUI
         private void LoadHoaDon()
         {
             LsTempHoadonxuatkhochitiets = XuatKhoService.LoadHoaDonTam(MaHoaDon);
-            var list = LsTempHoadonxuatkhochitiets.OrderBy(s => s.GHICHU.ToInt()).Join(DataList, p => p.MAMATHANG, s => s.MAMATHANG, (p, s) => new
-            {
-                p.IDUnit,
-                s.MAMATHANG,
-                s.TENMATHANG,
-                SOLUONG = p.SOLUONGLE,
-                GIAM = p.CHIETKHAUTHEOPHANTRAM * 100,
-                DONGIA = p.DONGIASI,
-                THANHTIEN = p.THANHTIENSAUCHIETKHAU_CT,
-                p.GHICHU
-            }).ToList();
-
+            var list = LsTempHoadonxuatkhochitiets
+                .OrderBy(s => s.GHICHU.ToInt())
+                .Join(DataList,
+                    p => p.MAMATHANG,
+                    s => s.MAMATHANG,
+                    (p, s) => new
+                    {
+                        p.IDUnit,
+                        s.MAMATHANG,
+                        s.TENMATHANG,
+                        SOLUONG = p.SOLUONGLE,
+                        GIAM = p.CHIETKHAUTHEOPHANTRAM * 100,
+                        DONGIA = p.DONGIASI,
+                        THANHTIENTRUOC_CK = p.THANHTIENTRUOCCHIETKHAU_CT,
+                        THANHTIEN = p.THANHTIENSAUCHIETKHAU_CT,
+                        p.GHICHU
+                    }).ToList();
             LoadData2(list);
             var totalAmount = XuatKhoService.CalTotalAmount(MaHoaDon);
             labTongTien.Values.ExtraText = totalAmount == 0
