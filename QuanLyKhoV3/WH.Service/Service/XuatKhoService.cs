@@ -8,6 +8,7 @@ using Util.Pattern;
 using WH.Entity;
 using WH.Model;
 using WH.Service.Service;
+using static Util.Pattern.ExtendMethod;
 
 namespace WH.Service
 {
@@ -45,8 +46,6 @@ namespace WH.Service
         string CreateMaHoaDon();
 
         decimal CalTotalAmount(string maHoaDon);
-
-        double Adjust(double value);
 
         decimal CalTongTienTruocChietKhau(string maHoaDon);
         List<TEMP_HOADONXUATKHOCHITIET> LoadHoaDonTam(string maHoaDon);
@@ -96,7 +95,6 @@ namespace WH.Service
         public XuatKhoService(IUnitOfWorkAsync unitOfWork) : base(unitOfWork)
         {
         }
-
 
         public string CreateMaHoaDon()
         {
@@ -771,9 +769,9 @@ namespace WH.Service
                 objHd.NGAYTAOHOADON = ngayTaoHd;
                 objHd.TIENCHIETKHAU_HD = lsTempHoadonhapkhochitiets.Sum(s => s.CHIETKHAUTHEOTIEN.GetValueOrDefault());
                 objHd.TIENKHUYENMAI_HD = giamGia;
-                objHd.SOTIENTHANHTOAN_HD =
-                    lsTempHoadonhapkhochitiets.Sum(s => s.THANHTIENSAUCHIETKHAU_CT.GetValueOrDefault());
-                //objHd.THANHTIENCHUACK_HD - objHd.TIENCHIETKHAU_HD - objHd.TIENKHUYENMAI_HD;
+
+                var totalAmount = lsTempHoadonhapkhochitiets.Sum(s => s.THANHTIENSAUCHIETKHAU_CT.GetValueOrDefault());
+                objHd.SOTIENTHANHTOAN_HD = AdjustRound(decimal.ToDouble(totalAmount));
 
                 objHd.GHICHU_HD = ghiChu;
                 objHd.DATHANHTOAN = objHd.SOTIENKHACHDUA_HD.GetValueOrDefault() -
@@ -870,14 +868,12 @@ namespace WH.Service
                 ErrMsg = _hoadonxuatkhoService.ErrMsg;
                 return MethodResult.Failed;
             }
-
         loi2:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _hoadonxuatkhochitietService.ErrMsg;
                 return MethodResult.Failed;
             }
-
         loi3:
             {
                 _unitOfWork?.Rollback();
@@ -1275,25 +1271,6 @@ namespace WH.Service
         public List<HOADONXUATKHO> GetListHoaDonXuatKhoTheoNgay(DateTime BatDau, DateTime KetThuc)
         {
             return _hoadonxuatkhoService.Search(p => p.NGAYTAOHOADON >= BatDau && p.NGAYTAOHOADON <= KetThuc).ToList();
-        }
-
-        public double Adjust(double value)
-        {
-            double whole = Math.Truncate(value);
-            double remainder = value - whole;
-            if (remainder < 0.5)
-            {
-                remainder = 0;
-            }
-            else if (remainder == 0.5)
-            {
-                remainder = 0.5;
-            }
-            else
-            {
-                remainder = 1;
-            }
-            return whole + remainder;
         }
     }
 }

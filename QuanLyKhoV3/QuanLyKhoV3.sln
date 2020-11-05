@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLyKhoV3", "QuanLyKhoV3\QuanLyKhoV3.csproj", "{234C8D0A-1FD4-486F-AD2C-27B962056B4A}"
 EndProject
@@ -122,5 +122,8 @@ Global
 		{F68A1D19-93FB-47C1-A22B-42BEA3E4FD8C} = {06B4BAF0-6F92-479E-AB6E-DF32291FFA98}
 		{4EFBA6DA-2E78-4CA6-90D6-782772B160CD} = {06B4BAF0-6F92-479E-AB6E-DF32291FFA98}
 		{19B9A83D-7B8B-4842-B53F-CAF44FFCAAC6} = {06B4BAF0-6F92-479E-AB6E-DF32291FFA98}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {709E48F3-C2E2-4FCF-B303-50D55CE1EF6B}
 	EndGlobalSection
 EndGlobal

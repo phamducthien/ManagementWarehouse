@@ -70,7 +70,6 @@ namespace Util.Pattern
             return string.IsNullOrEmpty(input);
         }
 
-
         public static string ToDbFormatString(this DateTime time)
         {
             return time.ToString("yyyy-MM-dd HH:mm:ss");
@@ -309,7 +308,7 @@ namespace Util.Pattern
         {
             decimal i;
             var res = decimal.TryParse(input, NumberStyles.Number, CultureInfo.CurrentCulture, out i);
-           
+
             return res ? i : DefaultInt;
         }
 
@@ -449,5 +448,24 @@ namespace Util.Pattern
         }
 
         #endregion
+
+        public static decimal? AdjustRound(double value)
+        {
+            var whole = Math.Truncate(value);
+            var remainder = value - whole;
+            if (remainder < 0.5)
+            {
+                remainder = 0;
+            }
+            else if (remainder == 0.5)
+            {
+                remainder = 0.5;
+            }
+            else
+            {
+                remainder = 1;
+            }
+            return (decimal?)(whole + remainder);
+        }
     }
 }

@@ -439,7 +439,8 @@ namespace WH.GUI
                 else
                 {
                     txtTienChi.Text = 0.ToString("N1");
-                    labTongTien.Values.ExtraText = XuatKhoService.CalTotalAmount(MaHoaDon).ToString("N2");
+                    var totalAmount = XuatKhoService.CalTotalAmount(MaHoaDon);
+                    labTongTien.Values.ExtraText = ExtendMethod.AdjustRound(decimal.ToDouble(totalAmount))?.ToString(CultureInfo.InvariantCulture);
                     MaHoaDon = "";
                     dgvHoaDon.DataSource = null;
                 }
@@ -679,19 +680,6 @@ namespace WH.GUI
                     dtpNgayTaoHD.Value = DateTime.Now;
                     frm.Dispose();
                 }
-
-                //Hide();
-                //var frm = new FrmThanhToanXuatKho(MaHoaDon, KhachHangModel);
-                //frm.ShowDialog();
-                //if (frm.IsSuccess)
-                //{
-                //    MaHoaDon = string.Empty;
-                //    dgvHoaDon.DataSource = null;
-                //    labTongTien.Values.ExtraText = 0.ToString("N2");
-                //    LoadKHToGui(null);
-                //    LoadDataAllMatHang();
-                //}
-                //Show();
             }
             catch (Exception ex)
             {
@@ -784,7 +772,7 @@ namespace WH.GUI
             var totalAmount = XuatKhoService.CalTotalAmount(MaHoaDon);
             labTongTien.Values.ExtraText = totalAmount == 0
                 ? "0"
-                : XuatKhoService.Adjust(decimal.ToDouble(totalAmount)).ToString(CultureInfo.InvariantCulture);
+                : ExtendMethod.AdjustRound(decimal.ToDouble(totalAmount))?.ToString(CultureInfo.InvariantCulture);
             txtTienChi.Text = labTongTien.Values.ExtraText;
             txtTimKiem.SelectAll();
             txtTimKiem.Select();
