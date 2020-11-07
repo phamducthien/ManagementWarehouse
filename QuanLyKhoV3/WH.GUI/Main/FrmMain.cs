@@ -105,9 +105,8 @@ namespace WH.GUI
         {
             if (CheckQuyen("XUẤT KHO - BÁN HÀNG"))
             {
-                Hide();
                 var frm = new FrmXuatKho();
-                frm.ShowDialog();
+                frm.Show();
                 Show();
                 Activate();
             }

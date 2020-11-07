@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
 using Util.Pattern;
 using WH.Entity;
 using WH.Service;
@@ -67,7 +67,6 @@ namespace WH.GUI
             txtTienChi.Select();
         }
 
-
         private void DgvHoaDon_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             dgvHoaDon.Rows[e.RowIndex].Cells[0].Value = e.RowIndex + 1;
@@ -80,20 +79,20 @@ namespace WH.GUI
         private void LoadHoaDon()
         {
             HoaDon = XuatKhoService.GetModelHoaDonXuat(MaHoaDon);
-            LstHoadonxuatkhochitiets = (List<HOADONXUATKHOCHITIET>) HoaDon.HOADONXUATKHOCHITIETs;
+            LstHoadonxuatkhochitiets = (List<HOADONXUATKHOCHITIET>)HoaDon.HOADONXUATKHOCHITIETs;
             var list = (from p in LstHoadonxuatkhochitiets
-                join s in LstMathangs on p.MAMATHANG equals s.MAMATHANG
-                select new
-                {
-                    p.IDUnit,
-                    s.MAMATHANG,
-                    s.TENMATHANG,
-                    SOLUONG = p.SOLUONGLE,
-                    GIAM = p.CHIETKHAUTHEOPHANTRAM * 100,
-                    DONGIA = p.DONGIASI,
-                    THANHTIEN = p.THANHTIENSAUCHIETKHAU_CT,
-                    p.GHICHU
-                }).ToList();
+                        join s in LstMathangs on p.MAMATHANG equals s.MAMATHANG
+                        select new
+                        {
+                            p.IDUnit,
+                            s.MAMATHANG,
+                            s.TENMATHANG,
+                            SOLUONG = p.SOLUONGLE,
+                            GIAM = p.CHIETKHAUTHEOPHANTRAM * 100,
+                            DONGIA = p.DONGIASI,
+                            THANHTIEN = p.THANHTIENSAUCHIETKHAU_CT,
+                            p.GHICHU
+                        }).ToList();
 
             try
             {

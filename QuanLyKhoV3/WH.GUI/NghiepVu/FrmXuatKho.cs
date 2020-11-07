@@ -19,8 +19,11 @@ namespace WH.GUI
             InitializeComponent();
             this.SuspendLayout();
             CreateEvent();
+            FormClosing += FrmXuatKho_FormClosing; ; ;
 
         }
+
+        private void FrmXuatKho_FormClosing(object sender, FormClosingEventArgs e) => Close();
 
         #region Init
 
@@ -667,7 +670,7 @@ namespace WH.GUI
                 {
                     var frm = new FrmHoaDonXuatKho(MaHoaDon, KhachHangModel);
                     frm.ShowDialog(this);
-
+                    frm.FormClosing += FrmXuatKho_FormClosing;
                     MaHoaDon = string.Empty;
                     dgvHoaDon.DataSource = null;
                     labTongTien.Values.ExtraText = 0.ToString("N2");
