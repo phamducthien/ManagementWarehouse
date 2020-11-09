@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using WH.GUI.ExportWarehouse;
 using WH.Model;
 using WH.Report;
 
@@ -105,10 +106,36 @@ namespace WH.GUI
         {
             if (CheckQuyen("XUẤT KHO - BÁN HÀNG"))
             {
-                var frm = new FrmXuatKho();
-                frm.Show();
-                Show();
-                Activate();
+                var fc = Application.OpenForms;
+                var isOpen = false;
+                foreach (Form frm in fc)
+                {
+                    if (frm.Name != "FrmExportWarehouseTab") continue;
+                    frm.Focus();
+                    isOpen = true;
+                }
+
+                if (isOpen) return;
+                {
+                    var frm = new FrmExportWarehouseTab();
+                    frm.Show();
+                    var opacity = 0.00;
+                    while (opacity < 1)
+                    {
+                        frm.Opacity = opacity;
+                        opacity += 0.04;
+                    }
+                    frm.Opacity = 1.00;
+                }
+
+
+
+                //Activate();
+
+                //var frm = new FrmXuatKho();
+                //frm.Show();
+                //Show();
+                //Activate();
             }
         }
 
