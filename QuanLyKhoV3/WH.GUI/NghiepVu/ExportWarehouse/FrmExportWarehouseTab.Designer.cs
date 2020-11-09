@@ -36,6 +36,7 @@
             // 
             // btnAddExportWarehouse
             // 
+            this.btnAddExportWarehouse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAddExportWarehouse.Location = new System.Drawing.Point(12, 634);
             this.btnAddExportWarehouse.Name = "btnAddExportWarehouse";
             this.btnAddExportWarehouse.Size = new System.Drawing.Size(150, 35);
@@ -45,6 +46,9 @@
             // 
             // tabExportWarehouse
             // 
+            this.tabExportWarehouse.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabExportWarehouse.Location = new System.Drawing.Point(12, 13);
             this.tabExportWarehouse.Name = "tabExportWarehouse";
             this.tabExportWarehouse.Size = new System.Drawing.Size(1326, 615);
