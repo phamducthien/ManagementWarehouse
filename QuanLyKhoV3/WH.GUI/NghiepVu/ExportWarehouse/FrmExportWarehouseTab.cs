@@ -1,32 +1,65 @@
 ﻿using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Toolkit;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace WH.GUI.ExportWarehouse
 {
     public partial class FrmExportWarehouseTab : Form
     {
-        private int _count = 1;
         public FrmExportWarehouseTab()
         {
             InitializeComponent();
             AddNewTab();
+            tabExportWarehouse.Pages.Inserted += OnPageInsertRemove;
+            tabExportWarehouse.Pages.Removed += OnPageInsertRemove;
         }
 
         private void AddNewTab()
         {
-            KryptonPage newPage = new KryptonPage();
+            var newPage = new KryptonPage();
 
-            // Populate with text and image
-            newPage.Text = "Page " + _count.ToString();
-            newPage.TextTitle = "Page " + _count.ToString() + " Title";
-            newPage.TextDescription = "Page " + _count.ToString() + " Description";
-            _count++;
+            var frmExportWarehouse = new FrmXuatKho
+            {
+                TopLevel = false,
+                Dock = DockStyle.Fill
+            };
+
+            frmExportWarehouse.WindowState = FormWindowState.Maximized;
+            frmExportWarehouse.Dock = DockStyle.Fill;
+            frmExportWarehouse.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            frmExportWarehouse.Size = new Size(100, 100);
+
+            frmExportWarehouse.Show();
+            // Add form to tab
+            newPage.Controls.Add(frmExportWarehouse);
 
             // Append to end of the pages collection
             tabExportWarehouse.Pages.Add(newPage);
 
             // Select the new page
             tabExportWarehouse.SelectedPage = newPage;
+        }
+
+        private void btnAddExportWarehouse_Click(object sender, System.EventArgs e)
+        {
+            AddNewTab();
+        }
+
+        void OnPageInsertRemove(object sender, TypedCollectionEventArgs<KryptonPage> e)
+        {
+            UpdateButtonState();
+        }
+
+        private void UpdateButtonState()
+        {
+            // Can only remove if a page is selected
+            btnRemove.Enabled = (tabExportWarehouse.SelectedPage != null);
+        }
+
+        private void btnRemove_Click(object sender, System.EventArgs e)
+        {
+            tabExportWarehouse.Pages.Remove(tabExportWarehouse.SelectedPage);
         }
     }
 }
