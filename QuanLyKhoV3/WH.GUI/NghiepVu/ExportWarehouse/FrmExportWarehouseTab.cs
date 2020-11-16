@@ -17,20 +17,22 @@ namespace WH.GUI.ExportWarehouse
 
         private void AddNewTab()
         {
-            var newPage = new KryptonPage();
+            var newPage = new KryptonPage
+            {
+                Text = "Đơn hàng"
+            };
 
             var frmExportWarehouse = new FrmXuatKho
             {
                 TopLevel = false,
-                Dock = DockStyle.Fill
+                Dock = DockStyle.Fill,
+                WindowState = FormWindowState.Maximized,
+                Size = new Size(100, 100),
+                Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right
             };
 
-            frmExportWarehouse.WindowState = FormWindowState.Maximized;
-            frmExportWarehouse.Dock = DockStyle.Fill;
-            frmExportWarehouse.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            frmExportWarehouse.Size = new Size(100, 100);
-
             frmExportWarehouse.Show();
+
             // Add form to tab
             newPage.Controls.Add(frmExportWarehouse);
 
