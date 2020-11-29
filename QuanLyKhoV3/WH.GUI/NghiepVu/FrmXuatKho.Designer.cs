@@ -30,6 +30,14 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -40,18 +48,18 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.gbxInfo = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.kryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.dgvHoaDon = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.HoaDon_STT = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.HoaDon_IDUnit = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.HoaDon_TenMatHang = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.HoaDon_SoLuong = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.CHIETKHAUPHAMTRAM = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.HoaDon_GiaNhap = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.THANHTIENTRUOC_CK = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.HoaDon_ThanhTien = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.pnlThanhToan = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.btnNhapHDExcel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel5 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
@@ -104,14 +112,6 @@
             this.btnCanNhap = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btnCanXuat = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.HoaDon_STT = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.HoaDon_IDUnit = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.HoaDon_TenMatHang = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.HoaDon_SoLuong = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.CHIETKHAUPHAMTRAM = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.HoaDon_GiaNhap = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.THANHTIENTRUOC_CK = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.HoaDon_ThanhTien = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer.Panel1)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -163,8 +163,8 @@
             this.splitContainer.Panel2.Controls.Add(this.gbxList);
             this.splitContainer.Panel2.StateCommon.Color1 = System.Drawing.Color.Transparent;
             this.splitContainer.Panel2MinSize = 0;
-            this.splitContainer.Size = new System.Drawing.Size(1380, 729);
-            this.splitContainer.SplitterDistance = 616;
+            this.splitContainer.Size = new System.Drawing.Size(1284, 729);
+            this.splitContainer.SplitterDistance = 573;
             this.splitContainer.SplitterIncrement = 10;
             this.splitContainer.SplitterWidth = 1;
             this.splitContainer.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
@@ -184,7 +184,7 @@
             this.gbxInfo.Panel.Controls.Add(this.pnlThanhToan);
             this.gbxInfo.Panel.Controls.Add(this.pnlInfoNCC);
             this.gbxInfo.Panel.Controls.Add(this.labID);
-            this.gbxInfo.Size = new System.Drawing.Size(616, 729);
+            this.gbxInfo.Size = new System.Drawing.Size(573, 729);
             this.gbxInfo.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
             this.gbxInfo.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(148)))), ((int)(((byte)(148)))));
             this.gbxInfo.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
@@ -239,7 +239,7 @@
             this.dgvHoaDon.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvHoaDon.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvHoaDon.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvHoaDon.Size = new System.Drawing.Size(610, 249);
+            this.dgvHoaDon.Size = new System.Drawing.Size(567, 249);
             this.dgvHoaDon.StandardTab = true;
             this.dgvHoaDon.StateCommon.Background.Color1 = System.Drawing.Color.White;
             this.dgvHoaDon.StateCommon.Background.Color2 = System.Drawing.Color.White;
@@ -263,6 +263,111 @@
             this.dgvHoaDon.StateCommon.HeaderColumn.Content.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvHoaDon.TabIndex = 701;
             // 
+            // HoaDon_STT
+            // 
+            this.HoaDon_STT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = "0";
+            this.HoaDon_STT.DefaultCellStyle = dataGridViewCellStyle2;
+            this.HoaDon_STT.HeaderText = "Stt";
+            this.HoaDon_STT.Name = "HoaDon_STT";
+            this.HoaDon_STT.ReadOnly = true;
+            this.HoaDon_STT.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.HoaDon_STT.Width = 53;
+            // 
+            // HoaDon_IDUnit
+            // 
+            this.HoaDon_IDUnit.DataPropertyName = "IDUnit";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.HoaDon_IDUnit.DefaultCellStyle = dataGridViewCellStyle3;
+            this.HoaDon_IDUnit.HeaderText = "Mã";
+            this.HoaDon_IDUnit.Name = "HoaDon_IDUnit";
+            this.HoaDon_IDUnit.ReadOnly = true;
+            this.HoaDon_IDUnit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.HoaDon_IDUnit.Visible = false;
+            this.HoaDon_IDUnit.Width = 100;
+            // 
+            // HoaDon_TenMatHang
+            // 
+            this.HoaDon_TenMatHang.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.HoaDon_TenMatHang.DataPropertyName = "TENMATHANG";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.HoaDon_TenMatHang.DefaultCellStyle = dataGridViewCellStyle4;
+            this.HoaDon_TenMatHang.HeaderText = "Mặt hàng";
+            this.HoaDon_TenMatHang.Name = "HoaDon_TenMatHang";
+            this.HoaDon_TenMatHang.ReadOnly = true;
+            this.HoaDon_TenMatHang.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.HoaDon_TenMatHang.Width = 74;
+            // 
+            // HoaDon_SoLuong
+            // 
+            this.HoaDon_SoLuong.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.HoaDon_SoLuong.DataPropertyName = "SOLUONG";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = "0";
+            this.HoaDon_SoLuong.DefaultCellStyle = dataGridViewCellStyle5;
+            this.HoaDon_SoLuong.HeaderText = "SL";
+            this.HoaDon_SoLuong.Name = "HoaDon_SoLuong";
+            this.HoaDon_SoLuong.ReadOnly = true;
+            this.HoaDon_SoLuong.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.HoaDon_SoLuong.Width = 49;
+            // 
+            // CHIETKHAUPHAMTRAM
+            // 
+            this.CHIETKHAUPHAMTRAM.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CHIETKHAUPHAMTRAM.DataPropertyName = "GIAM";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.CHIETKHAUPHAMTRAM.DefaultCellStyle = dataGridViewCellStyle6;
+            this.CHIETKHAUPHAMTRAM.HeaderText = "Giảm%";
+            this.CHIETKHAUPHAMTRAM.Name = "CHIETKHAUPHAMTRAM";
+            this.CHIETKHAUPHAMTRAM.ReadOnly = true;
+            this.CHIETKHAUPHAMTRAM.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.CHIETKHAUPHAMTRAM.Width = 75;
+            // 
+            // HoaDon_GiaNhap
+            // 
+            this.HoaDon_GiaNhap.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.HoaDon_GiaNhap.DataPropertyName = "DONGIA";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "C1";
+            dataGridViewCellStyle7.NullValue = "0";
+            this.HoaDon_GiaNhap.DefaultCellStyle = dataGridViewCellStyle7;
+            this.HoaDon_GiaNhap.HeaderText = "Giá bán";
+            this.HoaDon_GiaNhap.Name = "HoaDon_GiaNhap";
+            this.HoaDon_GiaNhap.ReadOnly = true;
+            this.HoaDon_GiaNhap.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.HoaDon_GiaNhap.Width = 77;
+            // 
+            // THANHTIENTRUOC_CK
+            // 
+            this.THANHTIENTRUOC_CK.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.THANHTIENTRUOC_CK.DataPropertyName = "THANHTIENTRUOC_CK";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "C2";
+            dataGridViewCellStyle8.NullValue = "0";
+            this.THANHTIENTRUOC_CK.DefaultCellStyle = dataGridViewCellStyle8;
+            this.THANHTIENTRUOC_CK.HeaderText = "Thành tiền chưa CK";
+            this.THANHTIENTRUOC_CK.Name = "THANHTIENTRUOC_CK";
+            this.THANHTIENTRUOC_CK.ReadOnly = true;
+            this.THANHTIENTRUOC_CK.Width = 143;
+            // 
+            // HoaDon_ThanhTien
+            // 
+            this.HoaDon_ThanhTien.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.HoaDon_ThanhTien.DataPropertyName = "THANHTIEN";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "C2";
+            dataGridViewCellStyle9.NullValue = "0";
+            this.HoaDon_ThanhTien.DefaultCellStyle = dataGridViewCellStyle9;
+            this.HoaDon_ThanhTien.HeaderText = "Thành tiền";
+            this.HoaDon_ThanhTien.Name = "HoaDon_ThanhTien";
+            this.HoaDon_ThanhTien.ReadOnly = true;
+            this.HoaDon_ThanhTien.Width = 95;
+            // 
             // pnlThanhToan
             // 
             this.pnlThanhToan.Controls.Add(this.btnNhapHDExcel);
@@ -278,14 +383,14 @@
             this.pnlThanhToan.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlThanhToan.Location = new System.Drawing.Point(0, 469);
             this.pnlThanhToan.Name = "pnlThanhToan";
-            this.pnlThanhToan.Size = new System.Drawing.Size(610, 229);
+            this.pnlThanhToan.Size = new System.Drawing.Size(567, 229);
             this.pnlThanhToan.StateCommon.Color1 = System.Drawing.Color.Transparent;
             this.pnlThanhToan.TabIndex = 702;
             // 
             // btnNhapHDExcel
             // 
             this.btnNhapHDExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNhapHDExcel.Location = new System.Drawing.Point(172, 179);
+            this.btnNhapHDExcel.Location = new System.Drawing.Point(129, 179);
             this.btnNhapHDExcel.Margin = new System.Windows.Forms.Padding(0);
             this.btnNhapHDExcel.Name = "btnNhapHDExcel";
             this.btnNhapHDExcel.Size = new System.Drawing.Size(195, 45);
@@ -323,7 +428,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonPanel5.Location = new System.Drawing.Point(21, 86);
             this.kryptonPanel5.Name = "kryptonPanel5";
-            this.kryptonPanel5.Size = new System.Drawing.Size(568, 1);
+            this.kryptonPanel5.Size = new System.Drawing.Size(525, 1);
             this.kryptonPanel5.StateCommon.Color1 = System.Drawing.Color.Gray;
             this.kryptonPanel5.TabIndex = 725;
             // 
@@ -345,7 +450,7 @@
             this.txtGhiChu.MaxLength = 200;
             this.txtGhiChu.Multiline = true;
             this.txtGhiChu.Name = "txtGhiChu";
-            this.txtGhiChu.Size = new System.Drawing.Size(499, 83);
+            this.txtGhiChu.Size = new System.Drawing.Size(456, 83);
             this.txtGhiChu.StateCommon.Border.Color1 = System.Drawing.Color.Gray;
             this.txtGhiChu.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
@@ -358,7 +463,7 @@
             // txtTienChi
             // 
             this.txtTienChi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTienChi.Location = new System.Drawing.Point(447, 53);
+            this.txtTienChi.Location = new System.Drawing.Point(404, 53);
             this.txtTienChi.Name = "txtTienChi";
             this.txtTienChi.Size = new System.Drawing.Size(143, 31);
             this.txtTienChi.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -381,7 +486,7 @@
             this.kryptonLabel2.AutoSize = false;
             this.kryptonLabel2.Location = new System.Drawing.Point(22, 53);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(427, 30);
+            this.kryptonLabel2.Size = new System.Drawing.Size(384, 30);
             this.kryptonLabel2.StateCommon.LongText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.kryptonLabel2.StateCommon.LongText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kryptonLabel2.StateCommon.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
@@ -396,14 +501,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonPanel1.Location = new System.Drawing.Point(22, 38);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(566, 1);
+            this.kryptonPanel1.Size = new System.Drawing.Size(523, 1);
             this.kryptonPanel1.StateCommon.Color1 = System.Drawing.Color.Gray;
             this.kryptonPanel1.TabIndex = 716;
             // 
             // btnThanhToan
             // 
             this.btnThanhToan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnThanhToan.Location = new System.Drawing.Point(377, 179);
+            this.btnThanhToan.Location = new System.Drawing.Point(334, 179);
             this.btnThanhToan.Margin = new System.Windows.Forms.Padding(0);
             this.btnThanhToan.Name = "btnThanhToan";
             this.btnThanhToan.Size = new System.Drawing.Size(215, 45);
@@ -441,7 +546,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlLine2.Location = new System.Drawing.Point(22, 4);
             this.pnlLine2.Name = "pnlLine2";
-            this.pnlLine2.Size = new System.Drawing.Size(566, 1);
+            this.pnlLine2.Size = new System.Drawing.Size(523, 1);
             this.pnlLine2.StateCommon.Color1 = System.Drawing.Color.Gray;
             this.pnlLine2.TabIndex = 702;
             // 
@@ -452,7 +557,7 @@
             this.labTongTien.AutoSize = false;
             this.labTongTien.Location = new System.Drawing.Point(22, 8);
             this.labTongTien.Name = "labTongTien";
-            this.labTongTien.Size = new System.Drawing.Size(566, 30);
+            this.labTongTien.Size = new System.Drawing.Size(523, 30);
             this.labTongTien.StateCommon.LongText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.labTongTien.StateCommon.LongText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labTongTien.StateCommon.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
@@ -480,7 +585,7 @@
             this.pnlInfoNCC.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlInfoNCC.Location = new System.Drawing.Point(0, 0);
             this.pnlInfoNCC.Name = "pnlInfoNCC";
-            this.pnlInfoNCC.Size = new System.Drawing.Size(610, 220);
+            this.pnlInfoNCC.Size = new System.Drawing.Size(567, 220);
             this.pnlInfoNCC.StateCommon.Color1 = System.Drawing.Color.Transparent;
             this.pnlInfoNCC.TabIndex = 675;
             // 
@@ -561,7 +666,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlLine1.Location = new System.Drawing.Point(22, 173);
             this.pnlLine1.Name = "pnlLine1";
-            this.pnlLine1.Size = new System.Drawing.Size(566, 1);
+            this.pnlLine1.Size = new System.Drawing.Size(523, 1);
             this.pnlLine1.StateCommon.Color1 = System.Drawing.Color.Gray;
             this.pnlLine1.TabIndex = 701;
             // 
@@ -576,14 +681,14 @@
             this.pnlMenu.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlMenu.Location = new System.Drawing.Point(0, 180);
             this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(610, 40);
+            this.pnlMenu.Size = new System.Drawing.Size(567, 40);
             this.pnlMenu.StateNormal.Color1 = System.Drawing.Color.Transparent;
             this.pnlMenu.TabIndex = 700;
             // 
             // btnCapNhat
             // 
             this.btnCapNhat.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnCapNhat.Location = new System.Drawing.Point(326, 0);
+            this.btnCapNhat.Location = new System.Drawing.Point(283, 0);
             this.btnCapNhat.Margin = new System.Windows.Forms.Padding(0);
             this.btnCapNhat.Name = "btnCapNhat";
             this.btnCapNhat.Size = new System.Drawing.Size(96, 35);
@@ -618,7 +723,7 @@
             // btnXoaSP
             // 
             this.btnXoaSP.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnXoaSP.Location = new System.Drawing.Point(422, 0);
+            this.btnXoaSP.Location = new System.Drawing.Point(379, 0);
             this.btnXoaSP.Margin = new System.Windows.Forms.Padding(0);
             this.btnXoaSP.Name = "btnXoaSP";
             this.btnXoaSP.Size = new System.Drawing.Size(90, 35);
@@ -653,7 +758,7 @@
             // btnHuyHD
             // 
             this.btnHuyHD.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnHuyHD.Location = new System.Drawing.Point(512, 0);
+            this.btnHuyHD.Location = new System.Drawing.Point(469, 0);
             this.btnHuyHD.Margin = new System.Windows.Forms.Padding(0);
             this.btnHuyHD.Name = "btnHuyHD";
             this.btnHuyHD.Size = new System.Drawing.Size(98, 35);
@@ -760,7 +865,7 @@
             this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.kryptonPanel2.Location = new System.Drawing.Point(0, 35);
             this.kryptonPanel2.Name = "kryptonPanel2";
-            this.kryptonPanel2.Size = new System.Drawing.Size(610, 5);
+            this.kryptonPanel2.Size = new System.Drawing.Size(567, 5);
             this.kryptonPanel2.StateCommon.Color1 = System.Drawing.Color.Transparent;
             this.kryptonPanel2.TabIndex = 700;
             // 
@@ -813,7 +918,7 @@
             this.txtNhaCungCap.Location = new System.Drawing.Point(0, 0);
             this.txtNhaCungCap.Name = "txtNhaCungCap";
             this.txtNhaCungCap.ReadOnly = true;
-            this.txtNhaCungCap.Size = new System.Drawing.Size(610, 31);
+            this.txtNhaCungCap.Size = new System.Drawing.Size(567, 31);
             this.txtNhaCungCap.StateCommon.Border.Color1 = System.Drawing.Color.Gray;
             this.txtNhaCungCap.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
@@ -861,7 +966,7 @@
             this.gbxList.Panel.Controls.Add(this.kryptonPanel4);
             this.gbxList.Panel.Controls.Add(this.txtTimKiem);
             this.gbxList.Panel.Controls.Add(this.kryptonPanel3);
-            this.gbxList.Size = new System.Drawing.Size(763, 729);
+            this.gbxList.Size = new System.Drawing.Size(710, 729);
             this.gbxList.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
             this.gbxList.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
             this.gbxList.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(148)))), ((int)(((byte)(148)))));
@@ -910,7 +1015,7 @@
             dataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.White;
             this.dgvDanhMuc.RowsDefaultCellStyle = dataGridViewCellStyle20;
             this.dgvDanhMuc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDanhMuc.Size = new System.Drawing.Size(757, 563);
+            this.dgvDanhMuc.Size = new System.Drawing.Size(704, 563);
             this.dgvDanhMuc.StateCommon.Background.Color1 = System.Drawing.Color.White;
             this.dgvDanhMuc.StateCommon.Background.Color2 = System.Drawing.Color.White;
             this.dgvDanhMuc.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
@@ -970,7 +1075,7 @@
             this.DanhMuc_TenMatHang.Name = "DanhMuc_TenMatHang";
             this.DanhMuc_TenMatHang.ReadOnly = true;
             this.DanhMuc_TenMatHang.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DanhMuc_TenMatHang.Width = 250;
+            this.DanhMuc_TenMatHang.Width = 224;
             // 
             // DanhMuc_GiaLe
             // 
@@ -1046,14 +1151,14 @@
             this.DanhMuc_GhiChu.Name = "DanhMuc_GhiChu";
             this.DanhMuc_GhiChu.ReadOnly = true;
             this.DanhMuc_GhiChu.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DanhMuc_GhiChu.Width = 251;
+            this.DanhMuc_GhiChu.Width = 224;
             // 
             // kryptonPanel4
             // 
             this.kryptonPanel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonPanel4.Location = new System.Drawing.Point(0, 130);
             this.kryptonPanel4.Name = "kryptonPanel4";
-            this.kryptonPanel4.Size = new System.Drawing.Size(757, 5);
+            this.kryptonPanel4.Size = new System.Drawing.Size(704, 5);
             this.kryptonPanel4.StateCommon.Color1 = System.Drawing.Color.Transparent;
             this.kryptonPanel4.TabIndex = 699;
             // 
@@ -1067,7 +1172,7 @@
             this.txtTimKiem.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtTimKiem.Location = new System.Drawing.Point(0, 93);
             this.txtTimKiem.Name = "txtTimKiem";
-            this.txtTimKiem.Size = new System.Drawing.Size(757, 37);
+            this.txtTimKiem.Size = new System.Drawing.Size(704, 37);
             this.txtTimKiem.StateCommon.Border.Color1 = System.Drawing.Color.Gray;
             this.txtTimKiem.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
@@ -1106,122 +1211,22 @@
             this.kryptonPanel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonPanel3.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel3.Name = "kryptonPanel3";
-            this.kryptonPanel3.Size = new System.Drawing.Size(757, 93);
+            this.kryptonPanel3.Size = new System.Drawing.Size(704, 93);
             this.kryptonPanel3.StateCommon.Color1 = System.Drawing.Color.Transparent;
             this.kryptonPanel3.TabIndex = 701;
             this.kryptonPanel3.Visible = false;
-            // 
-            // HoaDon_STT
-            // 
-            this.HoaDon_STT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = "0";
-            this.HoaDon_STT.DefaultCellStyle = dataGridViewCellStyle2;
-            this.HoaDon_STT.HeaderText = "Stt";
-            this.HoaDon_STT.Name = "HoaDon_STT";
-            this.HoaDon_STT.ReadOnly = true;
-            this.HoaDon_STT.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.HoaDon_STT.Width = 53;
-            // 
-            // HoaDon_IDUnit
-            // 
-            this.HoaDon_IDUnit.DataPropertyName = "IDUnit";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.HoaDon_IDUnit.DefaultCellStyle = dataGridViewCellStyle3;
-            this.HoaDon_IDUnit.HeaderText = "Mã";
-            this.HoaDon_IDUnit.Name = "HoaDon_IDUnit";
-            this.HoaDon_IDUnit.ReadOnly = true;
-            this.HoaDon_IDUnit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.HoaDon_IDUnit.Visible = false;
-            this.HoaDon_IDUnit.Width = 100;
-            // 
-            // HoaDon_TenMatHang
-            // 
-            this.HoaDon_TenMatHang.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.HoaDon_TenMatHang.DataPropertyName = "TENMATHANG";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.HoaDon_TenMatHang.DefaultCellStyle = dataGridViewCellStyle4;
-            this.HoaDon_TenMatHang.HeaderText = "Mặt hàng";
-            this.HoaDon_TenMatHang.Name = "HoaDon_TenMatHang";
-            this.HoaDon_TenMatHang.ReadOnly = true;
-            this.HoaDon_TenMatHang.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.HoaDon_TenMatHang.Width = 117;
-            // 
-            // HoaDon_SoLuong
-            // 
-            this.HoaDon_SoLuong.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.HoaDon_SoLuong.DataPropertyName = "SOLUONG";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N0";
-            dataGridViewCellStyle5.NullValue = "0";
-            this.HoaDon_SoLuong.DefaultCellStyle = dataGridViewCellStyle5;
-            this.HoaDon_SoLuong.HeaderText = "SL";
-            this.HoaDon_SoLuong.Name = "HoaDon_SoLuong";
-            this.HoaDon_SoLuong.ReadOnly = true;
-            this.HoaDon_SoLuong.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.HoaDon_SoLuong.Width = 49;
-            // 
-            // CHIETKHAUPHAMTRAM
-            // 
-            this.CHIETKHAUPHAMTRAM.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.CHIETKHAUPHAMTRAM.DataPropertyName = "GIAM";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.CHIETKHAUPHAMTRAM.DefaultCellStyle = dataGridViewCellStyle6;
-            this.CHIETKHAUPHAMTRAM.HeaderText = "Giảm%";
-            this.CHIETKHAUPHAMTRAM.Name = "CHIETKHAUPHAMTRAM";
-            this.CHIETKHAUPHAMTRAM.ReadOnly = true;
-            this.CHIETKHAUPHAMTRAM.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.CHIETKHAUPHAMTRAM.Width = 75;
-            // 
-            // HoaDon_GiaNhap
-            // 
-            this.HoaDon_GiaNhap.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.HoaDon_GiaNhap.DataPropertyName = "DONGIA";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "C1";
-            dataGridViewCellStyle7.NullValue = "0";
-            this.HoaDon_GiaNhap.DefaultCellStyle = dataGridViewCellStyle7;
-            this.HoaDon_GiaNhap.HeaderText = "Giá bán";
-            this.HoaDon_GiaNhap.Name = "HoaDon_GiaNhap";
-            this.HoaDon_GiaNhap.ReadOnly = true;
-            this.HoaDon_GiaNhap.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.HoaDon_GiaNhap.Width = 77;
-            // 
-            // THANHTIENTRUOC_CK
-            // 
-            this.THANHTIENTRUOC_CK.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.THANHTIENTRUOC_CK.DataPropertyName = "THANHTIENTRUOC_CK";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "C2";
-            dataGridViewCellStyle8.NullValue = "0";
-            this.THANHTIENTRUOC_CK.DefaultCellStyle = dataGridViewCellStyle8;
-            this.THANHTIENTRUOC_CK.HeaderText = "Thành tiền chưa CK";
-            this.THANHTIENTRUOC_CK.Name = "THANHTIENTRUOC_CK";
-            this.THANHTIENTRUOC_CK.ReadOnly = true;
-            this.THANHTIENTRUOC_CK.Width = 143;
-            // 
-            // HoaDon_ThanhTien
-            // 
-            this.HoaDon_ThanhTien.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.HoaDon_ThanhTien.DataPropertyName = "THANHTIEN";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "C2";
-            dataGridViewCellStyle9.NullValue = "0";
-            this.HoaDon_ThanhTien.DefaultCellStyle = dataGridViewCellStyle9;
-            this.HoaDon_ThanhTien.HeaderText = "Thành tiền";
-            this.HoaDon_ThanhTien.Name = "HoaDon_ThanhTien";
-            this.HoaDon_ThanhTien.ReadOnly = true;
-            this.HoaDon_ThanhTien.Width = 95;
             // 
             // FrmXuatKho
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1380, 729);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
+            this.ClientSize = new System.Drawing.Size(1284, 729);
             this.Controls.Add(this.splitContainer);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmXuatKho";
             this.StateCommon.Back.Color1 = System.Drawing.Color.White;
             this.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));

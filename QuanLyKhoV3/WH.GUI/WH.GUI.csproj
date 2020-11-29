@@ -304,6 +304,12 @@
     <Compile Include="Main\UrcQuanLyChung.Designer.cs">
       <DependentUpon>UrcQuanLyChung.cs</DependentUpon>
     </Compile>
+    <Compile Include="NghiepVu\ExportWarehouse\FrmExportWarehouseTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NghiepVu\ExportWarehouse\FrmExportWarehouseTab.Designer.cs">
+      <DependentUpon>FrmExportWarehouseTab.cs</DependentUpon>
+    </Compile>
     <Compile Include="NghiepVu\FrmCongNoKhachHang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -511,6 +517,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Main\UrcQuanLyChung.resx">
       <DependentUpon>UrcQuanLyChung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NghiepVu\ExportWarehouse\FrmExportWarehouseTab.resx">
+      <DependentUpon>FrmExportWarehouseTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NghiepVu\FrmCongNoKhachHang.resx">
       <DependentUpon>FrmCongNoKhachHang.cs</DependentUpon>
