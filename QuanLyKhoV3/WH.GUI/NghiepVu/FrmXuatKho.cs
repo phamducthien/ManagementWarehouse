@@ -653,6 +653,7 @@ namespace WH.GUI
                 if (dgvHoaDon.Rows.Count == 0) return;
 
                 var tienChi = txtTienChi.Text.ToDecimal();
+                MessageBox.Show(tienChi.ToString(CultureInfo.InvariantCulture));
                 decimal giamGia = 0;
 
                 var service = XuatKhoService;
