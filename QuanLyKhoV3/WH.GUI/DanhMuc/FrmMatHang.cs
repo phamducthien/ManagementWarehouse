@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Service.Pattern;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using Service.Pattern;
 using Util.Pattern;
 using WH.Entity;
 using WH.Model;
@@ -603,11 +603,11 @@ namespace WH.GUI
             numTonToiDa.Value = Model.NGUONGXUAT ?? 0;
             try
             {
-                numGiamGia.Value = (Model.CHIETKHAU != null ? (decimal) Model.CHIETKHAU.Value : 0) * 100;
+                numGiamGia.Value = (Model.CHIETKHAU != null ? (decimal)Model.CHIETKHAU.Value : 0) * 100;
             }
             catch (Exception e)
             {
-                numGiamGia.Value = Model.CHIETKHAU != null ? (decimal) Model.CHIETKHAU.Value : 0;
+                numGiamGia.Value = Model.CHIETKHAU != null ? (decimal)Model.CHIETKHAU.Value : 0;
             }
 
 
@@ -683,7 +683,7 @@ namespace WH.GUI
             if (Model != null)
                 Model = Service.GetMatHang(Model.MAMATHANG);
 
-            var objKhomathang = new KHOMATHANG {SOLUONGLE = numTonKho.Value};
+            var objKhomathang = new KHOMATHANG { SOLUONGLE = numTonKho.Value };
             if (Model == null)
             {
                 Model = Service.CreateNew();
@@ -708,7 +708,7 @@ namespace WH.GUI
             Model.SOLUONGQUYDOI = 1; //NumQuyCach.Value.ToString("####").ToIntOrDefault();
             Model.NGUONGNHAP = numTonToiThieu.Value;
             Model.NGUONGXUAT = numTonToiDa.Value;
-            Model.CHIETKHAU = numGiamGia.Value > 0 ? (double) numGiamGia.Value / 100 : 0;
+            Model.CHIETKHAU = numGiamGia.Value > 0 ? (double)numGiamGia.Value / 100 : 0;
             Model.NGAYCAPNHAT = DateTime.Now;
             Model.NGUOICAPNHAT = UserId;
             Model.DONVI = Model.DONVI1 = null;

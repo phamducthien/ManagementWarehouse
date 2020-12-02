@@ -245,7 +245,7 @@ namespace WH.Service
                     //TONGLAI = p.HOADONXUATKHOCHITIETs.Sum(d => d.THANHTIENSAUCHIETKHAU_CT) ??
                     //          0 - p.HOADONXUATKHOCHITIETs.Sum(d => d.SOLUONGLE * d.SOLUONGSI) ?? 0 -
                     //          p.HOADONNHAPXUATCHITIETs.Sum(d => d.THANHTIENSAUCHIETKHAU_CT) ?? 0,
-                    TONGLAI = p.GIALE * (decimal)(1 - p.CHIETKHAU) - p.GIANHAP,
+                    //TONGLAI = p.GIALE * (decimal)(1 - p.CHIETKHAU) - p.GIANHAP,
                     //TrangThai =
                     //(p.HOADONXUATKHOCHITIETs.Sum(d => d.THANHTIENSAUCHIETKHAU_CT) ??
                     // 0 - p.HOADONXUATKHOCHITIETs.Sum(d => d.SOLUONGLE * d.SOLUONGSI) ??
@@ -256,8 +256,8 @@ namespace WH.Service
                     //       0 - p.HOADONNHAPXUATCHITIETs.Sum(d => d.THANHTIENSAUCHIETKHAU_CT) ?? 0) < 0
                     //        ? Resources.status1
                     //        : Resources.status2
-                    TrangThai = p.GIALE * (decimal)(1 - p.CHIETKHAU) - p.GIANHAP == 0 ? Resources.status3 :
-                    p.GIALE * (decimal)(1 - p.CHIETKHAU) - p.GIANHAP < 0 ? Resources.status1 : Resources.status2
+                    //TrangThai = p.GIALE * (decimal)(1 - p.CHIETKHAU) - p.GIANHAP == 0 ? Resources.status3 :
+                    //p.GIALE * (decimal)(1 - p.CHIETKHAU) - p.GIANHAP < 0 ? Resources.status1 : Resources.status2
                 });
 
 
