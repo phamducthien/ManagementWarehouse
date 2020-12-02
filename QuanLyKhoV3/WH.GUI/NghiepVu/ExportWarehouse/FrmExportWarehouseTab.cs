@@ -10,6 +10,7 @@ namespace WH.GUI.ExportWarehouse
         {
             InitializeComponent();
             //AddNewTab();
+            UpdateButtonState();
             kryptonNavExportWarehouse.Pages.Inserted += OnPageInsertRemove;
             kryptonNavExportWarehouse.Pages.Removed += OnPageInsertRemove;
         }
