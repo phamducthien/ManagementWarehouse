@@ -19,13 +19,18 @@ namespace WH.GUI.ExportWarehouse
             var kryptonPage = new KryptonPage { Text = "Đơn hàng" };
             kryptonPage.AutoScroll = true;
             kryptonPage.Dock = DockStyle.Fill;
+            kryptonPage.AutoSize = true;
+            kryptonPage.AutoSizeMode = AutoSizeMode.GrowOnly;
+            //kryptonPage.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Left;
 
             var frmExportWarehouse = new FrmXuatKho
             {
                 TopLevel = false,
                 Visible = true,
                 FormBorderStyle = FormBorderStyle.None,
-                Dock = DockStyle.Fill
+                Dock = DockStyle.Fill,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowOnly
             };
             kryptonPage.Controls.Add(frmExportWarehouse);
 
