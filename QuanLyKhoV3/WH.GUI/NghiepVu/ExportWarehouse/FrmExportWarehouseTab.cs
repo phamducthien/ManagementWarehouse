@@ -1,6 +1,5 @@
 ﻿using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace WH.GUI.ExportWarehouse
@@ -11,36 +10,29 @@ namespace WH.GUI.ExportWarehouse
         {
             InitializeComponent();
             AddNewTab();
-            tabExportWarehouse.Pages.Inserted += OnPageInsertRemove;
-            tabExportWarehouse.Pages.Removed += OnPageInsertRemove;
+            kryptonNavExportWarehouse.Pages.Inserted += OnPageInsertRemove;
+            kryptonNavExportWarehouse.Pages.Removed += OnPageInsertRemove;
         }
 
         private void AddNewTab()
         {
-            var newPage = new KryptonPage
-            {
-                Text = "Đơn hàng"
-            };
+            var kryptonPage = new KryptonPage { Text = "Đơn hàng" };
+            kryptonPage.AutoScroll = true;
+            kryptonPage.Dock = DockStyle.Fill;
 
             var frmExportWarehouse = new FrmXuatKho
             {
                 TopLevel = false,
-                Dock = DockStyle.Fill,
-                WindowState = FormWindowState.Maximized,
-                Size = new Size(100, 100),
-                Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right
+                Visible = true,
+                FormBorderStyle = FormBorderStyle.None,
+                Dock = DockStyle.Fill
             };
+            kryptonPage.Controls.Add(frmExportWarehouse);
+
+            kryptonNavExportWarehouse.Pages.Add(kryptonPage);
+            kryptonNavExportWarehouse.SelectedPage = kryptonPage;
 
             frmExportWarehouse.Show();
-
-            // Add form to tab
-            newPage.Controls.Add(frmExportWarehouse);
-
-            // Append to end of the pages collection
-            tabExportWarehouse.Pages.Add(newPage);
-
-            // Select the new page
-            tabExportWarehouse.SelectedPage = newPage;
         }
 
         private void btnAddExportWarehouse_Click(object sender, System.EventArgs e)
@@ -56,12 +48,12 @@ namespace WH.GUI.ExportWarehouse
         private void UpdateButtonState()
         {
             // Can only remove if a page is selected
-            btnRemove.Enabled = (tabExportWarehouse.SelectedPage != null);
+            btnRemove.Enabled = (kryptonNavExportWarehouse.SelectedPage != null);
         }
 
         private void btnRemove_Click(object sender, System.EventArgs e)
         {
-            tabExportWarehouse.Pages.Remove(tabExportWarehouse.SelectedPage);
+            kryptonNavExportWarehouse.Pages.Remove(kryptonNavExportWarehouse.SelectedPage);
         }
     }
 }
