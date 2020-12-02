@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.btnAddExportWarehouse = new System.Windows.Forms.Button();
-            this.tabExportWarehouse = new ComponentFactory.Krypton.Docking.KryptonDockableNavigator();
+            this.kryptonNavExportWarehouse = new ComponentFactory.Krypton.Docking.KryptonDockableNavigator();
             this.btnRemove = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.tabExportWarehouse)).BeginInit();
-            this.tabExportWarehouse.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonNavExportWarehouse)).BeginInit();
+            this.kryptonNavExportWarehouse.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAddExportWarehouse
@@ -46,16 +46,16 @@
             this.btnAddExportWarehouse.UseVisualStyleBackColor = true;
             this.btnAddExportWarehouse.Click += new System.EventHandler(this.btnAddExportWarehouse_Click);
             // 
-            // tabExportWarehouse
+            // kryptonNavExportWarehouse
             // 
-            this.tabExportWarehouse.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.kryptonNavExportWarehouse.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabExportWarehouse.Location = new System.Drawing.Point(12, 13);
-            this.tabExportWarehouse.Name = "tabExportWarehouse";
-            this.tabExportWarehouse.Size = new System.Drawing.Size(978, 537);
-            this.tabExportWarehouse.TabIndex = 2;
-            this.tabExportWarehouse.Text = "Danh sách đơn hàng";
+            this.kryptonNavExportWarehouse.Location = new System.Drawing.Point(12, 13);
+            this.kryptonNavExportWarehouse.Name = "kryptonNavExportWarehouse";
+            this.kryptonNavExportWarehouse.Size = new System.Drawing.Size(978, 537);
+            this.kryptonNavExportWarehouse.TabIndex = 2;
+            this.kryptonNavExportWarehouse.Text = "Danh sách đơn hàng";
             // 
             // btnRemove
             // 
@@ -75,12 +75,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1011, 603);
             this.Controls.Add(this.btnRemove);
-            this.Controls.Add(this.tabExportWarehouse);
+            this.Controls.Add(this.kryptonNavExportWarehouse);
             this.Controls.Add(this.btnAddExportWarehouse);
             this.Name = "FrmExportWarehouseTab";
             this.Text = "Danh sách đơn hàng";
-            ((System.ComponentModel.ISupportInitialize)(this.tabExportWarehouse)).EndInit();
-            this.tabExportWarehouse.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonNavExportWarehouse)).EndInit();
+            this.kryptonNavExportWarehouse.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -88,7 +88,7 @@
         #endregion
 
         private System.Windows.Forms.Button btnAddExportWarehouse;
-        private ComponentFactory.Krypton.Docking.KryptonDockableNavigator tabExportWarehouse;
+        private ComponentFactory.Krypton.Docking.KryptonDockableNavigator kryptonNavExportWarehouse;
         private System.Windows.Forms.Button btnRemove;
     }
 }

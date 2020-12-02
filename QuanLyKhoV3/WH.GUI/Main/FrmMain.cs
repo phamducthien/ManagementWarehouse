@@ -117,8 +117,11 @@ namespace WH.GUI
 
                 if (isOpen) return;
                 {
+                    Hide();
                     var frm = new FrmExportWarehouseTab();
-                    frm.Show();
+                    frm.ShowDialog();
+                    Show();
+                    Activate();
                     var opacity = 0.00;
                     while (opacity < 1)
                     {
@@ -127,15 +130,6 @@ namespace WH.GUI
                     }
                     frm.Opacity = 1.00;
                 }
-
-
-
-                //Activate();
-
-                //var frm = new FrmXuatKho();
-                //frm.Show();
-                //Show();
-                //Activate();
             }
         }
 
