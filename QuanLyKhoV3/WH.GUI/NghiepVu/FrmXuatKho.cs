@@ -652,7 +652,7 @@ namespace WH.GUI
                 if (LsTempHoadonxuatkhochitiets.isNull()) return;
                 if (dgvHoaDon.Rows.Count == 0) return;
 
-                var tienChi = decimal.Parse(txtTienChi.Text, CultureInfo.InvariantCulture);
+                var tienChi = txtTienChi.Text.ToDecimal();
                 decimal giamGia = 0;
                 var service = XuatKhoService;
                 var result = service.ThanhToan(MaHoaDon, dtpNgayTaoHD.Value, KhachHangModel.MAKHACHHANG, tienChi,
