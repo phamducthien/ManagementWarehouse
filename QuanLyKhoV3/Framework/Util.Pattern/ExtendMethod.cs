@@ -307,7 +307,7 @@ namespace Util.Pattern
         public static decimal ToDecimal(this string input)
         {
             decimal i;
-            var res = decimal.TryParse(input, NumberStyles.Number, CultureInfo.CurrentCulture, out i);
+            var res = decimal.TryParse(input, NumberStyles.Number, CultureInfo.InvariantCulture, out i);
 
             return res ? i : DefaultInt;
         }
