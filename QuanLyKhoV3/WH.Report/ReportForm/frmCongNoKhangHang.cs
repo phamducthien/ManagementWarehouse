@@ -1,16 +1,15 @@
-﻿using System;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-using ClosedXML.Excel;
+﻿using ClosedXML.Excel;
 using HLVControl.Grid;
 using HLVControl.Grid.Data;
 using HLVControl.Grid.Events;
 using MetroUI.Forms;
 using Repository.Pattern.UnitOfWork;
-using Util.Pattern;
+using System;
+using System.Data;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 using WH.Report.ReportFunction;
 using WH.Service;
 using WH.Service.Repository.Core;
@@ -92,10 +91,10 @@ namespace WH.Report.ReportForm
                     row.Cells.Add(new TreeListCell(drow[7].ToString())); // MaCodeKhach hang
                     row.Cells.Add(new TreeListCell(drow[8].ToString())); // barcode Khach Hang
                     row.Cells.Add(new TreeListCell(drow[9].ToString())); // Ten Khach hang
-                    row.Cells.Add(new TreeListCell(drow[1].ToString().ToDecimal().ToString("N")));
-                    row.Cells.Add(new TreeListCell(drow[2].ToString().ToDecimal().ToString("N")));
-                    row.Cells.Add(new TreeListCell(drow[3].ToString().ToDecimal().ToString("N")));
-                    row.Cells.Add(new TreeListCell(drow[4].ToString().ToDecimal().ToString("N")));
+                    row.Cells.Add(new TreeListCell(drow[1].ToString()));
+                    row.Cells.Add(new TreeListCell(drow[2].ToString()));
+                    row.Cells.Add(new TreeListCell(drow[3].ToString()));
+                    row.Cells.Add(new TreeListCell(drow[4].ToString()));
                     row.Cells.Add(new TreeListCell(drow[8].ToString()));
                     row.Tag = count;
 

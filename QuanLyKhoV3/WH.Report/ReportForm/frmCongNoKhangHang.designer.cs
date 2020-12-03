@@ -393,7 +393,7 @@ namespace WH.Report.ReportForm
             // 
             // _colTongTien
             // 
-            this._colTongTien.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
+            this._colTongTien.AlignCellHorizontal = System.Drawing.StringAlignment.Far;
             this._colTongTien.AlignCellVertical = System.Drawing.StringAlignment.Center;
             this._colTongTien.AlignHeaderHorizontal = System.Drawing.StringAlignment.Center;
             this._colTongTien.AlignHeaderVertical = System.Drawing.StringAlignment.Center;
@@ -417,7 +417,7 @@ namespace WH.Report.ReportForm
             // 
             // _colTienKM
             // 
-            this._colTienKM.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
+            this._colTienKM.AlignCellHorizontal = System.Drawing.StringAlignment.Far;
             this._colTienKM.AlignCellVertical = System.Drawing.StringAlignment.Center;
             this._colTienKM.AlignHeaderHorizontal = System.Drawing.StringAlignment.Center;
             this._colTienKM.AlignHeaderVertical = System.Drawing.StringAlignment.Center;
@@ -441,7 +441,7 @@ namespace WH.Report.ReportForm
             // 
             // _colTienThu
             // 
-            this._colTienThu.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
+            this._colTienThu.AlignCellHorizontal = System.Drawing.StringAlignment.Far;
             this._colTienThu.AlignCellVertical = System.Drawing.StringAlignment.Center;
             this._colTienThu.AlignHeaderHorizontal = System.Drawing.StringAlignment.Center;
             this._colTienThu.AlignHeaderVertical = System.Drawing.StringAlignment.Center;
@@ -465,7 +465,7 @@ namespace WH.Report.ReportForm
             // 
             // _colConLai
             // 
-            this._colConLai.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
+            this._colConLai.AlignCellHorizontal = System.Drawing.StringAlignment.Far;
             this._colConLai.AlignCellVertical = System.Drawing.StringAlignment.Center;
             this._colConLai.AlignHeaderHorizontal = System.Drawing.StringAlignment.Center;
             this._colConLai.AlignHeaderVertical = System.Drawing.StringAlignment.Center;

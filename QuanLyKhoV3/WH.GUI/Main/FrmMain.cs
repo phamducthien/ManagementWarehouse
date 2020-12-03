@@ -8,12 +8,9 @@ namespace WH.GUI
 {
     public partial class FrmMain : FrmBase
     {
-        private readonly BaseForm _baseForm;
-
         public FrmMain()
         {
             InitializeComponent();
-            _baseForm = new BaseForm();
             Load += FrmMain_Load;
             btnThoat.Click += BtnThoat_Click;
             btnMatHang.Click += BtnMatHang_Click;
@@ -175,26 +172,14 @@ namespace WH.GUI
 
         private void BtnBaoCao_Click(object sender, EventArgs e)
         {
-            //foreach (UserControl u in grpMainApp.Panel.Controls.OfType<UserControl>())
-            //{
-            //    u.Dispose();
-            //}
-            if (CheckQuyen("BÁO CÁO"))
-            {
-                Hide();
-                var uc = new ucMain();
-                var frm = new FrmUserControl(uc);
-                frm.ShowDialog();
-                Show();
-                Activate();
-            }
+            if (!CheckQuyen("BÁO CÁO")) return;
 
-
-            //{
-            //    Size = grpMainApp.Panel.Size
-            //};
-            //grpMainApp.Panel.Controls.Add(uc);
-            //uc.ResumeLayout(true);
+            Hide();
+            var uc = new ucMain();
+            var frm = new FrmUserControl(uc);
+            frm.ShowDialog();
+            Show();
+            Activate();
         }
 
         private void BtnThoat_Click(object sender, EventArgs e)
