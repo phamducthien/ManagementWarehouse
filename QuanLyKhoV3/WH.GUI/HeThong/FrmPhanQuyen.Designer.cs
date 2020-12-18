@@ -161,7 +161,6 @@
             this.gbxInfo.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.gbxInfo.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxInfo.TabIndex = 674;
-            this.gbxInfo.Text = "Thông tin một người dùng";
             this.gbxInfo.Values.Heading = "Thông tin một người dùng";
             this.gbxInfo.Values.Image = global::WH.GUI.Properties.Resources.ThongTin;
             // 
@@ -387,7 +386,6 @@
             this.gbxList.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.gbxList.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxList.TabIndex = 694;
-            this.gbxList.Text = "Danh sách người dùng";
             this.gbxList.Values.Heading = "Danh sách người dùng";
             this.gbxList.Values.Image = global::WH.GUI.Properties.Resources.ListCheck;
             // 
@@ -757,7 +755,7 @@
             this.TENCHUCNANG.HeaderText = "Chức Năng";
             this.TENCHUCNANG.Name = "TENCHUCNANG";
             this.TENCHUCNANG.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.TENCHUCNANG.Width = 283;
+            this.TENCHUCNANG.Width = 83;
             // 
             // QUYENXEM
             // 
@@ -787,7 +785,6 @@
             this.QUYENIN.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.QUYENIN.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.QUYENIN.TrueValue = null;
-            this.QUYENIN.Visible = false;
             this.QUYENIN.Width = 40;
             // 
             // QUYENSUA
@@ -802,7 +799,6 @@
             this.QUYENSUA.Name = "QUYENSUA";
             this.QUYENSUA.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.QUYENSUA.TrueValue = null;
-            this.QUYENSUA.Visible = false;
             this.QUYENSUA.Width = 40;
             // 
             // QUYENXOA
@@ -817,7 +813,6 @@
             this.QUYENXOA.Name = "QUYENXOA";
             this.QUYENXOA.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.QUYENXOA.TrueValue = null;
-            this.QUYENXOA.Visible = false;
             this.QUYENXOA.Width = 40;
             // 
             // QUYENXUATFILE
@@ -832,7 +827,6 @@
             this.QUYENXUATFILE.Name = "QUYENXUATFILE";
             this.QUYENXUATFILE.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.QUYENXUATFILE.TrueValue = null;
-            this.QUYENXUATFILE.Visible = false;
             this.QUYENXUATFILE.Width = 40;
             // 
             // QUYENTIMKIEM
@@ -847,7 +841,6 @@
             this.QUYENTIMKIEM.Name = "QUYENTIMKIEM";
             this.QUYENTIMKIEM.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.QUYENTIMKIEM.TrueValue = null;
-            this.QUYENTIMKIEM.Visible = false;
             this.QUYENTIMKIEM.Width = 40;
             // 
             // FrmPhanQuyen
