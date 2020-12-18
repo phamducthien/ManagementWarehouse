@@ -30,12 +30,6 @@
 		{
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -45,9 +39,24 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.gbxInfo = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.dgvPhanQuyen = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.STT = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.MaChucNang = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.TENCHUCNANG = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.QUYENXEM = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
+            this.QUYENIN = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
+            this.QUYENSUA = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
+            this.QUYENXOA = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
+            this.QUYENXUATFILE = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
+            this.QUYENTIMKIEM = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
             this.txtPass = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.txtUser = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -74,15 +83,6 @@
             this.btnXoa = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnSua = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnThem = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.STT = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.MaChucNang = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.TENCHUCNANG = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.QUYENXEM = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
-            this.QUYENIN = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
-            this.QUYENSUA = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
-            this.QUYENXOA = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
-            this.QUYENXUATFILE = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
-            this.QUYENTIMKIEM = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer.Panel1)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -123,9 +123,9 @@
             // 
             this.splitContainer.Panel2.Controls.Add(this.gbxList);
             this.splitContainer.Panel2.StateCommon.Color1 = System.Drawing.Color.Transparent;
-            this.splitContainer.Panel2MinSize = 463;
-            this.splitContainer.Size = new System.Drawing.Size(1008, 600);
-            this.splitContainer.SplitterDistance = 418;
+            this.splitContainer.Panel2MinSize = 200;
+            this.splitContainer.Size = new System.Drawing.Size(1089, 600);
+            this.splitContainer.SplitterDistance = 536;
             this.splitContainer.SplitterIncrement = 10;
             this.splitContainer.SplitterWidth = 3;
             this.splitContainer.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
@@ -150,7 +150,7 @@
             this.gbxInfo.Panel.Controls.Add(this.btnLuu);
             this.gbxInfo.Panel.Controls.Add(this.btnHuy);
             this.gbxInfo.Panel.Controls.Add(this.txtTen);
-            this.gbxInfo.Size = new System.Drawing.Size(418, 600);
+            this.gbxInfo.Size = new System.Drawing.Size(536, 600);
             this.gbxInfo.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
             this.gbxInfo.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(148)))), ((int)(((byte)(148)))));
             this.gbxInfo.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
@@ -199,7 +199,7 @@
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.White;
             this.dgvPhanQuyen.RowsDefaultCellStyle = dataGridViewCellStyle11;
             this.dgvPhanQuyen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPhanQuyen.Size = new System.Drawing.Size(412, 410);
+            this.dgvPhanQuyen.Size = new System.Drawing.Size(530, 410);
             this.dgvPhanQuyen.StateCommon.Background.Color1 = System.Drawing.Color.White;
             this.dgvPhanQuyen.StateCommon.Background.Color2 = System.Drawing.Color.White;
             this.dgvPhanQuyen.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
@@ -222,10 +222,131 @@
             this.dgvPhanQuyen.StateCommon.HeaderColumn.Content.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvPhanQuyen.TabIndex = 685;
             // 
+            // STT
+            // 
+            this.STT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = "0";
+            this.STT.DefaultCellStyle = dataGridViewCellStyle2;
+            this.STT.Frozen = true;
+            this.STT.HeaderText = "Stt";
+            this.STT.Name = "STT";
+            this.STT.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.STT.Width = 35;
+            // 
+            // MaChucNang
+            // 
+            this.MaChucNang.DataPropertyName = "IDUnit";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.MaChucNang.DefaultCellStyle = dataGridViewCellStyle3;
+            this.MaChucNang.HeaderText = "Mã";
+            this.MaChucNang.Name = "MaChucNang";
+            this.MaChucNang.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.MaChucNang.Visible = false;
+            this.MaChucNang.Width = 100;
+            // 
+            // TENCHUCNANG
+            // 
+            this.TENCHUCNANG.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TENCHUCNANG.DataPropertyName = "TENCHUCNANG";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.TENCHUCNANG.DefaultCellStyle = dataGridViewCellStyle4;
+            this.TENCHUCNANG.HeaderText = "Chức Năng";
+            this.TENCHUCNANG.Name = "TENCHUCNANG";
+            this.TENCHUCNANG.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.TENCHUCNANG.Width = 201;
+            // 
+            // QUYENXEM
+            // 
+            this.QUYENXEM.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.NullValue = false;
+            this.QUYENXEM.DefaultCellStyle = dataGridViewCellStyle5;
+            this.QUYENXEM.FalseValue = null;
+            this.QUYENXEM.HeaderText = "Cấp Quyền";
+            this.QUYENXEM.IndeterminateValue = null;
+            this.QUYENXEM.Name = "QUYENXEM";
+            this.QUYENXEM.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.QUYENXEM.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.QUYENXEM.TrueValue = null;
+            this.QUYENXEM.Width = 93;
+            // 
+            // QUYENIN
+            // 
+            this.QUYENIN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.NullValue = false;
+            this.QUYENIN.DefaultCellStyle = dataGridViewCellStyle6;
+            this.QUYENIN.FalseValue = null;
+            this.QUYENIN.HeaderText = "Thêm";
+            this.QUYENIN.IndeterminateValue = null;
+            this.QUYENIN.Name = "QUYENIN";
+            this.QUYENIN.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.QUYENIN.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.QUYENIN.TrueValue = null;
+            this.QUYENIN.Width = 40;
+            // 
+            // QUYENSUA
+            // 
+            this.QUYENSUA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.NullValue = false;
+            this.QUYENSUA.DefaultCellStyle = dataGridViewCellStyle7;
+            this.QUYENSUA.FalseValue = null;
+            this.QUYENSUA.HeaderText = "Sửa";
+            this.QUYENSUA.IndeterminateValue = null;
+            this.QUYENSUA.Name = "QUYENSUA";
+            this.QUYENSUA.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.QUYENSUA.TrueValue = null;
+            this.QUYENSUA.Width = 40;
+            // 
+            // QUYENXOA
+            // 
+            this.QUYENXOA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.NullValue = false;
+            this.QUYENXOA.DefaultCellStyle = dataGridViewCellStyle8;
+            this.QUYENXOA.FalseValue = null;
+            this.QUYENXOA.HeaderText = "Xóa";
+            this.QUYENXOA.IndeterminateValue = null;
+            this.QUYENXOA.Name = "QUYENXOA";
+            this.QUYENXOA.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.QUYENXOA.TrueValue = null;
+            this.QUYENXOA.Width = 40;
+            // 
+            // QUYENXUATFILE
+            // 
+            this.QUYENXUATFILE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.NullValue = false;
+            this.QUYENXUATFILE.DefaultCellStyle = dataGridViewCellStyle9;
+            this.QUYENXUATFILE.FalseValue = null;
+            this.QUYENXUATFILE.HeaderText = "Xuất";
+            this.QUYENXUATFILE.IndeterminateValue = null;
+            this.QUYENXUATFILE.Name = "QUYENXUATFILE";
+            this.QUYENXUATFILE.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.QUYENXUATFILE.TrueValue = null;
+            this.QUYENXUATFILE.Width = 40;
+            // 
+            // QUYENTIMKIEM
+            // 
+            this.QUYENTIMKIEM.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.NullValue = false;
+            this.QUYENTIMKIEM.DefaultCellStyle = dataGridViewCellStyle10;
+            this.QUYENTIMKIEM.FalseValue = null;
+            this.QUYENTIMKIEM.HeaderText = "Nhập";
+            this.QUYENTIMKIEM.IndeterminateValue = null;
+            this.QUYENTIMKIEM.Name = "QUYENTIMKIEM";
+            this.QUYENTIMKIEM.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.QUYENTIMKIEM.TrueValue = null;
+            this.QUYENTIMKIEM.Width = 40;
+            // 
             // txtPass
             // 
             this.txtPass.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtPass.Location = new System.Drawing.Point(152, 78);
+            this.txtPass.Location = new System.Drawing.Point(211, 78);
             this.txtPass.Name = "txtPass";
             this.txtPass.PasswordChar = '●';
             this.txtPass.Size = new System.Drawing.Size(250, 31);
@@ -244,7 +365,7 @@
             // txtUser
             // 
             this.txtUser.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtUser.Location = new System.Drawing.Point(152, 41);
+            this.txtUser.Location = new System.Drawing.Point(211, 41);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(250, 31);
             this.txtUser.StateCommon.Border.Color1 = System.Drawing.Color.Gray;
@@ -303,7 +424,7 @@
             // btnLuu
             // 
             this.btnLuu.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnLuu.Location = new System.Drawing.Point(152, 115);
+            this.btnLuu.Location = new System.Drawing.Point(211, 115);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(100, 35);
             this.btnLuu.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(148)))), ((int)(((byte)(148)))));
@@ -323,7 +444,7 @@
             // btnHuy
             // 
             this.btnHuy.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnHuy.Location = new System.Drawing.Point(302, 115);
+            this.btnHuy.Location = new System.Drawing.Point(361, 115);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(100, 35);
             this.btnHuy.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
@@ -347,7 +468,7 @@
             // txtTen
             // 
             this.txtTen.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtTen.Location = new System.Drawing.Point(152, 4);
+            this.txtTen.Location = new System.Drawing.Point(211, 4);
             this.txtTen.Name = "txtTen";
             this.txtTen.Size = new System.Drawing.Size(250, 31);
             this.txtTen.StateCommon.Border.Color1 = System.Drawing.Color.Gray;
@@ -374,7 +495,7 @@
             this.gbxList.Panel.Controls.Add(this.txtTimKiem);
             this.gbxList.Panel.Controls.Add(this.pnlLine1);
             this.gbxList.Panel.Controls.Add(this.pnlMenu);
-            this.gbxList.Size = new System.Drawing.Size(587, 600);
+            this.gbxList.Size = new System.Drawing.Size(550, 600);
             this.gbxList.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
             this.gbxList.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
             this.gbxList.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(148)))), ((int)(((byte)(148)))));
@@ -419,7 +540,7 @@
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.White;
             this.dgvDanhMuc.RowsDefaultCellStyle = dataGridViewCellStyle17;
             this.dgvDanhMuc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDanhMuc.Size = new System.Drawing.Size(581, 487);
+            this.dgvDanhMuc.Size = new System.Drawing.Size(544, 487);
             this.dgvDanhMuc.StateCommon.Background.Color1 = System.Drawing.Color.White;
             this.dgvDanhMuc.StateCommon.Background.Color2 = System.Drawing.Color.White;
             this.dgvDanhMuc.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
@@ -488,7 +609,7 @@
             this.pnlLine2.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlLine2.Location = new System.Drawing.Point(0, 77);
             this.pnlLine2.Name = "pnlLine2";
-            this.pnlLine2.Size = new System.Drawing.Size(581, 5);
+            this.pnlLine2.Size = new System.Drawing.Size(544, 5);
             this.pnlLine2.StateCommon.Color1 = System.Drawing.Color.Transparent;
             this.pnlLine2.TabIndex = 699;
             // 
@@ -500,7 +621,7 @@
             this.txtTimKiem.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtTimKiem.Location = new System.Drawing.Point(0, 40);
             this.txtTimKiem.Name = "txtTimKiem";
-            this.txtTimKiem.Size = new System.Drawing.Size(581, 37);
+            this.txtTimKiem.Size = new System.Drawing.Size(544, 37);
             this.txtTimKiem.StateCommon.Border.Color1 = System.Drawing.Color.Gray;
             this.txtTimKiem.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
@@ -527,7 +648,7 @@
             this.pnlLine1.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlLine1.Location = new System.Drawing.Point(0, 35);
             this.pnlLine1.Name = "pnlLine1";
-            this.pnlLine1.Size = new System.Drawing.Size(581, 5);
+            this.pnlLine1.Size = new System.Drawing.Size(544, 5);
             this.pnlLine1.StateCommon.Color1 = System.Drawing.Color.Transparent;
             this.pnlLine1.TabIndex = 697;
             // 
@@ -541,7 +662,7 @@
             this.pnlMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMenu.Location = new System.Drawing.Point(0, 0);
             this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(581, 35);
+            this.pnlMenu.Size = new System.Drawing.Size(544, 35);
             this.pnlMenu.StateCommon.Color1 = System.Drawing.Color.Transparent;
             this.pnlMenu.TabIndex = 698;
             // 
@@ -722,132 +843,11 @@
             this.btnThem.Values.Image = global::WH.GUI.Properties.Resources.ThemLon;
             this.btnThem.Values.Text = "Thêm";
             // 
-            // STT
-            // 
-            this.STT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = "0";
-            this.STT.DefaultCellStyle = dataGridViewCellStyle2;
-            this.STT.Frozen = true;
-            this.STT.HeaderText = "Stt";
-            this.STT.Name = "STT";
-            this.STT.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.STT.Width = 35;
-            // 
-            // MaChucNang
-            // 
-            this.MaChucNang.DataPropertyName = "IDUnit";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.MaChucNang.DefaultCellStyle = dataGridViewCellStyle3;
-            this.MaChucNang.HeaderText = "Mã";
-            this.MaChucNang.Name = "MaChucNang";
-            this.MaChucNang.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.MaChucNang.Visible = false;
-            this.MaChucNang.Width = 100;
-            // 
-            // TENCHUCNANG
-            // 
-            this.TENCHUCNANG.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TENCHUCNANG.DataPropertyName = "TENCHUCNANG";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.TENCHUCNANG.DefaultCellStyle = dataGridViewCellStyle4;
-            this.TENCHUCNANG.HeaderText = "Chức Năng";
-            this.TENCHUCNANG.Name = "TENCHUCNANG";
-            this.TENCHUCNANG.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.TENCHUCNANG.Width = 83;
-            // 
-            // QUYENXEM
-            // 
-            this.QUYENXEM.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.NullValue = false;
-            this.QUYENXEM.DefaultCellStyle = dataGridViewCellStyle5;
-            this.QUYENXEM.FalseValue = null;
-            this.QUYENXEM.HeaderText = "Cấp Quyền";
-            this.QUYENXEM.IndeterminateValue = null;
-            this.QUYENXEM.Name = "QUYENXEM";
-            this.QUYENXEM.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.QUYENXEM.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.QUYENXEM.TrueValue = null;
-            this.QUYENXEM.Width = 93;
-            // 
-            // QUYENIN
-            // 
-            this.QUYENIN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.NullValue = false;
-            this.QUYENIN.DefaultCellStyle = dataGridViewCellStyle6;
-            this.QUYENIN.FalseValue = null;
-            this.QUYENIN.HeaderText = "Thêm";
-            this.QUYENIN.IndeterminateValue = null;
-            this.QUYENIN.Name = "QUYENIN";
-            this.QUYENIN.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.QUYENIN.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.QUYENIN.TrueValue = null;
-            this.QUYENIN.Width = 40;
-            // 
-            // QUYENSUA
-            // 
-            this.QUYENSUA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.NullValue = false;
-            this.QUYENSUA.DefaultCellStyle = dataGridViewCellStyle7;
-            this.QUYENSUA.FalseValue = null;
-            this.QUYENSUA.HeaderText = "Sửa";
-            this.QUYENSUA.IndeterminateValue = null;
-            this.QUYENSUA.Name = "QUYENSUA";
-            this.QUYENSUA.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.QUYENSUA.TrueValue = null;
-            this.QUYENSUA.Width = 40;
-            // 
-            // QUYENXOA
-            // 
-            this.QUYENXOA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.NullValue = false;
-            this.QUYENXOA.DefaultCellStyle = dataGridViewCellStyle8;
-            this.QUYENXOA.FalseValue = null;
-            this.QUYENXOA.HeaderText = "Xóa";
-            this.QUYENXOA.IndeterminateValue = null;
-            this.QUYENXOA.Name = "QUYENXOA";
-            this.QUYENXOA.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.QUYENXOA.TrueValue = null;
-            this.QUYENXOA.Width = 40;
-            // 
-            // QUYENXUATFILE
-            // 
-            this.QUYENXUATFILE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.NullValue = false;
-            this.QUYENXUATFILE.DefaultCellStyle = dataGridViewCellStyle9;
-            this.QUYENXUATFILE.FalseValue = null;
-            this.QUYENXUATFILE.HeaderText = "Xuất";
-            this.QUYENXUATFILE.IndeterminateValue = null;
-            this.QUYENXUATFILE.Name = "QUYENXUATFILE";
-            this.QUYENXUATFILE.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.QUYENXUATFILE.TrueValue = null;
-            this.QUYENXUATFILE.Width = 40;
-            // 
-            // QUYENTIMKIEM
-            // 
-            this.QUYENTIMKIEM.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.NullValue = false;
-            this.QUYENTIMKIEM.DefaultCellStyle = dataGridViewCellStyle10;
-            this.QUYENTIMKIEM.FalseValue = null;
-            this.QUYENTIMKIEM.HeaderText = "Nhập";
-            this.QUYENTIMKIEM.IndeterminateValue = null;
-            this.QUYENTIMKIEM.Name = "QUYENTIMKIEM";
-            this.QUYENTIMKIEM.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.QUYENTIMKIEM.TrueValue = null;
-            this.QUYENTIMKIEM.Width = 40;
-            // 
             // FrmPhanQuyen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 600);
+            this.ClientSize = new System.Drawing.Size(1089, 600);
             this.Controls.Add(this.splitContainer);
             this.Name = "FrmPhanQuyen";
             this.StateCommon.Back.Color1 = System.Drawing.Color.White;
