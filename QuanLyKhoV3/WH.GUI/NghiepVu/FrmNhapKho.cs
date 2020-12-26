@@ -1,9 +1,10 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Service.Pattern;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using Service.Pattern;
 using Util.Pattern;
 using WH.Entity;
 using WH.Model;
@@ -294,7 +295,7 @@ namespace WH.GUI
                 var objMathang = Model;
                 if (objMathang == null) return;
 
-                if (!CheckTonToiDa(objMathang.MAMATHANG,slNhap)) return;
+                if (!CheckTonToiDa(objMathang.MAMATHANG, slNhap)) return;
 
                 var nhapKhoService = NhapKhoService;
                 if (MaHoaDon.IsBlank()) MaHoaDon = nhapKhoService.CreateMaHoaDon();
@@ -399,11 +400,11 @@ namespace WH.GUI
                 var objMathang = Model;
                 if (objMathang == null) return;
                 int soluong = 0;
-                 var nhapKhoService = NhapKhoService;
-                 if (MaHoaDon.IsBlank())
+                var nhapKhoService = NhapKhoService;
+                if (MaHoaDon.IsBlank())
                     MaHoaDon = nhapKhoService.CreateMaHoaDon();
-                 else
-                 {
+                else
+                {
                     var listct = nhapKhoService.LoadHoaDonTam(MaHoaDon);
                     if (!listct.isNullOrZero())
                     {
@@ -411,7 +412,7 @@ namespace WH.GUI
                             .ToInt();
                     }
                 }
-                var frm = new FrmInputNumberExportByLoai_Extend(soluong,objMathang, false,true);
+                var frm = new FrmInputNumberExportByLoai_Extend(soluong, objMathang, false, true);
                 frm.ShowDialog(this);
 
                 if (frm.lstChiTietNhap.isNullOrZero()) return;
@@ -423,7 +424,7 @@ namespace WH.GUI
                 {
                     if (ct.SOLUONGLE <= 0) continue;
                     var slNhap = ct.SOLUONGLE;
-                    if (!CheckTonToiDa(ct.MAMATHANG??0,(int)slNhap)) continue;
+                    if (!CheckTonToiDa(ct.MAMATHANG ?? 0, (int)slNhap)) continue;
 
                     var objHoadonhapkhochitiet = ct;
                     objHoadonhapkhochitiet.MAHOADON = MaHoaDon;
@@ -489,7 +490,7 @@ namespace WH.GUI
                 }
 
                 var soluongTang = 1;
-                if (!CheckTonToiDa(objChiTiet.MAMATHANG??0,soluongTang)) return;
+                if (!CheckTonToiDa(objChiTiet.MAMATHANG ?? 0, soluongTang)) return;
 
                 if (MaHoaDon.IsBlank() || dgvHoaDon.Rows.Count == 0)
                 {
@@ -596,7 +597,7 @@ namespace WH.GUI
                 }
 
                 var objMathang = NhapKhoService.GetModelMatHang(objChiTiet);
-                var frm = new FrmInputNumberImport(objMathang, (decimal) objChiTiet.DONGIA);
+                var frm = new FrmInputNumberImport(objMathang, (decimal)objChiTiet.DONGIA);
                 frm.ShowDialog();
                 var soluongNhap = frm.numImport;
                 var giaNhap = frm.gianhap;
@@ -607,7 +608,7 @@ namespace WH.GUI
                     return;
                 }
 
-                if (!CheckTonToiDa(objMathang.MAMATHANG,soluongNhap)) return;
+                if (!CheckTonToiDa(objMathang.MAMATHANG, soluongNhap)) return;
 
                 if (MaHoaDon.IsBlank() || dgvHoaDon.Rows.Count == 0)
                 {
@@ -670,14 +671,14 @@ namespace WH.GUI
                     return;
                 }
 
-                if (labTongTien.Values.ExtraText.ToDecimal()== 0 && ShowMessage(IconMessageBox.Question,
+                if (labTongTien.Values.ExtraText.ToDecimal() == 0 && ShowMessage(IconMessageBox.Question,
                         "Tổng tiền hóa đơn nhập kho bằng 0, bạn có muốn tiếp tục tạo hóa đơn này không?") ==
                     DialogResult.No) return;
 
                 if (MaHoaDon.IsBlank()) return;
                 if (LsTempHoadonhapkhochitiets.isNull()) return;
                 if (dgvHoaDon.Rows.Count == 0) return;
-                var tienChi = txtTienChi.Text.ToDecimal();
+                var tienChi = decimal.Parse(txtTienChi.Text, CultureInfo.InvariantCulture);
                 var ngayTaoHD = dtpNgayTaoHD.Value;
 
                 var nhapkhoService = NhapKhoService;
@@ -691,7 +692,7 @@ namespace WH.GUI
                 {
                     var frm = new FrmHoaDonNhapKho(MaHoaDon, NhacungcapModel);
                     frm.ShowDialog(this);
-         
+
                     MaHoaDon = string.Empty;
                     dgvHoaDon.DataSource = null;
                     labTongTien.Values.ExtraText = 0.ToString("N2");
@@ -699,7 +700,7 @@ namespace WH.GUI
                     txtGhiChu.Text = string.Empty;
                     LoadNccToGui(null);
                     LoadDataAllMatHang();
-                     dtpNgayTaoHD.Value = DateTime.Now;
+                    dtpNgayTaoHD.Value = DateTime.Now;
                 }
 
                 //Hide();
@@ -783,22 +784,22 @@ namespace WH.GUI
         {
             LsTempHoadonhapkhochitiets = NhapKhoService.LoadHoaDonTam(MaHoaDon);
             var list = from p in LsTempHoadonhapkhochitiets.OrderBy(s => s.GHICHU_CT.ToInt())
-                join s in DataList on p.MAMATHANG equals s.MAMATHANG
-                select new
-                {
-                    p.IDUnit,
-                    s.MAMATHANG,
-                    s.TENMATHANG,
-                    p.SOLUONGLE,
-                    p.DONGIA,
-                    p.THANHTIENSAUCHIETKHAU_CT,
-                    p.GHICHU_CT
-                };
+                       join s in DataList on p.MAMATHANG equals s.MAMATHANG
+                       select new
+                       {
+                           p.IDUnit,
+                           s.MAMATHANG,
+                           s.TENMATHANG,
+                           p.SOLUONGLE,
+                           p.DONGIA,
+                           p.THANHTIENSAUCHIETKHAU_CT,
+                           p.GHICHU_CT
+                       };
 
             LoadData2(list.ToList());
             var tongTien = NhapKhoService.CalTongTien(MaHoaDon);
             labTongTien.Values.ExtraText = tongTien == 0 ? "0" : tongTien.ToString("N2");
-            txtTienChi.Text = labTongTien.Values.ExtraText;
+            txtTienChi.Text = decimal.Parse(tongTien.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture).ToString(CultureInfo.InvariantCulture);
             txtTimKiem.SelectAll();
             txtTimKiem.Select();
         }
@@ -809,16 +810,16 @@ namespace WH.GUI
             int Sothutu = 1;
             var lstMatHangs = from a in this.DataList
                               select new
-                                         {
-                                             STT = Sothutu++,
-                                             a.IDUnit,
-                                             a.TENMATHANG,
-                                             a.GIALE,
-                                             a.GIANHAP,
-                                             a.TENDONVI,
-                                             a.SLTON,
-                                             a.GHICHU
-                                         };
+                              {
+                                  STT = Sothutu++,
+                                  a.IDUnit,
+                                  a.TENMATHANG,
+                                  a.GIALE,
+                                  a.GIANHAP,
+                                  a.TENDONVI,
+                                  a.SLTON,
+                                  a.GHICHU
+                              };
 
             LoadData(lstMatHangs.ToList()); //.ToDatatable()
         }
@@ -851,7 +852,7 @@ namespace WH.GUI
             }
         }
 
-        private bool CheckTonToiDa(int mamathang,int slNhap)
+        private bool CheckTonToiDa(int mamathang, int slNhap)
         {
             decimal sltronghoadon = 0;
             decimal slTonKho = 0;

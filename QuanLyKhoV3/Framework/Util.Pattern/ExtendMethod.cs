@@ -299,7 +299,7 @@ namespace Util.Pattern
         public static int ToIntOrDefault(this string input)
         {
             int i;
-            var res = int.TryParse(input, NumberStyles.Number, CultureInfo.CurrentCulture, out i);
+            var res = int.TryParse(input, NumberStyles.Number, CultureInfo.InvariantCulture, out i);
 
             return res ? i : DefaultInt;
         }
@@ -315,7 +315,7 @@ namespace Util.Pattern
         public static decimal ToDecimalOrDefault(this string input)
         {
             decimal i;
-            var res = decimal.TryParse(input, NumberStyles.Number, CultureInfo.CurrentCulture, out i);
+            var res = decimal.TryParse(input, NumberStyles.Number, CultureInfo.InvariantCulture, out i);
 
             return res ? i : DefaultInt;
         }
@@ -323,6 +323,14 @@ namespace Util.Pattern
         public static double ToDouble(this string input)
         {
             return double.Parse(input);
+        }
+
+        public static double ToDoubleOrDefault(this string input)
+        {
+            double i;
+            var res = double.TryParse(input, NumberStyles.Number, CultureInfo.InvariantCulture, out i);
+
+            return res ? i : DefaultDouble;
         }
 
         public static bool ToBoolOrDefault(this string input)
@@ -348,14 +356,6 @@ namespace Util.Pattern
         public static Guid ToGuid(this string input)
         {
             return Guid.Parse(input);
-        }
-
-        public static double ToDoubleOrDefault(this string input)
-        {
-            double i;
-            var res = double.TryParse(input, NumberStyles.Number, CultureInfo.CurrentCulture, out i);
-
-            return res ? i : DefaultDouble;
         }
 
         public static bool IsInt(this string input)
@@ -457,13 +457,13 @@ namespace Util.Pattern
             {
                 remainder = 0;
             }
-            else if (remainder == 0.5)
+            else if (remainder > 0.5)
             {
-                remainder = 0.5;
+                remainder = 1;
             }
             else
             {
-                remainder = 1;
+                remainder = 0.5;
             }
             return (decimal?)(whole + remainder);
         }

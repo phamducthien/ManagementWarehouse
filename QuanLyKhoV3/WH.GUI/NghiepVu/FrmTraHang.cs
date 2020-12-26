@@ -1,9 +1,10 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Service.Pattern;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using Service.Pattern;
 using Util.Pattern;
 using WH.Entity;
 using WH.Model;
@@ -374,20 +375,20 @@ namespace WH.GUI
                 if (frm.lstChiTietXuat.Count <= 0) return;
 
                 var lsTempHoadonhapkhochitiets = new List<TEMP_HOADONXUATKHOCHITIET>();
-                
+
                 var isChangePrice = false;
                 foreach (var ct in frm.lstChiTietXuat)
                 {
                     if (ct.SOLUONGLE <= 0) continue;
                     var slNhap = ct.SOLUONGLE;
-                    if (!CheckTonToiDa((int) slNhap)) continue;
-                    isChangePrice = (bool) ct.ISDELETE;
+                    if (!CheckTonToiDa((int)slNhap)) continue;
+                    isChangePrice = (bool)ct.ISDELETE;
 
                     var objHoadonhapkhochitiet = ct;
 
                     objHoadonhapkhochitiet.MAHOADON = MaHoaDon;
                     objHoadonhapkhochitiet.MACHITIETHOADON =
-                        PrefixContext.MaChiTietHoaDon(MaHoaDon, (int) ct.MAMATHANG);
+                        PrefixContext.MaChiTietHoaDon(MaHoaDon, (int)ct.MAMATHANG);
                     objHoadonhapkhochitiet.ISDELETE = false;
 
                     lsTempHoadonhapkhochitiets.Add(objHoadonhapkhochitiet);
@@ -465,7 +466,7 @@ namespace WH.GUI
 
                 var nhapKhoService = TraHangService;
                 var result = nhapKhoService.TangSoLuong(objChiTiet.MACHITIETHOADON, soluongTang,
-                    (decimal) objChiTiet.CHIETKHAUTHEOPHANTRAM);
+                    (decimal)objChiTiet.CHIETKHAUTHEOPHANTRAM);
                 if (result != MethodResult.Succeed)
                     ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
                 else
@@ -504,7 +505,7 @@ namespace WH.GUI
 
                 var nhapKhoService = TraHangService;
                 var result = nhapKhoService.GiamSoLuong(objChiTiet.MACHITIETHOADON, soluongGiam,
-                    (decimal) objChiTiet.CHIETKHAUTHEOPHANTRAM);
+                    (decimal)objChiTiet.CHIETKHAUTHEOPHANTRAM);
                 if (result != MethodResult.Succeed)
                     ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
                 else
@@ -564,7 +565,7 @@ namespace WH.GUI
                 }
 
                 var objMathang = TraHangService.GetModelMatHang(objChiTiet);
-                var frm = new FrmInputNumberExport(objMathang, (decimal) objChiTiet.DONGIASI);
+                var frm = new FrmInputNumberExport(objMathang, (decimal)objChiTiet.DONGIASI);
                 frm.ShowDialog();
                 var soluongNhap = frm.numImport;
                 var giaBan = frm.giaban;
@@ -587,7 +588,6 @@ namespace WH.GUI
                 var nhapKhoService = TraHangService;
                 objChiTiet.DONGIASI = giaBan;
                 objChiTiet.SOLUONGLE = soluongNhap;
-                //objChiTiet.CHIETKHAUTHEOPHANTRAM = 
                 var lsTempHoadonhapkhochitiets = new List<TEMP_HOADONXUATKHOCHITIET>
                 {
                     objChiTiet
@@ -649,12 +649,10 @@ namespace WH.GUI
                 if (LsTempHoadonxuatkhochitiets.isNull()) return;
                 if (dgvHoaDon.Rows.Count == 0) return;
 
-                var tienChi = txtTienChi.Text.ToDecimal();
+                var tienChi = decimal.Parse(txtTienChi.Text, CultureInfo.InvariantCulture);
                 decimal giamGia = 0;
-
                 var service = TraHangService;
-                var result = service.ThanhToan(MaHoaDon, dtpNgayTaoHD.Value, KhachHangModel.MAKHACHHANG, tienChi,
-                    giamGia, txtGhiChu.Text);
+                var result = service.ThanhToan(MaHoaDon, dtpNgayTaoHD.Value, KhachHangModel.MAKHACHHANG, tienChi, giamGia, txtGhiChu.Text);
                 if (result != MethodResult.Succeed)
                 {
                     ShowMessage(IconMessageBox.Information, service.ErrMsg);
@@ -669,24 +667,11 @@ namespace WH.GUI
                     labTongTien.Values.ExtraText = 0.ToString("N2");
                     txtTienChi.Text = 0.ToString("N2");
                     txtGhiChu.Text = string.Empty;
-                    KhachHangModel = null; //XuatKhoService.GetModelKhachHang("56DBC32E-11D7-4175-A7AC-608CCBF962D7");
+                    KhachHangModel = null;
                     LoadKhToGui(null);
                     LoadDataAllMatHang();
-                     dtpNgayTaoHD.Value = DateTime.Now;
+                    dtpNgayTaoHD.Value = DateTime.Now;
                 }
-
-                //Hide();
-                //var frm = new FrmThanhToanXuatKho(MaHoaDon, KhachHangModel);
-                //frm.ShowDialog();
-                //if (frm.IsSuccess)
-                //{
-                //    MaHoaDon = string.Empty;
-                //    dgvHoaDon.DataSource = null;
-                //    labTongTien.Values.ExtraText = 0.ToString("N2");
-                //    LoadKHToGui(null);
-                //    LoadDataAllMatHang();
-                //}
-                //Show();
             }
             catch (Exception ex)
             {
@@ -772,7 +757,7 @@ namespace WH.GUI
             LoadData2(list);
             var tongTien = TraHangService.CalTongTien(MaHoaDon);
             labTongTien.Values.ExtraText = tongTien == 0 ? "0" : tongTien.ToString("N2");
-            txtTienChi.Text = labTongTien.Values.ExtraText;
+            txtTienChi.Text = decimal.Parse(tongTien.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture).ToString(CultureInfo.InvariantCulture);
             txtTimKiem.SelectAll();
             txtTimKiem.Select();
         }
@@ -783,16 +768,16 @@ namespace WH.GUI
             int Sothutu = 1;
             var lstMatHangs = from a in this.DataList
                               select new
-                                         {
-                                             STT = Sothutu++,
-                                             a.IDUnit,
-                                             a.TENMATHANG,
-                                             a.GIALE,
-                                             a.GIANHAP,
-                                             a.TENDONVI,
-                                             a.SLTON,
-                                             a.GHICHU
-                                         };
+                              {
+                                  STT = Sothutu++,
+                                  a.IDUnit,
+                                  a.TENMATHANG,
+                                  a.GIALE,
+                                  a.GIANHAP,
+                                  a.TENDONVI,
+                                  a.SLTON,
+                                  a.GHICHU
+                              };
 
             LoadData(lstMatHangs.ToList()); //.ToDatatable()
         }
