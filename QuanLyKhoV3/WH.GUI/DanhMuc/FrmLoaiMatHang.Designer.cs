@@ -144,7 +144,6 @@
             this.gbxInfo.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.gbxInfo.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxInfo.TabIndex = 674;
-            this.gbxInfo.Text = "Thông tin một loại mặt hàng";
             this.gbxInfo.Values.Heading = "Thông tin một loại mặt hàng";
             this.gbxInfo.Values.Image = global::WH.GUI.Properties.Resources.ThongTin;
             // 
@@ -246,10 +245,10 @@
             // txtGhiChu
             // 
             this.txtGhiChu.Location = new System.Drawing.Point(96, 93);
-            this.txtGhiChu.MaxLength = 200;
+            this.txtGhiChu.MaxLength = 1000;
             this.txtGhiChu.Multiline = true;
             this.txtGhiChu.Name = "txtGhiChu";
-            this.txtGhiChu.Size = new System.Drawing.Size(227, 80);
+            this.txtGhiChu.Size = new System.Drawing.Size(227, 227);
             this.txtGhiChu.StateCommon.Border.Color1 = System.Drawing.Color.Gray;
             this.txtGhiChu.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
@@ -275,7 +274,7 @@
             // btnLuu
             // 
             this.btnLuu.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnLuu.Location = new System.Drawing.Point(96, 179);
+            this.btnLuu.Location = new System.Drawing.Point(96, 326);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(100, 35);
             this.btnLuu.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(148)))), ((int)(((byte)(148)))));
@@ -295,7 +294,7 @@
             // btnHuy
             // 
             this.btnHuy.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnHuy.Location = new System.Drawing.Point(223, 179);
+            this.btnHuy.Location = new System.Drawing.Point(215, 326);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(100, 35);
             this.btnHuy.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
@@ -341,7 +340,6 @@
             this.gbxList.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.gbxList.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxList.TabIndex = 694;
-            this.gbxList.Text = "Danh sách loại mặt hàng";
             this.gbxList.Values.Heading = "Danh sách loại mặt hàng";
             this.gbxList.Values.Image = global::WH.GUI.Properties.Resources.ListCheck;
             // 
