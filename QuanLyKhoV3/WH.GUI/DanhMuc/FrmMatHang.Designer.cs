@@ -29,20 +29,20 @@
 		private void InitializeComponent()
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMatHang));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.gbxInfo = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -102,18 +102,6 @@
             this.btnHuy = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.gbxList = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.dgvDanhMuc = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.pnlLine2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.txtTimKiem = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.btnTimKiem = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.btnAll = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.pnlLine1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.pnlMenu = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.btnXuatFileTemp = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnXuatExcel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnNhapExcel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnXoa = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnSua = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnThem = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.colStt = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.colLoai = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.IDUnit = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
@@ -131,6 +119,18 @@
             this.MALOAIMATHANG = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.MADONVISI = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.MADONVI = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.pnlLine2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.txtTimKiem = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.btnTimKiem = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.btnAll = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.pnlLine1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.pnlMenu = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btnXuatFileTemp = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnXuatExcel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnNhapExcel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnXoa = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnSua = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnThem = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer.Panel1)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -171,7 +171,7 @@
             this.splitContainer.Panel2.Controls.Add(this.gbxList);
             this.splitContainer.Panel2.StateCommon.Color1 = System.Drawing.Color.Transparent;
             this.splitContainer.Panel2MinSize = 463;
-            this.splitContainer.Size = new System.Drawing.Size(1008, 697);
+            this.splitContainer.Size = new System.Drawing.Size(1008, 771);
             this.splitContainer.SplitterDistance = 360;
             this.splitContainer.SplitterIncrement = 10;
             this.splitContainer.SplitterWidth = 3;
@@ -238,7 +238,7 @@
             this.gbxInfo.Panel.Controls.Add(this.labID);
             this.gbxInfo.Panel.Controls.Add(this.btnLuu);
             this.gbxInfo.Panel.Controls.Add(this.btnHuy);
-            this.gbxInfo.Size = new System.Drawing.Size(360, 697);
+            this.gbxInfo.Size = new System.Drawing.Size(360, 771);
             this.gbxInfo.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
             this.gbxInfo.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(148)))), ((int)(((byte)(148)))));
             this.gbxInfo.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
@@ -502,7 +502,7 @@
             // 
             this.line2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.line2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.line2.Location = new System.Drawing.Point(176, 578);
+            this.line2.Location = new System.Drawing.Point(176, 651);
             this.line2.Name = "line2";
             this.line2.Size = new System.Drawing.Size(1, 49);
             this.line2.TabIndex = 748;
@@ -511,7 +511,7 @@
             // labMaDVLe
             // 
             this.labMaDVLe.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.labMaDVLe.Location = new System.Drawing.Point(-15, 633);
+            this.labMaDVLe.Location = new System.Drawing.Point(-15, 706);
             this.labMaDVLe.Name = "labMaDVLe";
             this.labMaDVLe.Size = new System.Drawing.Size(73, 24);
             this.labMaDVLe.StateCommon.ShortText.Color1 = System.Drawing.Color.Red;
@@ -523,7 +523,7 @@
             // labMaDVSi
             // 
             this.labMaDVSi.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.labMaDVSi.Location = new System.Drawing.Point(57, 633);
+            this.labMaDVSi.Location = new System.Drawing.Point(57, 706);
             this.labMaDVSi.Name = "labMaDVSi";
             this.labMaDVSi.Size = new System.Drawing.Size(69, 24);
             this.labMaDVSi.StateCommon.ShortText.Color1 = System.Drawing.Color.Red;
@@ -546,7 +546,7 @@
             // kryptonLabel11
             // 
             this.kryptonLabel11.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.kryptonLabel11.Location = new System.Drawing.Point(10, 567);
+            this.kryptonLabel11.Location = new System.Drawing.Point(10, 640);
             this.kryptonLabel11.Name = "kryptonLabel11";
             this.kryptonLabel11.Size = new System.Drawing.Size(78, 24);
             this.kryptonLabel11.StateCommon.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
@@ -635,7 +635,7 @@
             this.btnDownQuyCach.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnDownQuyCach.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDownQuyCach.Image = ((System.Drawing.Image)(resources.GetObject("btnDownQuyCach.Image")));
-            this.btnDownQuyCach.Location = new System.Drawing.Point(144, 601);
+            this.btnDownQuyCach.Location = new System.Drawing.Point(144, 674);
             this.btnDownQuyCach.Name = "btnDownQuyCach";
             this.btnDownQuyCach.Size = new System.Drawing.Size(26, 26);
             this.btnDownQuyCach.TabIndex = 733;
@@ -651,7 +651,7 @@
             this.btnUpQuyCach.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnUpQuyCach.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpQuyCach.Image = ((System.Drawing.Image)(resources.GetObject("btnUpQuyCach.Image")));
-            this.btnUpQuyCach.Location = new System.Drawing.Point(37, 601);
+            this.btnUpQuyCach.Location = new System.Drawing.Point(37, 674);
             this.btnUpQuyCach.Name = "btnUpQuyCach";
             this.btnUpQuyCach.Size = new System.Drawing.Size(26, 26);
             this.btnUpQuyCach.TabIndex = 732;
@@ -672,7 +672,7 @@
             // labMaLoai
             // 
             this.labMaLoai.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.labMaLoai.Location = new System.Drawing.Point(125, 633);
+            this.labMaLoai.Location = new System.Drawing.Point(125, 706);
             this.labMaLoai.Name = "labMaLoai";
             this.labMaLoai.Size = new System.Drawing.Size(65, 24);
             this.labMaLoai.StateCommon.ShortText.Color1 = System.Drawing.Color.Red;
@@ -817,7 +817,7 @@
             // 
             this.chbCheckKhuyenMai.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chbCheckKhuyenMai.CheckPosition = ComponentFactory.Krypton.Toolkit.VisualOrientation.Right;
-            this.chbCheckKhuyenMai.Location = new System.Drawing.Point(177, 633);
+            this.chbCheckKhuyenMai.Location = new System.Drawing.Point(177, 706);
             this.chbCheckKhuyenMai.Name = "chbCheckKhuyenMai";
             this.chbCheckKhuyenMai.Size = new System.Drawing.Size(203, 24);
             this.chbCheckKhuyenMai.StateCommon.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
@@ -895,7 +895,7 @@
             // NumQuyCach
             // 
             this.NumQuyCach.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.NumQuyCach.Location = new System.Drawing.Point(62, 601);
+            this.NumQuyCach.Location = new System.Drawing.Point(62, 674);
             this.NumQuyCach.Maximum = new decimal(new int[] {
             999,
             0,
@@ -1025,10 +1025,10 @@
             // 
             this.txtGhiChu.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txtGhiChu.Location = new System.Drawing.Point(99, 442);
-            this.txtGhiChu.MaxLength = 200;
+            this.txtGhiChu.MaxLength = 1000;
             this.txtGhiChu.Multiline = true;
             this.txtGhiChu.Name = "txtGhiChu";
-            this.txtGhiChu.Size = new System.Drawing.Size(250, 80);
+            this.txtGhiChu.Size = new System.Drawing.Size(250, 153);
             this.txtGhiChu.StateCommon.Border.Color1 = System.Drawing.Color.Gray;
             this.txtGhiChu.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
@@ -1041,7 +1041,7 @@
             // labID
             // 
             this.labID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labID.Location = new System.Drawing.Point(8, -60);
+            this.labID.Location = new System.Drawing.Point(8, 14);
             this.labID.Name = "labID";
             this.labID.Size = new System.Drawing.Size(55, 24);
             this.labID.StateCommon.ShortText.Color1 = System.Drawing.Color.Red;
@@ -1053,7 +1053,7 @@
             // btnLuu
             // 
             this.btnLuu.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnLuu.Location = new System.Drawing.Point(99, 528);
+            this.btnLuu.Location = new System.Drawing.Point(99, 601);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(100, 35);
             this.btnLuu.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(148)))), ((int)(((byte)(148)))));
@@ -1073,7 +1073,7 @@
             // btnHuy
             // 
             this.btnHuy.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnHuy.Location = new System.Drawing.Point(249, 528);
+            this.btnHuy.Location = new System.Drawing.Point(249, 601);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(100, 35);
             this.btnHuy.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
@@ -1107,7 +1107,7 @@
             this.gbxList.Panel.Controls.Add(this.txtTimKiem);
             this.gbxList.Panel.Controls.Add(this.pnlLine1);
             this.gbxList.Panel.Controls.Add(this.pnlMenu);
-            this.gbxList.Size = new System.Drawing.Size(645, 697);
+            this.gbxList.Size = new System.Drawing.Size(645, 771);
             this.gbxList.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
             this.gbxList.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
             this.gbxList.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(148)))), ((int)(((byte)(148)))));
@@ -1128,9 +1128,9 @@
             this.dgvDanhMuc.AllowUserToDeleteRows = false;
             this.dgvDanhMuc.AllowUserToResizeColumns = false;
             this.dgvDanhMuc.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(70)))), ((int)(((byte)(87)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            this.dgvDanhMuc.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(70)))), ((int)(((byte)(87)))));
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.White;
+            this.dgvDanhMuc.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle15;
             this.dgvDanhMuc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvDanhMuc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvDanhMuc.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1161,11 +1161,11 @@
             this.dgvDanhMuc.ReadOnly = true;
             this.dgvDanhMuc.RowHeadersVisible = false;
             this.dgvDanhMuc.RowHeadersWidth = 30;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(70)))), ((int)(((byte)(87)))));
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.White;
-            this.dgvDanhMuc.RowsDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(70)))), ((int)(((byte)(87)))));
+            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.Color.White;
+            this.dgvDanhMuc.RowsDefaultCellStyle = dataGridViewCellStyle28;
             this.dgvDanhMuc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDanhMuc.Size = new System.Drawing.Size(639, 584);
+            this.dgvDanhMuc.Size = new System.Drawing.Size(639, 658);
             this.dgvDanhMuc.StateCommon.Background.Color1 = System.Drawing.Color.White;
             this.dgvDanhMuc.StateCommon.Background.Color2 = System.Drawing.Color.White;
             this.dgvDanhMuc.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
@@ -1187,6 +1187,219 @@
             this.dgvDanhMuc.StateCommon.HeaderColumn.Content.Color1 = System.Drawing.Color.White;
             this.dgvDanhMuc.StateCommon.HeaderColumn.Content.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvDanhMuc.TabIndex = 100;
+            // 
+            // colStt
+            // 
+            this.colStt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colStt.DataPropertyName = "STT";
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.Format = "N0";
+            dataGridViewCellStyle16.NullValue = "0";
+            this.colStt.DefaultCellStyle = dataGridViewCellStyle16;
+            this.colStt.Frozen = true;
+            this.colStt.HeaderText = "Stt";
+            this.colStt.Name = "colStt";
+            this.colStt.ReadOnly = true;
+            this.colStt.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colStt.Width = 54;
+            // 
+            // colLoai
+            // 
+            this.colLoai.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colLoai.DataPropertyName = "TENLOAI";
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.colLoai.DefaultCellStyle = dataGridViewCellStyle17;
+            this.colLoai.Frozen = true;
+            this.colLoai.HeaderText = "Loại mặt hàng";
+            this.colLoai.Name = "colLoai";
+            this.colLoai.ReadOnly = true;
+            this.colLoai.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colLoai.Width = 126;
+            // 
+            // IDUnit
+            // 
+            this.IDUnit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.IDUnit.DataPropertyName = "MAMATHANG";
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.IDUnit.DefaultCellStyle = dataGridViewCellStyle18;
+            this.IDUnit.HeaderText = "Mã";
+            this.IDUnit.Name = "IDUnit";
+            this.IDUnit.ReadOnly = true;
+            this.IDUnit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.IDUnit.Visible = false;
+            this.IDUnit.Width = 53;
+            // 
+            // colMaCode
+            // 
+            this.colMaCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colMaCode.DataPropertyName = "MACODE";
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.colMaCode.DefaultCellStyle = dataGridViewCellStyle19;
+            this.colMaCode.HeaderText = "Mã Code";
+            this.colMaCode.Name = "colMaCode";
+            this.colMaCode.ReadOnly = true;
+            this.colMaCode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colMaCode.Visible = false;
+            this.colMaCode.Width = 84;
+            // 
+            // colMaBar
+            // 
+            this.colMaBar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colMaBar.DataPropertyName = "MABARCODE";
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.colMaBar.DefaultCellStyle = dataGridViewCellStyle20;
+            this.colMaBar.HeaderText = "Bar code";
+            this.colMaBar.Name = "colMaBar";
+            this.colMaBar.ReadOnly = true;
+            this.colMaBar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colMaBar.Visible = false;
+            this.colMaBar.Width = 82;
+            // 
+            // colMatHang
+            // 
+            this.colMatHang.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colMatHang.DataPropertyName = "TENMATHANG";
+            this.colMatHang.HeaderText = "Mặt hàng";
+            this.colMatHang.MinimumWidth = 150;
+            this.colMatHang.Name = "colMatHang";
+            this.colMatHang.ReadOnly = true;
+            this.colMatHang.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colMatHang.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.colMatHang.Width = 150;
+            // 
+            // colGiaLe
+            // 
+            this.colGiaLe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colGiaLe.DataPropertyName = "LE";
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle21.Format = "C1";
+            dataGridViewCellStyle21.NullValue = "0";
+            this.colGiaLe.DefaultCellStyle = dataGridViewCellStyle21;
+            this.colGiaLe.HeaderText = "Giá Bán";
+            this.colGiaLe.Name = "colGiaLe";
+            this.colGiaLe.ReadOnly = true;
+            this.colGiaLe.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colGiaLe.Width = 84;
+            // 
+            // colGiaNhap
+            // 
+            this.colGiaNhap.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colGiaNhap.DataPropertyName = "NHAP";
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle22.Format = "C2";
+            dataGridViewCellStyle22.NullValue = "0";
+            this.colGiaNhap.DefaultCellStyle = dataGridViewCellStyle22;
+            this.colGiaNhap.HeaderText = "Giá nhập";
+            this.colGiaNhap.Name = "colGiaNhap";
+            this.colGiaNhap.ReadOnly = true;
+            this.colGiaNhap.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colGiaNhap.Width = 92;
+            // 
+            // QUYCACH
+            // 
+            this.QUYCACH.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.QUYCACH.DataPropertyName = "QUYCACH";
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle23.Format = "N0";
+            dataGridViewCellStyle23.NullValue = "0";
+            this.QUYCACH.DefaultCellStyle = dataGridViewCellStyle23;
+            this.QUYCACH.HeaderText = "Quy Cách";
+            this.QUYCACH.Name = "QUYCACH";
+            this.QUYCACH.ReadOnly = true;
+            this.QUYCACH.Visible = false;
+            this.QUYCACH.Width = 88;
+            // 
+            // DONVI
+            // 
+            this.DONVI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DONVI.DataPropertyName = "TENDONVI";
+            this.DONVI.HeaderText = "Đơn Vị";
+            this.DONVI.Name = "DONVI";
+            this.DONVI.ReadOnly = true;
+            this.DONVI.Width = 80;
+            // 
+            // SLTON
+            // 
+            this.SLTON.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.SLTON.DataPropertyName = "SLTON";
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle24.Format = "N0";
+            dataGridViewCellStyle24.NullValue = "0";
+            this.SLTON.DefaultCellStyle = dataGridViewCellStyle24;
+            this.SLTON.HeaderText = "SL Tồn";
+            this.SLTON.Name = "SLTON";
+            this.SLTON.ReadOnly = true;
+            this.SLTON.Width = 79;
+            // 
+            // colTonToiThieu
+            // 
+            this.colTonToiThieu.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colTonToiThieu.DataPropertyName = "TONTOITHIEU";
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle25.Format = "N0";
+            dataGridViewCellStyle25.NullValue = "0";
+            this.colTonToiThieu.DefaultCellStyle = dataGridViewCellStyle25;
+            this.colTonToiThieu.HeaderText = "Tồn Tối Thiểu";
+            this.colTonToiThieu.Name = "colTonToiThieu";
+            this.colTonToiThieu.ReadOnly = true;
+            this.colTonToiThieu.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colTonToiThieu.Width = 124;
+            // 
+            // colTonToiDa
+            // 
+            this.colTonToiDa.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colTonToiDa.DataPropertyName = "TONTOIDA";
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle26.Format = "N0";
+            dataGridViewCellStyle26.NullValue = "0";
+            this.colTonToiDa.DefaultCellStyle = dataGridViewCellStyle26;
+            this.colTonToiDa.HeaderText = "Tồn Tối Đa";
+            this.colTonToiDa.Name = "colTonToiDa";
+            this.colTonToiDa.ReadOnly = true;
+            this.colTonToiDa.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colTonToiDa.Width = 106;
+            // 
+            // colGhiChu
+            // 
+            this.colGhiChu.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colGhiChu.DataPropertyName = "GHICHU";
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.colGhiChu.DefaultCellStyle = dataGridViewCellStyle27;
+            this.colGhiChu.HeaderText = "Ghi chú";
+            this.colGhiChu.Name = "colGhiChu";
+            this.colGhiChu.ReadOnly = true;
+            this.colGhiChu.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colGhiChu.Width = 84;
+            // 
+            // MALOAIMATHANG
+            // 
+            this.MALOAIMATHANG.DataPropertyName = "MALOAIMATHANG";
+            this.MALOAIMATHANG.HeaderText = "MALOAIMATHANG";
+            this.MALOAIMATHANG.Name = "MALOAIMATHANG";
+            this.MALOAIMATHANG.ReadOnly = true;
+            this.MALOAIMATHANG.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.MALOAIMATHANG.Visible = false;
+            this.MALOAIMATHANG.Width = 139;
+            // 
+            // MADONVISI
+            // 
+            this.MADONVISI.DataPropertyName = "MADONVISI";
+            this.MADONVISI.HeaderText = "MADONVISI";
+            this.MADONVISI.Name = "MADONVISI";
+            this.MADONVISI.ReadOnly = true;
+            this.MADONVISI.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.MADONVISI.Visible = false;
+            this.MADONVISI.Width = 100;
+            // 
+            // MADONVI
+            // 
+            this.MADONVI.DataPropertyName = "MADONVILE";
+            this.MADONVI.HeaderText = "MADONVILE";
+            this.MADONVI.Name = "MADONVI";
+            this.MADONVI.ReadOnly = true;
+            this.MADONVI.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.MADONVI.Visible = false;
+            this.MADONVI.Width = 103;
             // 
             // pnlLine2
             // 
@@ -1461,224 +1674,11 @@
             this.btnThem.Values.Image = global::WH.GUI.Properties.Resources.ThemLon;
             this.btnThem.Values.Text = "Thêm";
             // 
-            // colStt
-            // 
-            this.colStt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colStt.DataPropertyName = "STT";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = "0";
-            this.colStt.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colStt.Frozen = true;
-            this.colStt.HeaderText = "Stt";
-            this.colStt.Name = "colStt";
-            this.colStt.ReadOnly = true;
-            this.colStt.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colStt.Width = 54;
-            // 
-            // colLoai
-            // 
-            this.colLoai.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colLoai.DataPropertyName = "TENLOAI";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.colLoai.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colLoai.Frozen = true;
-            this.colLoai.HeaderText = "Loại mặt hàng";
-            this.colLoai.Name = "colLoai";
-            this.colLoai.ReadOnly = true;
-            this.colLoai.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colLoai.Width = 126;
-            // 
-            // IDUnit
-            // 
-            this.IDUnit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.IDUnit.DataPropertyName = "MAMATHANG";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.IDUnit.DefaultCellStyle = dataGridViewCellStyle4;
-            this.IDUnit.HeaderText = "Mã";
-            this.IDUnit.Name = "IDUnit";
-            this.IDUnit.ReadOnly = true;
-            this.IDUnit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.IDUnit.Visible = false;
-            this.IDUnit.Width = 56;
-            // 
-            // colMaCode
-            // 
-            this.colMaCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colMaCode.DataPropertyName = "MACODE";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.colMaCode.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colMaCode.HeaderText = "Mã Code";
-            this.colMaCode.Name = "colMaCode";
-            this.colMaCode.ReadOnly = true;
-            this.colMaCode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colMaCode.Visible = false;
-            this.colMaCode.Width = 91;
-            // 
-            // colMaBar
-            // 
-            this.colMaBar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colMaBar.DataPropertyName = "MABARCODE";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.colMaBar.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colMaBar.HeaderText = "Bar code";
-            this.colMaBar.Name = "colMaBar";
-            this.colMaBar.ReadOnly = true;
-            this.colMaBar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colMaBar.Visible = false;
-            this.colMaBar.Width = 90;
-            // 
-            // colMatHang
-            // 
-            this.colMatHang.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colMatHang.DataPropertyName = "TENMATHANG";
-            this.colMatHang.HeaderText = "Mặt hàng";
-            this.colMatHang.MinimumWidth = 150;
-            this.colMatHang.Name = "colMatHang";
-            this.colMatHang.ReadOnly = true;
-            this.colMatHang.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colMatHang.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.colMatHang.Width = 150;
-            // 
-            // colGiaLe
-            // 
-            this.colGiaLe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colGiaLe.DataPropertyName = "LE";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "C1";
-            dataGridViewCellStyle7.NullValue = "0";
-            this.colGiaLe.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colGiaLe.HeaderText = "Giá Bán";
-            this.colGiaLe.Name = "colGiaLe";
-            this.colGiaLe.ReadOnly = true;
-            this.colGiaLe.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colGiaLe.Width = 84;
-            // 
-            // colGiaNhap
-            // 
-            this.colGiaNhap.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colGiaNhap.DataPropertyName = "NHAP";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "C2";
-            dataGridViewCellStyle8.NullValue = "0";
-            this.colGiaNhap.DefaultCellStyle = dataGridViewCellStyle8;
-            this.colGiaNhap.HeaderText = "Giá nhập";
-            this.colGiaNhap.Name = "colGiaNhap";
-            this.colGiaNhap.ReadOnly = true;
-            this.colGiaNhap.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colGiaNhap.Width = 92;
-            // 
-            // QUYCACH
-            // 
-            this.QUYCACH.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.QUYCACH.DataPropertyName = "QUYCACH";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N0";
-            dataGridViewCellStyle9.NullValue = "0";
-            this.QUYCACH.DefaultCellStyle = dataGridViewCellStyle9;
-            this.QUYCACH.HeaderText = "Quy Cách";
-            this.QUYCACH.Name = "QUYCACH";
-            this.QUYCACH.ReadOnly = true;
-            this.QUYCACH.Visible = false;
-            this.QUYCACH.Width = 95;
-            // 
-            // DONVI
-            // 
-            this.DONVI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DONVI.DataPropertyName = "TENDONVI";
-            this.DONVI.HeaderText = "Đơn Vị";
-            this.DONVI.Name = "DONVI";
-            this.DONVI.ReadOnly = true;
-            this.DONVI.Width = 80;
-            // 
-            // SLTON
-            // 
-            this.SLTON.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.SLTON.DataPropertyName = "SLTON";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N0";
-            dataGridViewCellStyle10.NullValue = "0";
-            this.SLTON.DefaultCellStyle = dataGridViewCellStyle10;
-            this.SLTON.HeaderText = "SL Tồn";
-            this.SLTON.Name = "SLTON";
-            this.SLTON.ReadOnly = true;
-            this.SLTON.Width = 79;
-            // 
-            // colTonToiThieu
-            // 
-            this.colTonToiThieu.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colTonToiThieu.DataPropertyName = "TONTOITHIEU";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "N0";
-            dataGridViewCellStyle11.NullValue = "0";
-            this.colTonToiThieu.DefaultCellStyle = dataGridViewCellStyle11;
-            this.colTonToiThieu.HeaderText = "Tồn Tối Thiểu";
-            this.colTonToiThieu.Name = "colTonToiThieu";
-            this.colTonToiThieu.ReadOnly = true;
-            this.colTonToiThieu.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colTonToiThieu.Width = 124;
-            // 
-            // colTonToiDa
-            // 
-            this.colTonToiDa.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colTonToiDa.DataPropertyName = "TONTOIDA";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle12.Format = "N0";
-            dataGridViewCellStyle12.NullValue = "0";
-            this.colTonToiDa.DefaultCellStyle = dataGridViewCellStyle12;
-            this.colTonToiDa.HeaderText = "Tồn Tối Đa";
-            this.colTonToiDa.Name = "colTonToiDa";
-            this.colTonToiDa.ReadOnly = true;
-            this.colTonToiDa.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colTonToiDa.Width = 106;
-            // 
-            // colGhiChu
-            // 
-            this.colGhiChu.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colGhiChu.DataPropertyName = "GHICHU";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.colGhiChu.DefaultCellStyle = dataGridViewCellStyle13;
-            this.colGhiChu.HeaderText = "Ghi chú";
-            this.colGhiChu.Name = "colGhiChu";
-            this.colGhiChu.ReadOnly = true;
-            this.colGhiChu.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colGhiChu.Width = 84;
-            // 
-            // MALOAIMATHANG
-            // 
-            this.MALOAIMATHANG.DataPropertyName = "MALOAIMATHANG";
-            this.MALOAIMATHANG.HeaderText = "MALOAIMATHANG";
-            this.MALOAIMATHANG.Name = "MALOAIMATHANG";
-            this.MALOAIMATHANG.ReadOnly = true;
-            this.MALOAIMATHANG.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.MALOAIMATHANG.Visible = false;
-            this.MALOAIMATHANG.Width = 154;
-            // 
-            // MADONVISI
-            // 
-            this.MADONVISI.DataPropertyName = "MADONVISI";
-            this.MADONVISI.HeaderText = "MADONVISI";
-            this.MADONVISI.Name = "MADONVISI";
-            this.MADONVISI.ReadOnly = true;
-            this.MADONVISI.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.MADONVISI.Visible = false;
-            this.MADONVISI.Width = 112;
-            // 
-            // MADONVI
-            // 
-            this.MADONVI.DataPropertyName = "MADONVILE";
-            this.MADONVI.HeaderText = "MADONVILE";
-            this.MADONVI.Name = "MADONVI";
-            this.MADONVI.ReadOnly = true;
-            this.MADONVI.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.MADONVI.Visible = false;
-            this.MADONVI.Width = 115;
-            // 
             // FrmMatHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 697);
+            this.ClientSize = new System.Drawing.Size(1008, 771);
             this.Controls.Add(this.splitContainer);
             this.MinimumSize = new System.Drawing.Size(1024, 726);
             this.Name = "FrmMatHang";
