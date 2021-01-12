@@ -50,7 +50,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.gbxInfo = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
-            this.kryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.dgvHoaDon = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.HoaDon_STT = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.HoaDon_IDUnit = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
@@ -122,7 +121,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gbxInfo.Panel)).BeginInit();
             this.gbxInfo.Panel.SuspendLayout();
             this.gbxInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHoaDon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlThanhToan)).BeginInit();
             this.pnlThanhToan.SuspendLayout();
@@ -179,7 +177,6 @@
             // 
             // gbxInfo.Panel
             // 
-            this.gbxInfo.Panel.Controls.Add(this.kryptonDataGridView1);
             this.gbxInfo.Panel.Controls.Add(this.dgvHoaDon);
             this.gbxInfo.Panel.Controls.Add(this.pnlThanhToan);
             this.gbxInfo.Panel.Controls.Add(this.pnlInfoNCC);
@@ -197,13 +194,6 @@
             this.gbxInfo.TabIndex = 675;
             this.gbxInfo.Values.Heading = "Thông tin hóa đơn xuất kho";
             this.gbxInfo.Values.Image = global::WH.GUI.Properties.Resources.ThongTin;
-            // 
-            // kryptonDataGridView1
-            // 
-            this.kryptonDataGridView1.Location = new System.Drawing.Point(393, 299);
-            this.kryptonDataGridView1.Name = "kryptonDataGridView1";
-            this.kryptonDataGridView1.Size = new System.Drawing.Size(8, 8);
-            this.kryptonDataGridView1.TabIndex = 704;
             // 
             // dgvHoaDon
             // 
@@ -1250,7 +1240,6 @@
             this.gbxInfo.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gbxInfo)).EndInit();
             this.gbxInfo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHoaDon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlThanhToan)).EndInit();
             this.pnlThanhToan.ResumeLayout(false);
@@ -1334,7 +1323,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn TONGLAI;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn DanhMuc_GhiChu;
         protected internal ComponentFactory.Krypton.Toolkit.KryptonDataGridView dgvDanhMuc;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView kryptonDataGridView1;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn HoaDon_STT;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn HoaDon_IDUnit;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn HoaDon_TenMatHang;
