@@ -65,6 +65,7 @@
     <Compile Include="Connection\ISqlConnectionUtil.cs" />
     <Compile Include="Connection\EntityConnectionUtil.cs" />
     <Compile Include="Connection\SqlServerConnectionUtil.cs" />
+    <Compile Include="Contain\Functions.cs" />
     <Compile Include="ConverterUtil.cs" />
     <Compile Include="DateTimeUtil\DateTimeExtend.cs" />
     <Compile Include="Connection\DbConnectionUtil.cs" />
@@ -97,6 +98,7 @@
       <Name>Repository.Pattern.Ef6</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

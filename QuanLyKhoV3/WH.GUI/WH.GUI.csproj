@@ -310,6 +310,12 @@
     <Compile Include="NghiepVu\ExportWarehouse\FrmExportWarehouseTab.Designer.cs">
       <DependentUpon>FrmExportWarehouseTab.cs</DependentUpon>
     </Compile>
+    <Compile Include="NghiepVu\ExportWarehouse\FrmListExportWarehouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NghiepVu\ExportWarehouse\FrmListExportWarehouse.Designer.cs">
+      <DependentUpon>FrmListExportWarehouse.cs</DependentUpon>
+    </Compile>
     <Compile Include="NghiepVu\FrmCongNoKhachHang.cs">
       <SubType>Form</SubType>
     </Compile>

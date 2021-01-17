@@ -46,6 +46,7 @@
             this.btnTraHang = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.kryptonContextMenuSeparator1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator();
             this.grpFunctionButton = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.btnListExportWarehouse = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.grpHeader = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.btnHeThong = new ComponentFactory.Krypton.Toolkit.KryptonDropButton();
             this.labUsername = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -136,7 +137,7 @@
             this.btnMatHang.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.btnMatHang.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnMatHang.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnMatHang.TabIndex = 3;
+            this.btnMatHang.TabIndex = 2;
             this.btnMatHang.Values.ExtraText = "Nơi quản lý các mặt hàng.";
             this.btnMatHang.Values.Image = global::WH.GUI.Properties.Resources.Product;
             this.btnMatHang.Values.Text = "MẶT HÀNG";
@@ -195,7 +196,7 @@
             this.btnDoiTac.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.btnDoiTac.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnDoiTac.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnDoiTac.TabIndex = 4;
+            this.btnDoiTac.TabIndex = 3;
             this.btnDoiTac.Values.ExtraText = "Nơi Quản Lý Khách Hàng";
             this.btnDoiTac.Values.Image = global::WH.GUI.Properties.Resources.KhachHang;
             this.btnDoiTac.Values.Text = "ĐỐI TÁC";
@@ -237,7 +238,7 @@
             this.btnNhapKho.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.btnNhapKho.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnNhapKho.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnNhapKho.TabIndex = 6;
+            this.btnNhapKho.TabIndex = 5;
             this.btnNhapKho.Values.ExtraText = "Nhập hàng vào kho.";
             this.btnNhapKho.Values.Image = global::WH.GUI.Properties.Resources.Import;
             this.btnNhapKho.Values.Text = "NHẬP KHO";
@@ -279,7 +280,7 @@
             this.btnXuatKho.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.btnXuatKho.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnXuatKho.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnXuatKho.TabIndex = 5;
+            this.btnXuatKho.TabIndex = 1;
             this.btnXuatKho.Values.ExtraText = "Nơi bán hàng cho đối tác.";
             this.btnXuatKho.Values.Image = global::WH.GUI.Properties.Resources.Money;
             this.btnXuatKho.Values.Text = "BÁN HÀNG";
@@ -321,7 +322,7 @@
             this.btnDanhMuc.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.btnDanhMuc.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnDanhMuc.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnDanhMuc.TabIndex = 7;
+            this.btnDanhMuc.TabIndex = 4;
             this.btnDanhMuc.Values.ExtraText = "Đơn vị, Loại mặt hàng...";
             this.btnDanhMuc.Values.Image = global::WH.GUI.Properties.Resources.DanhMuc;
             this.btnDanhMuc.Values.Text = "QUẢN LÝ CHUNG";
@@ -363,7 +364,7 @@
             this.btnBaoCao.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.btnBaoCao.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnBaoCao.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnBaoCao.TabIndex = 8;
+            this.btnBaoCao.TabIndex = 7;
             this.btnBaoCao.Values.ExtraText = "Nơi cung cấp thông tin...";
             this.btnBaoCao.Values.Image = global::WH.GUI.Properties.Resources.ThongKe;
             this.btnBaoCao.Values.Text = "BÁO CÁO";
@@ -448,7 +449,7 @@
             this.btnTraHang.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.btnTraHang.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnTraHang.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnTraHang.TabIndex = 10;
+            this.btnTraHang.TabIndex = 6;
             this.btnTraHang.Values.ExtraText = "Nơi nhập các mặt hàng.";
             this.btnTraHang.Values.Image = global::WH.GUI.Properties.Resources.Import;
             this.btnTraHang.Values.Text = "TRẢ HÀNG";
@@ -464,6 +465,7 @@
             // grpFunctionButton.Panel
             // 
             this.grpFunctionButton.Panel.AutoScroll = true;
+            this.grpFunctionButton.Panel.Controls.Add(this.btnListExportWarehouse);
             this.grpFunctionButton.Panel.Controls.Add(this.btnTraHang);
             this.grpFunctionButton.Panel.Controls.Add(this.btnBaoCao);
             this.grpFunctionButton.Panel.Controls.Add(this.btnDanhMuc);
@@ -476,6 +478,48 @@
             this.grpFunctionButton.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.grpFunctionButton.TabIndex = 0;
             this.grpFunctionButton.Values.Heading = "Chức Năng Chính";
+            // 
+            // btnListExportWarehouse
+            // 
+            this.btnListExportWarehouse.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnListExportWarehouse.Location = new System.Drawing.Point(9, 251);
+            this.btnListExportWarehouse.Margin = new System.Windows.Forms.Padding(0);
+            this.btnListExportWarehouse.Name = "btnListExportWarehouse";
+            this.btnListExportWarehouse.Size = new System.Drawing.Size(254, 108);
+            this.btnListExportWarehouse.StateCheckedNormal.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.btnListExportWarehouse.StateCheckedNormal.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.btnListExportWarehouse.StateCheckedPressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.btnListExportWarehouse.StateCheckedPressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.btnListExportWarehouse.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.btnListExportWarehouse.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.btnListExportWarehouse.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.btnListExportWarehouse.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.btnListExportWarehouse.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left)
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.btnListExportWarehouse.StateCommon.Border.Rounding = 10;
+            this.btnListExportWarehouse.StateCommon.Border.Width = 1;
+            this.btnListExportWarehouse.StateCommon.Content.Image.ImageH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
+            this.btnListExportWarehouse.StateCommon.Content.Image.ImageV = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
+            this.btnListExportWarehouse.StateCommon.Content.LongText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
+            this.btnListExportWarehouse.StateCommon.Content.LongText.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
+            this.btnListExportWarehouse.StateCommon.Content.LongText.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
+            this.btnListExportWarehouse.StateCommon.Content.LongText.TextV = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Far;
+            this.btnListExportWarehouse.StateCommon.Content.Padding = new System.Windows.Forms.Padding(0);
+            this.btnListExportWarehouse.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.btnListExportWarehouse.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.btnListExportWarehouse.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnListExportWarehouse.StateCommon.Content.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterLeft;
+            this.btnListExportWarehouse.StateCommon.Content.ShortText.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
+            this.btnListExportWarehouse.StateCommon.Content.ShortText.TextV = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
+            this.btnListExportWarehouse.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.btnListExportWarehouse.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.btnListExportWarehouse.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnListExportWarehouse.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnListExportWarehouse.TabIndex = 10;
+            this.btnListExportWarehouse.Values.ExtraText = "Chỉnh sửa phiếu xuất kho";
+            this.btnListExportWarehouse.Values.Image = global::WH.GUI.Properties.Resources.Import;
+            this.btnListExportWarehouse.Values.Text = "Danh sách phiếu xuất kho";
             // 
             // grpHeader
             // 
@@ -637,5 +681,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckButton btnBaoCao;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckButton btnKiemKe;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckButton btnTraHang;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton btnListExportWarehouse;
     }
 }

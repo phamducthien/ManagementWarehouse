@@ -9,7 +9,6 @@ namespace WH.GUI.ExportWarehouse
         public FrmExportWarehouseTab()
         {
             InitializeComponent();
-            //AddNewTab();
             UpdateButtonState();
             kryptonNavExportWarehouse.Pages.Inserted += OnPageInsertRemove;
             kryptonNavExportWarehouse.Pages.Removed += OnPageInsertRemove;
@@ -22,7 +21,6 @@ namespace WH.GUI.ExportWarehouse
             kryptonPage.Dock = DockStyle.Fill;
             kryptonPage.AutoSize = true;
             kryptonPage.AutoSizeMode = AutoSizeMode.GrowOnly;
-            //kryptonPage.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Left;
 
             var frmExportWarehouse = new FrmXuatKho
             {

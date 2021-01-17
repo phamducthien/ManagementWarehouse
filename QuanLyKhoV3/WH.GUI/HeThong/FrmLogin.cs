@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Service.Pattern;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using Service.Pattern;
 using WH.Service;
 
 namespace WH.GUI
