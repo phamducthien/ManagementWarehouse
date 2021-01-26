@@ -1,8 +1,8 @@
-﻿using System.Windows.Forms;
+﻿using MetroFramework.Forms;
 
 namespace WH.GUI.ExportWarehouse
 {
-    public partial class FrmListExportWarehouse : Form
+    public partial class FrmListExportWarehouse : MetroForm
     {
         private readonly BaseForm _baseForm;
 
@@ -11,5 +11,6 @@ namespace WH.GUI.ExportWarehouse
             InitializeComponent();
             _baseForm = new BaseForm();
         }
+
     }
 }
