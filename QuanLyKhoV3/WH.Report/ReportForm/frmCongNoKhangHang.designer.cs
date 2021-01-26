@@ -189,7 +189,7 @@ namespace WH.Report.ReportForm
             this.treeDanhMuc.Columns.Add(this._colTienThu);
             this.treeDanhMuc.Columns.Add(this._colConLai);
             this.treeDanhMuc.Columns.Add(this._colTinhTrang);
-            this.treeDanhMuc.Cursor = System.Windows.Forms.Cursors.Default;
+            this.treeDanhMuc.Cursor = System.Windows.Forms.Cursors.VSplit;
             this.treeDanhMuc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeDanhMuc.FixedColumnCount = 0;
             this.treeDanhMuc.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -340,7 +340,7 @@ namespace WH.Report.ReportForm
             this._colMaCode.Text = "Mã Code";
             this._colMaCode.TextNonDisplay = null;
             this._colMaCode.Visible = true;
-            this._colMaCode.Width = 100;
+            this._colMaCode.Width = 101;
             this._colMaCode.WordWrap = false;
             // 
             // _colBarCode

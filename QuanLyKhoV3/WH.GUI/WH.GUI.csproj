@@ -527,6 +527,9 @@
     <EmbeddedResource Include="NghiepVu\ExportWarehouse\FrmExportWarehouseTab.resx">
       <DependentUpon>FrmExportWarehouseTab.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NghiepVu\ExportWarehouse\FrmListExportWarehouse.resx">
+      <DependentUpon>FrmListExportWarehouse.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NghiepVu\FrmCongNoKhachHang.resx">
       <DependentUpon>FrmCongNoKhachHang.cs</DependentUpon>
     </EmbeddedResource>
