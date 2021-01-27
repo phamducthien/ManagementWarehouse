@@ -1,4 +1,5 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
+using Repository.Pattern.UnitOfWork;
 using Service.Pattern;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,34 @@ namespace WH.GUI.ExportWarehouse
 {
     public partial class FrmEditExportWarehouse : FrmBase
     {
-        public FrmEditExportWarehouse()
+        private readonly IUnitOfWorkAsync _unitOfWorkAsync;
+
+        public FrmEditExportWarehouse(HOADONXUATKHO hdXuatKho, List<HOADONXUATKHOCHITIET> lsthdXuatKhoChiTiet, IUnitOfWorkAsync unitOfWorkAsync)
         {
+            _unitOfWorkAsync = unitOfWorkAsync;
             InitializeComponent();
-            this.SuspendLayout();
-            CreateEvent();
+
+            if (hdXuatKho != null && lsthdXuatKhoChiTiet != null)
+            {
+                labCreatedDate.Text = hdXuatKho.NGAYTAOHOADON?.ToString("dd/MM/yyyy");
+                labCustomerName.Text = hdXuatKho.KHACHHANG?.TENKHACHHANG;
+                labTongTien.Values.ExtraText = hdXuatKho.SOTIENTHANHTOAN_HD.ToString();
+                txtTienChi.Text = hdXuatKho.SOTIENKHACHDUA_HD.ToString();
+                txtGhiChu.Text = hdXuatKho.GHICHU_HD;
+
+                ReloadUnitOfWork();
+                IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
+                var dt = service.DanhSachChiTietXuat(hdXuatKho.MAHOADONXUAT);
+                dgvHoaDon.DataSource = null;
+                dgvHoaDon.AutoGenerateColumns = false;
+                dgvHoaDon.DataSource = dt;
+
+                CreateEvent();
+            }
+            else
+            {
+                MessageBox.Show(@"Hóa đơn này không tồn tại. Vui lòng chọn lại hóa đơn mới.");
+            }
         }
 
         #region Init
@@ -245,10 +269,7 @@ namespace WH.GUI.ExportWarehouse
                 ShowLoad();
                 TxtMacDinh = TxtSearch;
                 LoadDataAllMatHang();
-                //Mac Dinh Khach VIP SI
-                KhachHangModel = null; //XuatKhoService.GetModelKhachHang("56DBC32E-11D7-4175-A7AC-608CCBF962D7");
-                LoadKhToGui(KhachHangModel);
-                dtpNgayTaoHD.Value = DateTime.Now;
+                KhachHangModel = null;
                 CloseLoad();
                 txtTimKiem.Select();
             }
@@ -259,71 +280,6 @@ namespace WH.GUI.ExportWarehouse
             }
         }
 
-        //private void ActionNhapMatHangVaoHoaDon()
-        //{
-        //    try
-        //    {
-        //        GetDataFromDgvDanhMuc();
-        //        var objMathang = Model;
-        //        if (objMathang == null) return;
-
-        //        var frm = new FrmInputNumberExportByLoai_Extend(objMathang);
-        //        frm.ShowDialog();
-        //        if (frm.numImport <= 0) return;
-
-        //        var slNhap = frm.numImport;
-        //        var isChangePrice = frm.IsChangcePrice;
-
-        //        var lsTempHoadonhapkhochitiets = new List<TEMP_HOADONXUATKHOCHITIET>();
-        //        var nhapKhoService = XuatKhoService;
-        //        if (MaHoaDon.IsBlank())
-        //            MaHoaDon = nhapKhoService.CreateMaHoaDon();
-
-        //        if (!CheckTonToiThieu(slNhap)) return;
-
-        //        var objHoadonhapkhochitiet = new TEMP_HOADONXUATKHOCHITIET
-        //        {
-        //            MAKHO = SessionModel.CurrentSession.KhoMatHang.MAKHO,
-        //            MAMATHANG = objMathang.MAMATHANG,
-        //            MAHOADON = MaHoaDon,
-        //            MACHITIETHOADON = PrefixContext.MaChiTietHoaDon(MaHoaDon, objMathang.MAMATHANG),
-        //            DONGIASI = objMathang.GIALE ?? 0,
-        //            SOLUONGLE = slNhap,
-        //            SOLUONGSI = objMathang.GIANHAP ?? 0, //Gia Nhap
-
-        //            CHIETKHAUTHEOPHANTRAM = objMathang.CHIETKHAU ?? 0,
-        //            THANHTIENTRUOCCHIETKHAU_CT = objMathang.GIALE * slNhap,
-        //            CHIETKHAUTHEOTIEN =
-        //                objMathang.GIALE * slNhap -
-        //                objMathang.GIALE * slNhap * (1 - (decimal) (objMathang.CHIETKHAU ?? 0)),
-
-        //            //Them (decimal)(1-objMathang.CHIETKHAU ?? 0)
-        //            THANHTIENSAUCHIETKHAU_CT =
-        //                objMathang.GIALE * slNhap * (1 - (decimal) (objMathang.CHIETKHAU ?? 0)) +
-        //                (objMathang.GIALE * slNhap * objMathang.VAT ?? 0),
-        //            GHICHU = DateTime.Now.ToString("G"),
-        //            ISDELETE = false
-        //        };
-
-        //        lsTempHoadonhapkhochitiets.Add(objHoadonhapkhochitiet);
-
-        //        var result = nhapKhoService.NhapMatHangVaoHoaDonTam(MaHoaDon, lsTempHoadonhapkhochitiets, null);
-        //        if (result != MethodResult.Succeed)
-        //        {
-        //            ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
-        //        }
-        //        else
-        //        {
-        //            if (isChangePrice)
-        //                LoadDataAllMatHang();
-        //            LoadHoaDon();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ShowMessage(IconMessageBox.Warning, ex.Message);
-        //    }
-        //}
         private void ActionNhapMatHangVaoHoaDon()
         {
             try
@@ -624,7 +580,7 @@ namespace WH.GUI.ExportWarehouse
                 var tienChi = txtTienChi.Text.ToDecimal();
                 decimal giamGia = 0;
                 var service = XuatKhoService;
-                var result = service.ThanhToan(MaHoaDon, dtpNgayTaoHD.Value, KhachHangModel.MAKHACHHANG, tienChi,
+                var result = service.ThanhToan(MaHoaDon, labCreatedDate.Text.ToDateTime(), KhachHangModel.MAKHACHHANG, tienChi,
                     giamGia, txtGhiChu.Text);
                 if (result != MethodResult.Succeed)
                 {
@@ -640,9 +596,8 @@ namespace WH.GUI.ExportWarehouse
                     txtTienChi.Text = 0.ToString("N2");
                     txtGhiChu.Text = string.Empty;
                     KhachHangModel = null;
-                    LoadKhToGui(KhachHangModel);
                     LoadDataAllMatHang();
-                    dtpNgayTaoHD.Value = DateTime.Now;
+                    labCreatedDate.Text = DateTime.Now.ToString();
                     frm.Dispose();
                 }
             }
@@ -803,25 +758,6 @@ namespace WH.GUI.ExportWarehouse
                               };
 
             LoadData(lstMatHangs.ToList());
-        }
-
-        private void LoadKhToGui(KHACHHANG objKhachHang)
-        {
-            if (objKhachHang != null)
-            {
-                labDiaChiNCC.Text = objKhachHang.DIACHI;
-                labDienThoaiNCC.Text = objKhachHang.DIENTHOAI;
-                labDCGiaoHang.Text = objKhachHang.DIACHIGIAOHANG;
-                labDCHangDong.Text = objKhachHang.DIACHIGIAOHOADON;
-            }
-            else
-            {
-                labDiaChiNCC.Text = "";
-                labDienThoaiNCC.Text = "";
-                labDCGiaoHang.Text = "";
-                labDCHangDong.Text = "";
-                dtpNgayTaoHD.Value = DateTime.Now;
-            }
         }
 
         private bool CheckTonToiThieu(int slNhap, bool isCapNhat = false)
