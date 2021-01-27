@@ -189,7 +189,7 @@ namespace WH.Report.ReportForm
             this.treeDanhMuc.Columns.Add(this._colTienThu);
             this.treeDanhMuc.Columns.Add(this._colConLai);
             this.treeDanhMuc.Columns.Add(this._colTinhTrang);
-            this.treeDanhMuc.Cursor = System.Windows.Forms.Cursors.VSplit;
+            this.treeDanhMuc.Cursor = System.Windows.Forms.Cursors.Default;
             this.treeDanhMuc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeDanhMuc.FixedColumnCount = 0;
             this.treeDanhMuc.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

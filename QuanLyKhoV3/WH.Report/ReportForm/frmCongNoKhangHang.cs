@@ -107,7 +107,7 @@ namespace WH.Report.ReportForm
             }
             catch (Exception)
             {
-                MessageBox.Show("Không thể tải thông tin!");
+                MessageBox.Show(@"Không thể tải thông tin!");
             }
         }
 
@@ -355,7 +355,7 @@ namespace WH.Report.ReportForm
             catch (Exception ex)
             {
                 //MessageBox.Show("Lỗi: Không thể chọn dữ liệu." + " " + ex.Message);
-                MessageBox.Show("Bạn hãy chọn lại hóa đơn cần xem.");
+                MessageBox.Show(@"Bạn hãy chọn lại hóa đơn cần xem.");
             }
         }
 
@@ -376,7 +376,7 @@ namespace WH.Report.ReportForm
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Bạn hãy chọn lại hóa đơn cần xem.");
+                MessageBox.Show(@"Bạn hãy chọn lại hóa đơn cần xem.");
                 //MessageBox.Show("Lỗi: Không thể chọn dữ liệu." + " " + ex.Message);
             }
         }
@@ -398,7 +398,7 @@ namespace WH.Report.ReportForm
             catch (Exception ex)
             {
                 //MessageBox.Show("Lỗi: Không thể chọn dữ liệu." + " " + ex.Message);
-                MessageBox.Show("Bạn hãy chọn lại hóa đơn cần xem.");
+                MessageBox.Show(@"Bạn hãy chọn lại hóa đơn cần xem.");
             }
         }
     }

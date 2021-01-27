@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Repository.Pattern.UnitOfWork;
+using System;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using Repository.Pattern.UnitOfWork;
 using Util.Pattern;
 using WH.Model;
 using WH.Service.Repository.Core;
@@ -28,21 +28,21 @@ namespace WH.Report.ReportForm
 
                 DataTable dt = null;
                 try
-                { 
-                    dt = collection.Collection.OrderBy(s=>s.GhiChu_CT.ToInt()).ToDatatable();
+                {
+                    dt = collection.Collection.OrderBy(s => s.GhiChu_CT.ToInt()).ToDatatable();
                 }
                 catch (Exception e)
                 {
-                    dt = collection.Collection.OrderBy(s=>s.GhiChu_CT).ToDatatable();
+                    dt = collection.Collection.OrderBy(s => s.GhiChu_CT).ToDatatable();
                 }
-               
+
                 dgvHoaDon.DataSource = null;
                 dgvHoaDon.AutoGenerateColumns = false;
                 dgvHoaDon.DataSource = dt;
             }
             else
             {
-                MessageBox.Show("Hóa đơn này không tồn tại. Vui lòng chọn lại hóa đơn mới.");
+                MessageBox.Show(@"Hóa đơn này không tồn tại. Vui lòng chọn lại hóa đơn mới.");
             }
         }
 

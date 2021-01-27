@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Repository.Pattern.UnitOfWork;
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Windows.Forms;
-using Repository.Pattern.UnitOfWork;
 using WH.Entity;
 using WH.Service;
 using WH.Service.Repository.Core;
@@ -28,14 +27,14 @@ namespace WH.Report.ReportForm
                 ReloadUnitOfWork();
                 INhapKhoService service = new NhapKhoService(unitOfWorkAsync);
                 var dt = service.DanhSachChiTietNhap(hdNhapKho.MAHOADONNHAP);
-               
+
                 dgvHoaDon.DataSource = null;
                 dgvHoaDon.AutoGenerateColumns = false;
                 dgvHoaDon.DataSource = dt;
             }
             else
             {
-                MessageBox.Show("Hóa đơn này không tồn tại. Vui lòng chọn lại hóa đơn mới.");
+                MessageBox.Show(@"Hóa đơn này không tồn tại. Vui lòng chọn lại hóa đơn mới.");
             }
         }
 

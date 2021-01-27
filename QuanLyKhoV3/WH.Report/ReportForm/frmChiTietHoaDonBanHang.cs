@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Repository.Pattern.UnitOfWork;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Repository.Pattern.UnitOfWork;
 using WH.Entity;
 using WH.Service;
 using WH.Service.Repository.Core;
@@ -33,7 +33,7 @@ namespace WH.Report.ReportForm
             }
             else
             {
-                MessageBox.Show("Hóa đơn này không tồn tại. Vui lòng chọn lại hóa đơn mới.");
+                MessageBox.Show(@"Hóa đơn này không tồn tại. Vui lòng chọn lại hóa đơn mới.");
             }
         }
 

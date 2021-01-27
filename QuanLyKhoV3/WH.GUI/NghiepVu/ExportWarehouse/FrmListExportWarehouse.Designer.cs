@@ -1,12 +1,18 @@
-﻿
+﻿using ComponentFactory.Krypton.Toolkit;
+using HLVControl.Grid;
+using HLVControl.Grid.Data;
+using MetroUI.Forms;
+using System.ComponentModel;
+using System.Windows.Forms;
+
 namespace WH.GUI.ExportWarehouse
 {
-    partial class FrmListExportWarehouse
+    partial class FrmListExportWarehouse : MetroForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -29,14 +35,15 @@ namespace WH.GUI.ExportWarehouse
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmListExportWarehouse));
             HLVControl.Grid.Render.MetroTreeListRenderer metroTreeListRenderer1 = new HLVControl.Grid.Render.MetroTreeListRenderer();
-            this.txtTimKiem = new System.Windows.Forms.TextBox();
-            this.btnTheoNgay = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.btnTimKiem = new System.Windows.Forms.Button();
+            this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.btnAll = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.btnTop50 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.btnTop10 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
+            this.btnExit = new System.Windows.Forms.Button();
             this.treeDanhMuc = new HLVControl.Grid.TreeListView();
             this._colStt = new HLVControl.Grid.Data.TreeListColumn();
             this._colBillID = new HLVControl.Grid.Data.TreeListColumn();
@@ -49,25 +56,10 @@ namespace WH.GUI.ExportWarehouse
             this._colTienThu = new HLVControl.Grid.Data.TreeListColumn();
             this._colConLai = new HLVControl.Grid.Data.TreeListColumn();
             this._colTinhTrang = new HLVControl.Grid.Data.TreeListColumn();
+            this.btnTheoNgay = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
+            this.CheckSet = new ComponentFactory.Krypton.Toolkit.KryptonCheckSet(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.CheckSet)).BeginInit();
             this.SuspendLayout();
-            // 
-            // txtTimKiem
-            // 
-            this.txtTimKiem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtTimKiem.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTimKiem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.txtTimKiem.Location = new System.Drawing.Point(339, 12);
-            this.txtTimKiem.Name = "txtTimKiem";
-            this.txtTimKiem.Size = new System.Drawing.Size(173, 35);
-            this.txtTimKiem.TabIndex = 634;
-            // 
-            // btnTheoNgay
-            // 
-            this.btnTheoNgay.Location = new System.Drawing.Point(828, 8);
-            this.btnTheoNgay.Name = "btnTheoNgay";
-            this.btnTheoNgay.Size = new System.Drawing.Size(83, 46);
-            this.btnTheoNgay.TabIndex = 642;
-            this.btnTheoNgay.Values.Text = "Theo Ngày";
             // 
             // btnTimKiem
             // 
@@ -79,40 +71,72 @@ namespace WH.GUI.ExportWarehouse
             this.btnTimKiem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnTimKiem.Image = global::WH.GUI.Properties.Resources.TimKiem;
             this.btnTimKiem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTimKiem.Location = new System.Drawing.Point(518, 8);
+            this.btnTimKiem.Location = new System.Drawing.Point(619, 9);
             this.btnTimKiem.Name = "btnTimKiem";
-            this.btnTimKiem.Size = new System.Drawing.Size(79, 46);
-            this.btnTimKiem.TabIndex = 640;
+            this.btnTimKiem.Size = new System.Drawing.Size(79, 45);
+            this.btnTimKiem.TabIndex = 632;
             this.btnTimKiem.Tag = "timkiem";
             this.btnTimKiem.Text = "(F2)";
             this.btnTimKiem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnTimKiem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTimKiem.UseVisualStyleBackColor = true;
+            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
+            // 
+            // txtTimKiem
+            // 
+            this.txtTimKiem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txtTimKiem.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTimKiem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.txtTimKiem.Location = new System.Drawing.Point(439, 14);
+            this.txtTimKiem.Name = "txtTimKiem";
+            this.txtTimKiem.Size = new System.Drawing.Size(173, 35);
+            this.txtTimKiem.TabIndex = 633;
             // 
             // btnAll
             // 
-            this.btnAll.Location = new System.Drawing.Point(917, 9);
+            this.btnAll.Location = new System.Drawing.Point(971, 9);
             this.btnAll.Name = "btnAll";
             this.btnAll.Size = new System.Drawing.Size(83, 45);
-            this.btnAll.TabIndex = 639;
+            this.btnAll.TabIndex = 631;
             this.btnAll.Values.Text = "Tất Cả";
+            this.btnAll.Click += new System.EventHandler(this.btnAll_Click);
             // 
             // btnTop50
             // 
-            this.btnTop50.Location = new System.Drawing.Point(717, 9);
+            this.btnTop50.Location = new System.Drawing.Point(793, 9);
             this.btnTop50.Name = "btnTop50";
-            this.btnTop50.Size = new System.Drawing.Size(105, 45);
-            this.btnTop50.TabIndex = 638;
-            this.btnTop50.Values.Text = "50 Hóa Đơn MN";
+            this.btnTop50.Size = new System.Drawing.Size(83, 45);
+            this.btnTop50.TabIndex = 630;
+            this.btnTop50.Values.Text = "50 Hóa Đơn\r\n  Mới Nhất";
+            this.btnTop50.Click += new System.EventHandler(this.btnTop50_Click);
             // 
             // btnTop10
             // 
             this.btnTop10.Checked = true;
-            this.btnTop10.Location = new System.Drawing.Point(603, 9);
+            this.btnTop10.Location = new System.Drawing.Point(704, 9);
             this.btnTop10.Name = "btnTop10";
-            this.btnTop10.Size = new System.Drawing.Size(108, 45);
-            this.btnTop10.TabIndex = 637;
-            this.btnTop10.Values.Text = "10 Hóa Đơn MN";
+            this.btnTop10.Size = new System.Drawing.Size(83, 45);
+            this.btnTop10.TabIndex = 629;
+            this.btnTop10.Values.Text = "10 Hóa Đơn\r\n  Mới Nhất";
+            this.btnTop10.Click += new System.EventHandler(this.btnTop10_Click);
+            // 
+            // btnExit
+            // 
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.BackColor = System.Drawing.Color.Transparent;
+            this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Image = global::WH.GUI.Properties.Resources.Exit;
+            this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExit.Location = new System.Drawing.Point(1187, 18);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(34, 28);
+            this.btnExit.TabIndex = 627;
+            this.btnExit.Tag = "thoat";
+            this.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // treeDanhMuc
             // 
@@ -186,13 +210,15 @@ namespace WH.GUI.ExportWarehouse
             this.treeDanhMuc.ShowSelection = true;
             this.treeDanhMuc.ShowSelectionBorder = true;
             this.treeDanhMuc.ShowSummaryRow = false;
-            this.treeDanhMuc.Size = new System.Drawing.Size(1172, 430);
+            this.treeDanhMuc.Size = new System.Drawing.Size(1188, 401);
             this.treeDanhMuc.SummaryRowHeight = 45;
-            this.treeDanhMuc.TabIndex = 643;
+            this.treeDanhMuc.TabIndex = 635;
             this.treeDanhMuc.Text = "treeListView";
             this.treeDanhMuc.TreeColumn = this._colStt;
             this.treeDanhMuc.TreeMode = false;
             this.treeDanhMuc.WheelDelta = 120;
+            this.treeDanhMuc.AfterSelectionChange += new HLVControl.Grid.Events.AfterSelectionChangeEventHandler(this.treeDanhMuc_AfterSelectionChange);
+            this.treeDanhMuc.DoubleClickElement += new HLVControl.Grid.Events.DoubleClickEventHandler(this.treeDanhMuc_DoubleClickElement);
             // 
             // _colStt
             // 
@@ -460,44 +486,68 @@ namespace WH.GUI.ExportWarehouse
             this._colTinhTrang.Width = 100;
             this._colTinhTrang.WordWrap = false;
             // 
+            // btnTheoNgay
+            // 
+            this.btnTheoNgay.Location = new System.Drawing.Point(882, 9);
+            this.btnTheoNgay.Name = "btnTheoNgay";
+            this.btnTheoNgay.Size = new System.Drawing.Size(83, 45);
+            this.btnTheoNgay.TabIndex = 636;
+            this.btnTheoNgay.Values.Text = "Theo Ngày";
+            this.btnTheoNgay.Click += new System.EventHandler(this.btnTheoNgay_Click);
+            // 
+            // CheckSet
+            // 
+            this.CheckSet.CheckButtons.Add(this.btnAll);
+            this.CheckSet.CheckButtons.Add(this.btnTheoNgay);
+            this.CheckSet.CheckButtons.Add(this.btnTop50);
+            this.CheckSet.CheckButtons.Add(this.btnTop10);
+            this.CheckSet.CheckedButton = this.btnTop10;
+            // 
             // FrmListExportWarehouse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1212, 510);
+            this.ClientSize = new System.Drawing.Size(1228, 481);
+            this.ControlBox = false;
             this.Controls.Add(this.treeDanhMuc);
             this.Controls.Add(this.btnTheoNgay);
             this.Controls.Add(this.btnTimKiem);
+            this.Controls.Add(this.txtTimKiem);
             this.Controls.Add(this.btnAll);
             this.Controls.Add(this.btnTop50);
             this.Controls.Add(this.btnTop10);
-            this.Controls.Add(this.txtTimKiem);
+            this.Controls.Add(this.btnExit);
             this.Name = "FrmListExportWarehouse";
-            this.Text = "Danh sách hóa đơn xuất kho";
+            this.Resizable = false;
+            this.Text = "Danh Sách Hóa Đơn Xuất Kho";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmCongNoKhachHang_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.CheckSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtTimKiem;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton btnTheoNgay;
-        private System.Windows.Forms.Button btnTimKiem;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton btnAll;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton btnTop50;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton btnTop10;
-        private HLVControl.Grid.TreeListView treeDanhMuc;
-        private HLVControl.Grid.Data.TreeListColumn _colStt;
-        private HLVControl.Grid.Data.TreeListColumn _colBillID;
-        private HLVControl.Grid.Data.TreeListColumn _colNgayTao;
-        private HLVControl.Grid.Data.TreeListColumn _colMaCode;
-        private HLVControl.Grid.Data.TreeListColumn _colBarCode;
-        private HLVControl.Grid.Data.TreeListColumn _colTenKH;
-        private HLVControl.Grid.Data.TreeListColumn _colTongTien;
-        private HLVControl.Grid.Data.TreeListColumn _colTienKM;
-        private HLVControl.Grid.Data.TreeListColumn _colTienThu;
-        private HLVControl.Grid.Data.TreeListColumn _colConLai;
-        private HLVControl.Grid.Data.TreeListColumn _colTinhTrang;
+        private Button btnTimKiem;
+        private TextBox txtTimKiem;
+        private KryptonCheckButton btnAll;
+        private KryptonCheckButton btnTop50;
+        private KryptonCheckButton btnTop10;
+        private Button btnExit;
+        private TreeListView treeDanhMuc;
+        private TreeListColumn _colStt;
+        private TreeListColumn _colBillID;
+        private TreeListColumn _colTienKM;
+        private TreeListColumn _colTongTien;
+        private TreeListColumn _colTienThu;
+        private TreeListColumn _colConLai;
+        private KryptonCheckButton btnTheoNgay;
+        private TreeListColumn _colNgayTao;
+        private KryptonCheckSet CheckSet;
+        private TreeListColumn _colTinhTrang;
+        private TreeListColumn _colTenKH;
+        private TreeListColumn _colMaCode;
+        private TreeListColumn _colBarCode;
     }
 }

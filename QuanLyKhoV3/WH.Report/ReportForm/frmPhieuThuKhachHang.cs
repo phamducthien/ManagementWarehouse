@@ -1,10 +1,10 @@
-﻿using System;
+﻿using ClosedXML.Excel;
+using MetroUI.Forms;
+using Repository.Pattern.UnitOfWork;
+using System;
 using System.Data;
 using System.IO;
 using System.Windows.Forms;
-using ClosedXML.Excel;
-using MetroUI.Forms;
-using Repository.Pattern.UnitOfWork;
 using WH.Model;
 using WH.Report.ReportFunction;
 using WH.Service.Repository.Core;
@@ -43,7 +43,7 @@ namespace WH.Report.ReportForm
             codeKH = CodeKhachHang;
             if (dtFrom == null || dtTo == null || codeKH == "")
             {
-                MessageBox.Show("Một trong các dữ liệu Ngày Từ hoặc Ngày Đến hoặc Khách Hàng chưa được chọn.");
+                MessageBox.Show(@"Một trong các dữ liệu Ngày Từ hoặc Ngày Đến hoặc Khách Hàng chưa được chọn.");
                 Close();
             }
 

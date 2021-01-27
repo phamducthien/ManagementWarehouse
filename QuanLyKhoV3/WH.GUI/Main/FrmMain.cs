@@ -4,6 +4,7 @@ using Util.Pattern.Contain;
 using WH.GUI.ExportWarehouse;
 using WH.Model;
 using WH.Report;
+using WH.Report.ReportForm;
 
 namespace WH.GUI
 {
