@@ -330,6 +330,12 @@
     <Compile Include="NghiepVu\ExportWarehouse\FrmExportWarehouseTab.Designer.cs">
       <DependentUpon>FrmExportWarehouseTab.cs</DependentUpon>
     </Compile>
+    <Compile Include="NghiepVu\ExportWarehouse\FrmEditExportWarehouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NghiepVu\ExportWarehouse\FrmEditExportWarehouse.Designer.cs">
+      <DependentUpon>FrmEditExportWarehouse.cs</DependentUpon>
+    </Compile>
     <Compile Include="NghiepVu\FrmCongNoKhachHang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -543,6 +549,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NghiepVu\ExportWarehouse\FrmExportWarehouseTab.resx">
       <DependentUpon>FrmExportWarehouseTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NghiepVu\ExportWarehouse\FrmEditExportWarehouse.resx">
+      <DependentUpon>FrmEditExportWarehouse.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NghiepVu\FrmCongNoKhachHang.resx">
       <DependentUpon>FrmCongNoKhachHang.cs</DependentUpon>

@@ -258,10 +258,7 @@ namespace WH.GUI.ExportWarehouse
                     var hdKho = service.GetModelHoaDonXuat(id);
                     if (hdKho == null) return;
                     var lst = hdKho.HOADONXUATKHOCHITIETs.ToList();
-                    //var frm = new frmChiTietHoaDonBanHang(hdKho, lst);
-
-                    var frm = new FrmXuatKho();
-
+                    var frm = new FrmEditExportWarehouse();
                     frm.ShowDialog(this);
                 }
             }
