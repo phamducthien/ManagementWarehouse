@@ -1,5 +1,4 @@
-﻿using ClosedXML.Excel;
-using HLVControl.Grid;
+﻿using HLVControl.Grid;
 using HLVControl.Grid.Data;
 using HLVControl.Grid.Events;
 using MetroUI.Forms;
@@ -7,7 +6,6 @@ using Repository.Pattern.UnitOfWork;
 using System;
 using System.Data;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using WH.Report.ReportForm;
@@ -142,63 +140,6 @@ namespace WH.GUI.ExportWarehouse
             LoadBill(GetTop10());
         }
 
-        private void btnPrinter_Click(object sender, EventArgs e)
-        {
-            if (treeDanhMuc.Rows.Count <= 0) return;
-            var dt = new DataTable();
-            var numCol = treeDanhMuc.Columns.Count;
-            foreach (TreeListColumn column in treeDanhMuc.Columns) dt.Columns.Add(column.Text, typeof(string));
-
-            //Adding the Rows
-            foreach (TreeListRow row in treeDanhMuc.Rows)
-            {
-                dt.Rows.Add();
-                var cellIndex = 0;
-                foreach (TreeListCell cell in row.Cells)
-                {
-                    dt.Rows[dt.Rows.Count - 1][cellIndex++] = cell.Value.ToString();
-                    if (cellIndex == numCol)
-                        cellIndex = 0;
-                }
-            }
-
-            //Exporting to Excel
-            var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
-            using (var wb = new XLWorkbook())
-            {
-                wb.Worksheets.Add(dt, "Danh Sách Hóa Đơn Xuất");
-
-                //save file region here
-                var dialog = new SaveFileDialog();
-                dialog.InitialDirectory = folderPath;
-                dialog.DefaultExt = "xlsx";
-                dialog.Filter = @"Excel WorkBook (*.xlsx)|*.xlsx";
-                dialog.AddExtension = true;
-                dialog.RestoreDirectory = true;
-                dialog.Title = @"Lưu File Tại";
-                dialog.FileName = @"DSHoaDonXuatKho_" + DateTime.Now.ToString("yyyyMMddHHmmss");
-
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    wb.SaveAs(dialog.FileName);
-                    MessageBox.Show(@"Đã xuất file tại :" + dialog.FileName);
-                    dialog.Dispose();
-                }
-
-                //Hết savedialog
-            }
-
-            //if (treeDanhMuc.Rows.Count > 0)
-            //{
-            //    var export = new FrmDmExportExcel("CONGNOKHACHHANG_" + DateTime.Now.ToString("ddMMyyyy_HHmm"),
-            //        treeDanhMuc);
-            //    if (export.ShowDialog() == DialogResult.OK)
-            //    {
-            //    }
-            //}
-        }
-
         //==============================================================
         private void SelectNextTreeList(TreeListView dgv, bool isDown)
         {
@@ -317,7 +258,10 @@ namespace WH.GUI.ExportWarehouse
                     var hdKho = service.GetModelHoaDonXuat(id);
                     if (hdKho == null) return;
                     var lst = hdKho.HOADONXUATKHOCHITIETs.ToList();
-                    var frm = new frmChiTietHoaDonBanHang(hdKho, lst);
+                    //var frm = new frmChiTietHoaDonBanHang(hdKho, lst);
+
+                    var frm = new FrmXuatKho();
+
                     frm.ShowDialog(this);
                 }
             }
