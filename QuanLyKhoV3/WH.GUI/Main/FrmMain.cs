@@ -4,7 +4,6 @@ using Util.Pattern.Contain;
 using WH.GUI.ExportWarehouse;
 using WH.Model;
 using WH.Report;
-using WH.Report.ReportForm;
 
 namespace WH.GUI
 {
@@ -183,14 +182,6 @@ namespace WH.GUI
             var frm = new FrmListExportWarehouse();
             frm.ShowDialog();
             Show();
-            Activate();
-            var opacity = 0.00;
-            while (opacity < 1)
-            {
-                frm.Opacity = opacity;
-                opacity += 0.04;
-            }
-            frm.Opacity = 1.00;
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
