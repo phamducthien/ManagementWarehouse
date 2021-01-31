@@ -51,8 +51,8 @@ namespace WH.GUI.ExportWarehouse
         public KHACHHANG KhachHangModel { get; set; }
         public KHOMATHANG KhoMatHangModel { get; set; }
         public List<MATHANG> DataList { get; set; }
-        public TEMP_HOADONXUATKHOCHITIET ModelChiTiet { get; set; }
-        public List<TEMP_HOADONXUATKHOCHITIET> LsTempHoadonxuatkhochitiets { get; set; }
+        public HOADONXUATKHOCHITIET ModelChiTiet { get; set; }
+        public List<HOADONXUATKHOCHITIET> LsTempHoadonxuatkhochitiets { get; set; }
         public string MaHoaDon { get; set; }
 
         private IXuatKhoService XuatKhoService
@@ -247,41 +247,36 @@ namespace WH.GUI.ExportWarehouse
             try
             {
                 GetDataFromDgvDanhMuc();
-                var objMathang = Model;
-                if (objMathang == null) return;
+                var objMatHang = Model;
+                if (objMatHang == null) return;
 
-                int soluong = 0;
+                var soLuong = 0;
                 var xuatKhoService = XuatKhoService;
 
-                var listct = xuatKhoService.LoadHoaDonTam(MaHoaDon);
+                var hoaDonChiTiets = xuatKhoService.LoadHoaDon(MaHoaDon);
                 if (MaHoaDon.IsBlank())
                     MaHoaDon = xuatKhoService.CreateMaHoaDon();
                 else
                 {
-                    if (!listct.isNullOrZero())
+                    if (!hoaDonChiTiets.isNullOrZero())
                     {
-                        soluong = listct.OrderBy(s => s.GHICHU.ToInt()).Last().GHICHU
-                            .ToInt();
+                        soLuong = hoaDonChiTiets.OrderBy(s => s.GHICHU.ToInt()).Last().GHICHU.ToInt();
                     }
                 }
 
-                var frm = new FrmInputNumberExportByLoai_Extend(soluong, objMathang, true);
+                var frm = new FrmInputNumberExportByLoaiExtend(soLuong, objMatHang, true);
                 frm.ShowDialog(this);
 
                 if (frm.lstChiTietXuat.isNullOrZero()) return;
                 if (frm.lstChiTietXuat.Count <= 0) return;
 
-                var lsTempHoadonhapkhochitiets = new List<TEMP_HOADONXUATKHOCHITIET>();
-
-                //bool isChangePrice = false;
+                var hoaDonNhapKhoChiTiets = new List<HOADONXUATKHOCHITIET>();
                 foreach (var ct in frm.lstChiTietXuat)
                 {
                     if (ct.SOLUONGLE <= 0) continue;
                     var slNhap = ct.SOLUONGLE;
 
-                    var modelCT = listct.Find(s => s.MAMATHANG == ct.MAMATHANG);
                     if (!CheckTonToiThieu((int)ct.MAMATHANG, (int)slNhap)) continue;
-                    //isChangePrice = (bool)ct.ISDELETE;
 
                     var objHoadonhapkhochitiet = ct;
                     objHoadonhapkhochitiet.MAHOADON = MaHoaDon;
@@ -289,11 +284,11 @@ namespace WH.GUI.ExportWarehouse
                         PrefixContext.MaChiTietHoaDon(MaHoaDon, (int)ct.MAMATHANG);
                     objHoadonhapkhochitiet.ISDELETE = false;
 
-                    lsTempHoadonhapkhochitiets.Add(objHoadonhapkhochitiet);
+                    hoaDonNhapKhoChiTiets.Add(objHoadonhapkhochitiet);
                 }
 
                 xuatKhoService = XuatKhoService;
-                var result = xuatKhoService.NhapMatHangVaoHoaDonTam(MaHoaDon, lsTempHoadonhapkhochitiets, null);
+                var result = xuatKhoService.NhapMatHangVaoHoaDonTam(MaHoaDon, hoaDonNhapKhoChiTiets, null);
                 if (result != MethodResult.Succeed)
                     ShowMessage(IconMessageBox.Information, xuatKhoService.ErrMsg);
                 else
@@ -427,11 +422,11 @@ namespace WH.GUI.ExportWarehouse
                 }
 
                 var nhapKhoService = XuatKhoService;
-                var lsTempHoadonhapkhochitiets = new List<TEMP_HOADONXUATKHOCHITIET>
+                var lsHoadonhapkhochitiets = new List<HOADONXUATKHOCHITIET>
                 {
                     objChiTiet
                 };
-                var result = nhapKhoService.HuyMatHangTrongHoaDonTam(MaHoaDon, lsTempHoadonhapkhochitiets);
+                var result = nhapKhoService.HuyMatHangTrongHoaDon(MaHoaDon, lsHoadonhapkhochitiets);
                 if (result != MethodResult.Succeed)
                     ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
                 else
@@ -502,7 +497,7 @@ namespace WH.GUI.ExportWarehouse
             {
                 var textSerach = txtTimKiem.Text.Trim();
                 var nhapKhoService = XuatKhoService;
-                var lstMatHangs = nhapKhoService.SearchMathangs(textSerach);
+                var lstMatHangs = nhapKhoService.SearchMatHangs(textSerach);
                 LoadData(lstMatHangs.ToDatatable());
                 txtTimKiem.SelectAll();
                 txtTimKiem.Select();

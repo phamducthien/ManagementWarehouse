@@ -9,12 +9,12 @@ using WH.Service.Service;
 
 namespace WH.GUI
 {
-    public partial class FrmInputNumberExportByLoai_Extend : FrmBase
+    public partial class FrmInputNumberExportByLoaiExtend : FrmBase
     {
         private readonly bool _showCK;
         private bool bGiaNhap;
         private int slChiTiet;
-        public FrmInputNumberExportByLoai_Extend(int soluongchitiettronghoadon,MATHANG objMathang, bool showCK = false, bool isGiaNhap = false)
+        public FrmInputNumberExportByLoaiExtend(int soluongchitiettronghoadon, MATHANG objMathang, bool showCK = false, bool isGiaNhap = false)
         {
             slChiTiet = soluongchitiettronghoadon;
             bGiaNhap = isGiaNhap;
@@ -24,7 +24,7 @@ namespace WH.GUI
             InitializeComponent();
             btnXacNhanXuat.Visible = !isGiaNhap;
             btnXacNhapNhap.Visible = isGiaNhap;
-            numImport = (int) NumSoLuongNhap.Value;
+            numImport = (int)NumSoLuongNhap.Value;
             if (objMathang.isNull())
             {
                 ShowMessage(IconMessageBox.Warning, "Không xác định được mặt hàng!");
@@ -40,8 +40,8 @@ namespace WH.GUI
 
         private void FrmInputNumberExport_Load(object sender, EventArgs e)
         {
-            numImport = (int) NumSoLuongNhap.Value;
-            LoadMatHang((int) Model.MALOAIMATHANG);
+            numImport = (int)NumSoLuongNhap.Value;
+            LoadMatHang((int)Model.MALOAIMATHANG);
         }
 
         private void LoadMatHang(int maLoai)
@@ -66,13 +66,14 @@ namespace WH.GUI
             //var ucChiTiet = new ucMatHangChiTiet(Model, soLuong) { Name = Model.MAMATHANG.ToString(), Tag = stt++};
             //flnDSMatHang.Controls.Add(ucChiTiet);
 
-            foreach (var mh in ModelLoaiMatHang?.MATHANGs.OrderBy(s=>s.TENDONVI))
+            foreach (var mh in ModelLoaiMatHang?.MATHANGs.OrderBy(s => s.TENDONVI))
             {
                 if (mh.ISDELETE == true) continue;
                 //if (mh.MAMATHANG == Model.MAMATHANG) continue;
                 var ucChiTiet = new ucMatHangChiTiet(mh, 0, _showCK, bGiaNhap)
                 {
-                    Name = mh.MAMATHANG.ToString(), Tag = stt++,
+                    Name = mh.MAMATHANG.ToString(),
+                    Tag = stt++,
                     Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
                 };
                 flnDSMatHang.Controls.Add(ucChiTiet);
@@ -86,7 +87,7 @@ namespace WH.GUI
 
         private void radTatCa_CheckedChanged(object sender, EventArgs e)
         {
-            numImport = (int) NumSoLuongNhap.Value;
+            numImport = (int)NumSoLuongNhap.Value;
             foreach (var uc in flnDSMatHang.Controls.OfType<ucMatHangChiTiet>())
             {
                 uc.cbxMatHang.Checked = radTatCa.Checked;
@@ -96,7 +97,7 @@ namespace WH.GUI
 
         private void radDau_CheckedChanged(object sender, EventArgs e)
         {
-            numImport = (int) NumSoLuongNhap.Value;
+            numImport = (int)NumSoLuongNhap.Value;
             var count = flnDSMatHang.Controls.OfType<ucMatHangChiTiet>().Count() / 2;
             foreach (var uc in flnDSMatHang.Controls.OfType<ucMatHangChiTiet>())
                 if (uc.Tag.ToString().ToInt() <= count || count == 0)
@@ -113,7 +114,7 @@ namespace WH.GUI
 
         private void radDuoi_CheckedChanged(object sender, EventArgs e)
         {
-            numImport = (int) NumSoLuongNhap.Value;
+            numImport = (int)NumSoLuongNhap.Value;
             var count = flnDSMatHang.Controls.OfType<ucMatHangChiTiet>().Count() / 2;
             foreach (var uc in flnDSMatHang.Controls.OfType<ucMatHangChiTiet>())
                 if (uc.Tag.ToString().ToInt() > count && count > 0)
@@ -138,8 +139,8 @@ namespace WH.GUI
             var count = flnDSMatHang.Controls.OfType<ucMatHangChiTiet>().Count(s => s.cbxMatHang.Checked);
             if (count <= 0) return;
             lstChiTietXuat = new List<TEMP_HOADONXUATKHOCHITIET>(count);
-            int stt = slChiTiet+1;
-            foreach (var uc in flnDSMatHang.Controls.OfType<ucMatHangChiTiet>().OrderBy(s=>s.Tag))
+            int stt = slChiTiet + 1;
+            foreach (var uc in flnDSMatHang.Controls.OfType<ucMatHangChiTiet>().OrderBy(s => s.Tag))
             {
                 if (!uc.cbxMatHang.Checked) continue;
 
@@ -158,7 +159,7 @@ namespace WH.GUI
                     SOLUONGLE = uc.NumSoLuongNhap.Value,
                     SOLUONGSI = uc.Mathang.GIANHAP, //Gia Nhap
 
-                    CHIETKHAUTHEOPHANTRAM = (double?) chietkhau ?? 0,
+                    CHIETKHAUTHEOPHANTRAM = (double?)chietkhau ?? 0,
                     THANHTIENTRUOCCHIETKHAU_CT = uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value,
                     CHIETKHAUTHEOTIEN =
                         uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value -
@@ -167,7 +168,7 @@ namespace WH.GUI
                     THANHTIENSAUCHIETKHAU_CT =
                         uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * (1 - chietkhau) +
                         (uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * uc.Mathang.VAT ?? 0),
-                   
+
                     ISDELETE = uc.IsChangcePrice
                 };
                 lstChiTietXuat.Add(ct);
@@ -178,7 +179,7 @@ namespace WH.GUI
 
         private void NumSoLuongNhap_ValueChanged(object sender, EventArgs e)
         {
-            numImport = (int) NumSoLuongNhap.Value;
+            numImport = (int)NumSoLuongNhap.Value;
         }
 
         #region Inits
@@ -186,6 +187,7 @@ namespace WH.GUI
         public MATHANG Model { get; set; }
         public LOAIMATHANG ModelLoaiMatHang { get; set; }
 
+        public List<HOADONXUATKHOCHITIET> HOADONXUATKHOCHITIET;
         public List<TEMP_HOADONXUATKHOCHITIET> lstChiTietXuat;
         public List<TEMP_HOADONHAPKHOCHITIET> lstChiTietNhap;
         private readonly List<LOAIMATHANG> _lstLoaimathangs;
@@ -219,7 +221,7 @@ namespace WH.GUI
             var count = flnDSMatHang.Controls.OfType<ucMatHangChiTiet>().Count(s => s.cbxMatHang.Checked);
             if (count <= 0) return;
             lstChiTietNhap = new List<TEMP_HOADONHAPKHOCHITIET>(count);
-             int stt = slChiTiet+1;
+            int stt = slChiTiet + 1;
             foreach (var uc in flnDSMatHang.Controls.OfType<ucMatHangChiTiet>())
             {
                 if (!uc.cbxMatHang.Checked) continue;
@@ -233,11 +235,11 @@ namespace WH.GUI
                     MAKHO = SessionModel.CurrentSession.KhoMatHang.MAKHO,
                     MAMATHANG = uc.Mathang.MAMATHANG,
                     DONGIA = uc.numGiaNhap.Value,
-                    
+
                     //MAHOADON = MaHoaDon,
                     //MACHITIETHOADON = PrefixContext.MaChiTietHoaDon(MaHoaDon, (int)ct.MAMATHANG),
                     SOLUONGLE = uc.NumSoLuongNhap.Value,
-                    SOLUONGSI = 0, 
+                    SOLUONGSI = 0,
                     THANHTIENTRUOCCHIETKHAU_CT = uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value,
                     TIENVAT = uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * uc.Mathang.VAT ?? 0,
                     THANHTIENSAUCHIETKHAU_CT = uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value + (uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * uc.Mathang.VAT ?? 0),

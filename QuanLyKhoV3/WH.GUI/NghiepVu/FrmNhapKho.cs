@@ -412,7 +412,7 @@ namespace WH.GUI
                             .ToInt();
                     }
                 }
-                var frm = new FrmInputNumberExportByLoai_Extend(soluong, objMathang, false, true);
+                var frm = new FrmInputNumberExportByLoaiExtend(soluong, objMathang, false, true);
                 frm.ShowDialog(this);
 
                 if (frm.lstChiTietNhap.isNullOrZero()) return;

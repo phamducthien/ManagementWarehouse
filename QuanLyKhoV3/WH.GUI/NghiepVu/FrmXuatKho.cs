@@ -378,7 +378,7 @@ namespace WH.GUI
                     }
                 }
 
-                var frm = new FrmInputNumberExportByLoai_Extend(soluong, objMathang, true);
+                var frm = new FrmInputNumberExportByLoaiExtend(soluong, objMathang, true);
                 frm.ShowDialog(this);
 
                 if (frm.lstChiTietXuat.isNullOrZero()) return;
@@ -616,7 +616,7 @@ namespace WH.GUI
             {
                 var textSerach = txtTimKiem.Text.Trim();
                 var nhapKhoService = XuatKhoService;
-                var lstMatHangs = nhapKhoService.SearchMathangs(textSerach);
+                var lstMatHangs = nhapKhoService.SearchMatHangs(textSerach);
                 LoadData(lstMatHangs.ToDatatable());
                 txtTimKiem.SelectAll();
                 txtTimKiem.Select();
