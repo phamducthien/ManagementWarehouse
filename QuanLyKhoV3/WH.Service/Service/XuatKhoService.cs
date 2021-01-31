@@ -101,19 +101,89 @@ namespace WH.Service
             return _hoaDonXuatKhoChiTietService.Search(s => s.MAHOADON == maHoaDon);
         }
 
-        public MethodResult NhapMatHangVaoHoaDon(string maHoaDon, List<HOADONXUATKHOCHITIET> hoaDonNhapKhoChiTiets, List<MATHANG> listCapNhatGia,
-            bool isCommitted = true)
+        public MethodResult NhapMatHangVaoHoaDon(string maHoaDon, List<HOADONXUATKHOCHITIET> hoaDonNhapKhoChiTiets, List<MATHANG> listCapNhatGia, bool isCommitted = true)
         {
-            throw new NotImplementedException();
+            //1.Them Chi Tiet
+            //2.Cap Nhat Gia Nhap Mat Hang
+            //3.Luu
+
+            if (hoaDonNhapKhoChiTiets.isNull())
+            {
+                ErrMsg = "Không tìm thấy hóa đơn!!!";
+                return MethodResult.Failed;
+            }
+
+            var result = MethodResult.Failed;
+            try
+            {
+                if (isCommitted)
+                    _unitOfWork.BeginTransaction();
+
+                //2.Them Chi Tiet Mat Hang
+                if (!hoaDonNhapKhoChiTiets.isNull())
+                    foreach (var ct in hoaDonNhapKhoChiTiets)
+                    {
+                        var objct = _hoaDonXuatKhoChiTietService.Find(s => s.MAHOADON == maHoaDon && s.MACHITIETHOADON == ct.MACHITIETHOADON);
+                        if (objct.isNull())
+                        {
+                            //Them mat hang vao hoa don
+                            ct.MAHOADON = maHoaDon;
+                            ct.MACHITIETHOADON = PrefixContext.MaChiTietHoaDon(maHoaDon, ct.MAMATHANG.GetValueOrDefault());
+                            result = _hoaDonXuatKhoChiTietService.Add(ct);
+                            if (result != MethodResult.Succeed)
+                                break;
+                        }
+                        else
+                        {
+                            //Cap Nhat Mat Hang Vao Hoa Don
+                            objct.SOLUONGLE += ct.SOLUONGLE;
+                            objct.DONGIASI = ct.DONGIASI;
+                            objct.THANHTIENTRUOCCHIETKHAU_CT = objct.SOLUONGLE * objct.DONGIASI;
+                            objct.CHIETKHAUTHEOTIEN = objct.THANHTIENTRUOCCHIETKHAU_CT * (decimal)objct.CHIETKHAUTHEOPHANTRAM;
+                            objct.THANHTIENSAUCHIETKHAU_CT = objct.THANHTIENTRUOCCHIETKHAU_CT - objct.CHIETKHAUTHEOTIEN;
+                            result = _hoaDonXuatKhoChiTietService.Modify(objct);
+                            if (result != MethodResult.Succeed)
+                                break;
+                        }
+                    }
+
+                //3.Cap Nhat Gia Mat Hang Neu Co
+                if (result == MethodResult.Succeed)
+                    if (!listCapNhatGia.isNull())
+                        foreach (var mh in listCapNhatGia)
+                        {
+                            result = _matHangService.Modify(mh);
+                            if (result != MethodResult.Succeed)
+                                break;
+                        }
+
+                //4.Luu
+                if (result != MethodResult.Succeed)
+                {
+                    _unitOfWork?.Rollback();
+                    ErrMsg = _hoaDonXuatKhoChiTietService.ErrMsg;
+                    result = MethodResult.Failed;
+                }
+                else
+                {
+                    if (isCommitted)
+                    {
+                        _unitOfWork?.Commit();
+                        result = MethodResult.Succeed;
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                _unitOfWork?.Rollback();
+                ErrMsg = exception.Message;
+                result = MethodResult.Failed;
+            }
+            return result;
         }
 
         public MethodResult HuyMatHangTrongHoaDon(string maHoaDon, List<HOADONXUATKHOCHITIET> hoaDonNhapKhoChiTiets, bool isCommitted = true)
         {
-            //1.Them Hoa Don
-            //2.Them Chi Tiet
-            //3.Cap Nhat Gia Nhap Mat Hang
-            //4.Luu
-
             if (hoaDonNhapKhoChiTiets.isNull())
             {
                 ErrMsg = "Không tìm thấy mặt hàng trong hóa đơn !!!";
@@ -213,10 +283,6 @@ namespace WH.Service
             return _hoaDonXuatKhoChiTietService.Find(s => s.MAMATHANG == maMatHang && s.MAHOADON == maHoaDon);
         }
 
-        public MATHANG GetModel_MH_HD_XK_CT(HOADONXUATKHOCHITIET objChiTiet)
-        {
-            throw new NotImplementedException();
-        }
 
         #endregion
 
@@ -703,9 +769,7 @@ namespace WH.Service
 
         #region NghiepVu
 
-        public MethodResult NhapMatHangVaoHoaDonTam(string maHoaDon,
-            List<TEMP_HOADONXUATKHOCHITIET> tempHoaDonNhapKhoChiTiets, List<MATHANG> listCapNhatGia,
-            bool isCommitted = true)
+        public MethodResult NhapMatHangVaoHoaDonTam(string maHoaDon, List<TEMP_HOADONXUATKHOCHITIET> tempHoaDonNhapKhoChiTiets, List<MATHANG> listCapNhatGia, bool isCommitted = true)
         {
             //1.Them Chi Tiet Tam
             //2.Cap Nhat Gia Nhap Mat Hang
@@ -792,8 +856,6 @@ namespace WH.Service
             }
             return result;
         }
-
-
 
         public MethodResult XoaHoaDonTam(string maHoaDon, bool isCommitted = true)
         {
