@@ -568,7 +568,7 @@ namespace WH.GUI
                     return;
                 }
 
-                var objMathang = XuatKhoService.GetModelMatHang(objChiTiet);
+                var objMathang = XuatKhoService.GetModel_MH_T_HD_XK_CT(objChiTiet);
                 var frm = new FrmInputNumberExport(objMathang, (decimal)objChiTiet.DONGIASI);
                 frm.ShowDialog();
                 var soluongNhap = frm.numImport;

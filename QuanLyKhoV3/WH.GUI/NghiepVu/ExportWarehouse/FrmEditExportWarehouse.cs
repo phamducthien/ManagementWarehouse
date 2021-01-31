@@ -60,7 +60,7 @@ namespace WH.GUI.ExportWarehouse
             get
             {
                 ReloadUnitOfWork();
-                return new XuatKhoService(UnitOfWorkAsync);
+                return new XuatKhoService(_unitOfWorkAsync);
             }
         }
 
@@ -267,28 +267,28 @@ namespace WH.GUI.ExportWarehouse
                 var frm = new FrmInputNumberExportByLoaiExtend(soLuong, objMatHang, true);
                 frm.ShowDialog(this);
 
-                if (frm.lstChiTietXuat.isNullOrZero()) return;
-                if (frm.lstChiTietXuat.Count <= 0) return;
+                if (frm.hoaDonXuatKhoChiTiet.isNullOrZero()) return;
+                if (frm.hoaDonXuatKhoChiTiet.Count <= 0) return;
 
                 var hoaDonNhapKhoChiTiets = new List<HOADONXUATKHOCHITIET>();
-                foreach (var ct in frm.lstChiTietXuat)
+                foreach (var ct in frm.hoaDonXuatKhoChiTiet)
                 {
                     if (ct.SOLUONGLE <= 0) continue;
                     var slNhap = ct.SOLUONGLE;
 
                     if (!CheckTonToiThieu((int)ct.MAMATHANG, (int)slNhap)) continue;
 
-                    var objHoadonhapkhochitiet = ct;
-                    objHoadonhapkhochitiet.MAHOADON = MaHoaDon;
-                    objHoadonhapkhochitiet.MACHITIETHOADON =
+                    var objHoaDonNhapKhoChiTiet = ct;
+                    objHoaDonNhapKhoChiTiet.MAHOADON = MaHoaDon;
+                    objHoaDonNhapKhoChiTiet.MACHITIETHOADON =
                         PrefixContext.MaChiTietHoaDon(MaHoaDon, (int)ct.MAMATHANG);
-                    objHoadonhapkhochitiet.ISDELETE = false;
+                    objHoaDonNhapKhoChiTiet.ISDELETE = false;
 
-                    hoaDonNhapKhoChiTiets.Add(objHoadonhapkhochitiet);
+                    hoaDonNhapKhoChiTiets.Add(objHoaDonNhapKhoChiTiet);
                 }
 
                 xuatKhoService = XuatKhoService;
-                var result = xuatKhoService.NhapMatHangVaoHoaDonTam(MaHoaDon, hoaDonNhapKhoChiTiets, null);
+                var result = xuatKhoService.NhapMatHangVaoHoaDon(MaHoaDon, hoaDonNhapKhoChiTiets, null);
                 if (result != MethodResult.Succeed)
                     ShowMessage(IconMessageBox.Information, xuatKhoService.ErrMsg);
                 else
@@ -343,8 +343,8 @@ namespace WH.GUI.ExportWarehouse
                     return;
                 }
 
-                var soluongTang = 1;
-                if (!CheckTonToiThieu(soluongTang)) return;
+                var soLuongTang = 1;
+                if (!CheckTonToiThieu(soLuongTang)) return;
 
                 if (MaHoaDon.IsBlank() || dgvHoaDon.Rows.Count == 0)
                 {
@@ -353,7 +353,7 @@ namespace WH.GUI.ExportWarehouse
                 }
 
                 var nhapKhoService = XuatKhoService;
-                var result = nhapKhoService.TangSoLuong(objChiTiet.MACHITIETHOADON, soluongTang);
+                var result = nhapKhoService.TangSoLuong(objChiTiet.MACHITIETHOADON, soLuongTang);
                 if (result != MethodResult.Succeed)
                     ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
                 else
@@ -377,21 +377,21 @@ namespace WH.GUI.ExportWarehouse
                     return;
                 }
 
-                var soluongGiam = 1;
+                var soLuongGiam = 1;
                 if (MaHoaDon.IsBlank() || dgvHoaDon.Rows.Count == 0)
                 {
                     ShowMessage(IconMessageBox.Information, "Không có sản phẩm trong hóa đơn!");
                     return;
                 }
 
-                if (objChiTiet.SOLUONGLE - soluongGiam <= 0)
+                if (objChiTiet.SOLUONGLE - soLuongGiam <= 0)
                 {
                     ShowMessage(IconMessageBox.Information, "không thể giảm được nũa!");
                     return;
                 }
 
                 var nhapKhoService = XuatKhoService;
-                var result = nhapKhoService.GiamSoLuong(objChiTiet.MACHITIETHOADON, soluongGiam);
+                var result = nhapKhoService.GiamSoLuong(objChiTiet.MACHITIETHOADON, soLuongGiam);
                 if (result != MethodResult.Succeed)
                     ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
                 else
@@ -422,11 +422,11 @@ namespace WH.GUI.ExportWarehouse
                 }
 
                 var nhapKhoService = XuatKhoService;
-                var lsHoadonhapkhochitiets = new List<HOADONXUATKHOCHITIET>
+                var hoaDonNhapKhoChiTiets = new List<HOADONXUATKHOCHITIET>
                 {
                     objChiTiet
                 };
-                var result = nhapKhoService.HuyMatHangTrongHoaDon(MaHoaDon, lsHoadonhapkhochitiets);
+                var result = nhapKhoService.HuyMatHangTrongHoaDon(MaHoaDon, hoaDonNhapKhoChiTiets);
                 if (result != MethodResult.Succeed)
                     ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
                 else
@@ -450,7 +450,7 @@ namespace WH.GUI.ExportWarehouse
                     return;
                 }
 
-                var objMatHang = XuatKhoService.GetModelMatHang(objChiTiet);
+                var objMatHang = XuatKhoService.GetModelMatHang(objChiTiet.MATHANG.IDUnit);
                 var frm = new FrmInputNumberExport(objMatHang, (decimal)objChiTiet.DONGIASI);
                 frm.ShowDialog();
                 var soLuongNhap = frm.numImport;
@@ -474,12 +474,12 @@ namespace WH.GUI.ExportWarehouse
                 objChiTiet.DONGIASI = giaBan;
                 objChiTiet.SOLUONGLE = soLuongNhap;
 
-                var lsTempHoadonhapkhochitiets = new List<TEMP_HOADONXUATKHOCHITIET>
+                var hoaDonNhapKhoChiTiets = new List<HOADONXUATKHOCHITIET>
                 {
                     objChiTiet
                 };
 
-                var result = nhapKhoService.CapNhatMatHangTrongHoaDonTam(lsTempHoadonhapkhochitiets);
+                var result = nhapKhoService.CapNhatMatHangTrongHoaDon(hoaDonNhapKhoChiTiets);
                 if (result != MethodResult.Succeed)
                     ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
                 else
@@ -495,9 +495,9 @@ namespace WH.GUI.ExportWarehouse
         {
             try
             {
-                var textSerach = txtTimKiem.Text.Trim();
+                var textSearch = txtTimKiem.Text.Trim();
                 var nhapKhoService = XuatKhoService;
-                var lstMatHangs = nhapKhoService.SearchMatHangs(textSerach);
+                var lstMatHangs = nhapKhoService.SearchMatHangs(textSearch);
                 LoadData(lstMatHangs.ToDatatable());
                 txtTimKiem.SelectAll();
                 txtTimKiem.Select();
@@ -510,6 +510,7 @@ namespace WH.GUI.ExportWarehouse
 
         private void ActionThanhToan()
         {
+            decimal giamGia = 0;
             try
             {
                 if (MaHoaDon.IsBlank())
@@ -525,19 +526,15 @@ namespace WH.GUI.ExportWarehouse
                 }
 
                 if (labTongTien.Values.ExtraText.ToDecimal() == 0 &&
-                    ShowMessage(IconMessageBox.Question,
-                        "Tổng tiền hóa đơn bán hàng bằng 0, bạn có muốn tiếp tục tạo hóa đơn này không?") ==
-                    DialogResult.No)
+                    ShowMessage(IconMessageBox.Question, "Tổng tiền hóa đơn bán hàng bằng 0, bạn có muốn tiếp tục tạo hóa đơn này không?") == DialogResult.No)
                     return;
 
                 if (LsTempHoadonxuatkhochitiets.isNull()) return;
                 if (dgvHoaDon.Rows.Count == 0) return;
 
                 var tienChi = txtTienChi.Text.ToDecimal();
-                decimal giamGia = 0;
                 var service = XuatKhoService;
-                var result = service.ThanhToan(MaHoaDon, labCreatedDate.Text.ToDateTime(), KhachHangModel.MAKHACHHANG, tienChi,
-                    giamGia, txtGhiChu.Text);
+                var result = service.ThanhToan(MaHoaDon, labCreatedDate.Text.ToDateTime(), KhachHangModel.MAKHACHHANG, tienChi, giamGia, txtGhiChu.Text);
                 if (result != MethodResult.Succeed)
                 {
                     ShowMessage(IconMessageBox.Information, service.ErrMsg);
@@ -553,7 +550,7 @@ namespace WH.GUI.ExportWarehouse
                     txtGhiChu.Text = string.Empty;
                     KhachHangModel = null;
                     LoadDataAllMatHang();
-                    labCreatedDate.Text = DateTime.Now.ToString();
+                    labCreatedDate.Text = DateTime.Now.ToString(CultureInfo.InvariantCulture);
                     frm.Dispose();
                 }
             }
@@ -571,23 +568,19 @@ namespace WH.GUI.ExportWarehouse
         {
             try
             {
-                if (IsSelect)
-                {
-                    Model = null;
-                    if (dgvDanhMuc.SelectedRows.Count > 0)
-                    {
-                        var row = dgvDanhMuc.SelectedRows[0];
-                        if (row == null) return;
+                if (!IsSelect) return;
+                Model = null;
+                if (dgvDanhMuc.SelectedRows.Count <= 0) return;
+                var row = dgvDanhMuc.SelectedRows[0];
+                if (row == null) return;
 
-                        var sId = row.Cells["DanhMuc_IDUnit"].Value.ToString();
-                        if (sId == "") return;
+                var sId = row.Cells["DanhMuc_IDUnit"].Value.ToString();
+                if (sId == "") return;
 
-                        var service = XuatKhoService;
-                        Model = service.GetModelMatHang(sId);
-                        KhoMatHangModel = service.GetModelKhoMatHang(sId);
-                        CurrentRow = row;
-                    }
-                }
+                var service = XuatKhoService;
+                Model = service.GetModelMatHang(sId);
+                KhoMatHangModel = service.GetModelKhoMatHang(sId);
+                CurrentRow = row;
             }
             catch (Exception ex)
             {
@@ -611,7 +604,7 @@ namespace WH.GUI.ExportWarehouse
 
                         if (sId == "") return;
                         var service = XuatKhoService;
-                        ModelChiTiet = service.GetModelChiTietTam(sId);
+                        ModelChiTiet = service.GetModelChiTiet(sId);
                         KhoMatHangModel = service.GetModelKhoMatHang(ModelChiTiet.MAMATHANG.ToString());
                         CurrentRow2 = row;
                     }
@@ -625,7 +618,7 @@ namespace WH.GUI.ExportWarehouse
 
         private void LoadHoaDon()
         {
-            LsTempHoadonxuatkhochitiets = XuatKhoService.LoadHoaDonTam(MaHoaDon);
+            LsTempHoadonxuatkhochitiets = XuatKhoService.LoadHoaDon(MaHoaDon);
             var list = LsTempHoadonxuatkhochitiets
                 .OrderBy(s => s.GHICHU.ToInt())
                 .Join(DataList,
@@ -656,11 +649,11 @@ namespace WH.GUI.ExportWarehouse
         private void LoadDataAllMatHang()
         {
             DataList = XuatKhoService.GetListMatHang();
-            int Sothutu = 1;
+            int soThuTu = 1;
             var lstMatHangs = from a in this.DataList
                               select new
                               {
-                                  STT = Sothutu++,
+                                  STT = soThuTu++,
                                   a.IDUnit,
                                   a.TENMATHANG,
                                   a.GIALE,
@@ -671,17 +664,17 @@ namespace WH.GUI.ExportWarehouse
                                   a.GHICHU
                               };
 
-            LoadData(lstMatHangs.ToList()); //.ToDatatable()
+            LoadData(lstMatHangs.ToList());
         }
 
         private void LoadDataCanNhapMatHang()
         {
             DataList = XuatKhoService.GetListMatHangCanNhap();
-            int sothutu = 1;
+            int soThuTu = 1;
             var lstMatHangs = from a in this.DataList
                               select new
                               {
-                                  STT = sothutu++,
+                                  STT = soThuTu++,
                                   a.IDUnit,
                                   a.TENMATHANG,
                                   a.GIALE,
@@ -698,11 +691,11 @@ namespace WH.GUI.ExportWarehouse
         private void LoadDataCanXuatMatHang()
         {
             DataList = XuatKhoService.GetListMatHangCanXuat();
-            int sothutu = 1;
+            int soThuTu = 1;
             var lstMatHangs = from a in this.DataList
                               select new
                               {
-                                  STT = sothutu++,
+                                  STT = soThuTu++,
                                   a.IDUnit,
                                   a.TENMATHANG,
                                   a.GIALE,
@@ -718,17 +711,17 @@ namespace WH.GUI.ExportWarehouse
 
         private bool CheckTonToiThieu(int slNhap, bool isCapNhat = false)
         {
-            decimal sltronghoadon = 0;
+            decimal slTrongHoaDon = 0;
             decimal slTonKho = 0;
             var service = XuatKhoService;
-            ModelChiTiet = service.GetModelChiTietTam(Model.MAMATHANG, MaHoaDon);
+            ModelChiTiet = service.GetModelChiTiet(Model.MAMATHANG, MaHoaDon);
             KhoMatHangModel = service.GetModelKhoMatHang(Model.MAMATHANG.ToString());
             var mathangModel = service.GetModelMatHang(Model.MAMATHANG.ToString());
             if (ModelChiTiet != null)
-                sltronghoadon = ModelChiTiet.SOLUONGLE ?? 0;
+                slTrongHoaDon = ModelChiTiet.SOLUONGLE ?? 0;
             if (KhoMatHangModel != null)
                 slTonKho = KhoMatHangModel.SOLUONGLE ?? 0;
-            var soluong = slTonKho - slNhap - sltronghoadon;
+            var soluong = slTonKho - slNhap - slTrongHoaDon;
             if (isCapNhat)
                 soluong = slTonKho - slNhap;
 
@@ -752,39 +745,38 @@ namespace WH.GUI.ExportWarehouse
 
         private bool CheckTonToiThieu(int maMatHang, int slNhap, bool isCapNhat = false)
         {
-            decimal sltronghoadon = 0;
             decimal slTonKho = 0;
             var service = XuatKhoService;
-            ModelChiTiet = service.GetModelChiTietTam(maMatHang, MaHoaDon);
+            ModelChiTiet = service.GetModelChiTiet(maMatHang, MaHoaDon);
             KhoMatHangModel = service.GetModelKhoMatHang(maMatHang.ToString());
-            var mathangModel = service.GetModelMatHang(maMatHang.ToString());
-            sltronghoadon = ModelChiTiet?.SOLUONGLE ?? 0;
+            var matHangModel = service.GetModelMatHang(maMatHang.ToString());
+            var slTrongHoaDon = ModelChiTiet?.SOLUONGLE ?? 0;
 
             if (KhoMatHangModel != null)
             {
                 slTonKho = KhoMatHangModel.SOLUONGLE ?? 0;
             }
 
-            int soluong = (int)(slTonKho - slNhap - sltronghoadon);
+            int soLuong = (int)(slTonKho - slNhap - slTrongHoaDon);
             if (isCapNhat)
             {
-                soluong = (int)(slTonKho - slNhap);
+                soLuong = (int)(slTonKho - slNhap);
             }
 
-            if (soluong < 0)
+            if (soLuong < 0)
             {
                 ShowMessage(IconMessageBox.Information,
-                    "Số lượng trong mặt hàng " + mathangModel.TENMATHANG + " trong kho chỉ còn " + soluong +
+                    "Số lượng trong mặt hàng " + matHangModel.TENMATHANG + " trong kho chỉ còn " + soLuong +
                     " mặt hàng. Không đủ số lượng mặt hàng này để xuất!!!");
                 return false;
             }
 
-            if (soluong <= mathangModel.NGUONGNHAP)
+            if (soLuong <= matHangModel.NGUONGNHAP)
             {
                 return ShowMessage(IconMessageBox.Question,
-                           "Số lượng trong mặt hàng " + mathangModel.TENMATHANG + " trong kho chỉ còn " + soluong +
+                           "Số lượng trong mặt hàng " + matHangModel.TENMATHANG + " trong kho chỉ còn " + soLuong +
                            " mặt hàng trong kho, đã thấp hơn số mặt hàng tối thiểu " +
-                           (mathangModel?.NGUONGNHAP ?? -1).ToString("## 'mặt hàng'") +
+                           (matHangModel.NGUONGNHAP ?? -1).ToString("## 'mặt hàng'") +
                            " !!! Bạn có muốn tiếp tục xuất mặt hàng này không?") ==
                        DialogResult.Yes;
 

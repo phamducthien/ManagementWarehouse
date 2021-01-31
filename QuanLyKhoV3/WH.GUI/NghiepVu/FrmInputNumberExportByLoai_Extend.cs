@@ -187,7 +187,7 @@ namespace WH.GUI
         public MATHANG Model { get; set; }
         public LOAIMATHANG ModelLoaiMatHang { get; set; }
 
-        public List<HOADONXUATKHOCHITIET> HOADONXUATKHOCHITIET;
+        public List<HOADONXUATKHOCHITIET> hoaDonXuatKhoChiTiet;
         public List<TEMP_HOADONXUATKHOCHITIET> lstChiTietXuat;
         public List<TEMP_HOADONHAPKHOCHITIET> lstChiTietNhap;
         private readonly List<LOAIMATHANG> _lstLoaimathangs;
