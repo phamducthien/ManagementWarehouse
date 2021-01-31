@@ -17,12 +17,12 @@ namespace WH.GUI.ExportWarehouse
     {
         private readonly IUnitOfWorkAsync _unitOfWorkAsync;
 
-        public FrmEditExportWarehouse(HOADONXUATKHO hdXuatKho, List<HOADONXUATKHOCHITIET> lsthdXuatKhoChiTiet, IUnitOfWorkAsync unitOfWorkAsync)
+        public FrmEditExportWarehouse(HOADONXUATKHO hdXuatKho, List<HOADONXUATKHOCHITIET> hoaDonXuatKhoChiTiets, IUnitOfWorkAsync unitOfWorkAsync)
         {
             _unitOfWorkAsync = unitOfWorkAsync;
             InitializeComponent();
 
-            if (hdXuatKho != null && lsthdXuatKhoChiTiet != null)
+            if (hdXuatKho != null && hoaDonXuatKhoChiTiets != null)
             {
                 labCreatedDate.Text = hdXuatKho.NGAYTAOHOADON?.ToString("dd/MM/yyyy");
                 labCustomerName.Text = hdXuatKho.KHACHHANG?.TENKHACHHANG;
@@ -96,20 +96,15 @@ namespace WH.GUI.ExportWarehouse
             }
 
             dgvDanhMuc.CellMouseDoubleClick += DgvDanhMuc_CellMouseDoubleClick;
-            dgvDanhMuc.SelectionChanged += dgvDanhMuc_SelectionChanged;
-            dgvDanhMuc.CellMouseClick += dgvDanhMuc_CellMouseClick;
             dgvDanhMuc.RowPrePaint += dgvDanhMuc_RowPrePaint;
-            dgvDanhMuc.CellEnter += DgvDanhMuc_CellEnter;
 
             dgvHoaDon.RowPrePaint += DgvHoaDon_RowPrePaint;
-            dgvHoaDon.SelectionChanged += DgvHoaDon_SelectionChanged;
             dgvHoaDon.CellMouseDoubleClick += DgvHoaDon_CellMouseDoubleClick;
 
             btnAll.Click += BtnAll_Click;
             btnCanNhap.Click += BtnCanNhap_Click;
             btnCanXuat.Click += BtnCanXuat_Click;
             btnTimKiem.Click += BtnTimKiem_Click;
-            txtTimKiem.TextChanged += TxtTimKiem_TextChanged;
 
             btnTangSL.Click += BtnTangSL_Click;
             btnGiamSL.Click += BtnGiamSL_Click;
@@ -143,11 +138,6 @@ namespace WH.GUI.ExportWarehouse
         private void BtnTimKiem_Click(object sender, EventArgs e)
         {
             ActionTimKiem();
-        }
-
-        private void TxtTimKiem_TextChanged(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
         }
 
         private void BtnCapNhat_Click(object sender, EventArgs e)
@@ -186,39 +176,14 @@ namespace WH.GUI.ExportWarehouse
             ActionNhapMatHangVaoHoaDon();
         }
 
-        private void dgvDanhMuc_SelectionChanged(object sender, EventArgs e)
-        {
-            // GetDataFromDgvDanhMuc();
-        }
-
         private void dgvDanhMuc_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             dgvDanhMuc.Rows[e.RowIndex].Cells[0].Value = e.RowIndex + 1;
         }
 
-        private void dgvDanhMuc_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-        }
-
-        private void DgvDanhMuc_CellEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            //GetDataFromDgvDanhMuc();
-            //FrmInputNumberImport frm = new FrmInputNumberImport(Model);
-            //frm.ShowDialog();
-            //if (frm.Model != null && frm.numImport > 0)
-            //{
-            //    ActionNhapMatHangVaoHoaDon(frm.Model, frm.numImport);
-            //}
-        }
-
         private void DgvHoaDon_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             ActionCapNhatMatHang();
-        }
-
-        private void DgvHoaDon_SelectionChanged(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
         }
 
         private void DgvHoaDon_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -238,9 +203,6 @@ namespace WH.GUI.ExportWarehouse
                 case Keys.Enter:
                     if (txtTimKiem.Focused)
                         btnTimKiem.PerformClick();
-
-                    //if (btnLuu.Visible)
-                    //    btnLuu.PerformClick();
 
                     if (dgvDanhMuc.Focused)
                         ActionNhapMatHangVaoHoaDon();
@@ -493,19 +455,18 @@ namespace WH.GUI.ExportWarehouse
                     return;
                 }
 
-                var objMathang = XuatKhoService.GetModelMatHang(objChiTiet);
-                var frm = new FrmInputNumberExport(objMathang, (decimal)objChiTiet.DONGIASI);
+                var objMatHang = XuatKhoService.GetModelMatHang(objChiTiet);
+                var frm = new FrmInputNumberExport(objMatHang, (decimal)objChiTiet.DONGIASI);
                 frm.ShowDialog();
-                var soluongNhap = frm.numImport;
+                var soLuongNhap = frm.numImport;
                 var giaBan = frm.giaban;
-                //var isChangePrice = frm.IsChangcePrice;
-                if (soluongNhap <= 0)
+                if (soLuongNhap <= 0)
                 {
                     ShowMessage(IconMessageBox.Information, "Số lượng cập nhật phải lớn hơn 0!");
                     return;
                 }
 
-                if (!CheckTonToiThieu(soluongNhap, true)) return;
+                if (!CheckTonToiThieu(soLuongNhap, true)) return;
 
                 if (MaHoaDon.IsBlank() || dgvHoaDon.Rows.Count == 0)
                 {
@@ -516,7 +477,7 @@ namespace WH.GUI.ExportWarehouse
                 var nhapKhoService = XuatKhoService;
 
                 objChiTiet.DONGIASI = giaBan;
-                objChiTiet.SOLUONGLE = soluongNhap;
+                objChiTiet.SOLUONGLE = soLuongNhap;
 
                 var lsTempHoadonhapkhochitiets = new List<TEMP_HOADONXUATKHOCHITIET>
                 {
