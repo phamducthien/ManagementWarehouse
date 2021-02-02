@@ -109,7 +109,7 @@ namespace WH.GUI
                 //    //{
                 //    //    ShowMessage(IconMessageBox.Warning, service.ErrMsg);
                 //    //}
-                //    //IsChangcePrice = result == MethodResult.Succeed;
+                //    //IsChangePrice = result == MethodResult.Succeed;
                 //}
             }
             catch (Exception ex)

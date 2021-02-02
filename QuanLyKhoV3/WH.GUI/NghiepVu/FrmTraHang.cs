@@ -200,9 +200,9 @@ namespace WH.GUI
             //GetDataFromDgvDanhMuc();
             //FrmInputNumberImport frm = new FrmInputNumberImport(MatHangModel);
             //frm.ShowDialog();
-            //if (frm.MatHangModel != null && frm.numImport > 0)
+            //if (frm.MatHangModel != null && frm.NumImport > 0)
             //{
-            //    ActionNhapMatHangVaoHoaDon(frm.MatHangModel, frm.numImport);
+            //    ActionNhapMatHangVaoHoaDon(frm.MatHangModel, frm.NumImport);
             //}
         }
 
@@ -291,10 +291,10 @@ namespace WH.GUI
 
         //        var frm = new FrmInputNumberExportByLoai_Extend(objMathang);
         //        frm.ShowDialog();
-        //        if (frm.numImport <= 0) return;
+        //        if (frm.NumImport <= 0) return;
 
-        //        var slNhap = frm.numImport;
-        //        var isChangePrice = frm.IsChangcePrice;
+        //        var slNhap = frm.NumImport;
+        //        var isChangePrice = frm.IsChangePrice;
 
         //        var lsTempHoadonhapkhochitiets = new List<TEMP_HOADONXUATKHOCHITIET>();
         //        var nhapKhoService = XuatKhoService;
@@ -368,16 +368,16 @@ namespace WH.GUI
                     }
                 }
 
-                var frm = new FrmInputNumberExportByLoaiExtend(soluong, objMathang, true);
+                var frm = new FrmInputNumberExportByLoaiExtend(soluong, objMathang);
                 frm.ShowDialog(this);
 
-                if (frm.lstChiTietXuat.isNullOrZero()) return;
-                if (frm.lstChiTietXuat.Count <= 0) return;
+                if (frm.LstChiTietXuat.isNullOrZero()) return;
+                if (frm.LstChiTietXuat.Count <= 0) return;
 
                 var lsTempHoadonhapkhochitiets = new List<TEMP_HOADONXUATKHOCHITIET>();
 
                 var isChangePrice = false;
-                foreach (var ct in frm.lstChiTietXuat)
+                foreach (var ct in frm.LstChiTietXuat)
                 {
                     if (ct.SOLUONGLE <= 0) continue;
                     var slNhap = ct.SOLUONGLE;
@@ -567,10 +567,10 @@ namespace WH.GUI
                 var objMathang = TraHangService.GetModelMatHang(objChiTiet);
                 var frm = new FrmInputNumberExport(objMathang, (decimal)objChiTiet.DONGIASI);
                 frm.ShowDialog();
-                var soluongNhap = frm.numImport;
-                var giaBan = frm.giaban;
+                var soluongNhap = frm.NumImport;
+                var giaBan = frm.GiaBan;
 
-                //var isChangePrice = frm.IsChangcePrice;
+                //var isChangePrice = frm.IsChangePrice;
                 if (soluongNhap <= 0)
                 {
                     ShowMessage(IconMessageBox.Information, "Số lượng cập nhật phải lớn hơn 0!");

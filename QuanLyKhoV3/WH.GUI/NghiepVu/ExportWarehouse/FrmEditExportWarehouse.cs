@@ -264,14 +264,14 @@ namespace WH.GUI.ExportWarehouse
                     }
                 }
 
-                var frm = new FrmInputNumberExportByLoaiExtend(soLuong, objMatHang, true);
+                var frm = new FrmInputNumberExportByLoaiExtend(soLuong, objMatHang);
                 frm.ShowDialog(this);
 
-                if (frm.hoaDonXuatKhoChiTiet.isNullOrZero()) return;
-                if (frm.hoaDonXuatKhoChiTiet.Count <= 0) return;
+                if (frm.HoaDonXuatKhoChiTiet.isNullOrZero()) return;
+                if (frm.HoaDonXuatKhoChiTiet.Count <= 0) return;
 
                 var hoaDonNhapKhoChiTiets = new List<HOADONXUATKHOCHITIET>();
-                foreach (var ct in frm.hoaDonXuatKhoChiTiet)
+                foreach (var ct in frm.HoaDonXuatKhoChiTiet)
                 {
                     if (ct.SOLUONGLE <= 0) continue;
                     var slNhap = ct.SOLUONGLE;
@@ -453,8 +453,8 @@ namespace WH.GUI.ExportWarehouse
                 var objMatHang = XuatKhoService.GetModelMatHang(objChiTiet.MATHANG.IDUnit);
                 var frm = new FrmInputNumberExport(objMatHang, (decimal)objChiTiet.DONGIASI);
                 frm.ShowDialog();
-                var soLuongNhap = frm.numImport;
-                var giaBan = frm.giaban;
+                var soLuongNhap = frm.NumImport;
+                var giaBan = frm.GiaBan;
                 if (soLuongNhap <= 0)
                 {
                     ShowMessage(IconMessageBox.Information, "Số lượng cập nhật phải lớn hơn 0!");

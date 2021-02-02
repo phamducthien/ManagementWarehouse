@@ -11,83 +11,78 @@ namespace WH.GUI
 {
     public partial class FrmInputNumberExportByLoaiExtend : FrmBase
     {
-        private readonly bool _showCK;
-        private bool bGiaNhap;
-        private int slChiTiet;
-        public FrmInputNumberExportByLoaiExtend(int soluongchitiettronghoadon, MATHANG objMathang, bool showCK = false, bool isGiaNhap = false)
+        private readonly bool _showCk;
+        private readonly bool _bGiaNhap;
+        private readonly int _slChiTiet;
+        public FrmInputNumberExportByLoaiExtend(int soLuongChiTietTrongHoaDon, MATHANG objMatHang, bool showCk = false, bool isGiaNhap = false)
         {
-            slChiTiet = soluongchitiettronghoadon;
-            bGiaNhap = isGiaNhap;
-            _showCK = showCK;
-            Model = objMathang;
-            IsChangcePrice = false;
+            _slChiTiet = soLuongChiTietTrongHoaDon;
+            _bGiaNhap = isGiaNhap;
+            _showCk = showCk;
+            Model = objMatHang;
+            IsChangePrice = false;
             InitializeComponent();
             btnXacNhanXuat.Visible = !isGiaNhap;
             btnXacNhapNhap.Visible = isGiaNhap;
-            numImport = (int)NumSoLuongNhap.Value;
-            if (objMathang.isNull())
+            NumImport = (int)NumSoLuongNhap.Value;
+            if (objMatHang.isNull())
             {
                 ShowMessage(IconMessageBox.Warning, "Không xác định được mặt hàng!");
                 Close();
             }
 
-            _lstLoaimathangs = LoaiMatHangService.FindAll();
+            _lstLoaiMatHangs = LoaiMatHangService.FindAll();
 
             cbxLoai.ValueMember = "MALOAIMATHANG";
             cbxLoai.DisplayMember = "TENLOAIMATHANG";
-            cbxLoai.DataSource = _lstLoaimathangs;
+            cbxLoai.DataSource = _lstLoaiMatHangs;
         }
 
         private void FrmInputNumberExport_Load(object sender, EventArgs e)
         {
-            numImport = (int)NumSoLuongNhap.Value;
+            NumImport = (int)NumSoLuongNhap.Value;
             LoadMatHang((int)Model.MALOAIMATHANG);
         }
 
         private void LoadMatHang(int maLoai)
         {
-            //FrmFlashChild.ShowSplash();
-            //Application.DoEvents();
             Hide();
             SuspendLayout();
-            Loaded = false;
+            _loaded = false;
             flnDSMatHang.Controls.Clear();
-            ModelLoaiMatHang = _lstLoaimathangs.FirstOrDefault(s => s.MALOAIMATHANG == maLoai);
+            ModelLoaiMatHang = _lstLoaiMatHangs.FirstOrDefault(s => s.MALOAIMATHANG == maLoai);
             if (ModelLoaiMatHang.isNull())
             {
                 ShowMessage(IconMessageBox.Warning, "Không xác định được loại mặt hàng!");
                 Close();
             }
 
-            cbxLoai.SelectedValue = ModelLoaiMatHang.MALOAIMATHANG;
-            var soLuong = NumSoLuongNhap.Value;
-            var stt = 1;
-
-            //var ucChiTiet = new ucMatHangChiTiet(MatHangModel, soLuong) { Name = MatHangModel.MAMATHANG.ToString(), Tag = stt++};
-            //flnDSMatHang.Controls.Add(ucChiTiet);
-
-            foreach (var mh in ModelLoaiMatHang?.MATHANGs.OrderBy(s => s.TENDONVI))
+            if (ModelLoaiMatHang != null)
             {
-                if (mh.ISDELETE == true) continue;
-                //if (mh.MAMATHANG == MatHangModel.MAMATHANG) continue;
-                var ucChiTiet = new ucMatHangChiTiet(mh, 0, _showCK, bGiaNhap)
+                cbxLoai.SelectedValue = ModelLoaiMatHang.MALOAIMATHANG;
+                var stt = 1;
+
+                foreach (var mh in ModelLoaiMatHang?.MATHANGs.OrderBy(s => s.TENDONVI))
                 {
-                    Name = mh.MAMATHANG.ToString(),
-                    Tag = stt++,
-                    Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
-                };
-                flnDSMatHang.Controls.Add(ucChiTiet);
+                    if (mh.ISDELETE == true) continue;
+                    var ucChiTiet = new ucMatHangChiTiet(mh, 0, _showCk, _bGiaNhap)
+                    {
+                        Name = mh.MAMATHANG.ToString(),
+                        Tag = stt++,
+                        Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
+                    };
+                    flnDSMatHang.Controls.Add(ucChiTiet);
+                }
             }
 
-            Loaded = true;
+            _loaded = true;
             ResumeLayout();
             Show();
-            //FrmFlashChild.CloseSplash();
         }
 
         private void radTatCa_CheckedChanged(object sender, EventArgs e)
         {
-            numImport = (int)NumSoLuongNhap.Value;
+            NumImport = (int)NumSoLuongNhap.Value;
             foreach (var uc in flnDSMatHang.Controls.OfType<ucMatHangChiTiet>())
             {
                 uc.cbxMatHang.Checked = radTatCa.Checked;
@@ -97,7 +92,7 @@ namespace WH.GUI
 
         private void radDau_CheckedChanged(object sender, EventArgs e)
         {
-            numImport = (int)NumSoLuongNhap.Value;
+            NumImport = (int)NumSoLuongNhap.Value;
             var count = flnDSMatHang.Controls.OfType<ucMatHangChiTiet>().Count() / 2;
             foreach (var uc in flnDSMatHang.Controls.OfType<ucMatHangChiTiet>())
                 if (uc.Tag.ToString().ToInt() <= count || count == 0)
@@ -114,7 +109,7 @@ namespace WH.GUI
 
         private void radDuoi_CheckedChanged(object sender, EventArgs e)
         {
-            numImport = (int)NumSoLuongNhap.Value;
+            NumImport = (int)NumSoLuongNhap.Value;
             var count = flnDSMatHang.Controls.OfType<ucMatHangChiTiet>().Count() / 2;
             foreach (var uc in flnDSMatHang.Controls.OfType<ucMatHangChiTiet>())
                 if (uc.Tag.ToString().ToInt() > count && count > 0)
@@ -131,47 +126,43 @@ namespace WH.GUI
 
         private void cbxLoai_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Loaded) LoadMatHang((cbxLoai.SelectedItem as LOAIMATHANG).MALOAIMATHANG);
+            if (_loaded) LoadMatHang(((LOAIMATHANG)cbxLoai.SelectedItem).MALOAIMATHANG);
         }
 
         private void btnXacNhan_Click(object sender, EventArgs e)
         {
             var count = flnDSMatHang.Controls.OfType<ucMatHangChiTiet>().Count(s => s.cbxMatHang.Checked);
             if (count <= 0) return;
-            lstChiTietXuat = new List<TEMP_HOADONXUATKHOCHITIET>(count);
-            int stt = slChiTiet + 1;
+            LstChiTietXuat = new List<TEMP_HOADONXUATKHOCHITIET>(count);
+            var stt = _slChiTiet + 1;
             foreach (var uc in flnDSMatHang.Controls.OfType<ucMatHangChiTiet>().OrderBy(s => s.Tag))
             {
                 if (!uc.cbxMatHang.Checked) continue;
 
-                //decimal chietkhau = uc.numCK.Value == 0 ? 0 : uc.numCK.Value / 100;
-                //if (!_showCK)
-                var chietkhau = uc.numCK.Value / 100;
+                var chietKhau = uc.numCK.Value / 100;
 
                 var ct = new TEMP_HOADONXUATKHOCHITIET
                 {
-                    GHICHU = stt++.ToString(),//DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") +" "+uc.Mathang.TENLOAI + " " +uc.Tag.ToString(),
+                    GHICHU = stt++.ToString(),
                     MAKHO = SessionModel.CurrentSession.KhoMatHang.MAKHO,
                     MAMATHANG = uc.Mathang.MAMATHANG,
-                    //MAHOADON = MaHoaDon,
-                    //MACHITIETHOADON = PrefixContext.MaChiTietHoaDon(MaHoaDon, (int)ct.MAMATHANG),
                     DONGIASI = uc.numGiaNhap.Value,
                     SOLUONGLE = uc.NumSoLuongNhap.Value,
                     SOLUONGSI = uc.Mathang.GIANHAP, //Gia Nhap
 
-                    CHIETKHAUTHEOPHANTRAM = (double?)chietkhau ?? 0,
+                    CHIETKHAUTHEOPHANTRAM = (double?)chietKhau,
                     THANHTIENTRUOCCHIETKHAU_CT = uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value,
                     CHIETKHAUTHEOTIEN =
                         uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value -
-                        uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * (1 - chietkhau),
+                        uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * (1 - chietKhau),
 
                     THANHTIENSAUCHIETKHAU_CT =
-                        uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * (1 - chietkhau) +
+                        uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * (1 - chietKhau) +
                         (uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * uc.Mathang.VAT ?? 0),
 
                     ISDELETE = uc.IsChangcePrice
                 };
-                lstChiTietXuat.Add(ct);
+                LstChiTietXuat.Add(ct);
             }
 
             Close();
@@ -179,7 +170,7 @@ namespace WH.GUI
 
         private void NumSoLuongNhap_ValueChanged(object sender, EventArgs e)
         {
-            numImport = (int)NumSoLuongNhap.Value;
+            NumImport = (int)NumSoLuongNhap.Value;
         }
 
         #region Inits
@@ -187,23 +178,13 @@ namespace WH.GUI
         public MATHANG Model { get; set; }
         public LOAIMATHANG ModelLoaiMatHang { get; set; }
 
-        public List<HOADONXUATKHOCHITIET> hoaDonXuatKhoChiTiet;
-        public List<TEMP_HOADONXUATKHOCHITIET> lstChiTietXuat;
-        public List<TEMP_HOADONHAPKHOCHITIET> lstChiTietNhap;
-        private readonly List<LOAIMATHANG> _lstLoaimathangs;
-        public static int numImport { get; set; }
-        public bool IsChangcePrice { get; set; }
-        private readonly decimal _oldGia;
-        private bool Loaded;
-
-        private IMATHANGService MatHangService
-        {
-            get
-            {
-                ReloadUnitOfWork();
-                return new MATHANGService(UnitOfWorkAsync);
-            }
-        }
+        public List<HOADONXUATKHOCHITIET> HoaDonXuatKhoChiTiet;
+        public List<TEMP_HOADONXUATKHOCHITIET> LstChiTietXuat;
+        public List<TEMP_HOADONHAPKHOCHITIET> LstChiTietNhap;
+        private readonly List<LOAIMATHANG> _lstLoaiMatHangs;
+        public static int NumImport { get; set; }
+        public bool IsChangePrice { get; set; }
+        private bool _loaded;
 
         private ILOAIMATHANGService LoaiMatHangService
         {
@@ -220,34 +201,25 @@ namespace WH.GUI
         {
             var count = flnDSMatHang.Controls.OfType<ucMatHangChiTiet>().Count(s => s.cbxMatHang.Checked);
             if (count <= 0) return;
-            lstChiTietNhap = new List<TEMP_HOADONHAPKHOCHITIET>(count);
-            int stt = slChiTiet + 1;
+            LstChiTietNhap = new List<TEMP_HOADONHAPKHOCHITIET>(count);
+            int stt = _slChiTiet + 1;
             foreach (var uc in flnDSMatHang.Controls.OfType<ucMatHangChiTiet>())
             {
                 if (!uc.cbxMatHang.Checked) continue;
-
-                //decimal chietkhau = uc.numCK.Value == 0 ? 0 : uc.numCK.Value / 100;
-                //if (!_showCK)
-                var chietkhau = uc.numCK.Value / 100;
-
                 var ct = new TEMP_HOADONHAPKHOCHITIET()
                 {
                     MAKHO = SessionModel.CurrentSession.KhoMatHang.MAKHO,
                     MAMATHANG = uc.Mathang.MAMATHANG,
                     DONGIA = uc.numGiaNhap.Value,
-
-                    //MAHOADON = MaHoaDon,
-                    //MACHITIETHOADON = PrefixContext.MaChiTietHoaDon(MaHoaDon, (int)ct.MAMATHANG),
                     SOLUONGLE = uc.NumSoLuongNhap.Value,
                     SOLUONGSI = 0,
                     THANHTIENTRUOCCHIETKHAU_CT = uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value,
                     TIENVAT = uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * uc.Mathang.VAT ?? 0,
                     THANHTIENSAUCHIETKHAU_CT = uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value + (uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * uc.Mathang.VAT ?? 0),
-                    GHICHU_CT = stt++.ToString(),//uc.Mathang.TENLOAI + " " +uc.Tag.ToString()+" "+ DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss:ffff"),
-                    //GHICHU_CT = uc.Tag.ToString(),
+                    GHICHU_CT = stt++.ToString(),
                     ISDELETE = false
                 };
-                lstChiTietNhap.Add(ct);
+                LstChiTietNhap.Add(ct);
             }
 
             Close();

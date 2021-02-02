@@ -1,7 +1,6 @@
 ﻿using System;
 using Util.Pattern;
 using WH.Entity;
-using WH.Service.Service;
 
 namespace WH.GUI
 {
@@ -9,14 +8,14 @@ namespace WH.GUI
     {
         public FrmInputNumberExport(MATHANG objMathang, decimal giaBan, double chietKhau = 0)
         {
-            IsChangcePrice = false;
-            giaban = giaBan;
-            chietkhau = chietKhau;
-            if (!giaban.isNull())
+            IsChangePrice = false;
+            GiaBan = giaBan;
+            ChietKhau = chietKhau;
+            if (!GiaBan.isNull())
             {
                 InitializeComponent();
-                _oldGia = objMathang.GIALE ?? 0;
-                numGiaNhap.Value = giaban;
+                OldGia = objMathang.GIALE ?? 0;
+                numGiaNhap.Value = GiaBan;
                 labTenMatHang.Text = objMathang.TENMATHANG;
                 Model = objMathang;
                 btnUpGiaNhap.Tag = btnDownGiaNhap.Tag = numGiaNhap.Name;
@@ -76,7 +75,7 @@ namespace WH.GUI
         {
             try
             {
-                giaban = numGiaNhap.Value;
+                GiaBan = numGiaNhap.Value;
             }
             catch (Exception ex)
             {
@@ -84,7 +83,7 @@ namespace WH.GUI
             }
             finally
             {
-                numImport = (int)NumSoLuongNhap.Value;
+                NumImport = (int)NumSoLuongNhap.Value;
                 Close();
             }
         }
@@ -92,21 +91,11 @@ namespace WH.GUI
         #region Inits
 
         public MATHANG Model { get; set; }
-        public int numImport { get; set; }
-        public decimal giaban { get; set; }
-        public double chietkhau { get; set; }
-        public bool IsChangcePrice { get; set; }
-        private readonly decimal _oldGia;
-
-        private IMATHANGService MatHangService
-        {
-            get
-            {
-                ReloadUnitOfWork();
-                return new MATHANGService(UnitOfWorkAsync);
-            }
-        }
-
+        public int NumImport { get; set; }
+        public decimal GiaBan { get; set; }
+        public double ChietKhau { get; set; }
+        public bool IsChangePrice { get; set; }
+        public readonly decimal OldGia;
         #endregion
     }
 }

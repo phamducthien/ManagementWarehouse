@@ -203,9 +203,9 @@ namespace WH.GUI
             //GetDataFromDgvDanhMuc();
             //FrmInputNumberImport frm = new FrmInputNumberImport(MatHangModel);
             //frm.ShowDialog();
-            //if (frm.MatHangModel != null && frm.numImport > 0)
+            //if (frm.MatHangModel != null && frm.NumImport > 0)
             //{
-            //    ActionNhapMatHangVaoHoaDon(frm.MatHangModel, frm.numImport);
+            //    ActionNhapMatHangVaoHoaDon(frm.MatHangModel, frm.NumImport);
             //}
         }
 
@@ -348,11 +348,11 @@ namespace WH.GUI
 
         //        var frm = new FrmInputNumberImport(objMathang, (decimal) objMathang.GIANHAP);
         //        frm.ShowDialog();
-        //        if (frm.numImport <= 0) return;
+        //        if (frm.NumImport <= 0) return;
 
-        //        var slNhap = frm.numImport;
+        //        var slNhap = frm.NumImport;
         //        var gianhap = frm.gianhap;
-        //        //bool isChangePrice = frm.IsChangcePrice;
+        //        //bool isChangePrice = frm.IsChangePrice;
 
         //        if (!CheckTonToiDa(slNhap)) return;
 
@@ -412,15 +412,15 @@ namespace WH.GUI
                             .ToInt();
                     }
                 }
-                var frm = new FrmInputNumberExportByLoaiExtend(soluong, objMathang, false, true);
+                var frm = new FrmInputNumberExportByLoaiExtend(soluong, objMathang, true);
                 frm.ShowDialog(this);
 
-                if (frm.lstChiTietNhap.isNullOrZero()) return;
-                if (frm.lstChiTietNhap.Count <= 0) return;
+                if (frm.LstChiTietNhap.isNullOrZero()) return;
+                if (frm.LstChiTietNhap.Count <= 0) return;
 
                 var lsTempHoadonhapkhochitiets = new List<TEMP_HOADONHAPKHOCHITIET>();
 
-                foreach (var ct in frm.lstChiTietNhap)
+                foreach (var ct in frm.LstChiTietNhap)
                 {
                     if (ct.SOLUONGLE <= 0) continue;
                     var slNhap = ct.SOLUONGLE;
@@ -601,7 +601,7 @@ namespace WH.GUI
                 frm.ShowDialog();
                 var soluongNhap = frm.numImport;
                 var giaNhap = frm.gianhap;
-                //bool isChangePrice = frm.IsChangcePrice;
+                //bool isChangePrice = frm.IsChangePrice;
                 if (soluongNhap <= 0)
                 {
                     ShowMessage(IconMessageBox.Information, "Số lượng cập nhạt phải lớn hơn 0!");

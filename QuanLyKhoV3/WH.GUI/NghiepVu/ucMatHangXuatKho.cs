@@ -74,7 +74,7 @@ namespace WH.GUI
 
         private void cbxMatHang_CheckedChanged(object sender, EventArgs e)
         {
-            NumSoLuongNhap.Value = !cbxMatHang.Checked ? 0 : FrmInputNumberExportByLoaiExtend.numImport;
+            NumSoLuongNhap.Value = !cbxMatHang.Checked ? 0 : FrmInputNumberExportByLoaiExtend.NumImport;
         }
     }
 }
