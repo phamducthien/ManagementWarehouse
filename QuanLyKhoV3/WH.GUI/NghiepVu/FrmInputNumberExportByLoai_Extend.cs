@@ -63,13 +63,13 @@ namespace WH.GUI
             var soLuong = NumSoLuongNhap.Value;
             var stt = 1;
 
-            //var ucChiTiet = new ucMatHangChiTiet(Model, soLuong) { Name = Model.MAMATHANG.ToString(), Tag = stt++};
+            //var ucChiTiet = new ucMatHangChiTiet(MatHangModel, soLuong) { Name = MatHangModel.MAMATHANG.ToString(), Tag = stt++};
             //flnDSMatHang.Controls.Add(ucChiTiet);
 
             foreach (var mh in ModelLoaiMatHang?.MATHANGs.OrderBy(s => s.TENDONVI))
             {
                 if (mh.ISDELETE == true) continue;
-                //if (mh.MAMATHANG == Model.MAMATHANG) continue;
+                //if (mh.MAMATHANG == MatHangModel.MAMATHANG) continue;
                 var ucChiTiet = new ucMatHangChiTiet(mh, 0, _showCK, bGiaNhap)
                 {
                     Name = mh.MAMATHANG.ToString(),

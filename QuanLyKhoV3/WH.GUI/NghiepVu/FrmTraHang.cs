@@ -198,11 +198,11 @@ namespace WH.GUI
         private void DgvDanhMuc_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             //GetDataFromDgvDanhMuc();
-            //FrmInputNumberImport frm = new FrmInputNumberImport(Model);
+            //FrmInputNumberImport frm = new FrmInputNumberImport(MatHangModel);
             //frm.ShowDialog();
-            //if (frm.Model != null && frm.numImport > 0)
+            //if (frm.MatHangModel != null && frm.numImport > 0)
             //{
-            //    ActionNhapMatHangVaoHoaDon(frm.Model, frm.numImport);
+            //    ActionNhapMatHangVaoHoaDon(frm.MatHangModel, frm.numImport);
             //}
         }
 
@@ -286,7 +286,7 @@ namespace WH.GUI
         //    try
         //    {
         //        GetDataFromDgvDanhMuc();
-        //        var objMathang = Model;
+        //        var objMathang = MatHangModel;
         //        if (objMathang == null) return;
 
         //        var frm = new FrmInputNumberExportByLoai_Extend(objMathang);
@@ -859,7 +859,7 @@ namespace WH.GUI
 
             if (ModelChiTiet != null) sltronghoadon = ModelChiTiet.SOLUONGLE ?? 0;
             if (KhoMatHangModel != null) slTonKho = KhoMatHangModel.SOLUONGLE ?? 0;
-            // Model.NGUONGXUAT Ton Toi Da
+            // MatHangModel.NGUONGXUAT Ton Toi Da
             var soluong = slTonKho + slNhap + sltronghoadon - Model.NGUONGXUAT ?? 0;
 
             if (soluong > 0 && Model.NGUONGXUAT > 0)

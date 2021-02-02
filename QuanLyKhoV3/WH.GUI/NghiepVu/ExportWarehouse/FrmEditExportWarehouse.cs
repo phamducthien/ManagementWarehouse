@@ -47,7 +47,7 @@ namespace WH.GUI.ExportWarehouse
 
         #region Init
 
-        public MATHANG Model { get; set; }
+        public MATHANG MatHangModel { get; set; }
         public KHACHHANG KhachHangModel { get; set; }
         public KHOMATHANG KhoMatHangModel { get; set; }
         public List<MATHANG> DataList { get; set; }
@@ -247,7 +247,7 @@ namespace WH.GUI.ExportWarehouse
             try
             {
                 GetDataFromDgvDanhMuc();
-                var objMatHang = Model;
+                var objMatHang = MatHangModel;
                 if (objMatHang == null) return;
 
                 var soLuong = 0;
@@ -569,7 +569,7 @@ namespace WH.GUI.ExportWarehouse
             try
             {
                 if (!IsSelect) return;
-                Model = null;
+                MatHangModel = null;
                 if (dgvDanhMuc.SelectedRows.Count <= 0) return;
                 var row = dgvDanhMuc.SelectedRows[0];
                 if (row == null) return;
@@ -578,7 +578,7 @@ namespace WH.GUI.ExportWarehouse
                 if (sId == "") return;
 
                 var service = XuatKhoService;
-                Model = service.GetModelMatHang(sId);
+                MatHangModel = service.GetModelMatHang(sId);
                 KhoMatHangModel = service.GetModelKhoMatHang(sId);
                 CurrentRow = row;
             }
@@ -714,9 +714,9 @@ namespace WH.GUI.ExportWarehouse
             decimal slTrongHoaDon = 0;
             decimal slTonKho = 0;
             var service = XuatKhoService;
-            ModelChiTiet = service.GetModelChiTiet(Model.MAMATHANG, MaHoaDon);
-            KhoMatHangModel = service.GetModelKhoMatHang(Model.MAMATHANG.ToString());
-            var mathangModel = service.GetModelMatHang(Model.MAMATHANG.ToString());
+            ModelChiTiet = service.GetModelChiTiet(MatHangModel.MAMATHANG, MaHoaDon);
+            KhoMatHangModel = service.GetModelKhoMatHang(MatHangModel.MAMATHANG.ToString());
+            var mathangModel = service.GetModelMatHang(MatHangModel.MAMATHANG.ToString());
             if (ModelChiTiet != null)
                 slTrongHoaDon = ModelChiTiet.SOLUONGLE ?? 0;
             if (KhoMatHangModel != null)
@@ -733,7 +733,7 @@ namespace WH.GUI.ExportWarehouse
                 return false;
             }
 
-            if (soluong <= Model.NGUONGNHAP)
+            if (soluong <= MatHangModel.NGUONGNHAP)
                 return ShowMessage(IconMessageBox.Question,
                            "Số lượng trong mặt hàng trong kho chỉ còn " + soluong +
                            " mặt hàng trong kho, đã thấp hơn số mặt hàng tối thiểu " +

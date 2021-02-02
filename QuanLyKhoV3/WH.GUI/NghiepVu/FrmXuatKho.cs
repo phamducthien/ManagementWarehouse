@@ -207,11 +207,11 @@ namespace WH.GUI
         private void DgvDanhMuc_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             //GetDataFromDgvDanhMuc();
-            //FrmInputNumberImport frm = new FrmInputNumberImport(Model);
+            //FrmInputNumberImport frm = new FrmInputNumberImport(MatHangModel);
             //frm.ShowDialog();
-            //if (frm.Model != null && frm.numImport > 0)
+            //if (frm.MatHangModel != null && frm.numImport > 0)
             //{
-            //    ActionNhapMatHangVaoHoaDon(frm.Model, frm.numImport);
+            //    ActionNhapMatHangVaoHoaDon(frm.MatHangModel, frm.numImport);
             //}
         }
 
@@ -295,7 +295,7 @@ namespace WH.GUI
         //    try
         //    {
         //        GetDataFromDgvDanhMuc();
-        //        var objMathang = Model;
+        //        var objMathang = MatHangModel;
         //        if (objMathang == null) return;
 
         //        var frm = new FrmInputNumberExportByLoai_Extend(objMathang);

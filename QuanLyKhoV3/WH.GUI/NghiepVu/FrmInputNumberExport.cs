@@ -56,8 +56,6 @@ namespace WH.GUI
         private void ActionTinhTien()
         {
             decimal thanhtien = 0;
-            //numGiaNhap.Refresh();
-            //NumSoLuongNhap.Refresh();
             try
             {
                 thanhtien = numGiaNhap.Value * NumSoLuongNhap.Value;
@@ -79,18 +77,6 @@ namespace WH.GUI
             try
             {
                 giaban = numGiaNhap.Value;
-                //decimal newGia = numGiaNhap.Value;
-                //if (newGia != _oldGia)
-                //{
-                //    Model.GIALE = newGia;
-                //    var service = MatHangService;
-                //    MethodResult result = service.Modify(Model, true);
-                //    if (result != MethodResult.Succeed)
-                //    {
-                //        ShowMessage(IconMessageBox.Warning, service.ErrMsg);
-                //    }
-                //    IsChangcePrice = result == MethodResult.Succeed;
-                //}
             }
             catch (Exception ex)
             {
@@ -98,7 +84,7 @@ namespace WH.GUI
             }
             finally
             {
-                numImport = (int) NumSoLuongNhap.Value;
+                numImport = (int)NumSoLuongNhap.Value;
                 Close();
             }
         }
