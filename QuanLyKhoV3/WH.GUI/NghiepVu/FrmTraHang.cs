@@ -371,13 +371,13 @@ namespace WH.GUI
                 var frm = new FrmInputNumberExportByLoaiExtend(soluong, objMathang);
                 frm.ShowDialog(this);
 
-                if (frm.LstChiTietXuat.isNullOrZero()) return;
-                if (frm.LstChiTietXuat.Count <= 0) return;
+                if (frm.TempHoaDonXuatKhoChiTiet.isNullOrZero()) return;
+                if (frm.TempHoaDonXuatKhoChiTiet.Count <= 0) return;
 
                 var lsTempHoadonhapkhochitiets = new List<TEMP_HOADONXUATKHOCHITIET>();
 
                 var isChangePrice = false;
-                foreach (var ct in frm.LstChiTietXuat)
+                foreach (var ct in frm.TempHoaDonXuatKhoChiTiet)
                 {
                     if (ct.SOLUONGLE <= 0) continue;
                     var slNhap = ct.SOLUONGLE;

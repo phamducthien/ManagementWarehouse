@@ -14,8 +14,10 @@ namespace WH.GUI
         private readonly bool _showCk;
         private readonly bool _bGiaNhap;
         private readonly int _slChiTiet;
-        public FrmInputNumberExportByLoaiExtend(int soLuongChiTietTrongHoaDon, MATHANG objMatHang, bool showCk = false, bool isGiaNhap = false)
+        private readonly string _maHoaDon;
+        public FrmInputNumberExportByLoaiExtend(int soLuongChiTietTrongHoaDon, MATHANG objMatHang, bool showCk = false, bool isGiaNhap = false, string maHoaDon = null)
         {
+            _maHoaDon = maHoaDon;
             _slChiTiet = soLuongChiTietTrongHoaDon;
             _bGiaNhap = isGiaNhap;
             _showCk = showCk;
@@ -133,7 +135,55 @@ namespace WH.GUI
         {
             var count = flnDSMatHang.Controls.OfType<ucMatHangChiTiet>().Count(s => s.cbxMatHang.Checked);
             if (count <= 0) return;
-            LstChiTietXuat = new List<TEMP_HOADONXUATKHOCHITIET>(count);
+            if (!string.IsNullOrEmpty(_maHoaDon))
+            {
+                GetHoaDonXuatKhoChiTiet(count);
+            }
+
+            GetTempHoaDonXuatKhoChiTiet(count);
+
+            Close();
+        }
+
+        private void GetHoaDonXuatKhoChiTiet(int count)
+        {
+            HoaDonXuatKhoChiTiet = new List<HOADONXUATKHOCHITIET>(count);
+            var stt = _slChiTiet + 1;
+            foreach (var uc in flnDSMatHang.Controls.OfType<ucMatHangChiTiet>().OrderBy(s => s.Tag))
+            {
+                if (!uc.cbxMatHang.Checked) continue;
+
+                var chietKhau = uc.numCK.Value / 100;
+
+                var ct = new HOADONXUATKHOCHITIET
+                {
+                    MAHOADON = _maHoaDon,
+                    GHICHU = stt++.ToString(),
+                    MAKHO = SessionModel.CurrentSession.KhoMatHang.MAKHO,
+                    MAMATHANG = uc.Mathang.MAMATHANG,
+                    DONGIASI = uc.numGiaNhap.Value,
+                    SOLUONGLE = uc.NumSoLuongNhap.Value,
+                    SOLUONGSI = uc.Mathang.GIANHAP, //Gia Nhap
+
+                    CHIETKHAUTHEOPHANTRAM = (double?)chietKhau,
+                    THANHTIENTRUOCCHIETKHAU_CT = uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value,
+                    CHIETKHAUTHEOTIEN =
+                        uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value -
+                        uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * (1 - chietKhau),
+
+                    THANHTIENSAUCHIETKHAU_CT =
+                        uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * (1 - chietKhau) +
+                        (uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * uc.Mathang.VAT ?? 0),
+
+                    ISDELETE = uc.IsChangcePrice
+                };
+                HoaDonXuatKhoChiTiet.Add(ct);
+            }
+        }
+
+        private void GetTempHoaDonXuatKhoChiTiet(int count)
+        {
+            TempHoaDonXuatKhoChiTiet = new List<TEMP_HOADONXUATKHOCHITIET>(count);
             var stt = _slChiTiet + 1;
             foreach (var uc in flnDSMatHang.Controls.OfType<ucMatHangChiTiet>().OrderBy(s => s.Tag))
             {
@@ -162,10 +212,8 @@ namespace WH.GUI
 
                     ISDELETE = uc.IsChangcePrice
                 };
-                LstChiTietXuat.Add(ct);
+                TempHoaDonXuatKhoChiTiet.Add(ct);
             }
-
-            Close();
         }
 
         private void NumSoLuongNhap_ValueChanged(object sender, EventArgs e)
@@ -179,7 +227,7 @@ namespace WH.GUI
         public LOAIMATHANG ModelLoaiMatHang { get; set; }
 
         public List<HOADONXUATKHOCHITIET> HoaDonXuatKhoChiTiet;
-        public List<TEMP_HOADONXUATKHOCHITIET> LstChiTietXuat;
+        public List<TEMP_HOADONXUATKHOCHITIET> TempHoaDonXuatKhoChiTiet;
         public List<TEMP_HOADONHAPKHOCHITIET> LstChiTietNhap;
         private readonly List<LOAIMATHANG> _lstLoaiMatHangs;
         public static int NumImport { get; set; }

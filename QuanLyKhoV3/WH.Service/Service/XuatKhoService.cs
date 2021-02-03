@@ -18,12 +18,13 @@ namespace WH.Service
 
         List<HOADONXUATKHOCHITIET> LoadHoaDon(string maHoaDon);
 
-        MethodResult NhapMatHangVaoHoaDon(string maHoaDon, List<HOADONXUATKHOCHITIET> hoaDonNhapKhoChiTiets, List<MATHANG> listCapNhatGia, bool isCommitted = true);
+        MethodResult NhapMatHangVaoHoaDon(string maHoaDon, List<HOADONXUATKHOCHITIET> hoaDonXuatKhoChiTiets, List<MATHANG> listCapNhatGia, bool isCommitted = true);
         MethodResult HuyMatHangTrongHoaDon(string maHoaDon, List<HOADONXUATKHOCHITIET> hoaDonNhapKhoChiTiets, bool isCommitted = true);
         MethodResult CapNhatMatHangTrongHoaDon(List<HOADONXUATKHOCHITIET> hoaDonNhapKhoChitTiets, bool isCommitted = true);
 
         HOADONXUATKHOCHITIET GetModelChiTiet(string maChiTiet);
         HOADONXUATKHOCHITIET GetModelChiTiet(int maMatHang, string maHoaDon);
+        decimal CalTotalAmountHoaDon(string maHoaDon);
         #endregion
 
         #region TEMP_HOADONXUATKHOCHITIET
@@ -54,7 +55,7 @@ namespace WH.Service
         MethodResult ThanhToan(DateTime ngayTaoHd, List<HOADONXUATKHO> hoaDonXuatKhos, List<HOADONXUATKHOCHITIET> hoadonxuatkhochitiets, List<PHIEUTHU> lstPhieuThus, bool isCommitted = true);
         MethodResult ThanhToan(List<ExcelHoaDonModelService.HoaDonNhapExcelModel> lstDonNhapExcelModels, bool isCommitted = true);
         string CreateMaHoaDon();
-        decimal CalTotalAmount(string maHoaDon);
+        decimal CalTotalAmountHoaDonTam(string maHoaDon);
         List<TEMP_HOADONXUATKHOCHITIET> LoadHoaDonTam(string maHoaDon);
 
         KHACHHANG GetModelKhachHang(string maKhachHang);
@@ -101,13 +102,13 @@ namespace WH.Service
             return _hoaDonXuatKhoChiTietService.Search(s => s.MAHOADON == maHoaDon);
         }
 
-        public MethodResult NhapMatHangVaoHoaDon(string maHoaDon, List<HOADONXUATKHOCHITIET> hoaDonNhapKhoChiTiets, List<MATHANG> listCapNhatGia, bool isCommitted = true)
+        public MethodResult NhapMatHangVaoHoaDon(string maHoaDon, List<HOADONXUATKHOCHITIET> hoaDonXuatKhoChiTiets, List<MATHANG> listCapNhatGia, bool isCommitted = true)
         {
             //1.Them Chi Tiet
             //2.Cap Nhat Gia Nhap Mat Hang
             //3.Luu
 
-            if (hoaDonNhapKhoChiTiets.isNull())
+            if (hoaDonXuatKhoChiTiets.isNull())
             {
                 ErrMsg = "Không tìm thấy hóa đơn!!!";
                 return MethodResult.Failed;
@@ -120,8 +121,8 @@ namespace WH.Service
                     _unitOfWork.BeginTransaction();
 
                 //2.Them Chi Tiet Mat Hang
-                if (!hoaDonNhapKhoChiTiets.isNull())
-                    foreach (var ct in hoaDonNhapKhoChiTiets)
+                if (!hoaDonXuatKhoChiTiets.isNull())
+                    foreach (var ct in hoaDonXuatKhoChiTiets)
                     {
                         var objct = _hoaDonXuatKhoChiTietService.Find(s => s.MAHOADON == maHoaDon && s.MACHITIETHOADON == ct.MACHITIETHOADON);
                         if (objct.isNull())
@@ -283,12 +284,16 @@ namespace WH.Service
             return _hoaDonXuatKhoChiTietService.Find(s => s.MAMATHANG == maMatHang && s.MAHOADON == maHoaDon);
         }
 
-
+        public decimal CalTotalAmountHoaDon(string maHoaDon)
+        {
+            var totalAmount = LoadHoaDon(maHoaDon).Sum(s => s.THANHTIENSAUCHIETKHAU_CT ?? 0);
+            return totalAmount;
+        }
         #endregion
 
         #region TEMP_HOADONXUATKHOCHITIET
 
-        public decimal CalTotalAmount(string maHoaDon)
+        public decimal CalTotalAmountHoaDonTam(string maHoaDon)
         {
             var totalAmount = LoadHoaDonTam(maHoaDon).Sum(s => s.THANHTIENSAUCHIETKHAU_CT ?? 0);
             return totalAmount;

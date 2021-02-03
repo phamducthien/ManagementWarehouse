@@ -31,7 +31,7 @@ namespace WH.GUI.ExportWarehouse
 
         private void ReloadUnitOfWork()
         {
-            if (unitOfWorkAsync != null) unitOfWorkAsync.Dispose();
+            unitOfWorkAsync?.Dispose();
             unitOfWorkAsync = null;
             unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
         }
@@ -136,7 +136,6 @@ namespace WH.GUI.ExportWarehouse
 
         private void frmCongNoKhachHang_Load(object sender, EventArgs e)
         {
-            //btnXemChiTiet.Enabled = true;
             LoadBill(GetTop10());
         }
 
@@ -273,13 +272,9 @@ namespace WH.GUI.ExportWarehouse
             try
             {
                 treeDanhMuc.Refresh();
-                if (e.RelatedElement is TreeListRow row)
+                if (e.RelatedElement is TreeListRow)
                 {
-                    var ID = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
-                    IXuatKhoService service = new XuatKhoService(unitOfWorkAsync);
-                    var hdKho = service.GetModelHoaDonXuat(ID);
-                    //btnXemChiTiet.Enabled = true;
                 }
             }
             catch (Exception)

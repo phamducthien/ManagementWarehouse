@@ -24,6 +24,8 @@ namespace WH.GUI.ExportWarehouse
 
             if (hdXuatKho != null && hoaDonXuatKhoChiTiets != null)
             {
+                HdXuatKho = hdXuatKho;
+                MaHoaDon = hdXuatKho.MAHOADONXUAT;
                 labCreatedDate.Text = hdXuatKho.NGAYTAOHOADON?.ToString("dd/MM/yyyy");
                 labCustomerName.Text = hdXuatKho.KHACHHANG?.TENKHACHHANG;
                 labTongTien.Values.ExtraText = hdXuatKho.SOTIENTHANHTOAN_HD.ToString();
@@ -46,13 +48,13 @@ namespace WH.GUI.ExportWarehouse
         }
 
         #region Init
-
+        public HOADONXUATKHO HdXuatKho { get; set; }
         public MATHANG MatHangModel { get; set; }
         public KHACHHANG KhachHangModel { get; set; }
         public KHOMATHANG KhoMatHangModel { get; set; }
         public List<MATHANG> DataList { get; set; }
         public HOADONXUATKHOCHITIET ModelChiTiet { get; set; }
-        public List<HOADONXUATKHOCHITIET> LsTempHoadonxuatkhochitiets { get; set; }
+        public List<HOADONXUATKHOCHITIET> hoaDonXuatKhoChiTiets { get; set; }
         public string MaHoaDon { get; set; }
 
         private IXuatKhoService XuatKhoService
@@ -254,17 +256,13 @@ namespace WH.GUI.ExportWarehouse
                 var xuatKhoService = XuatKhoService;
 
                 var hoaDonChiTiets = xuatKhoService.LoadHoaDon(MaHoaDon);
-                if (MaHoaDon.IsBlank())
-                    MaHoaDon = xuatKhoService.CreateMaHoaDon();
-                else
+
+                if (!hoaDonChiTiets.isNullOrZero())
                 {
-                    if (!hoaDonChiTiets.isNullOrZero())
-                    {
-                        soLuong = hoaDonChiTiets.OrderBy(s => s.GHICHU.ToInt()).Last().GHICHU.ToInt();
-                    }
+                    soLuong = hoaDonChiTiets.OrderBy(s => s.GHICHU.ToInt()).Last().GHICHU.ToInt();
                 }
 
-                var frm = new FrmInputNumberExportByLoaiExtend(soLuong, objMatHang);
+                var frm = new FrmInputNumberExportByLoaiExtend(soLuong, objMatHang, false, false, MaHoaDon);
                 frm.ShowDialog(this);
 
                 if (frm.HoaDonXuatKhoChiTiet.isNullOrZero()) return;
@@ -319,7 +317,7 @@ namespace WH.GUI.ExportWarehouse
                 else
                 {
                     txtTienChi.Text = 0.ToString("N1");
-                    var totalAmount = XuatKhoService.CalTotalAmount(MaHoaDon);
+                    var totalAmount = XuatKhoService.CalTotalAmountHoaDonTam(MaHoaDon);
                     labTongTien.Values.ExtraText = ExtendMethod.AdjustRound(decimal.ToDouble(totalAmount))?.ToString(CultureInfo.InvariantCulture);
                     MaHoaDon = "";
                     dgvHoaDon.DataSource = null;
@@ -529,7 +527,7 @@ namespace WH.GUI.ExportWarehouse
                     ShowMessage(IconMessageBox.Question, "Tổng tiền hóa đơn bán hàng bằng 0, bạn có muốn tiếp tục tạo hóa đơn này không?") == DialogResult.No)
                     return;
 
-                if (LsTempHoadonxuatkhochitiets.isNull()) return;
+                if (hoaDonXuatKhoChiTiets.isNull()) return;
                 if (dgvHoaDon.Rows.Count == 0) return;
 
                 var tienChi = txtTienChi.Text.ToDecimal();
@@ -618,8 +616,8 @@ namespace WH.GUI.ExportWarehouse
 
         private void LoadHoaDon()
         {
-            LsTempHoadonxuatkhochitiets = XuatKhoService.LoadHoaDon(MaHoaDon);
-            var list = LsTempHoadonxuatkhochitiets
+            hoaDonXuatKhoChiTiets = XuatKhoService.LoadHoaDon(MaHoaDon);
+            var list = hoaDonXuatKhoChiTiets
                 .OrderBy(s => s.GHICHU.ToInt())
                 .Join(DataList,
                     p => p.MAMATHANG,
@@ -637,7 +635,7 @@ namespace WH.GUI.ExportWarehouse
                         p.GHICHU
                     }).ToList();
             LoadData2(list);
-            var totalAmount = XuatKhoService.CalTotalAmount(MaHoaDon);
+            var totalAmount = XuatKhoService.CalTotalAmountHoaDon(MaHoaDon);
             labTongTien.Values.ExtraText = totalAmount == 0
                 ? "0"
                 : ExtendMethod.AdjustRound(decimal.ToDouble(totalAmount))?.ToString(CultureInfo.InvariantCulture);

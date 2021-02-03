@@ -70,6 +70,7 @@
             this.pnlLine2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.labTongTien = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.pnlInfoNCC = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.labCreatedDate = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.labCustomerName = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -100,7 +101,6 @@
             this.btnCanNhap = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btnCanXuat = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.labCreatedDate = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer.Panel1)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -525,6 +525,16 @@
             this.pnlInfoNCC.Size = new System.Drawing.Size(567, 114);
             this.pnlInfoNCC.StateCommon.Color1 = System.Drawing.Color.Transparent;
             this.pnlInfoNCC.TabIndex = 675;
+            // 
+            // labCreatedDate
+            // 
+            this.labCreatedDate.Location = new System.Drawing.Point(111, 37);
+            this.labCreatedDate.Name = "labCreatedDate";
+            this.labCreatedDate.Size = new System.Drawing.Size(87, 21);
+            this.labCreatedDate.StateCommon.ShortText.Color1 = System.Drawing.Color.Green;
+            this.labCreatedDate.StateCommon.ShortText.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labCreatedDate.TabIndex = 733;
+            this.labCreatedDate.Values.Text = "Ngày tạo HĐ";
             // 
             // labCustomerName
             // 
@@ -1038,16 +1048,6 @@
             this.kryptonPanel3.StateCommon.Color1 = System.Drawing.Color.Transparent;
             this.kryptonPanel3.TabIndex = 701;
             this.kryptonPanel3.Visible = false;
-            // 
-            // labCreatedDate
-            // 
-            this.labCreatedDate.Location = new System.Drawing.Point(111, 37);
-            this.labCreatedDate.Name = "labCreatedDate";
-            this.labCreatedDate.Size = new System.Drawing.Size(87, 21);
-            this.labCreatedDate.StateCommon.ShortText.Color1 = System.Drawing.Color.Green;
-            this.labCreatedDate.StateCommon.ShortText.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labCreatedDate.TabIndex = 733;
-            this.labCreatedDate.Values.Text = "Ngày tạo HĐ";
             // 
             // FrmEditExportWarehouse
             // 

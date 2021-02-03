@@ -381,13 +381,13 @@ namespace WH.GUI
                 var frm = new FrmInputNumberExportByLoaiExtend(soluong, objMathang);
                 frm.ShowDialog(this);
 
-                if (frm.LstChiTietXuat.isNullOrZero()) return;
-                if (frm.LstChiTietXuat.Count <= 0) return;
+                if (frm.TempHoaDonXuatKhoChiTiet.isNullOrZero()) return;
+                if (frm.TempHoaDonXuatKhoChiTiet.Count <= 0) return;
 
                 var lsTempHoadonhapkhochitiets = new List<TEMP_HOADONXUATKHOCHITIET>();
 
                 //bool isChangePrice = false;
-                foreach (var ct in frm.LstChiTietXuat)
+                foreach (var ct in frm.TempHoaDonXuatKhoChiTiet)
                 {
                     if (ct.SOLUONGLE <= 0) continue;
                     var slNhap = ct.SOLUONGLE;
@@ -437,7 +437,7 @@ namespace WH.GUI
                 else
                 {
                     txtTienChi.Text = 0.ToString("N1");
-                    var totalAmount = XuatKhoService.CalTotalAmount(MaHoaDon);
+                    var totalAmount = XuatKhoService.CalTotalAmountHoaDonTam(MaHoaDon);
                     labTongTien.Values.ExtraText = ExtendMethod.AdjustRound(decimal.ToDouble(totalAmount))?.ToString(CultureInfo.InvariantCulture);
                     MaHoaDon = "";
                     dgvHoaDon.DataSource = null;
@@ -770,7 +770,7 @@ namespace WH.GUI
                         p.GHICHU
                     }).ToList();
             LoadData2(list);
-            var totalAmount = XuatKhoService.CalTotalAmount(MaHoaDon);
+            var totalAmount = XuatKhoService.CalTotalAmountHoaDonTam(MaHoaDon);
             labTongTien.Values.ExtraText = totalAmount == 0
                 ? "0"
                 : ExtendMethod.AdjustRound(decimal.ToDouble(totalAmount))?.ToString(CultureInfo.InvariantCulture);
