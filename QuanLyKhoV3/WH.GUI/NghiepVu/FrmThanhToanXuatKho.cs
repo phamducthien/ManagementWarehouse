@@ -160,7 +160,7 @@ namespace WH.GUI
                 var tienChi = txtTienChi.Text.ToDecimal();
                 decimal giamGia = 0;
                 var nhapkhoService = XuatKhoService;
-                var result = nhapkhoService.ThanhToan(MaHoaDon, DateTime.Now, KhachHang.MAKHACHHANG, tienChi, giamGia,
+                var result = nhapkhoService.ThanhToanTemp(MaHoaDon, DateTime.Now, KhachHang.MAKHACHHANG, tienChi, giamGia,
                     txtGhiChu.Text);
                 if (result != MethodResult.Succeed)
                 {

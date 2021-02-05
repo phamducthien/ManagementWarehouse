@@ -28,8 +28,8 @@ namespace WH.GUI.ExportWarehouse
                 MaHoaDon = hdXuatKho.MAHOADONXUAT;
                 labCreatedDate.Text = hdXuatKho.NGAYTAOHOADON?.ToString("dd/MM/yyyy");
                 labCustomerName.Text = hdXuatKho.KHACHHANG?.TENKHACHHANG;
-                labTongTien.Values.ExtraText = hdXuatKho.SOTIENTHANHTOAN_HD.ToString();
-                txtTienChi.Text = hdXuatKho.SOTIENKHACHDUA_HD.ToString();
+                labTongTien.Values.ExtraText = ExtendMethod.AdjustRound(decimal.ToDouble((decimal)hdXuatKho.SOTIENTHANHTOAN_HD))?.ToString(CultureInfo.InvariantCulture);
+                txtTienChi.Text = ExtendMethod.AdjustRound(decimal.ToDouble((decimal)hdXuatKho.SOTIENKHACHDUA_HD))?.ToString(CultureInfo.InvariantCulture);
                 txtGhiChu.Text = hdXuatKho.GHICHU_HD;
 
                 ReloadUnitOfWork();
@@ -38,7 +38,7 @@ namespace WH.GUI.ExportWarehouse
                 dgvHoaDon.DataSource = null;
                 dgvHoaDon.AutoGenerateColumns = false;
                 dgvHoaDon.DataSource = dt;
-
+                HoaDonXuatKhoChiTiets = XuatKhoService.LoadHoaDon(MaHoaDon);
                 CreateEvent();
             }
             else
@@ -50,11 +50,10 @@ namespace WH.GUI.ExportWarehouse
         #region Init
         public HOADONXUATKHO HdXuatKho { get; set; }
         public MATHANG MatHangModel { get; set; }
-        public KHACHHANG KhachHangModel { get; set; }
         public KHOMATHANG KhoMatHangModel { get; set; }
         public List<MATHANG> DataList { get; set; }
         public HOADONXUATKHOCHITIET ModelChiTiet { get; set; }
-        public List<HOADONXUATKHOCHITIET> hoaDonXuatKhoChiTiets { get; set; }
+        public List<HOADONXUATKHOCHITIET> HoaDonXuatKhoChiTiets { get; set; }
         public string MaHoaDon { get; set; }
 
         private IXuatKhoService XuatKhoService
@@ -233,7 +232,6 @@ namespace WH.GUI.ExportWarehouse
                 ShowLoad();
                 TxtMacDinh = TxtSearch;
                 LoadDataAllMatHang();
-                KhachHangModel = null;
                 CloseLoad();
                 txtTimKiem.Select();
             }
@@ -517,38 +515,24 @@ namespace WH.GUI.ExportWarehouse
                     return;
                 }
 
-                if (KhachHangModel.isNull())
-                {
-                    ShowMessage(IconMessageBox.Information, "Vui lòng chọn khách hàng trước khi thanh toán!");
-                    return;
-                }
-
                 if (labTongTien.Values.ExtraText.ToDecimal() == 0 &&
                     ShowMessage(IconMessageBox.Question, "Tổng tiền hóa đơn bán hàng bằng 0, bạn có muốn tiếp tục tạo hóa đơn này không?") == DialogResult.No)
                     return;
 
-                if (hoaDonXuatKhoChiTiets.isNull()) return;
+                if (HoaDonXuatKhoChiTiets.isNull()) return;
                 if (dgvHoaDon.Rows.Count == 0) return;
 
                 var tienChi = txtTienChi.Text.ToDecimal();
                 var service = XuatKhoService;
-                var result = service.ThanhToan(MaHoaDon, labCreatedDate.Text.ToDateTime(), KhachHangModel.MAKHACHHANG, tienChi, giamGia, txtGhiChu.Text);
+                var result = service.ThanhToan(MaHoaDon, tienChi, giamGia, txtGhiChu.Text);
                 if (result != MethodResult.Succeed)
                 {
                     ShowMessage(IconMessageBox.Information, service.ErrMsg);
                 }
                 else
                 {
-                    var frm = new FrmHoaDonXuatKho(MaHoaDon, KhachHangModel);
+                    var frm = new FrmHoaDonXuatKho(MaHoaDon, HdXuatKho.KHACHHANG);
                     frm.ShowDialog(this);
-                    MaHoaDon = string.Empty;
-                    dgvHoaDon.DataSource = null;
-                    labTongTien.Values.ExtraText = 0.ToString("N2");
-                    txtTienChi.Text = 0.ToString("N2");
-                    txtGhiChu.Text = string.Empty;
-                    KhachHangModel = null;
-                    LoadDataAllMatHang();
-                    labCreatedDate.Text = DateTime.Now.ToString(CultureInfo.InvariantCulture);
                     frm.Dispose();
                 }
             }
@@ -616,8 +600,8 @@ namespace WH.GUI.ExportWarehouse
 
         private void LoadHoaDon()
         {
-            hoaDonXuatKhoChiTiets = XuatKhoService.LoadHoaDon(MaHoaDon);
-            var list = hoaDonXuatKhoChiTiets
+            HoaDonXuatKhoChiTiets = XuatKhoService.LoadHoaDon(MaHoaDon);
+            var list = HoaDonXuatKhoChiTiets
                 .OrderBy(s => s.GHICHU.ToInt())
                 .Join(DataList,
                     p => p.MAMATHANG,

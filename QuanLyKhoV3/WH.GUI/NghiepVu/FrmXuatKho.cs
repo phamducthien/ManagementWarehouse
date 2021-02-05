@@ -655,7 +655,7 @@ namespace WH.GUI
                 var tienChi = txtTienChi.Text.ToDecimal();
                 decimal giamGia = 0;
                 var service = XuatKhoService;
-                var result = service.ThanhToan(MaHoaDon, dtpNgayTaoHD.Value, KhachHangModel.MAKHACHHANG, tienChi,
+                var result = service.ThanhToanTemp(MaHoaDon, dtpNgayTaoHD.Value, KhachHangModel.MAKHACHHANG, tienChi,
                     giamGia, txtGhiChu.Text);
                 if (result != MethodResult.Succeed)
                 {
