@@ -24,7 +24,7 @@ namespace WH.GUI
         public MATHANG Model { get; set; }
         public KHOMATHANG ModelKhoMatHang { get; set; }
         public List<MATHANG> DataList { get; set; }
-        private int currIndex;
+        private int _currIndex;
 
         private IMatHangModelService Service
         {
@@ -49,7 +49,7 @@ namespace WH.GUI
             GbxList = gbxList;
             splitContainer.Panel1MinSize = 360;
             SplitContainer = splitContainer;
-            currIndex = -1;
+            _currIndex = -1;
             Load += Frm_Load;
             foreach (var txt in gbxInfo.Panel.Controls.OfType<KryptonTextBox>())
             {
@@ -298,11 +298,10 @@ namespace WH.GUI
 
         private void ActionSua()
         {
-            var result = MethodResult.Failed;
             if (!SetGuiToData()) return;
             if (Model == null) return;
             var service = Service;
-            result = service.UpdateMatHang(Model);
+            var result = service.UpdateMatHang(Model);
             if (result != MethodResult.Succeed)
             {
                 IsChange = false;
@@ -315,12 +314,12 @@ namespace WH.GUI
             IsChange = true;
             IsSuccessfuly = true;
             ThaoTac = ThaoTac.Xem;
-            // LoadDataAll();
+            LoadDataAll();
 
-            //if (index >= 0)
-            //{
-            //    SelectedRow(dgvDanhMuc.Rows[index]);
-            //}
+            if (index >= 0)
+            {
+                SelectedRow(dgvDanhMuc.Rows[index]);
+            }
 
             SetDataToGui();
             SetTextReadOnly(true);
@@ -369,10 +368,6 @@ namespace WH.GUI
 
                 case ThaoTac.Sua:
                     ActionSua();
-                    break;
-
-                default:
-                    //Debug.Assert(false);
                     break;
             }
         }
@@ -554,7 +549,7 @@ namespace WH.GUI
         {
             try
             {
-                if (dgvDanhMuc.SelectedRows.Count > 0) currIndex = dgvDanhMuc.SelectedRows[0].Index;
+                if (dgvDanhMuc.SelectedRows.Count > 0) _currIndex = dgvDanhMuc.SelectedRows[0].Index;
 
                 if (ThaoTac != ThaoTac.Them && ThaoTac != ThaoTac.Sua)
                 {
@@ -722,7 +717,7 @@ namespace WH.GUI
         {
             var data = Service.GetListMatHang();
             LoadData(data);
-            if (currIndex > -1) dgvDanhMuc.Rows[currIndex].Selected = true;
+            if (_currIndex > -1) dgvDanhMuc.Rows[_currIndex].Selected = true;
         }
 
         #endregion
