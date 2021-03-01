@@ -300,7 +300,6 @@ namespace WH.Service
                 return MethodResult.Failed;
             }
 
-            var isAdd = false;
             MethodResult result;
             try
             {
@@ -316,8 +315,7 @@ namespace WH.Service
                 var objHd = _hoaDonXuatKhoService.Find(s => s.MAHOADONXUAT == maHoaDon);
                 if (objHd.isNull())
                 {
-                    objHd = _hoaDonXuatKhoService.CreateNew();
-                    isAdd = true;
+                    goto loi2;
                 }
 
                 objHd.MAHOADONXUAT = maHoaDon;
@@ -335,19 +333,17 @@ namespace WH.Service
                 objHd.DATHANHTOAN = objHd.SOTIENKHACHDUA_HD.GetValueOrDefault() - objHd.SOTIENTHANHTOAN_HD.GetValueOrDefault() >= 0;
                 objHd.ISDELETE = false;
 
-                result = isAdd ? _hoaDonXuatKhoService.Add(objHd) : _hoaDonXuatKhoService.Modify(objHd);
+                result = _hoaDonXuatKhoService.Modify(objHd);
                 if (result != MethodResult.Succeed)
                     goto loi1;
 
                 //2.Them Chi Tiet Mat Hang
-                isAdd = false;
                 if (!hoaDonXuatKhoChiTiets.isNull())
                     foreach (var ct in hoaDonXuatKhoChiTiets)
                     {
                         var hoaDonXuatKhoChiTiet = _hoaDonXuatKhoChiTietService.Find(s => s.MACHITIETHOADON == ct.MACHITIETHOADON);
                         if (hoaDonXuatKhoChiTiet.isNull())
                         {
-                            isAdd = true;
                             hoaDonXuatKhoChiTiet = _hoaDonXuatKhoChiTietService.CreateNew();
                         }
 
@@ -365,32 +361,29 @@ namespace WH.Service
                         hoaDonXuatKhoChiTiet.THANHTIENSAUCHIETKHAU_CT = ct.THANHTIENSAUCHIETKHAU_CT;
                         hoaDonXuatKhoChiTiet.THANHTIENTRUOCCHIETKHAU_CT = ct.THANHTIENTRUOCCHIETKHAU_CT;
 
-                        result = isAdd
-                            ? _hoaDonXuatKhoChiTietService.Add(hoaDonXuatKhoChiTiet)
-                            : _hoaDonXuatKhoChiTietService.Modify(hoaDonXuatKhoChiTiet);
+                        result = _hoaDonXuatKhoChiTietService.Modify(hoaDonXuatKhoChiTiet);
                         if (result != MethodResult.Succeed)
                             goto loi2;
 
-                        var objKhoMatHang = _khoMatHangService.Find(s => s.MAKHO == hoaDonXuatKhoChiTiet.MAKHO && s.MAMATHANG == hoaDonXuatKhoChiTiet.MAMATHANG);
-                        if (objKhoMatHang == null) continue;
-                        objKhoMatHang.SOLUONGLE -= hoaDonXuatKhoChiTiet.SOLUONGLE;
-                        result = _khoMatHangService.Modify(objKhoMatHang);
-                        if (result != MethodResult.Succeed)
-                            goto loi5;
+                        //var objKhoMatHang = _khoMatHangService.Find(s => s.MAKHO == hoaDonXuatKhoChiTiet.MAKHO && s.MAMATHANG == hoaDonXuatKhoChiTiet.MAMATHANG);
+                        //if (objKhoMatHang == null) continue;
+                        //objKhoMatHang.SOLUONGLE -= hoaDonXuatKhoChiTiet.SOLUONGLE;
+                        //result = _khoMatHangService.Modify(objKhoMatHang);
+                        //if (result != MethodResult.Succeed)
+                        //    goto loi5;
                     }
 
-                //4.Tao Phieu Chi
+                //4.Cập nhật  Phieu Chi
                 if (objHd.SOTIENKHACHDUA_HD > 0)
                 {
-                    var pc = _phieuThuService.CreateNew();
-                    pc.MAHOADONTHU = PrefixContext.MaPhieuThu(objHd.MAHOADONXUAT);
-                    pc.MACA = _caId;
-                    pc.NGAYTHANHTOAN = DateTime.Now;
-                    pc.MAHOADONXUATKHO = objHd.MAHOADONXUAT;
-                    pc.TIENTHANHTOAN = soTienChi;
-                    pc.DIENGIAI = objHd.GHICHU_HD;
+                    var existPt = _phieuThuService.Find(s => s.MAHOADONXUATKHO == maHoaDon);
+                    if (existPt.isNull())
+                        goto loi4;
+                    existPt.NGAYTHANHTOAN = DateTime.Now;
+                    existPt.TIENTHANHTOAN = soTienChi;
+                    existPt.DIENGIAI = objHd.GHICHU_HD;
 
-                    result = _phieuThuService.Add(pc);
+                    result = _phieuThuService.Modify(existPt);
                     if (result != MethodResult.Succeed)
                         goto loi3;
                 }
