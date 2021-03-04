@@ -392,6 +392,7 @@ namespace WH.GUI
         //        ShowMessage(IconMessageBox.Warning, ex.Message);
         //    }
         //}
+
         private void ActionNhapMatHangVaoHoaDon()
         {
             try
@@ -412,7 +413,7 @@ namespace WH.GUI
                             .ToInt();
                     }
                 }
-                var frm = new FrmInputNumberExportByLoaiExtend(soluong, objMathang, true);
+                var frm = new FrmInputNumberExportByLoaiExtend(soluong, objMathang, false, true);
                 frm.ShowDialog(this);
 
                 if (frm.LstChiTietNhap.isNullOrZero()) return;
