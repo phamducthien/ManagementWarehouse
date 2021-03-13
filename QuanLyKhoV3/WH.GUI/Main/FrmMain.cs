@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
+using Util.Pattern.Contain;
 using WH.GUI.ExportWarehouse;
+using WH.GUI.NghiepVu.ExportWarehouse;
 using WH.Model;
 using WH.Report;
 
@@ -22,6 +24,7 @@ namespace WH.GUI
             btnDanhMuc.Click += BtnDanhMuc_Click;
             btnKiemKe.Click += BtnKiemKe_Click;
             btnTraHang.Click += BtnTraHang_Click;
+            btnListExportWarehouse.Click += btnListExportWarehouse_Click;
         }
 
         private void BtnTraHang_Click(object sender, EventArgs e)
@@ -170,6 +173,19 @@ namespace WH.GUI
             }
         }
 
+        private void btnListExportWarehouse_Click(object sender, EventArgs e)
+        {
+            var checkRole = CheckRole(Functions.XuatKhoBanHang, Role.QuyenSua);
+
+            if (!checkRole) return;
+
+            Hide();
+            var frm = new FrmListExportWarehouse();
+            frm.ShowDialog();
+            Show();
+        }
+
+
         private void BtnBaoCao_Click(object sender, EventArgs e)
         {
             if (!CheckQuyen("BÁO CÁO")) return;
@@ -204,7 +220,51 @@ namespace WH.GUI
             {
             }
 
-            this?.Show();
+            // hide button list export Warehouse if do not have role
+            var checkRole = CheckRole(Functions.XuatKhoBanHang, Role.QuyenSua);
+            if (!checkRole)
+            {
+                btnListExportWarehouse.Visible = false;
+            }
+
+            // hide button Report if do not have role
+            if (!CheckQuyen("BÁO CÁO"))
+            {
+                btnBaoCao.Visible = false;
+            }
+
+            // hide button Đối tác if do not have role
+            if (!CheckQuyen("ĐỐI TÁC"))
+            {
+                btnDoiTac.Visible = false;
+            }
+
+            // hide button Mặt hàng if do not have role
+            if (!CheckQuyen("MẶT HÀNG"))
+            {
+                btnMatHang.Visible = false;
+            }
+
+            // hide button Xuất Kho if do not have role
+            if (!CheckQuyen("XUẤT KHO - BÁN HÀNG"))
+            {
+                btnXuatKho.Visible = false;
+                btnTraHang.Visible = false;
+            }
+
+            // hide button Nhập Kho if do not have role
+            if (!CheckQuyen("NHẬP KHO"))
+            {
+                btnNhapKho.Visible = false;
+            }
+
+            // hide button QUẢN LÝ CHUNG if do not have role
+            if (!CheckQuyen("QUẢN LÝ CHUNG"))
+            {
+                btnDanhMuc.Visible = false;
+            }
+
+            Show();
             Activate();
         }
 

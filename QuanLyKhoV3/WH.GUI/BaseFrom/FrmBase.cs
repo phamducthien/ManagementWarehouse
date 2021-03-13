@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Repository.Pattern.UnitOfWork;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,8 +8,6 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using Repository.Pattern.UnitOfWork;
 using Util.Pattern;
 using Util.Pattern.Encryptor;
 using WH.GUI.Properties;
@@ -133,10 +133,10 @@ namespace WH.GUI
 
         protected void btnUp_Click(object sender, EventArgs e)
         {
-            var btn = (Button) sender;
+            var btn = (Button)sender;
             var parent = btn.Parent;
             var numeric =
-                parent.Controls.OfType<KryptonNumericUpDown>().FirstOrDefault(s => Equals(s.Name, (string) btn.Tag));
+                parent.Controls.OfType<KryptonNumericUpDown>().FirstOrDefault(s => Equals(s.Name, (string)btn.Tag));
             if (numeric != null)
             {
                 numeric.UpButton();
@@ -146,10 +146,10 @@ namespace WH.GUI
 
         protected void btnDown_Click(object sender, EventArgs e)
         {
-            var btn = (Button) sender;
+            var btn = (Button)sender;
             var parent = btn.Parent;
             var numeric =
-                parent.Controls.OfType<KryptonNumericUpDown>().FirstOrDefault(s => Equals(s.Name, (string) btn.Tag));
+                parent.Controls.OfType<KryptonNumericUpDown>().FirstOrDefault(s => Equals(s.Name, (string)btn.Tag));
             if (numeric != null)
             {
                 numeric.DownButton();
@@ -501,6 +501,43 @@ namespace WH.GUI
             return true;
         }
 
+        public static bool CheckRole(string function, string role)
+        {
+            if (string.IsNullOrWhiteSpace(function) || string.IsNullOrWhiteSpace(role))
+            {
+                return false;
+            }
+
+            var existFunctionRole =
+                SessionModel.CurrentSession.User.NGUOIDUNG_QUYENHAN.First(
+                    s => s.CHUCNANG.TENCHUCNANG == function);
+
+            var result = false;
+            switch (role)
+            {
+                case "QUYENIN":
+                    result = (bool)existFunctionRole.QUYENIN;
+                    break;
+
+                case "QUYENXOA":
+                    result = (bool)existFunctionRole.QUYENXOA;
+                    break;
+
+                case "QUYENSUA":
+                    result = (bool)existFunctionRole.QUYENSUA;
+                    break;
+
+                case "QUYENTIMKIEM":
+                    result = (bool)existFunctionRole.QUYENTIMKIEM;
+                    break;
+
+                case "QUYENXUATFILE":
+                    result = (bool)existFunctionRole.QUYENXUATFILE;
+                    break;
+            }
+            return result;
+        }
+
         protected void FrmBase_FormClosed(object sender, FormClosedEventArgs e)
         {
             Events.Dispose();
@@ -517,8 +554,8 @@ namespace WH.GUI
             ptbLoad = new PictureBox();
             labMessage = new Label();
             pnlLoad = new KryptonPanel();
-            ((ISupportInitialize) ptbLoad).BeginInit();
-            ((ISupportInitialize) pnlLoad).BeginInit();
+            ((ISupportInitialize)ptbLoad).BeginInit();
+            ((ISupportInitialize)pnlLoad).BeginInit();
             pnlLoad.SuspendLayout();
             SuspendLayout();
 
@@ -545,8 +582,8 @@ namespace WH.GUI
             pnlLoad.StateCommon.Color1 = Color.Transparent;
             pnlLoad.UseWaitCursor = true;
             //
-            ((ISupportInitialize) ptbLoad).EndInit();
-            ((ISupportInitialize) pnlLoad).EndInit();
+            ((ISupportInitialize)ptbLoad).EndInit();
+            ((ISupportInitialize)pnlLoad).EndInit();
             Controls.Add(pnlLoad);
             pnlLoad.ResumeLayout(true);
             ResumeLayout(true);
