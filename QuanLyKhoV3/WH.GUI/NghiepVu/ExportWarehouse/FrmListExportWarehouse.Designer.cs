@@ -54,6 +54,7 @@ namespace WH.GUI.ExportWarehouse
             this.btnTop50 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.btnTop10 = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.btnExit = new System.Windows.Forms.Button();
+            this.btnExit2 = new System.Windows.Forms.Button();
             this.pnlInfo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -129,7 +130,7 @@ namespace WH.GUI.ExportWarehouse
             this.treeDanhMuc.ShowSelection = true;
             this.treeDanhMuc.ShowSelectionBorder = true;
             this.treeDanhMuc.ShowSummaryRow = false;
-            this.treeDanhMuc.Size = new System.Drawing.Size(1100, 490);
+            this.treeDanhMuc.Size = new System.Drawing.Size(1162, 490);
             this.treeDanhMuc.SummaryRowHeight = 45;
             this.treeDanhMuc.TabIndex = 645;
             this.treeDanhMuc.Text = "treeListView";
@@ -411,7 +412,7 @@ namespace WH.GUI.ExportWarehouse
             this.pnlInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlInfo.Location = new System.Drawing.Point(20, 550);
             this.pnlInfo.Name = "pnlInfo";
-            this.pnlInfo.Size = new System.Drawing.Size(1100, 33);
+            this.pnlInfo.Size = new System.Drawing.Size(1162, 33);
             this.pnlInfo.TabIndex = 647;
             // 
             // btnXemChiTiet
@@ -442,7 +443,7 @@ namespace WH.GUI.ExportWarehouse
             this.labDoanhThu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.labDoanhThu.Location = new System.Drawing.Point(0, 0);
             this.labDoanhThu.Name = "labDoanhThu";
-            this.labDoanhThu.Size = new System.Drawing.Size(1100, 33);
+            this.labDoanhThu.Size = new System.Drawing.Size(1162, 33);
             this.labDoanhThu.TabIndex = 1;
             this.labDoanhThu.Text = "0 vnđ";
             this.labDoanhThu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -463,6 +464,7 @@ namespace WH.GUI.ExportWarehouse
             this.btnPrinter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrinter.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrinter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnPrinter.Image = global::WH.GUI.Properties.Resources.MayInNho;
             this.btnPrinter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnPrinter.Location = new System.Drawing.Point(1019, 14);
             this.btnPrinter.Name = "btnPrinter";
@@ -482,6 +484,7 @@ namespace WH.GUI.ExportWarehouse
             this.btnTimKiem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTimKiem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTimKiem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnTimKiem.Image = global::WH.GUI.Properties.Resources.TimKiem;
             this.btnTimKiem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTimKiem.Location = new System.Drawing.Point(569, 14);
             this.btnTimKiem.Name = "btnTimKiem";
@@ -536,7 +539,7 @@ namespace WH.GUI.ExportWarehouse
             this.btnExit.FlatAppearance.BorderSize = 0;
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(1137, 23);
+            this.btnExit.Location = new System.Drawing.Point(1199, 23);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(34, 28);
             this.btnExit.TabIndex = 638;
@@ -544,11 +547,31 @@ namespace WH.GUI.ExportWarehouse
             this.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.btnExit.UseVisualStyleBackColor = false;
             // 
+            // btnExit2
+            // 
+            this.btnExit2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit2.BackColor = System.Drawing.Color.Transparent;
+            this.btnExit2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExit2.FlatAppearance.BorderSize = 0;
+            this.btnExit2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit2.Image = global::WH.GUI.Properties.Resources.Exit;
+            this.btnExit2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExit2.Location = new System.Drawing.Point(1145, 18);
+            this.btnExit2.Name = "btnExit2";
+            this.btnExit2.Size = new System.Drawing.Size(34, 28);
+            this.btnExit2.TabIndex = 648;
+            this.btnExit2.Tag = "thoat";
+            this.btnExit2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.btnExit2.UseVisualStyleBackColor = false;
+            this.btnExit2.Click += new System.EventHandler(this.btnExit2_Click);
+            // 
             // FrmListExportWarehouse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1140, 603);
+            this.ClientSize = new System.Drawing.Size(1202, 603);
+            this.ControlBox = false;
+            this.Controls.Add(this.btnExit2);
             this.Controls.Add(this.treeDanhMuc);
             this.Controls.Add(this.pnlInfo);
             this.Controls.Add(this.btnTheoNgay);
@@ -560,6 +583,7 @@ namespace WH.GUI.ExportWarehouse
             this.Controls.Add(this.btnTop10);
             this.Controls.Add(this.btnExit);
             this.Name = "FrmListExportWarehouse";
+            this.Resizable = false;
             this.Text = "Danh Sách Hóa Đơn Xuất Kho";
             this.pnlInfo.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -592,5 +616,6 @@ namespace WH.GUI.ExportWarehouse
         private ComponentFactory.Krypton.Toolkit.KryptonCheckButton btnTop50;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckButton btnTop10;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Button btnExit2;
     }
 }

@@ -280,5 +280,10 @@ namespace WH.GUI.ExportWarehouse
                 MessageBox.Show(@"Bạn hãy chọn lại hóa đơn cần xem.");
             }
         }
+
+        private void btnExit2_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
