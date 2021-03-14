@@ -17,7 +17,15 @@ namespace WH.Service
         #region HOADONXUATKHOCHITIET
 
         List<HOADONXUATKHOCHITIET> LoadHoaDon(string maHoaDon);
-
+        MethodResult NhapMatHangVaoHoaDon(string maHoaDon, List<HOADONXUATKHOCHITIET> hoaDonXuatKhoChiTiets, List<MATHANG> listCapNhatGia, bool isCommitted = true);
+        decimal CalTotalAmountHoaDonTam(string maHoaDon);
+        MethodResult HuyMatHangTrongHoaDon(string maHoaDon, List<HOADONXUATKHOCHITIET> hoaDonNhapKhoChiTiets, bool isCommitted = true);
+        MethodResult CapNhatMatHangTrongHoaDon(List<HOADONXUATKHOCHITIET> hoaDonNhapKhoChitTiets, bool isCommitted = true);
+        List<MATHANG> SearchMatHangs(string textSearch);
+        MethodResult ThanhToan(string maHoaDon, decimal soTienChi = 0, decimal giamGia = 0, string ghiChu = "", bool isCommitted = true);
+        HOADONXUATKHOCHITIET GetModelChiTiet(string maChiTiet);
+        HOADONXUATKHOCHITIET GetModelChiTiet(int maMatHang, string maHoaDon);
+        decimal CalTotalAmountHoaDon(string maHoaDon);
         #endregion
 
         MethodResult NhapMatHangVaoHoaDonTam(string maHoaDon,
@@ -109,6 +117,355 @@ namespace WH.Service
             return _hoadonxuatkhochitietService.Search(s => s.MAHOADON == maHoaDon);
         }
 
+        public MethodResult NhapMatHangVaoHoaDon(string maHoaDon, List<HOADONXUATKHOCHITIET> hoaDonXuatKhoChiTiets, List<MATHANG> listCapNhatGia, bool isCommitted = true)
+        {
+            //1.Them Chi Tiet
+            //2.Cap Nhat Gia Nhap Mat Hang
+            //3.Luu
+
+            if (hoaDonXuatKhoChiTiets.isNull())
+            {
+                ErrMsg = "Không tìm thấy hóa đơn!!!";
+                return MethodResult.Failed;
+            }
+
+            var result = MethodResult.Failed;
+            try
+            {
+                if (isCommitted)
+                    _unitOfWork.BeginTransaction();
+
+                //2.Them Chi Tiet Mat Hang
+                if (!hoaDonXuatKhoChiTiets.isNull())
+                    foreach (var ct in hoaDonXuatKhoChiTiets)
+                    {
+                        var hoaDonXuatKhoChiTiet = _hoadonxuatkhochitietService.Find(s => s.MAHOADON == maHoaDon && s.MACHITIETHOADON == ct.MACHITIETHOADON);
+                        if (hoaDonXuatKhoChiTiet.isNull())
+                        {
+                            //Them mat hang vao hoa don
+                            ct.MAHOADON = maHoaDon;
+                            ct.MACHITIETHOADON = PrefixContext.MaChiTietHoaDon(maHoaDon, ct.MAMATHANG.GetValueOrDefault());
+                            result = _hoadonxuatkhochitietService.Add(ct);
+                            if (result != MethodResult.Succeed)
+                                break;
+                        }
+                        else
+                        {
+                            //Cap Nhat Mat Hang Vao Hoa Don
+                            hoaDonXuatKhoChiTiet.SOLUONGLE += ct.SOLUONGLE;
+                            hoaDonXuatKhoChiTiet.DONGIASI = ct.DONGIASI;
+                            hoaDonXuatKhoChiTiet.THANHTIENTRUOCCHIETKHAU_CT = hoaDonXuatKhoChiTiet.SOLUONGLE * hoaDonXuatKhoChiTiet.DONGIASI;
+                            hoaDonXuatKhoChiTiet.CHIETKHAUTHEOTIEN = hoaDonXuatKhoChiTiet.THANHTIENTRUOCCHIETKHAU_CT * (decimal)hoaDonXuatKhoChiTiet.CHIETKHAUTHEOPHANTRAM;
+                            hoaDonXuatKhoChiTiet.THANHTIENSAUCHIETKHAU_CT = hoaDonXuatKhoChiTiet.THANHTIENTRUOCCHIETKHAU_CT - hoaDonXuatKhoChiTiet.CHIETKHAUTHEOTIEN;
+                            result = _hoadonxuatkhochitietService.Modify(hoaDonXuatKhoChiTiet);
+                            if (result != MethodResult.Succeed)
+                                break;
+                        }
+                    }
+
+                //3.Cap Nhat Gia Mat Hang Neu Co
+                if (result == MethodResult.Succeed)
+                    if (!listCapNhatGia.isNull())
+                        foreach (var mh in listCapNhatGia)
+                        {
+                            result = _mathangService.Modify(mh);
+                            if (result != MethodResult.Succeed)
+                                break;
+                        }
+
+                //4.Luu
+                if (result != MethodResult.Succeed)
+                {
+                    _unitOfWork?.Rollback();
+                    ErrMsg = _hoadonxuatkhochitietService.ErrMsg;
+                    result = MethodResult.Failed;
+                }
+                else
+                {
+                    if (isCommitted)
+                    {
+                        _unitOfWork?.Commit();
+                        result = MethodResult.Succeed;
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                _unitOfWork?.Rollback();
+                ErrMsg = exception.Message;
+                result = MethodResult.Failed;
+            }
+            return result;
+        }
+
+        public decimal CalTotalAmountHoaDonTam(string maHoaDon)
+        {
+            var totalAmount = LoadHoaDonTam(maHoaDon).Sum(s => s.THANHTIENSAUCHIETKHAU_CT ?? 0);
+            return totalAmount;
+        }
+
+        public MethodResult HuyMatHangTrongHoaDon(string maHoaDon, List<HOADONXUATKHOCHITIET> hoaDonNhapKhoChiTiets, bool isCommitted = true)
+        {
+            if (hoaDonNhapKhoChiTiets.isNull())
+            {
+                ErrMsg = "Không tìm thấy mặt hàng trong hóa đơn !!!";
+                return MethodResult.Failed;
+            }
+
+            var result = MethodResult.Failed;
+            try
+            {
+                if (isCommitted)
+                    _unitOfWork.BeginTransaction();
+
+                //2.Xoa Chi Tiet Mat Hang
+                if (!hoaDonNhapKhoChiTiets.isNull())
+                    foreach (var ct in hoaDonNhapKhoChiTiets)
+                    {
+                        //Xoa Chi Tiet
+                        result = _hoadonxuatkhochitietService.Remove(ct);
+                        if (result != MethodResult.Succeed)
+                            break;
+                    }
+
+                //3.Luu
+                if (result != MethodResult.Succeed)
+                {
+                    _unitOfWork?.Rollback();
+                    ErrMsg = _hoadonxuatkhochitietService.ErrMsg;
+                    result = MethodResult.Failed;
+                }
+                else
+                {
+                    if (isCommitted)
+                        _unitOfWork?.Commit();
+                }
+            }
+            catch (Exception exception)
+            {
+                _unitOfWork?.Rollback();
+                ErrMsg = exception.Message;
+                result = MethodResult.Failed;
+            }
+            return result;
+        }
+
+        public MethodResult CapNhatMatHangTrongHoaDon(List<HOADONXUATKHOCHITIET> hoaDonNhapKhoChitTiets, bool isCommitted = true)
+        {
+            var result = MethodResult.Failed;
+            try
+            {
+                if (isCommitted)
+                    _unitOfWork.BeginTransaction();
+
+                foreach (var ct in hoaDonNhapKhoChitTiets)
+                {
+                    var objMatHang = _mathangService.Find(s => s.MAMATHANG == ct.MAMATHANG);
+                    if (objMatHang == null) continue;
+                    ct.CHIETKHAUTHEOTIEN = 0;
+                    if (objMatHang.CHIETKHAU != null)
+                        ct.CHIETKHAUTHEOTIEN = ct.SOLUONGLE * ct.DONGIASI * (decimal)objMatHang.CHIETKHAU ?? 0;
+
+                    ct.THANHTIENTRUOCCHIETKHAU_CT = ct.SOLUONGLE * ct.DONGIASI;
+                    ct.THANHTIENSAUCHIETKHAU_CT = ct.THANHTIENTRUOCCHIETKHAU_CT - ct.CHIETKHAUTHEOTIEN;
+                    result = _hoadonxuatkhochitietService.Modify(ct);
+                    if (result != MethodResult.Succeed)
+                        break;
+                }
+
+                //4.Luu
+                if (result != MethodResult.Succeed)
+                {
+                    _unitOfWork?.Rollback();
+                    ErrMsg = _hoadonxuatkhochitietService.ErrMsg;
+                    result = MethodResult.Failed;
+                }
+                else
+                {
+                    if (isCommitted)
+                        _unitOfWork?.Commit();
+                }
+            }
+            catch (Exception exception)
+            {
+                _unitOfWork?.Rollback();
+                ErrMsg = exception.Message;
+                result = MethodResult.Failed;
+            }
+            return result;
+        }
+
+        public List<MATHANG> SearchMatHangs(string textSearch)
+        {
+            return
+                _mathangService.Search(
+                    s =>
+                        s.ISDELETE == false && s.ISUSE == true &&
+                        s.KHOMATHANGs.FirstOrDefault(p => p.MAMATHANG == s.MAMATHANG) != null, textSearch);
+        }
+
+        public MethodResult ThanhToan(string maHoaDon, decimal soTienChi, decimal giamGia, string ghiChu, bool isCommitted = true)
+        {
+            if (maHoaDon.isNull())
+            {
+                ErrMsg = "Hoa Don Chua Duoc Khoi Tao!!!";
+                return MethodResult.Failed;
+            }
+
+            MethodResult result;
+            try
+            {
+                if (isCommitted)
+                    _unitOfWork.BeginTransaction();
+
+                //1.Get DS Chi Tiet Boi Ma Hoa Don
+                var hoaDonXuatKhoChiTiets = _hoadonxuatkhochitietService.Search(s => s.MAHOADON == maHoaDon);
+                if (hoaDonXuatKhoChiTiets.isNull())
+                    goto loi4;
+
+                //2.Tao Hoa Don
+                var objHd = _hoadonxuatkhoService.Find(s => s.MAHOADONXUAT == maHoaDon);
+                if (objHd.isNull())
+                {
+                    goto loi2;
+                }
+
+                objHd.MAHOADONXUAT = maHoaDon;
+                objHd.MACA = null;
+                objHd.SOTIENKHACHDUA_HD = soTienChi;
+                objHd.THANHTIENCHUACK_HD = hoaDonXuatKhoChiTiets.Sum(s => s.THANHTIENTRUOCCHIETKHAU_CT.GetValueOrDefault());
+                objHd.LOAIHOADON = 2;
+                objHd.TIENCHIETKHAU_HD = hoaDonXuatKhoChiTiets.Sum(s => s.CHIETKHAUTHEOTIEN.GetValueOrDefault());
+                objHd.TIENKHUYENMAI_HD = giamGia;
+
+                var totalAmount = hoaDonXuatKhoChiTiets.Sum(s => s.THANHTIENSAUCHIETKHAU_CT.GetValueOrDefault());
+                objHd.SOTIENTHANHTOAN_HD = AdjustRound(decimal.ToDouble(totalAmount));
+
+                objHd.GHICHU_HD = ghiChu;
+                objHd.DATHANHTOAN = objHd.SOTIENKHACHDUA_HD.GetValueOrDefault() - objHd.SOTIENTHANHTOAN_HD.GetValueOrDefault() >= 0;
+                objHd.ISDELETE = false;
+
+                result = _hoadonxuatkhoService.Modify(objHd);
+                if (result != MethodResult.Succeed)
+                    goto loi1;
+
+                //2.Them Chi Tiet Mat Hang
+                if (!hoaDonXuatKhoChiTiets.isNull())
+                    foreach (var ct in hoaDonXuatKhoChiTiets)
+                    {
+                        var hoaDonXuatKhoChiTiet = _hoadonxuatkhochitietService.Find(s => s.MACHITIETHOADON == ct.MACHITIETHOADON);
+                        if (hoaDonXuatKhoChiTiet.isNull())
+                        {
+                            hoaDonXuatKhoChiTiet = _hoadonxuatkhochitietService.CreateNew();
+                        }
+
+                        hoaDonXuatKhoChiTiet.MAHOADON = maHoaDon;
+                        hoaDonXuatKhoChiTiet.MAKHO = ct.MAKHO;
+                        hoaDonXuatKhoChiTiet.MAMATHANG = ct.MAMATHANG;
+                        hoaDonXuatKhoChiTiet.MACHITIETHOADON = ct.MACHITIETHOADON;
+                        hoaDonXuatKhoChiTiet.DONGIASI = ct.DONGIASI;
+                        hoaDonXuatKhoChiTiet.GHICHU = ct.GHICHU;
+                        hoaDonXuatKhoChiTiet.ISDELETE = false;
+                        hoaDonXuatKhoChiTiet.SOLUONGLE = ct.SOLUONGLE;
+                        hoaDonXuatKhoChiTiet.SOLUONGSI = ct.SOLUONGSI;
+                        hoaDonXuatKhoChiTiet.CHIETKHAUTHEOPHANTRAM = ct.CHIETKHAUTHEOPHANTRAM;
+                        hoaDonXuatKhoChiTiet.CHIETKHAUTHEOTIEN = ct.CHIETKHAUTHEOTIEN;
+                        hoaDonXuatKhoChiTiet.THANHTIENSAUCHIETKHAU_CT = ct.THANHTIENSAUCHIETKHAU_CT;
+                        hoaDonXuatKhoChiTiet.THANHTIENTRUOCCHIETKHAU_CT = ct.THANHTIENTRUOCCHIETKHAU_CT;
+
+                        result = _hoadonxuatkhochitietService.Modify(hoaDonXuatKhoChiTiet);
+                        if (result != MethodResult.Succeed)
+                            goto loi2;
+
+                        //var objKhoMatHang = _khoMatHangService.Find(s => s.MAKHO == hoaDonXuatKhoChiTiet.MAKHO && s.MAMATHANG == hoaDonXuatKhoChiTiet.MAMATHANG);
+                        //if (objKhoMatHang == null) continue;
+                        //objKhoMatHang.SOLUONGLE -= hoaDonXuatKhoChiTiet.SOLUONGLE;
+                        //result = _khoMatHangService.Modify(objKhoMatHang);
+                        //if (result != MethodResult.Succeed)
+                        //    goto loi5;
+                    }
+
+                //4.Cập nhật  Phieu Chi
+                if (objHd.SOTIENKHACHDUA_HD > 0)
+                {
+                    var existPt = _phieuthuService.Find(s => s.MAHOADONXUATKHO == maHoaDon);
+                    if (existPt.isNull())
+                        goto loi4;
+                    existPt.NGAYTHANHTOAN = DateTime.Now;
+                    existPt.TIENTHANHTOAN = soTienChi;
+                    existPt.DIENGIAI = objHd.GHICHU_HD;
+
+                    result = _phieuthuService.Modify(existPt);
+                    if (result != MethodResult.Succeed)
+                        goto loi3;
+                }
+
+                //4.Luu
+                if (isCommitted)
+                    _unitOfWork?.Commit();
+            }
+            catch (Exception exception)
+            {
+                _unitOfWork?.Rollback();
+                ErrMsg = exception.Message;
+                result = MethodResult.Failed;
+            }
+
+            return result;
+
+        loi1:
+            {
+                _unitOfWork?.Rollback();
+                ErrMsg = _hoadonxuatkhoService.ErrMsg;
+                return MethodResult.Failed;
+            }
+        loi2:
+            {
+                _unitOfWork?.Rollback();
+                ErrMsg = _hoadonxuatkhochitietService.ErrMsg;
+                return MethodResult.Failed;
+            }
+        loi3:
+            {
+                _unitOfWork?.Rollback();
+                ErrMsg = _phieuthuService.ErrMsg;
+                return MethodResult.Failed;
+            }
+        loi5:
+            {
+                _unitOfWork?.Rollback();
+                ErrMsg = _khomathangService.ErrMsg;
+                return MethodResult.Failed;
+            }
+        loi4:
+            {
+                _unitOfWork?.Rollback();
+                ErrMsg = "Không có mặt hàng trong hóa đơn!";
+                return MethodResult.Failed;
+            }
+        loi6:
+            {
+                _unitOfWork?.Rollback();
+                ErrMsg = _tempHoadonxuatkhochitietService.ErrMsg;
+                return MethodResult.Failed;
+            }
+        }
+
+        public HOADONXUATKHOCHITIET GetModelChiTiet(string maChiTiet)
+        {
+            return _hoadonxuatkhochitietService.Find(s => s.MACHITIETHOADON.Equals(maChiTiet));
+        }
+
+        public HOADONXUATKHOCHITIET GetModelChiTiet(int maMatHang, string maHoaDon)
+        {
+            return _hoadonxuatkhochitietService.Find(s => s.MAMATHANG == maMatHang && s.MAHOADON == maHoaDon);
+        }
+
+        public decimal CalTotalAmountHoaDon(string maHoaDon)
+        {
+            var totalAmount = LoadHoaDon(maHoaDon).Sum(s => s.THANHTIENSAUCHIETKHAU_CT ?? 0);
+            return totalAmount;
+        }
         #endregion
 
 
