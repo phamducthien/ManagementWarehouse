@@ -868,6 +868,7 @@ namespace WH.GUI.ExportWarehouse
             // 
             // IDUnit
             // 
+            this.IDUnit.DataPropertyName = "IDUnit";
             this.IDUnit.HeaderText = "Mã";
             this.IDUnit.Name = "IDUnit";
             this.IDUnit.ReadOnly = true;
@@ -878,6 +879,7 @@ namespace WH.GUI.ExportWarehouse
             // TENMATHANG
             // 
             this.TENMATHANG.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TENMATHANG.DataPropertyName = "TENMATHANG";
             this.TENMATHANG.HeaderText = "Mặt hàng";
             this.TENMATHANG.Name = "TENMATHANG";
             this.TENMATHANG.ReadOnly = true;
@@ -887,6 +889,7 @@ namespace WH.GUI.ExportWarehouse
             // GIALE
             // 
             this.GIALE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.GIALE.DataPropertyName = "GIALE";
             this.GIALE.HeaderText = "Giá bán";
             this.GIALE.Name = "GIALE";
             this.GIALE.ReadOnly = true;
@@ -896,6 +899,7 @@ namespace WH.GUI.ExportWarehouse
             // GIANHAP
             // 
             this.GIANHAP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.GIANHAP.DataPropertyName = "GIANHAP";
             this.GIANHAP.HeaderText = "Giá nhập";
             this.GIANHAP.Name = "GIANHAP";
             this.GIANHAP.ReadOnly = true;
@@ -906,6 +910,7 @@ namespace WH.GUI.ExportWarehouse
             // TENDONVI
             // 
             this.TENDONVI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.TENDONVI.DataPropertyName = "TENDONVI";
             this.TENDONVI.HeaderText = "Đơn vị";
             this.TENDONVI.Name = "TENDONVI";
             this.TENDONVI.ReadOnly = true;
@@ -915,6 +920,7 @@ namespace WH.GUI.ExportWarehouse
             // SLTON
             // 
             this.SLTON.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.SLTON.DataPropertyName = "SLTON";
             this.SLTON.HeaderText = "SL tồn";
             this.SLTON.Name = "SLTON";
             this.SLTON.ReadOnly = true;
@@ -924,6 +930,7 @@ namespace WH.GUI.ExportWarehouse
             // TONGLAI
             // 
             this.TONGLAI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.TONGLAI.DataPropertyName = "TIENLAI";
             this.TONGLAI.HeaderText = "Tiền lãi";
             this.TONGLAI.Name = "TONGLAI";
             this.TONGLAI.ReadOnly = true;
@@ -934,6 +941,7 @@ namespace WH.GUI.ExportWarehouse
             // GHICHU
             // 
             this.GHICHU.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.GHICHU.DataPropertyName = "GHICHU";
             this.GHICHU.HeaderText = "Ghi  chú";
             this.GHICHU.Name = "GHICHU";
             this.GHICHU.ReadOnly = true;

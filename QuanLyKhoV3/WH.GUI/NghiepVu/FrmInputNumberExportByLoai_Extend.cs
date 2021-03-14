@@ -14,8 +14,10 @@ namespace WH.GUI
         private readonly bool _showCK;
         private bool bGiaNhap;
         private int slChiTiet;
+        private readonly string _maHoaDon;
         public FrmInputNumberExportByLoai_Extend(int soluongchitiettronghoadon, MATHANG objMathang, bool showCK = false, bool isGiaNhap = false, string maHoaDon = null)
         {
+            _maHoaDon = maHoaDon;
             slChiTiet = soluongchitiettronghoadon;
             bGiaNhap = isGiaNhap;
             _showCK = showCK;
@@ -46,8 +48,6 @@ namespace WH.GUI
 
         private void LoadMatHang(int maLoai)
         {
-            //FrmFlashChild.ShowSplash();
-            //Application.DoEvents();
             Hide();
             SuspendLayout();
             Loaded = false;
@@ -63,13 +63,9 @@ namespace WH.GUI
             var soLuong = NumSoLuongNhap.Value;
             var stt = 1;
 
-            //var ucChiTiet = new ucMatHangChiTiet(Model, soLuong) { Name = Model.MAMATHANG.ToString(), Tag = stt++};
-            //flnDSMatHang.Controls.Add(ucChiTiet);
-
             foreach (var mh in ModelLoaiMatHang?.MATHANGs.OrderBy(s => s.TENDONVI))
             {
                 if (mh.ISDELETE == true) continue;
-                //if (mh.MAMATHANG == Model.MAMATHANG) continue;
                 var ucChiTiet = new ucMatHangChiTiet(mh, 0, _showCK, bGiaNhap)
                 {
                     Name = mh.MAMATHANG.ToString(),
@@ -82,7 +78,6 @@ namespace WH.GUI
             Loaded = true;
             ResumeLayout();
             Show();
-            //FrmFlashChild.CloseSplash();
         }
 
         private void radTatCa_CheckedChanged(object sender, EventArgs e)
@@ -138,43 +133,87 @@ namespace WH.GUI
         {
             var count = flnDSMatHang.Controls.OfType<ucMatHangChiTiet>().Count(s => s.cbxMatHang.Checked);
             if (count <= 0) return;
-            lstChiTietXuat = new List<TEMP_HOADONXUATKHOCHITIET>(count);
-            int stt = slChiTiet + 1;
+            if (!string.IsNullOrEmpty(_maHoaDon))
+            {
+                GetHoaDonXuatKhoChiTiet(count);
+            }
+            else
+            {
+                GetTempHoaDonXuatKhoChiTiet(count);
+            }
+
+            Close();
+        }
+
+        private void GetHoaDonXuatKhoChiTiet(int count)
+        {
+            HoaDonXuatKhoChiTiet = new List<HOADONXUATKHOCHITIET>(count);
+            var stt = slChiTiet + 1;
             foreach (var uc in flnDSMatHang.Controls.OfType<ucMatHangChiTiet>().OrderBy(s => s.Tag))
             {
                 if (!uc.cbxMatHang.Checked) continue;
 
-                //decimal chietkhau = uc.numCK.Value == 0 ? 0 : uc.numCK.Value / 100;
-                //if (!_showCK)
-                var chietkhau = uc.numCK.Value / 100;
+                var chietKhau = uc.numCK.Value / 100;
 
-                var ct = new TEMP_HOADONXUATKHOCHITIET
+                var ct = new HOADONXUATKHOCHITIET
                 {
-                    GHICHU = stt++.ToString(),//DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") +" "+uc.Mathang.TENLOAI + " " +uc.Tag.ToString(),
+                    MAHOADON = _maHoaDon,
+                    GHICHU = stt++.ToString(),
                     MAKHO = SessionModel.CurrentSession.KhoMatHang.MAKHO,
                     MAMATHANG = uc.Mathang.MAMATHANG,
-                    //MAHOADON = MaHoaDon,
-                    //MACHITIETHOADON = PrefixContext.MaChiTietHoaDon(MaHoaDon, (int)ct.MAMATHANG),
                     DONGIASI = uc.numGiaNhap.Value,
                     SOLUONGLE = uc.NumSoLuongNhap.Value,
                     SOLUONGSI = uc.Mathang.GIANHAP, //Gia Nhap
 
-                    CHIETKHAUTHEOPHANTRAM = (double?)chietkhau ?? 0,
+                    CHIETKHAUTHEOPHANTRAM = (double?)chietKhau,
                     THANHTIENTRUOCCHIETKHAU_CT = uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value,
                     CHIETKHAUTHEOTIEN =
                         uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value -
-                        uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * (1 - chietkhau),
+                        uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * (1 - chietKhau),
 
                     THANHTIENSAUCHIETKHAU_CT =
-                        uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * (1 - chietkhau) +
+                        uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * (1 - chietKhau) +
+                        (uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * uc.Mathang.VAT ?? 0),
+
+                    ISDELETE = uc.IsChangcePrice
+                };
+                HoaDonXuatKhoChiTiet.Add(ct);
+            }
+        }
+
+        private void GetTempHoaDonXuatKhoChiTiet(int count)
+        {
+            lstChiTietXuat = new List<TEMP_HOADONXUATKHOCHITIET>(count);
+            var stt = slChiTiet + 1;
+            foreach (var uc in flnDSMatHang.Controls.OfType<ucMatHangChiTiet>().OrderBy(s => s.Tag))
+            {
+                if (!uc.cbxMatHang.Checked) continue;
+
+                var chietKhau = uc.numCK.Value / 100;
+
+                var ct = new TEMP_HOADONXUATKHOCHITIET
+                {
+                    GHICHU = stt++.ToString(),
+                    MAKHO = SessionModel.CurrentSession.KhoMatHang.MAKHO,
+                    MAMATHANG = uc.Mathang.MAMATHANG,
+                    DONGIASI = uc.numGiaNhap.Value,
+                    SOLUONGLE = uc.NumSoLuongNhap.Value,
+                    SOLUONGSI = uc.Mathang.GIANHAP, //Gia Nhap
+
+                    CHIETKHAUTHEOPHANTRAM = (double?)chietKhau,
+                    THANHTIENTRUOCCHIETKHAU_CT = uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value,
+                    CHIETKHAUTHEOTIEN =
+                        uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value -
+                        uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * (1 - chietKhau),
+
+                    THANHTIENSAUCHIETKHAU_CT =
+                        uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * (1 - chietKhau) +
                         (uc.numGiaNhap.Value * uc.NumSoLuongNhap.Value * uc.Mathang.VAT ?? 0),
 
                     ISDELETE = uc.IsChangcePrice
                 };
                 lstChiTietXuat.Add(ct);
             }
-
-            Close();
         }
 
         private void NumSoLuongNhap_ValueChanged(object sender, EventArgs e)

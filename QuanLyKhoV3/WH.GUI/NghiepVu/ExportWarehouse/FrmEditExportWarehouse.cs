@@ -260,7 +260,7 @@ namespace WH.GUI.ExportWarehouse
                     soLuong = hoaDonChiTiets.OrderBy(s => s.GHICHU.ToInt()).Last().GHICHU.ToInt();
                 }
 
-                var frm = new FrmInputNumberExportByLoai_Extend(soLuong, objMatHang, false, false, MaHoaDon);
+                var frm = new FrmInputNumberExportByLoai_Extend(soLuong, objMatHang, true, false, MaHoaDon);
                 frm.ShowDialog(this);
 
                 if (frm.HoaDonXuatKhoChiTiet.isNullOrZero()) return;
@@ -556,7 +556,7 @@ namespace WH.GUI.ExportWarehouse
                 var row = dgvDanhMuc.SelectedRows[0];
                 if (row == null) return;
 
-                var sId = row.Cells["DanhMuc_IDUnit"].Value.ToString();
+                var sId = row.Cells["IDUnit"].Value.ToString();
                 if (sId == "") return;
 
                 var service = XuatKhoService;
