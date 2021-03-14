@@ -8,7 +8,6 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
-using WH.GUI.NghiepVu.ExportWarehouse;
 using WH.Report.ReportForm;
 using WH.Report.ReportFunction;
 using WH.Service;

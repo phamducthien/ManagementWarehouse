@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using Util.Pattern.Contain;
 using WH.GUI.ExportWarehouse;
-using WH.GUI.NghiepVu.ExportWarehouse;
 using WH.Model;
 using WH.Report;
 

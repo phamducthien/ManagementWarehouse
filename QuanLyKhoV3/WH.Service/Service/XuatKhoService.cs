@@ -14,6 +14,12 @@ namespace WH.Service
 {
     public interface IXuatKhoService : IService
     {
+        #region HOADONXUATKHOCHITIET
+
+        List<HOADONXUATKHOCHITIET> LoadHoaDon(string maHoaDon);
+
+        #endregion
+
         MethodResult NhapMatHangVaoHoaDonTam(string maHoaDon,
             List<TEMP_HOADONXUATKHOCHITIET> listTempHoadonhapkhochitiets,
             List<MATHANG> listCapNhatGia, bool isCommited = true);
@@ -95,6 +101,16 @@ namespace WH.Service
         public XuatKhoService(IUnitOfWorkAsync unitOfWork) : base(unitOfWork)
         {
         }
+
+        #region HOADONXUATKHOCHITIET
+
+        public List<HOADONXUATKHOCHITIET> LoadHoaDon(string maHoaDon)
+        {
+            return _hoadonxuatkhochitietService.Search(s => s.MAHOADON == maHoaDon);
+        }
+
+        #endregion
+
 
         public string CreateMaHoaDon()
         {
