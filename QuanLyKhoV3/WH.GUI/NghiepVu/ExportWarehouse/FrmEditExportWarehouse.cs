@@ -260,7 +260,7 @@ namespace WH.GUI.ExportWarehouse
                     soLuong = hoaDonChiTiets.OrderBy(s => s.GHICHU.ToInt()).Last().GHICHU.ToInt();
                 }
 
-                var frm = new FrmInputNumberExportByLoaiExtend(soLuong, objMatHang, false, false, MaHoaDon);
+                var frm = new FrmInputNumberExportByLoaiExtend(soLuong, objMatHang, true, false, MaHoaDon);
                 frm.ShowDialog(this);
 
                 if (frm.HoaDonXuatKhoChiTiet.isNullOrZero()) return;

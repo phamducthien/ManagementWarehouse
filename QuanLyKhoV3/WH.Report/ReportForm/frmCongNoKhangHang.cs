@@ -348,6 +348,7 @@ namespace WH.Report.ReportForm
                     {
                         var lst = hdKho.HOADONXUATKHOCHITIETs.ToList();
                         var frm = new frmChiTietHoaDonBanHang(hdKho, lst);
+                        frm.StartPosition = FormStartPosition.Manual;
                         frm.ShowDialog(this);
                     }
                 }
