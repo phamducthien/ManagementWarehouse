@@ -169,7 +169,7 @@ namespace WH.GUI.ExportWarehouse
         private void Frm_Load(object sender, EventArgs e)
         {
             ActionLoadForm();
-            this.ResumeLayout();
+            ResumeLayout();
         }
 
         private void DgvDanhMuc_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -631,8 +631,8 @@ namespace WH.GUI.ExportWarehouse
         private void LoadDataAllMatHang()
         {
             DataList = XuatKhoService.GetListMatHang();
-            int soThuTu = 1;
-            var lstMatHangs = from a in this.DataList
+            var soThuTu = 1;
+            var lstMatHangs = from a in DataList
                               select new
                               {
                                   STT = soThuTu++,
@@ -653,7 +653,7 @@ namespace WH.GUI.ExportWarehouse
         {
             DataList = XuatKhoService.GetListMatHangCanNhap();
             int soThuTu = 1;
-            var lstMatHangs = from a in this.DataList
+            var lstMatHangs = from a in DataList
                               select new
                               {
                                   STT = soThuTu++,
@@ -674,7 +674,7 @@ namespace WH.GUI.ExportWarehouse
         {
             DataList = XuatKhoService.GetListMatHangCanXuat();
             int soThuTu = 1;
-            var lstMatHangs = from a in this.DataList
+            var lstMatHangs = from a in DataList
                               select new
                               {
                                   STT = soThuTu++,
