@@ -631,7 +631,7 @@ namespace WH.GUI.ExportWarehouse
         private void LoadDataAllMatHang()
         {
             DataList = XuatKhoService.GetListMatHang();
-            var soThuTu = 1;
+            int soThuTu = 1;
             var lstMatHangs = from a in DataList
                               select new
                               {
