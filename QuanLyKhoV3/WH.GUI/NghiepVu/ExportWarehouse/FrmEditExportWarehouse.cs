@@ -306,7 +306,7 @@ namespace WH.GUI.ExportWarehouse
                 }
 
                 var nhapKhoService = XuatKhoService;
-                var result = nhapKhoService.XoaHoaDonTam(MaHoaDon);
+                var result = nhapKhoService.XoaHoaDon(MaHoaDon);
                 if (result != MethodResult.Succeed)
                 {
                     ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);

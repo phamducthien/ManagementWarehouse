@@ -26,7 +26,7 @@ namespace WH.Service
         HOADONXUATKHOCHITIET GetModelChiTiet(int maMatHang, string maHoaDon);
         decimal CalTotalAmountHoaDon(string maHoaDon);
         MethodResult ThanhToan(string maHoaDon, decimal soTienChi = 0, decimal giamGia = 0, string ghiChu = "", bool isCommitted = true);
-
+        MethodResult XoaHoaDon(string maHoaDon, bool isCommitted = true);
         #endregion
 
         #region TEMP_HOADONXUATKHOCHITIET
@@ -485,6 +485,58 @@ namespace WH.Service
             }
         }
 
+        public MethodResult XoaHoaDon(string maHoaDon, bool isCommitted = true)
+        {
+            var result = MethodResult.Failed;
+            try
+            {
+                if (isCommitted)
+                    _unitOfWork.BeginTransaction();
+                var lst =
+                    _hoaDonXuatKhoChiTietService.Search(s => s.MAHOADON == maHoaDon);
+
+                foreach (var ct in lst)
+                {
+                    //Cập nhật kho
+                    var objKhoMatHang = _khoMatHangService.Find(s => s.MAKHO == ct.MAKHO && s.MAMATHANG == ct.MAMATHANG);
+                    if (objKhoMatHang == null) continue;
+                    objKhoMatHang.SOLUONGLE = objKhoMatHang.SOLUONGLE + ct.SOLUONGLE;
+                    result = _khoMatHangService.Modify(objKhoMatHang);
+                    if (result != MethodResult.Succeed)
+                        goto loi5;
+
+                    result = _hoaDonXuatKhoChiTietService.Remove(ct);
+                    if (result != MethodResult.Succeed)
+                        break;
+                }
+
+                //4.Luu
+                if (result != MethodResult.Succeed)
+                {
+                    _unitOfWork?.Rollback();
+                    ErrMsg = _hoaDonXuatKhoChiTietService.ErrMsg;
+                    result = MethodResult.Failed;
+                }
+                else
+                {
+                    if (isCommitted) _unitOfWork?.Commit();
+                }
+            }
+            catch (Exception exception)
+            {
+                _unitOfWork?.Rollback();
+                ErrMsg = exception.Message;
+                result = MethodResult.Failed;
+            }
+            return result;
+
+        loi5:
+            {
+                _unitOfWork?.Rollback();
+                ErrMsg = _khoMatHangService.ErrMsg;
+                return MethodResult.Failed;
+            }
+        }
         #endregion
 
         #region TEMP_HOADONXUATKHOCHITIET
