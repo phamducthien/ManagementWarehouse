@@ -20,7 +20,7 @@ namespace WH.Service
 
         MethodResult NhapMatHangVaoHoaDon(string maHoaDon, List<HOADONXUATKHOCHITIET> hoaDonXuatKhoChiTiets, List<MATHANG> listCapNhatGia, bool isCommitted = true);
         MethodResult HuyMatHangTrongHoaDon(string maHoaDon, List<HOADONXUATKHOCHITIET> hoaDonNhapKhoChiTiets, bool isCommitted = true);
-        MethodResult CapNhatMatHangTrongHoaDon(List<HOADONXUATKHOCHITIET> hoaDonNhapKhoChitTiets, bool isCommitted = true);
+        MethodResult CapNhatMatHangTrongHoaDon(List<HOADONXUATKHOCHITIET> hoaDonXuatKhoChitTiets, bool isCommitted = true, decimal? oldUnits = null);
 
         HOADONXUATKHOCHITIET GetModelChiTiet(string maChiTiet);
         HOADONXUATKHOCHITIET GetModelChiTiet(int maMatHang, string maHoaDon);
@@ -231,7 +231,7 @@ namespace WH.Service
             return result;
         }
 
-        public MethodResult CapNhatMatHangTrongHoaDon(List<HOADONXUATKHOCHITIET> hoaDonNhapKhoChitTiets, bool isCommitted = true)
+        public MethodResult CapNhatMatHangTrongHoaDon(List<HOADONXUATKHOCHITIET> hoaDonXuatKhoChitTiets, bool isCommitted = true, decimal? oldUnits = null)
         {
             var result = MethodResult.Failed;
             try
@@ -239,7 +239,7 @@ namespace WH.Service
                 if (isCommitted)
                     _unitOfWork.BeginTransaction();
 
-                foreach (var ct in hoaDonNhapKhoChitTiets)
+                foreach (var ct in hoaDonXuatKhoChitTiets)
                 {
                     var objMatHang = _matHangService.Find(s => s.MAMATHANG == ct.MAMATHANG);
                     if (objMatHang == null) continue;
@@ -252,6 +252,15 @@ namespace WH.Service
                     result = _hoaDonXuatKhoChiTietService.Modify(ct);
                     if (result != MethodResult.Succeed)
                         break;
+
+                    //------ Cập nhật kho
+                    var objKhoMatHang = _khoMatHangService.Find(s => s.MAKHO == ct.MAKHO && s.MAMATHANG == ct.MAMATHANG);
+                    if (objKhoMatHang == null) continue;
+                    var soLuongLe = ct.SOLUONGLE - oldUnits;
+                    objKhoMatHang.SOLUONGLE = soLuongLe > 0 ? objKhoMatHang.SOLUONGLE - Math.Abs((decimal)soLuongLe) : objKhoMatHang.SOLUONGLE + Math.Abs((decimal)soLuongLe);
+                    result = _khoMatHangService.Modify(objKhoMatHang);
+                    if (result != MethodResult.Succeed)
+                        goto loi5;
                 }
 
                 //4.Luu
@@ -274,6 +283,13 @@ namespace WH.Service
                 result = MethodResult.Failed;
             }
             return result;
+
+        loi5:
+            {
+                _unitOfWork?.Rollback();
+                ErrMsg = _khoMatHangService.ErrMsg;
+                return MethodResult.Failed;
+            }
         }
 
         public HOADONXUATKHOCHITIET GetModelChiTiet(string maChiTiet)
@@ -311,7 +327,7 @@ namespace WH.Service
                 if (hoaDonXuatKhoChiTiets.isNull())
                     goto loi4;
 
-                //2.Tao Hoa Don
+                //2.cập nhật Hoa Don
                 var objHd = _hoaDonXuatKhoService.Find(s => s.MAHOADONXUAT == maHoaDon);
                 if (objHd.isNull())
                 {

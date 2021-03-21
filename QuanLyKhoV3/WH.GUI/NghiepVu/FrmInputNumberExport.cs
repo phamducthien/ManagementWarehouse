@@ -6,6 +6,16 @@ namespace WH.GUI
 {
     public partial class FrmInputNumberExport : FrmBase
     {
+        #region Inits
+
+        public MATHANG Model { get; set; }
+        public int NumImport { get; set; }
+        public decimal GiaBan { get; set; }
+        public double ChietKhau { get; set; }
+        public bool IsChangePrice { get; set; }
+        public readonly decimal OldGia;
+        #endregion
+
         public FrmInputNumberExport(MATHANG objMathang, decimal giaBan, double chietKhau = 0)
         {
             IsChangePrice = false;
@@ -15,6 +25,7 @@ namespace WH.GUI
             {
                 InitializeComponent();
                 OldGia = objMathang.GIALE ?? 0;
+
                 numGiaNhap.Value = GiaBan;
                 labTenMatHang.Text = objMathang.TENMATHANG;
                 Model = objMathang;
@@ -87,15 +98,5 @@ namespace WH.GUI
                 Close();
             }
         }
-
-        #region Inits
-
-        public MATHANG Model { get; set; }
-        public int NumImport { get; set; }
-        public decimal GiaBan { get; set; }
-        public double ChietKhau { get; set; }
-        public bool IsChangePrice { get; set; }
-        public readonly decimal OldGia;
-        #endregion
     }
 }

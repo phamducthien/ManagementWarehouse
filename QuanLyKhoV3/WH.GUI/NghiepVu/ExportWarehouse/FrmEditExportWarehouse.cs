@@ -276,8 +276,7 @@ namespace WH.GUI.ExportWarehouse
 
                     var objHoaDonNhapKhoChiTiet = ct;
                     objHoaDonNhapKhoChiTiet.MAHOADON = MaHoaDon;
-                    objHoaDonNhapKhoChiTiet.MACHITIETHOADON =
-                        PrefixContext.MaChiTietHoaDon(MaHoaDon, (int)ct.MAMATHANG);
+                    objHoaDonNhapKhoChiTiet.MACHITIETHOADON = PrefixContext.MaChiTietHoaDon(MaHoaDon, (int)ct.MAMATHANG);
                     objHoaDonNhapKhoChiTiet.ISDELETE = false;
 
                     hoaDonNhapKhoChiTiets.Add(objHoaDonNhapKhoChiTiet);
@@ -445,13 +444,14 @@ namespace WH.GUI.ExportWarehouse
                     ShowMessage(IconMessageBox.Information, "Không tìm thấy sản phẩm trong hóa đơn!");
                     return;
                 }
-
+                var oldUnits = objChiTiet.SOLUONGLE;
                 var objMatHang = XuatKhoService.GetModelMatHang(objChiTiet.MATHANG.IDUnit);
                 var frm = new FrmInputNumberExport(objMatHang, (decimal)objChiTiet.DONGIASI);
                 MatHangModel = objMatHang;
                 frm.ShowDialog();
                 var soLuongNhap = frm.NumImport;
                 var giaBan = frm.GiaBan;
+
                 if (soLuongNhap <= 0)
                 {
                     ShowMessage(IconMessageBox.Information, "Số lượng cập nhật phải lớn hơn 0!");
@@ -476,7 +476,7 @@ namespace WH.GUI.ExportWarehouse
                     objChiTiet
                 };
 
-                var result = nhapKhoService.CapNhatMatHangTrongHoaDon(hoaDonNhapKhoChiTiets);
+                var result = nhapKhoService.CapNhatMatHangTrongHoaDon(hoaDonNhapKhoChiTiets, true, oldUnits);
                 if (result != MethodResult.Succeed)
                     ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
                 else
