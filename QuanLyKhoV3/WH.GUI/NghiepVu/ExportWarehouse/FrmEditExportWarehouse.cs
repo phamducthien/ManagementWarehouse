@@ -448,6 +448,7 @@ namespace WH.GUI.ExportWarehouse
 
                 var objMatHang = XuatKhoService.GetModelMatHang(objChiTiet.MATHANG.IDUnit);
                 var frm = new FrmInputNumberExport(objMatHang, (decimal)objChiTiet.DONGIASI);
+                MatHangModel = objMatHang;
                 frm.ShowDialog();
                 var soLuongNhap = frm.NumImport;
                 var giaBan = frm.GiaBan;
