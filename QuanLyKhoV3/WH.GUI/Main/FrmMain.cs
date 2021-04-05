@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Util.Pattern.Contain;
 using WH.GUI.ExportWarehouse;
 using WH.Model;
 using WH.Report;
@@ -22,11 +23,11 @@ namespace WH.GUI
             btnDanhMuc.Click += BtnDanhMuc_Click;
             btnKiemKe.Click += BtnKiemKe_Click;
             btnTraHang.Click += BtnTraHang_Click;
+            btnListExportWarehouse.Click += btnListExportWarehouse_Click;
         }
 
         private void BtnTraHang_Click(object sender, EventArgs e)
         {
-            //if (SessionModel.CurrentSession.User.NGUOIDUNG_QUYENHAN.Count(s=>s.QUYENXEM==true) == 6)
             if (CheckQuyen("XUẤT KHO - BÁN HÀNG"))
             {
                 Hide();
@@ -68,10 +69,6 @@ namespace WH.GUI
 
         private void BtnDoiTac_Click(object sender, EventArgs e)
         {
-            //foreach (UserControl u in grpMainApp.Panel.Controls.OfType<UserControl>())
-            //{
-            //    u.Dispose();
-            //}
             if (CheckQuyen("ĐỐI TÁC"))
             {
                 Hide();
@@ -84,15 +81,10 @@ namespace WH.GUI
 
         private void BtnMatHang_Click(object sender, EventArgs e)
         {
-            //foreach (UserControl u in grpMainApp.Panel.Controls.OfType<UserControl>())
-            //{
-            //    u.Dispose();
-            //}
             if (CheckQuyen("MẶT HÀNG"))
             {
                 Hide();
                 var frm = new FrmMatHang();
-                // frm.Activate();
                 frm.ShowDialog();
                 Show();
                 Activate();
@@ -144,14 +136,6 @@ namespace WH.GUI
 
         private void BtnDanhMuc_Click(object sender, EventArgs e)
         {
-            //foreach (UserControl u in grpMainApp.Panel.Controls.OfType<UserControl>())
-            //{
-            //    u.Dispose();
-            //}
-            //var uc = new UrcQuanLyChung { Size = grpMainApp.Panel.Size };
-            //grpMainApp.Panel.Controls.Add(uc);
-            //uc.ResumeLayout(false);
-
             if (CheckQuyen("QUẢN LÝ CHUNG"))
             {
                 Hide();
@@ -188,6 +172,18 @@ namespace WH.GUI
             Application.Exit();
         }
 
+        private void btnListExportWarehouse_Click(object sender, EventArgs e)
+        {
+            var checkRole = CheckRole(Functions.XuatKhoBanHang, Role.QuyenSua);
+
+            if (!checkRole) return;
+
+            Hide();
+            var frm = new FrmListExportWarehouse();
+            frm.ShowDialog();
+            Show();
+        }
+
         private void FrmMain_Load(object sender, EventArgs e)
         {
             Hide();
@@ -204,7 +200,51 @@ namespace WH.GUI
             {
             }
 
-            this?.Show();
+            // hide button list export Warehouse if do not have role
+            var checkRole = CheckRole(Functions.XuatKhoBanHang, Role.QuyenSua);
+            if (!checkRole)
+            {
+                btnListExportWarehouse.Visible = false;
+            }
+
+            // hide button Report if do not have role
+            if (!CheckQuyen("BÁO CÁO"))
+            {
+                btnBaoCao.Visible = false;
+            }
+
+            // hide button Đối tác if do not have role
+            if (!CheckQuyen("ĐỐI TÁC"))
+            {
+                btnDoiTac.Visible = false;
+            }
+
+            // hide button Mặt hàng if do not have role
+            if (!CheckQuyen("MẶT HÀNG"))
+            {
+                btnMatHang.Visible = false;
+            }
+
+            // hide button Xuất Kho if do not have role
+            if (!CheckQuyen("XUẤT KHO - BÁN HÀNG"))
+            {
+                btnXuatKho.Visible = false;
+                btnTraHang.Visible = false;
+            }
+
+            // hide button Nhập Kho if do not have role
+            if (!CheckQuyen("NHẬP KHO"))
+            {
+                btnNhapKho.Visible = false;
+            }
+
+            // hide button QUẢN LÝ CHUNG if do not have role
+            if (!CheckQuyen("QUẢN LÝ CHUNG"))
+            {
+                btnDanhMuc.Visible = false;
+            }
+
+            Show();
             Activate();
         }
 

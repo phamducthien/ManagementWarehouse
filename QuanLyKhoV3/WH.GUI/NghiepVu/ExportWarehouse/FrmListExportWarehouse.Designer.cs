@@ -1,12 +1,13 @@
-﻿using System.ComponentModel;
-using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
+﻿using ComponentFactory.Krypton.Toolkit;
 using HLVControl.Grid;
 using HLVControl.Grid.Data;
+using MetroUI.Forms;
+using System.ComponentModel;
+using System.Windows.Forms;
 
-namespace WH.Report.ReportForm
+namespace WH.GUI.ExportWarehouse
 {
-    partial class FrmCongNoKhangHang
+    partial class FrmListExportWarehouse : MetroForm
     {
         /// <summary>
         /// Required designer variable.
@@ -35,9 +36,8 @@ namespace WH.Report.ReportForm
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCongNoKhangHang));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmListExportWarehouse));
             HLVControl.Grid.Render.MetroTreeListRenderer metroTreeListRenderer1 = new HLVControl.Grid.Render.MetroTreeListRenderer();
-            this.btnPrinter = new System.Windows.Forms.Button();
             this.btnTimKiem = new System.Windows.Forms.Button();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.btnAll = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
@@ -58,33 +58,8 @@ namespace WH.Report.ReportForm
             this._colTinhTrang = new HLVControl.Grid.Data.TreeListColumn();
             this.btnTheoNgay = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.CheckSet = new ComponentFactory.Krypton.Toolkit.KryptonCheckSet(this.components);
-            this.pnlInfo = new System.Windows.Forms.Panel();
-            this.btnXemChiTiet = new System.Windows.Forms.Button();
-            this.labDoanhThu = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.CheckSet)).BeginInit();
-            this.pnlInfo.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnPrinter
-            // 
-            this.btnPrinter.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.btnPrinter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnPrinter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnPrinter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrinter.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrinter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btnPrinter.Image = global::WH.Report.Properties.Resources.MayIn1;
-            this.btnPrinter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPrinter.Location = new System.Drawing.Point(1069, 9);
-            this.btnPrinter.Name = "btnPrinter";
-            this.btnPrinter.Size = new System.Drawing.Size(112, 45);
-            this.btnPrinter.TabIndex = 634;
-            this.btnPrinter.Tag = "timkiem";
-            this.btnPrinter.Text = "(Crtl+P)";
-            this.btnPrinter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrinter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPrinter.UseVisualStyleBackColor = true;
-            this.btnPrinter.Click += new System.EventHandler(this.btnPrinter_Click);
             // 
             // btnTimKiem
             // 
@@ -94,7 +69,7 @@ namespace WH.Report.ReportForm
             this.btnTimKiem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTimKiem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTimKiem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btnTimKiem.Image = global::WH.Report.Properties.Resources.TimKiem;
+            this.btnTimKiem.Image = global::WH.GUI.Properties.Resources.TimKiem;
             this.btnTimKiem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTimKiem.Location = new System.Drawing.Point(619, 9);
             this.btnTimKiem.Name = "btnTimKiem";
@@ -152,7 +127,7 @@ namespace WH.Report.ReportForm
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnExit.FlatAppearance.BorderSize = 0;
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExit.Image = global::WH.Report.Properties.Resources.Exit;
+            this.btnExit.Image = global::WH.GUI.Properties.Resources.Exit;
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnExit.Location = new System.Drawing.Point(1187, 18);
             this.btnExit.Name = "btnExit";
@@ -235,7 +210,7 @@ namespace WH.Report.ReportForm
             this.treeDanhMuc.ShowSelection = true;
             this.treeDanhMuc.ShowSelectionBorder = true;
             this.treeDanhMuc.ShowSummaryRow = false;
-            this.treeDanhMuc.Size = new System.Drawing.Size(1188, 368);
+            this.treeDanhMuc.Size = new System.Drawing.Size(1188, 401);
             this.treeDanhMuc.SummaryRowHeight = 45;
             this.treeDanhMuc.TabIndex = 635;
             this.treeDanhMuc.Text = "treeListView";
@@ -528,82 +503,32 @@ namespace WH.Report.ReportForm
             this.CheckSet.CheckButtons.Add(this.btnTop10);
             this.CheckSet.CheckedButton = this.btnTop10;
             // 
-            // pnlInfo
-            // 
-            this.pnlInfo.BackColor = System.Drawing.Color.White;
-            this.pnlInfo.Controls.Add(this.btnXemChiTiet);
-            this.pnlInfo.Controls.Add(this.labDoanhThu);
-            this.pnlInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlInfo.Location = new System.Drawing.Point(20, 428);
-            this.pnlInfo.Name = "pnlInfo";
-            this.pnlInfo.Size = new System.Drawing.Size(1188, 33);
-            this.pnlInfo.TabIndex = 637;
-            // 
-            // btnXemChiTiet
-            // 
-            this.btnXemChiTiet.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.btnXemChiTiet.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnXemChiTiet.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnXemChiTiet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXemChiTiet.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXemChiTiet.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btnXemChiTiet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnXemChiTiet.Location = new System.Drawing.Point(970, 0);
-            this.btnXemChiTiet.Name = "btnXemChiTiet";
-            this.btnXemChiTiet.Size = new System.Drawing.Size(109, 33);
-            this.btnXemChiTiet.TabIndex = 635;
-            this.btnXemChiTiet.Tag = "timkiem";
-            this.btnXemChiTiet.Text = "Xem Chi Tiết";
-            this.btnXemChiTiet.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnXemChiTiet.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnXemChiTiet.UseVisualStyleBackColor = true;
-            this.btnXemChiTiet.Visible = false;
-            this.btnXemChiTiet.Click += new System.EventHandler(this.btnXemChiTiet_Click);
-            // 
-            // labDoanhThu
-            // 
-            this.labDoanhThu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labDoanhThu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labDoanhThu.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labDoanhThu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.labDoanhThu.Location = new System.Drawing.Point(0, 0);
-            this.labDoanhThu.Name = "labDoanhThu";
-            this.labDoanhThu.Size = new System.Drawing.Size(1188, 33);
-            this.labDoanhThu.TabIndex = 1;
-            this.labDoanhThu.Text = "0 vnđ";
-            this.labDoanhThu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // FrmCongNoKhangHang
+            // FrmListExportWarehouse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1228, 481);
             this.ControlBox = false;
             this.Controls.Add(this.treeDanhMuc);
-            this.Controls.Add(this.pnlInfo);
             this.Controls.Add(this.btnTheoNgay);
-            this.Controls.Add(this.btnPrinter);
             this.Controls.Add(this.btnTimKiem);
             this.Controls.Add(this.txtTimKiem);
             this.Controls.Add(this.btnAll);
             this.Controls.Add(this.btnTop50);
             this.Controls.Add(this.btnTop10);
             this.Controls.Add(this.btnExit);
-            this.Name = "FrmCongNoKhangHang";
+            this.Name = "FrmListExportWarehouse";
             this.Resizable = false;
             this.Text = "Danh Sách Hóa Đơn Xuất Kho";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmCongNoKhachHang_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CheckSet)).EndInit();
-            this.pnlInfo.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private Button btnPrinter;
         private Button btnTimKiem;
         private TextBox txtTimKiem;
         private KryptonCheckButton btnAll;
@@ -620,11 +545,8 @@ namespace WH.Report.ReportForm
         private KryptonCheckButton btnTheoNgay;
         private TreeListColumn _colNgayTao;
         private KryptonCheckSet CheckSet;
-        private Panel pnlInfo;
-        private Label labDoanhThu;
         private TreeListColumn _colTinhTrang;
         private TreeListColumn _colTenKH;
-        private Button btnXemChiTiet;
         private TreeListColumn _colMaCode;
         private TreeListColumn _colBarCode;
     }

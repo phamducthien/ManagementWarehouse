@@ -102,14 +102,14 @@ namespace WH.GUI
                 //if (newGiaNhap != _oldGiaNhap)
                 //{
                 //    gianhap = newGiaNhap;
-                //    //Model.GIANHAP = newGiaNhap;
+                //    //MatHangModel.GIANHAP = newGiaNhap;
                 //    //var service = MatHangService;
-                //    //MethodResult result = service.Modify(Model, true);
+                //    //MethodResult result = service.Modify(MatHangModel, true);
                 //    //if (result != MethodResult.Succeed)
                 //    //{
                 //    //    ShowMessage(IconMessageBox.Warning, service.ErrMsg);
                 //    //}
-                //    //IsChangcePrice = result == MethodResult.Succeed;
+                //    //IsChangePrice = result == MethodResult.Succeed;
                 //}
             }
             catch (Exception ex)

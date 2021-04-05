@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Repository.Pattern.UnitOfWork;
+using System;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using Repository.Pattern.UnitOfWork;
 using WH.Service;
 using WH.Service.Repository.Core;
 
@@ -29,7 +29,7 @@ namespace WH.Report.ReportForm
             }
             else
             {
-                MessageBox.Show("Sản phầm này không tồn tại. Vui lòng chọn lại hóa đơn mới.");
+                MessageBox.Show(@"Sản phầm này không tồn tại. Vui lòng chọn lại hóa đơn mới.");
             }
         }
 
@@ -59,6 +59,6 @@ namespace WH.Report.ReportForm
             Close();
         }
 
- 
+
     }
 }

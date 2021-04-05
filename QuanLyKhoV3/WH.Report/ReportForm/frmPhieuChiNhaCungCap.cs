@@ -1,12 +1,12 @@
-﻿using System;
-using System.Data;
-using System.IO;
-using System.Windows.Forms;
-using ClosedXML.Excel;
+﻿using ClosedXML.Excel;
 using HLVControl.Grid;
 using HLVControl.Grid.Data;
 using MetroUI.Forms;
 using Repository.Pattern.UnitOfWork;
+using System;
+using System.Data;
+using System.IO;
+using System.Windows.Forms;
 using WH.Report.ReportFunction;
 using WH.Service.Repository.Core;
 using WH.Service.Service;
@@ -33,7 +33,7 @@ namespace WH.Report.ReportForm
             codeNCC = CodeNCC;
             if (dtFrom == null || dtTo == null || codeNCC == "")
             {
-                MessageBox.Show("Một trong các dữ liệu Ngày Từ hoặc Ngày Đến hoặc NCC chưa được chọn.");
+                MessageBox.Show(@"Một trong các dữ liệu Ngày Từ hoặc Ngày Đến hoặc NCC chưa được chọn.");
                 Close();
             }
 

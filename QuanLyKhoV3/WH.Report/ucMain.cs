@@ -29,10 +29,10 @@ namespace WH.Report
                 }
                 else
                 {
-                    MessageBox.Show("Bạn cần chọn khách hàng trước.");
+                    MessageBox.Show(@"Bạn cần chọn khách hàng trước.");
                 }
             else
-                MessageBox.Show("Bạn cần chọn ngày tháng trước.");
+                MessageBox.Show(@"Bạn cần chọn ngày tháng trước.");
 
             Show();
             //btnDoanhThu_KhachHang.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
@@ -54,12 +54,12 @@ namespace WH.Report
                 }
                 else
                 {
-                    MessageBox.Show("Bạn cần chọn NCC trước.");
+                    MessageBox.Show(@"Bạn cần chọn NCC trước.");
                 }
             }
             else
             {
-                MessageBox.Show("Bạn cần chọn ngày tháng trước.");
+                MessageBox.Show(@"Bạn cần chọn ngày tháng trước.");
             }
 
             Show();
@@ -180,7 +180,7 @@ namespace WH.Report
             var frm = new FrmSelectDate();
             if (frm.ShowDialog() == DialogResult.OK)
             {
-            
+
                 var frm1 = new frmTienLai(FrmSelectDate.DateFrom, FrmSelectDate.DateTo);
                 frm1.ShowDialog();
             }

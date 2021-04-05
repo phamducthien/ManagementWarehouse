@@ -10,7 +10,7 @@ namespace WH.GUI
         private decimal _oldGia;
         private readonly bool showCK;
         private bool bGiaNhap;
-        public ucMatHangChiTiet(MATHANG mathang, decimal slMatHang = 0, bool isShowCK = false,bool isGiaNhap = false)
+        public ucMatHangChiTiet(MATHANG mathang, decimal slMatHang = 0, bool isShowCK = false, bool isGiaNhap = false)
         {
             Mathang = mathang;
             IsChangcePrice = false;
@@ -51,7 +51,7 @@ namespace WH.GUI
             else
                 NumSoLuongNhap.Select(NumSoLuongNhap.Value.ToString("##,###").Length, 0);
             IsChangcePrice = _oldGia != numGiaNhap.Value;
-            _numImport = (int) NumSoLuongNhap.Value;
+            _numImport = (int)NumSoLuongNhap.Value;
         }
 
         private void ucMatHangChiTiet_Load(object sender, EventArgs e)
@@ -60,8 +60,8 @@ namespace WH.GUI
             {
                 _oldGia = Mathang.GIALE ?? 0;
                 cbxMatHang.Text = Mathang?.TENMATHANG ?? string.Empty;
-                numGiaNhap.Value = bGiaNhap ? (decimal) Mathang?.GIANHAP : (decimal) Mathang?.GIALE;
-                if (Mathang?.CHIETKHAU != null) numCK.Value = (decimal) Mathang?.CHIETKHAU * 100;
+                numGiaNhap.Value = bGiaNhap ? (decimal)Mathang?.GIANHAP : (decimal)Mathang?.GIALE;
+                if (Mathang?.CHIETKHAU != null) numCK.Value = (decimal)Mathang?.CHIETKHAU * 100;
                 NumSoLuongNhap.Value = _numImport;
             }
             else
@@ -74,7 +74,7 @@ namespace WH.GUI
 
         private void cbxMatHang_CheckedChanged(object sender, EventArgs e)
         {
-            NumSoLuongNhap.Value = !cbxMatHang.Checked ? 0 : FrmInputNumberExportByLoai_Extend.numImport;
+            NumSoLuongNhap.Value = !cbxMatHang.Checked ? 0 : FrmInputNumberExportByLoaiExtend.NumImport;
         }
     }
 }

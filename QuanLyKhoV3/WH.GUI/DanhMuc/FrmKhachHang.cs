@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using Service.Pattern;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
-using Service.Pattern;
 using Util.Pattern;
 using WH.Entity;
 using WH.Model;
@@ -223,8 +223,8 @@ namespace WH.GUI
                     return true;
 
                 //case Keys.Tab:
-                //	//dgvDanhMuc.Select();
-                //	return true;
+                //  //dgvDanhMuc.Select();
+                //  return true;
 
                 case Keys.Escape:
                     if (btnHuy.Visible)
@@ -306,7 +306,7 @@ namespace WH.GUI
                 LoadDataAll();
                 ControlAction(ThaoTac.Xem);
                 SplashScreenChild.CloseForm();
-                pnlLoad.Visible = false;
+                //pnlLoad.Visible = false;
             }
             catch (Exception exception)
             {
@@ -362,17 +362,16 @@ namespace WH.GUI
                 ShowMessage(IconMessageBox.Error, service.ErrMsg);
                 return;
             }
-
             var index = CurrentRow.Index;
             IsChange = true;
             IsSuccessfuly = true;
             ThaoTac = ThaoTac.Xem;
-            //LoadDataAll();
+            LoadDataAll();
 
-            //if (index >= 0)
-            //{
-            //	SelectedRow(dgvDanhMuc.Rows[index]);
-            //}
+            if (index >= 0)
+            {
+                SelectedRow(dgvDanhMuc.Rows[index]);
+            }
 
             SetDataToGui();
             SetTextReadOnly(true);
@@ -427,10 +426,6 @@ namespace WH.GUI
 
                 case ThaoTac.Sua:
                     ActionSua();
-                    break;
-
-                default:
-                    //Debug.Assert(false);
                     break;
             }
         }
@@ -489,14 +484,12 @@ namespace WH.GUI
                 case ThaoTac.TimKiem:
                     ActionSearchData();
                     break;
+
                 case ThaoTac.Thoat:
                     ActionExit();
                     break;
 
                 case ThaoTac.MacDinh:
-                    break;
-
-                default:
                     break;
             }
         }
@@ -634,26 +627,26 @@ namespace WH.GUI
                             s.MAKHACHHANG.ToString().ToLower() != "56dbc32e-11d7-4175-a7ac-608ccbf962d7" &&
                             s.MAKHACHHANG.ToString().ToLower() != "66dbc32e-11d7-4175-a7ac-608ccbf962d7").OrderBy(s => s.NGAYTAO)
                         select new
-                {
-                    STT = record++,
-                    TENKHUVUC = p.KHACHHANGKHUVUC?.TEN,
-                    IDUnit = p.MAKHACHHANG,
-                    p.CODEKHACHHANG,
-                    p.MABARCODE,
-                    p.TENKHACHHANG,
-                    p.DIACHI,
-                    p.DIACHICONGTY,
-                    HANGDONG = p.DIACHIGIAOHOADON,
-                    p.DIENTHOAI,
-                    p.CONGTY,
-                    p.MAKHUVUC,
-                    p.MANHOM,
-                    p.MALOAIKHACHHANG,
-                    //DOANHTHU = p.HOADONXUATKHOes.Sum(s => s.SOTIENTHANHTOAN_HD),
-                    //DATHU = p.HOADONXUATKHOes.Sum(s => s.SOTIENKHACHDUA_HD),
-                    //CONGNO = p.HOADONXUATKHOes.Sum(s => s.SOTIENKHACHDUA_HD - s.SOTIENTHANHTOAN_HD),
-                    p.NGAYTAO
-                }).OrderBy(s=>s.NGAYTAO).ToList();
+                        {
+                            STT = record++,
+                            TENKHUVUC = p.KHACHHANGKHUVUC?.TEN,
+                            IDUnit = p.MAKHACHHANG,
+                            p.CODEKHACHHANG,
+                            p.MABARCODE,
+                            p.TENKHACHHANG,
+                            p.DIACHI,
+                            p.DIACHICONGTY,
+                            HANGDONG = p.DIACHIGIAOHOADON,
+                            p.DIENTHOAI,
+                            p.CONGTY,
+                            p.MAKHUVUC,
+                            p.MANHOM,
+                            p.MALOAIKHACHHANG,
+                            //DOANHTHU = p.HOADONXUATKHOes.Sum(s => s.SOTIENTHANHTOAN_HD),
+                            //DATHU = p.HOADONXUATKHOes.Sum(s => s.SOTIENKHACHDUA_HD),
+                            //CONGNO = p.HOADONXUATKHOes.Sum(s => s.SOTIENKHACHDUA_HD - s.SOTIENTHANHTOAN_HD),
+                            p.NGAYTAO
+                        }).OrderBy(s => s.NGAYTAO).ToList();
 
             LoadData(data.ToDatatable());
             if (currIndex > -1) dgvDanhMuc.Rows[currIndex].Selected = true;

@@ -198,11 +198,11 @@ namespace WH.GUI
         private void DgvDanhMuc_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             //GetDataFromDgvDanhMuc();
-            //FrmInputNumberImport frm = new FrmInputNumberImport(Model);
+            //FrmInputNumberImport frm = new FrmInputNumberImport(MatHangModel);
             //frm.ShowDialog();
-            //if (frm.Model != null && frm.numImport > 0)
+            //if (frm.MatHangModel != null && frm.NumImport > 0)
             //{
-            //    ActionNhapMatHangVaoHoaDon(frm.Model, frm.numImport);
+            //    ActionNhapMatHangVaoHoaDon(frm.MatHangModel, frm.NumImport);
             //}
         }
 
@@ -286,15 +286,15 @@ namespace WH.GUI
         //    try
         //    {
         //        GetDataFromDgvDanhMuc();
-        //        var objMathang = Model;
+        //        var objMathang = MatHangModel;
         //        if (objMathang == null) return;
 
         //        var frm = new FrmInputNumberExportByLoai_Extend(objMathang);
         //        frm.ShowDialog();
-        //        if (frm.numImport <= 0) return;
+        //        if (frm.NumImport <= 0) return;
 
-        //        var slNhap = frm.numImport;
-        //        var isChangePrice = frm.IsChangcePrice;
+        //        var slNhap = frm.NumImport;
+        //        var isChangePrice = frm.IsChangePrice;
 
         //        var lsTempHoadonhapkhochitiets = new List<TEMP_HOADONXUATKHOCHITIET>();
         //        var nhapKhoService = XuatKhoService;
@@ -368,16 +368,16 @@ namespace WH.GUI
                     }
                 }
 
-                var frm = new FrmInputNumberExportByLoai_Extend(soluong, objMathang, true);
+                var frm = new FrmInputNumberExportByLoaiExtend(soluong, objMathang);
                 frm.ShowDialog(this);
 
-                if (frm.lstChiTietXuat.isNullOrZero()) return;
-                if (frm.lstChiTietXuat.Count <= 0) return;
+                if (frm.TempHoaDonXuatKhoChiTiet.isNullOrZero()) return;
+                if (frm.TempHoaDonXuatKhoChiTiet.Count <= 0) return;
 
                 var lsTempHoadonhapkhochitiets = new List<TEMP_HOADONXUATKHOCHITIET>();
 
                 var isChangePrice = false;
-                foreach (var ct in frm.lstChiTietXuat)
+                foreach (var ct in frm.TempHoaDonXuatKhoChiTiet)
                 {
                     if (ct.SOLUONGLE <= 0) continue;
                     var slNhap = ct.SOLUONGLE;
@@ -567,10 +567,10 @@ namespace WH.GUI
                 var objMathang = TraHangService.GetModelMatHang(objChiTiet);
                 var frm = new FrmInputNumberExport(objMathang, (decimal)objChiTiet.DONGIASI);
                 frm.ShowDialog();
-                var soluongNhap = frm.numImport;
-                var giaBan = frm.giaban;
+                var soluongNhap = frm.NumImport;
+                var giaBan = frm.GiaBan;
 
-                //var isChangePrice = frm.IsChangcePrice;
+                //var isChangePrice = frm.IsChangePrice;
                 if (soluongNhap <= 0)
                 {
                     ShowMessage(IconMessageBox.Information, "Số lượng cập nhật phải lớn hơn 0!");
@@ -859,7 +859,7 @@ namespace WH.GUI
 
             if (ModelChiTiet != null) sltronghoadon = ModelChiTiet.SOLUONGLE ?? 0;
             if (KhoMatHangModel != null) slTonKho = KhoMatHangModel.SOLUONGLE ?? 0;
-            // Model.NGUONGXUAT Ton Toi Da
+            // MatHangModel.NGUONGXUAT Ton Toi Da
             var soluong = slTonKho + slNhap + sltronghoadon - Model.NGUONGXUAT ?? 0;
 
             if (soluong > 0 && Model.NGUONGXUAT > 0)

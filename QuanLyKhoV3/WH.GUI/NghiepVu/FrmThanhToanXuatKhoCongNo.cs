@@ -123,7 +123,7 @@ namespace WH.GUI
             {
                 LoadData(list.OrderBy(s => s.GHICHU).ToList());
             }
-            labTongTien.Values.ExtraText = XuatKhoService.CalTotalAmount(MaHoaDon).ToString("N2");
+            labTongTien.Values.ExtraText = XuatKhoService.CalTotalAmountHoaDonTam(MaHoaDon).ToString("N2");
         }
 
         private void ActionThanhToan()

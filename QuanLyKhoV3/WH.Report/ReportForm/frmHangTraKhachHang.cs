@@ -1,13 +1,13 @@
-﻿using System;
+﻿using ClosedXML.Excel;
+using ComponentFactory.Krypton.Toolkit;
+using MetroFramework.Forms;
+using Repository.Pattern.UnitOfWork;
+using System;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using ClosedXML.Excel;
-using ComponentFactory.Krypton.Toolkit;
-using MetroFramework.Forms;
-using Repository.Pattern.UnitOfWork;
 using WH.Service;
 using WH.Service.Repository.Core;
 //using DocumentFormat.OpenXml.Wordprocessing;
@@ -87,7 +87,7 @@ namespace WH.Report.ReportForm
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Không thể tải thông tin!");
+                MessageBox.Show(@"Không thể tải thông tin!");
             }
         }
 

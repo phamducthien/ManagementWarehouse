@@ -35,6 +35,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.72.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.72.0\lib\net40-client\ClosedXML.dll</HintPath>
+    </Reference>
     <Reference Include="ComponentFactory.Krypton.Design, Version=4.4.1.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <HintPath>..\packages\KryptonWinFormControls.4.4.1.0\lib\net40\ComponentFactory.Krypton.Design.dll</HintPath>
       <Private>True</Private>
@@ -63,6 +66,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DLL\CrystalDecisions.CrystalReports.Design.dll</HintPath>
     </Reference>
+    <Reference Include="HLVControl">
+      <HintPath>..\DLL\HLVControl.dll</HintPath>
+    </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DLL\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
@@ -88,6 +94,14 @@
     <Reference Include="LinqKit, Version=1.1.8.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
       <HintPath>..\packages\LinqKit.1.1.8.0\lib\net45\LinqKit.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="MetroFramework, Version=1.3.5.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroUI, Version=1.0.4945.33365, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\MetroUI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -304,11 +318,23 @@
     <Compile Include="Main\UrcQuanLyChung.Designer.cs">
       <DependentUpon>UrcQuanLyChung.cs</DependentUpon>
     </Compile>
+    <Compile Include="NghiepVu\ExportWarehouse\FrmListExportWarehouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NghiepVu\ExportWarehouse\FrmListExportWarehouse.designer.cs">
+      <DependentUpon>FrmListExportWarehouse.cs</DependentUpon>
+    </Compile>
     <Compile Include="NghiepVu\ExportWarehouse\FrmExportWarehouseTab.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="NghiepVu\ExportWarehouse\FrmExportWarehouseTab.Designer.cs">
       <DependentUpon>FrmExportWarehouseTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NghiepVu\ExportWarehouse\FrmEditExportWarehouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NghiepVu\ExportWarehouse\FrmEditExportWarehouse.Designer.cs">
+      <DependentUpon>FrmEditExportWarehouse.cs</DependentUpon>
     </Compile>
     <Compile Include="NghiepVu\FrmCongNoKhachHang.cs">
       <SubType>Form</SubType>
@@ -518,8 +544,14 @@
     <EmbeddedResource Include="Main\UrcQuanLyChung.resx">
       <DependentUpon>UrcQuanLyChung.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NghiepVu\ExportWarehouse\FrmListExportWarehouse.resx">
+      <DependentUpon>FrmListExportWarehouse.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NghiepVu\ExportWarehouse\FrmExportWarehouseTab.resx">
       <DependentUpon>FrmExportWarehouseTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NghiepVu\ExportWarehouse\FrmEditExportWarehouse.resx">
+      <DependentUpon>FrmEditExportWarehouse.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NghiepVu\FrmCongNoKhachHang.resx">
       <DependentUpon>FrmCongNoKhachHang.cs</DependentUpon>

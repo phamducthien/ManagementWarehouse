@@ -298,25 +298,19 @@ namespace Util.Pattern
 
         public static int ToIntOrDefault(this string input)
         {
-            int i;
-            var res = int.TryParse(input, NumberStyles.Number, CultureInfo.InvariantCulture, out i);
-
+            var res = int.TryParse(input, NumberStyles.Number, CultureInfo.InvariantCulture, out var i);
             return res ? i : DefaultInt;
         }
 
         public static decimal ToDecimal(this string input)
         {
-            decimal i;
-            var res = decimal.TryParse(input, NumberStyles.Number, CultureInfo.InvariantCulture, out i);
-
+            var res = decimal.TryParse(input, NumberStyles.Number, CultureInfo.InvariantCulture, out var i);
             return res ? i : DefaultInt;
         }
 
         public static decimal ToDecimalOrDefault(this string input)
         {
-            decimal i;
-            var res = decimal.TryParse(input, NumberStyles.Number, CultureInfo.InvariantCulture, out i);
-
+            var res = decimal.TryParse(input, NumberStyles.Number, CultureInfo.InvariantCulture, out var i);
             return res ? i : DefaultInt;
         }
 
@@ -335,8 +329,7 @@ namespace Util.Pattern
 
         public static bool ToBoolOrDefault(this string input)
         {
-            bool i;
-            var res = bool.TryParse(input, out i);
+            var res = bool.TryParse(input, out var i);
             return res && i;
         }
 
@@ -347,8 +340,7 @@ namespace Util.Pattern
 
         public static Guid ToGuidOrDefault(this string input)
         {
-            Guid i;
-            var res = Guid.TryParse(input, out i);
+            var res = Guid.TryParse(input, out var i);
 
             return res ? i : DefaultGuid;
         }
@@ -361,8 +353,7 @@ namespace Util.Pattern
         public static bool IsInt(this string input)
         {
             if (input.IsBlank()) return false;
-            int i;
-            return int.TryParse(input, out i);
+            return int.TryParse(input, out _);
         }
 
         public static long ToLong(this string input)
