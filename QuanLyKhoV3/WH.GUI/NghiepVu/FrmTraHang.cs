@@ -368,13 +368,13 @@ namespace WH.GUI
                     }
                 }
 
-                var frm = new FrmInputNumberExportByLoaiExtend(soluong, objMathang);
+                var frm = new FrmInputNumberExportByLoaiExtend(soluong, objMathang, true);
                 frm.ShowDialog(this);
 
                 if (frm.TempHoaDonXuatKhoChiTiet.isNullOrZero()) return;
                 if (frm.TempHoaDonXuatKhoChiTiet.Count <= 0) return;
 
-                var lsTempHoadonhapkhochitiets = new List<TEMP_HOADONXUATKHOCHITIET>();
+                var lsTempHoaDonNhapKhoChiTiets = new List<TEMP_HOADONXUATKHOCHITIET>();
 
                 var isChangePrice = false;
                 foreach (var ct in frm.TempHoaDonXuatKhoChiTiet)
@@ -384,18 +384,17 @@ namespace WH.GUI
                     if (!CheckTonToiDa((int)slNhap)) continue;
                     isChangePrice = (bool)ct.ISDELETE;
 
-                    var objHoadonhapkhochitiet = ct;
+                    var objHoaDonNhapKhoChiTiet = ct;
 
-                    objHoadonhapkhochitiet.MAHOADON = MaHoaDon;
-                    objHoadonhapkhochitiet.MACHITIETHOADON =
-                        PrefixContext.MaChiTietHoaDon(MaHoaDon, (int)ct.MAMATHANG);
-                    objHoadonhapkhochitiet.ISDELETE = false;
+                    objHoaDonNhapKhoChiTiet.MAHOADON = MaHoaDon;
+                    objHoaDonNhapKhoChiTiet.MACHITIETHOADON = PrefixContext.MaChiTietHoaDon(MaHoaDon, (int)ct.MAMATHANG);
+                    objHoaDonNhapKhoChiTiet.ISDELETE = false;
 
-                    lsTempHoadonhapkhochitiets.Add(objHoadonhapkhochitiet);
+                    lsTempHoaDonNhapKhoChiTiets.Add(objHoaDonNhapKhoChiTiet);
                 }
 
                 service = TraHangService;
-                var result = service.NhapMatHangVaoHoaDonTam(MaHoaDon, lsTempHoadonhapkhochitiets, null);
+                var result = service.NhapMatHangVaoHoaDonTam(MaHoaDon, lsTempHoaDonNhapKhoChiTiets, null);
                 if (result != MethodResult.Succeed)
                 {
                     ShowMessage(IconMessageBox.Information, service.ErrMsg);

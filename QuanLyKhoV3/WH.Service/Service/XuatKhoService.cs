@@ -192,7 +192,7 @@ namespace WH.Service
             }
             return result;
 
-        loi5:
+            loi5:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _khoMatHangService.ErrMsg;
@@ -253,7 +253,7 @@ namespace WH.Service
             }
             return result;
 
-        loi5:
+            loi5:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _khoMatHangService.ErrMsg;
@@ -314,7 +314,7 @@ namespace WH.Service
             }
             return result;
 
-        loi5:
+            loi5:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _khoMatHangService.ErrMsg;
@@ -447,37 +447,37 @@ namespace WH.Service
 
             return result;
 
-        loi1:
+            loi1:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _hoaDonXuatKhoService.ErrMsg;
                 return MethodResult.Failed;
             }
-        loi2:
+            loi2:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _hoaDonXuatKhoChiTietService.ErrMsg;
                 return MethodResult.Failed;
             }
-        loi3:
+            loi3:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _phieuThuService.ErrMsg;
                 return MethodResult.Failed;
             }
-        loi5:
+            loi5:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _khoMatHangService.ErrMsg;
                 return MethodResult.Failed;
             }
-        loi4:
+            loi4:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = "Không có mặt hàng trong hóa đơn!";
                 return MethodResult.Failed;
             }
-        loi6:
+            loi6:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _tempHoaDonXuatKhoChiTietService.ErrMsg;
@@ -530,7 +530,7 @@ namespace WH.Service
             }
             return result;
 
-        loi5:
+            loi5:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _khoMatHangService.ErrMsg;
@@ -1292,37 +1292,37 @@ namespace WH.Service
 
             return result;
 
-        loi1:
+            loi1:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _hoaDonXuatKhoService.ErrMsg;
                 return MethodResult.Failed;
             }
-        loi2:
+            loi2:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _hoaDonXuatKhoChiTietService.ErrMsg;
                 return MethodResult.Failed;
             }
-        loi3:
+            loi3:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _phieuThuService.ErrMsg;
                 return MethodResult.Failed;
             }
-        loi5:
+            loi5:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _khoMatHangService.ErrMsg;
                 return MethodResult.Failed;
             }
-        loi4:
+            loi4:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = "Không có mặt hàng trong hóa đơn!";
                 return MethodResult.Failed;
             }
-        loi6:
+            loi6:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _tempHoaDonXuatKhoChiTietService.ErrMsg;
@@ -1384,19 +1384,19 @@ namespace WH.Service
                 return MethodResult.Failed;
             }
 
-        loi1:
+            loi1:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = "Không tìm thấy hóa đơn!";
                 return MethodResult.Failed;
             }
-        loi2:
+            loi2:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _hoaDonXuatKhoService.ErrMsg;
                 return MethodResult.Failed;
             }
-        loi3:
+            loi3:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _phieuThuService.ErrMsg;
@@ -1585,34 +1585,34 @@ namespace WH.Service
             }
             return result;
 
-        loi1:
+            loi1:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _hoaDonXuatKhoService.ErrMsg;
                 return MethodResult.Failed;
             }
 
-        loi2:
+            loi2:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _hoaDonXuatKhoChiTietService.ErrMsg;
                 return MethodResult.Failed;
             }
 
-        loi5:
+            loi5:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _phieuThuService.ErrMsg;
                 return MethodResult.Failed;
             }
-        loi3:
+            loi3:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = "Không tìm thấy hóa đơn xuất kho!";
                 return MethodResult.Failed;
             }
 
-        loi4:
+            loi4:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = ErrMsg = "Không tìm thấy chi tiết xuất kho!";
@@ -1667,27 +1667,27 @@ namespace WH.Service
             }
             return result;
 
-        loi1:
+            loi1:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _hoaDonXuatKhoService.ErrMsg;
                 return MethodResult.Failed;
             }
 
-        loi2:
+            loi2:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _hoaDonXuatKhoChiTietService.ErrMsg;
                 return MethodResult.Failed;
             }
 
-        loi5:
+            loi5:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _phieuThuService.ErrMsg;
                 return MethodResult.Failed;
             }
-        loi3:
+            loi3:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = "Không tìm thấy danh sách hóa đơn xuất kho!";
