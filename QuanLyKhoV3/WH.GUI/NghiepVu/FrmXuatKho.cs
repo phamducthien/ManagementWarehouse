@@ -378,7 +378,7 @@ namespace WH.GUI
                     }
                 }
 
-                var frm = new FrmInputNumberExportByLoaiExtend(soluong, objMathang);
+                var frm = new FrmInputNumberExportByLoaiExtend(soluong, objMathang, true);
                 frm.ShowDialog(this);
 
                 if (frm.TempHoaDonXuatKhoChiTiet.isNullOrZero()) return;
