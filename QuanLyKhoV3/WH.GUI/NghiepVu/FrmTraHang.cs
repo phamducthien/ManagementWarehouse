@@ -755,8 +755,8 @@ namespace WH.GUI
 
             LoadData2(list);
             var tongTien = TraHangService.CalTongTien(MaHoaDon);
-            labTongTien.Values.ExtraText = tongTien == 0 ? "0" : tongTien.ToString("N2");
-            txtTienChi.Text = decimal.Parse(tongTien.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture).ToString(CultureInfo.InvariantCulture);
+            labTongTien.Values.ExtraText = ExtendMethod.AdjustRound(decimal.ToDouble(tongTien))?.ToString(CultureInfo.InvariantCulture);
+            txtTienChi.Text = ExtendMethod.AdjustRound(decimal.ToDouble(tongTien))?.ToString(CultureInfo.InvariantCulture);
             txtTimKiem.SelectAll();
             txtTimKiem.Select();
         }
