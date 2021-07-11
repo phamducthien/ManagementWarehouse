@@ -569,7 +569,7 @@ namespace WH.GUI
                 }
 
                 var objMathang = XuatKhoService.GetModel_MH_T_HD_XK_CT(objChiTiet);
-                var frm = new FrmInputNumberExport(objMathang, (decimal)objChiTiet.DONGIASI);
+                var frm = new FrmInputNumberExport(objMathang, (decimal)objChiTiet.DONGIASI, (double)objChiTiet.CHIETKHAUTHEOPHANTRAM, (decimal)objChiTiet.SOLUONGLE);
                 frm.ShowDialog();
                 var soluongNhap = frm.NumImport;
                 var giaBan = frm.GiaBan;

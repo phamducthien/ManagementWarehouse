@@ -13,22 +13,26 @@ namespace WH.GUI
         public decimal GiaBan { get; set; }
         public double ChietKhau { get; set; }
         public bool IsChangePrice { get; set; }
+
         public readonly decimal OldGia;
+        public readonly decimal Sl;
         #endregion
 
-        public FrmInputNumberExport(MATHANG objMathang, decimal giaBan, double chietKhau = 0)
+        public FrmInputNumberExport(MATHANG objMatHang, decimal giaBan, double chietKhau = 0, decimal sl = 1)
         {
             IsChangePrice = false;
             GiaBan = giaBan;
             ChietKhau = chietKhau;
+            Sl = sl;
             if (!GiaBan.isNull())
             {
                 InitializeComponent();
-                OldGia = objMathang.GIALE ?? 0;
+                OldGia = objMatHang.GIALE ?? 0;
 
                 numGiaNhap.Value = GiaBan;
-                labTenMatHang.Text = objMathang.TENMATHANG;
-                Model = objMathang;
+                NumSoLuongNhap.Value = Sl;
+                labTenMatHang.Text = objMatHang.TENMATHANG;
+                Model = objMatHang;
                 btnUpGiaNhap.Tag = btnDownGiaNhap.Tag = numGiaNhap.Name;
                 btnUpSLNhap.Tag = btnDownSLNhap.Tag = NumSoLuongNhap.Name;
 
@@ -65,17 +69,17 @@ namespace WH.GUI
 
         private void ActionTinhTien()
         {
-            decimal thanhtien = 0;
+            decimal thanhTien = 0;
             try
             {
-                thanhtien = numGiaNhap.Value * NumSoLuongNhap.Value;
+                thanhTien = numGiaNhap.Value * NumSoLuongNhap.Value;
             }
             catch
             {
                 //
             }
 
-            btnLuu.Text = thanhtien.ToString("N2");
+            btnLuu.Text = thanhTien.ToString("N2");
             if (numGiaNhap.Focused)
                 numGiaNhap.Select(numGiaNhap.Value.ToString("##,###").Length, 0);
             else
