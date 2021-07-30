@@ -46,6 +46,7 @@
             this.btnTraHang = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.kryptonContextMenuSeparator1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator();
             this.grpFunctionButton = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.btnThncc = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.btnListExportWarehouse = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.grpHeader = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.btnHeThong = new ComponentFactory.Krypton.Toolkit.KryptonDropButton();
@@ -115,8 +116,8 @@
             this.btnMatHang.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.btnMatHang.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.btnMatHang.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
-            this.btnMatHang.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left)
+            this.btnMatHang.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnMatHang.StateCommon.Border.Rounding = 10;
             this.btnMatHang.StateCommon.Border.Width = 1;
@@ -152,8 +153,8 @@
             this.btnThoat.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
             this.btnThoat.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
             this.btnThoat.StateCommon.Border.Color1 = System.Drawing.Color.Transparent;
-            this.btnThoat.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left)
+            this.btnThoat.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnThoat.TabIndex = 4;
             this.btnThoat.Values.Image = global::WH.GUI.Properties.Resources.SysLogin;
@@ -174,8 +175,8 @@
             this.btnDoiTac.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.btnDoiTac.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.btnDoiTac.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
-            this.btnDoiTac.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left)
+            this.btnDoiTac.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnDoiTac.StateCommon.Border.Rounding = 10;
             this.btnDoiTac.StateCommon.Border.Width = 1;
@@ -216,8 +217,8 @@
             this.btnNhapKho.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.btnNhapKho.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.btnNhapKho.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
-            this.btnNhapKho.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left)
+            this.btnNhapKho.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnNhapKho.StateCommon.Border.Rounding = 10;
             this.btnNhapKho.StateCommon.Border.Width = 1;
@@ -258,8 +259,8 @@
             this.btnXuatKho.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.btnXuatKho.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.btnXuatKho.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
-            this.btnXuatKho.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left)
+            this.btnXuatKho.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnXuatKho.StateCommon.Border.Rounding = 10;
             this.btnXuatKho.StateCommon.Border.Width = 1;
@@ -300,8 +301,8 @@
             this.btnDanhMuc.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.btnDanhMuc.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.btnDanhMuc.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
-            this.btnDanhMuc.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left)
+            this.btnDanhMuc.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnDanhMuc.StateCommon.Border.Rounding = 10;
             this.btnDanhMuc.StateCommon.Border.Width = 1;
@@ -342,8 +343,8 @@
             this.btnBaoCao.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.btnBaoCao.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.btnBaoCao.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
-            this.btnBaoCao.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left)
+            this.btnBaoCao.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnBaoCao.StateCommon.Border.Rounding = 10;
             this.btnBaoCao.StateCommon.Border.Width = 1;
@@ -384,8 +385,8 @@
             this.btnKiemKe.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.btnKiemKe.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.btnKiemKe.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
-            this.btnKiemKe.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left)
+            this.btnKiemKe.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnKiemKe.StateCommon.Border.Rounding = 10;
             this.btnKiemKe.StateCommon.Border.Width = 1;
@@ -427,8 +428,8 @@
             this.btnTraHang.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.btnTraHang.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.btnTraHang.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
-            this.btnTraHang.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left)
+            this.btnTraHang.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnTraHang.StateCommon.Border.Rounding = 10;
             this.btnTraHang.StateCommon.Border.Width = 1;
@@ -465,6 +466,7 @@
             // grpFunctionButton.Panel
             // 
             this.grpFunctionButton.Panel.AutoScroll = true;
+            this.grpFunctionButton.Panel.Controls.Add(this.btnThncc);
             this.grpFunctionButton.Panel.Controls.Add(this.btnListExportWarehouse);
             this.grpFunctionButton.Panel.Controls.Add(this.btnTraHang);
             this.grpFunctionButton.Panel.Controls.Add(this.btnBaoCao);
@@ -478,6 +480,49 @@
             this.grpFunctionButton.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.grpFunctionButton.TabIndex = 0;
             this.grpFunctionButton.Values.Heading = "Chức Năng Chính";
+            // 
+            // btnThncc
+            // 
+            this.btnThncc.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnThncc.Location = new System.Drawing.Point(273, 251);
+            this.btnThncc.Margin = new System.Windows.Forms.Padding(0);
+            this.btnThncc.Name = "btnThncc";
+            this.btnThncc.Size = new System.Drawing.Size(313, 108);
+            this.btnThncc.StateCheckedNormal.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.btnThncc.StateCheckedNormal.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.btnThncc.StateCheckedPressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.btnThncc.StateCheckedPressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.btnThncc.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.btnThncc.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.btnThncc.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.btnThncc.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.btnThncc.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.btnThncc.StateCommon.Border.Rounding = 10;
+            this.btnThncc.StateCommon.Border.Width = 1;
+            this.btnThncc.StateCommon.Content.Image.ImageH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
+            this.btnThncc.StateCommon.Content.Image.ImageV = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
+            this.btnThncc.StateCommon.Content.LongText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
+            this.btnThncc.StateCommon.Content.LongText.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
+            this.btnThncc.StateCommon.Content.LongText.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
+            this.btnThncc.StateCommon.Content.LongText.TextV = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Far;
+            this.btnThncc.StateCommon.Content.Padding = new System.Windows.Forms.Padding(0);
+            this.btnThncc.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.btnThncc.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.btnThncc.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThncc.StateCommon.Content.ShortText.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterLeft;
+            this.btnThncc.StateCommon.Content.ShortText.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
+            this.btnThncc.StateCommon.Content.ShortText.TextV = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
+            this.btnThncc.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.btnThncc.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
+            this.btnThncc.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnThncc.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnThncc.TabIndex = 11;
+            this.btnThncc.Values.ExtraText = "Trả hàng nhà cung cấp";
+            this.btnThncc.Values.Image = global::WH.GUI.Properties.Resources.Import;
+            this.btnThncc.Values.Text = "TRẢ HÀNG NCC";
+            this.btnThncc.Click += new System.EventHandler(this.btnThncc_Click);
             // 
             // btnListExportWarehouse
             // 
@@ -494,8 +539,8 @@
             this.btnListExportWarehouse.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.btnListExportWarehouse.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
             this.btnListExportWarehouse.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
-            this.btnListExportWarehouse.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left)
+            this.btnListExportWarehouse.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnListExportWarehouse.StateCommon.Border.Rounding = 10;
             this.btnListExportWarehouse.StateCommon.Border.Width = 1;
@@ -538,8 +583,8 @@
             this.grpHeader.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
             this.grpHeader.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
             this.grpHeader.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(152)))));
-            this.grpHeader.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left)
+            this.grpHeader.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.grpHeader.TabIndex = 2;
             this.grpHeader.Values.Heading = "";
@@ -557,8 +602,8 @@
             this.btnHeThong.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
             this.btnHeThong.StateCommon.Back.Color2 = System.Drawing.Color.Transparent;
             this.btnHeThong.StateCommon.Border.Color1 = System.Drawing.Color.Transparent;
-            this.btnHeThong.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left)
+            this.btnHeThong.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnHeThong.TabIndex = 5;
             this.btnHeThong.Values.Image = global::WH.GUI.Properties.Resources.System;
@@ -619,16 +664,16 @@
             this.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
             this.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
             this.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left)
+            this.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.StateCommon.Border.Rounding = 10;
             this.StateCommon.Header.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.StateCommon.Header.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.StateCommon.Header.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
             this.StateCommon.Header.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.StateCommon.Header.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom)
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left)
+            this.StateCommon.Header.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.StateCommon.Header.ButtonEdgeInset = 0;
             this.StateCommon.Header.ButtonPadding = new System.Windows.Forms.Padding(0);
@@ -682,5 +727,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckButton btnKiemKe;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckButton btnTraHang;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckButton btnListExportWarehouse;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton btnThncc;
     }
 }

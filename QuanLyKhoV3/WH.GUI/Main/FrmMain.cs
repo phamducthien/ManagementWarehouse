@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Util.Pattern.Contain;
 using WH.GUI.ExportWarehouse;
+using WH.GUI.ReturnGoodsSupplier;
 using WH.Model;
 using WH.Report;
 
@@ -24,6 +25,7 @@ namespace WH.GUI
             btnKiemKe.Click += BtnKiemKe_Click;
             btnTraHang.Click += BtnTraHang_Click;
             btnListExportWarehouse.Click += btnListExportWarehouse_Click;
+            btnThncc.Click += btnThncc_Click;
         }
 
         private void BtnTraHang_Click(object sender, EventArgs e)
@@ -180,6 +182,16 @@ namespace WH.GUI
 
             Hide();
             var frm = new FrmListExportWarehouse();
+            frm.ShowDialog();
+            Show();
+        }
+
+        private void btnThncc_Click(object sender, EventArgs e)
+        {
+            if (!CheckQuyen(Functions.XuatKhoBanHang)) return;
+
+            Hide();
+            var frm = new FrmReturnGoodsSupplier();
             frm.ShowDialog();
             Show();
         }
