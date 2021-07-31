@@ -958,6 +958,7 @@ namespace WH.GUI.ReturnGoodsSupplier
             // 
             // Column3
             // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column3.DataPropertyName = "TENMATHANG";
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.Column3.DefaultCellStyle = dataGridViewCellStyle12;
@@ -965,7 +966,7 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
             this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column3.Width = 250;
+            this.Column3.Width = 251;
             // 
             // Column4
             // 
@@ -1057,7 +1058,7 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.Column11.Name = "Column11";
             this.Column11.ReadOnly = true;
             this.Column11.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column11.Width = 461;
+            this.Column11.Width = 435;
             // 
             // Column12
             // 
@@ -1081,11 +1082,11 @@ namespace WH.GUI.ReturnGoodsSupplier
             dataGridViewCellStyle6.Format = "C1";
             dataGridViewCellStyle6.NullValue = "0";
             this.Column13.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Column13.HeaderText = "Giá bán";
+            this.Column13.HeaderText = "Giá trả hàng";
             this.Column13.Name = "Column13";
             this.Column13.ReadOnly = true;
             this.Column13.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column13.Width = 77;
+            this.Column13.Width = 103;
             // 
             // Column14
             // 
