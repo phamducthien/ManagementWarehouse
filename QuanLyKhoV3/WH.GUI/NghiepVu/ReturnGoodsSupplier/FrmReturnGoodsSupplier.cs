@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 using ComponentFactory.Krypton.Toolkit;
 using WH.Entity;
 using WH.Service;
@@ -18,6 +17,7 @@ namespace WH.GUI.ReturnGoodsSupplier
 
         #region Init
         public List<MATHANG> MatHangs { get; set; }
+        public NHACUNGCAP NhaCungCapModel { get; set; }
 
         private IKhachTraHangService TraHangService
         {
@@ -75,7 +75,7 @@ namespace WH.GUI.ReturnGoodsSupplier
             //btnTimKiem.Click += BtnTimKiem_Click;
             //txtTimKiem.TextChanged += TxtTimKiem_TextChanged;
 
-            //btnSelectKH.Click += BtnSelectNCC_Click;
+            btnSelectKH.Click += BtnSelectNCC_Click;
             //btnAddKH.Click += BtnAddNCC_Click;
 
             //btnTangSL.Click += BtnTangSL_Click;
@@ -137,6 +137,32 @@ namespace WH.GUI.ReturnGoodsSupplier
             LoadData(lstMatHangs.ToList());
         }
 
+        private void BtnSelectNCC_Click(object sender, EventArgs e)
+        {
+            var frm = new FrmSelectNhaCungCap();
+            frm.ShowDialog();
+            NhaCungCapModel = frm.Model;
+            LoadKhToGui(NhaCungCapModel);
+        }
+
+        private void LoadKhToGui(NHACUNGCAP objNhaCungCap)
+        {
+            if (objNhaCungCap != null)
+            {
+                txtNhaCungCap.Text = objNhaCungCap.TENNHACUNGCAP;
+                labDiaChiNCC.Text = objNhaCungCap.DIACHI;
+                labDienThoaiNCC.Text = objNhaCungCap.DIENTHOAI;
+                labDCGiaoHang.Text = objNhaCungCap.DIACHI;
+            }
+            else
+            {
+                txtNhaCungCap.Text = @"Chọn KH trước khi thanh toán!";
+                labDiaChiNCC.Text = "";
+                labDienThoaiNCC.Text = "";
+                labDCGiaoHang.Text = "";
+                dtpNgayTaoHD.Value = DateTime.Now;
+            }
+        }
         #endregion
     }
 }
