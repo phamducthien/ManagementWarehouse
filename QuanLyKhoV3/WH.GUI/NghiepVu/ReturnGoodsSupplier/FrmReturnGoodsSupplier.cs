@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Windows.Forms;
 using ComponentFactory.Krypton.Toolkit;
+using Service.Pattern;
+using Util.Pattern;
 using WH.Entity;
+using WH.Model;
 using WH.Service;
 
 namespace WH.GUI.ReturnGoodsSupplier
@@ -16,8 +21,13 @@ namespace WH.GUI.ReturnGoodsSupplier
         }
 
         #region Init
+        public MATHANG MatHangModel { get; set; }
         public List<MATHANG> MatHangs { get; set; }
         public NHACUNGCAP NhaCungCapModel { get; set; }
+        public KHOMATHANG KhoMatHangModel { get; set; }
+        public TEMP_HOADONXUATKHOCHITIET ModelChiTiet { get; set; }
+        public List<TEMP_HOADONXUATKHOCHITIET> LsTempHoadonxuatkhochitiets { get; set; }
+        public string MaHoaDon { get; set; }
 
         private IKhachTraHangService TraHangService
         {
@@ -59,7 +69,7 @@ namespace WH.GUI.ReturnGoodsSupplier
                 txt.KeyPress += txt_KeyPress;
             }
 
-            //dgvDanhMuc.CellMouseDoubleClick += DgvDanhMuc_CellMouseDoubleClick;
+            dgvDanhMuc.CellMouseDoubleClick += DgvDanhMuc_CellMouseDoubleClick;
             //dgvDanhMuc.SelectionChanged += dgvDanhMuc_SelectionChanged;
             //dgvDanhMuc.CellMouseClick += dgvDanhMuc_CellMouseClick;
             //dgvDanhMuc.RowPrePaint += dgvDanhMuc_RowPrePaint;
@@ -103,8 +113,8 @@ namespace WH.GUI.ReturnGoodsSupplier
                 ShowLoad();
                 TxtMacDinh = TxtSearch;
                 LoadDataAllMatHang();
-                //KhachHangModel = null; 
-                //LoadKhToGui(KhachHangModel);
+                NhaCungCapModel = null; 
+                LoadNccToGui(NhaCungCapModel);
                 dtpNgayTaoHD.Value = DateTime.Now;
                 CloseLoad();
                 txtTimKiem.Select();
@@ -142,10 +152,10 @@ namespace WH.GUI.ReturnGoodsSupplier
             var frm = new FrmSelectNhaCungCap();
             frm.ShowDialog();
             NhaCungCapModel = frm.Model;
-            LoadKhToGui(NhaCungCapModel);
+            LoadNccToGui(NhaCungCapModel);
         }
 
-        private void LoadKhToGui(NHACUNGCAP objNhaCungCap)
+        private void LoadNccToGui(NHACUNGCAP objNhaCungCap)
         {
             if (objNhaCungCap != null)
             {
@@ -162,6 +172,162 @@ namespace WH.GUI.ReturnGoodsSupplier
                 labDCGiaoHang.Text = "";
                 dtpNgayTaoHD.Value = DateTime.Now;
             }
+        }
+
+        private void DgvDanhMuc_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            ActionNhapMatHangVaoHoaDon();
+        }
+
+        private void ActionNhapMatHangVaoHoaDon()
+        {
+            try
+            {
+                GetDataFromDgvDanhMuc();
+                var objMatHang = MatHangModel;
+                if (objMatHang == null) return;
+
+                int soLuong = 0;
+                var service = TraHangService;
+                if (MaHoaDon.IsBlank())
+                    MaHoaDon = service.CreateMaHoaDon();
+                else
+                {
+                    var hoaDonXuatKhoChiTiets = service.LoadHoaDonTam(MaHoaDon);
+                    if (!hoaDonXuatKhoChiTiets.isNullOrZero())
+                    {
+                        soLuong = hoaDonXuatKhoChiTiets.OrderBy(s => s.GHICHU.ToInt()).Last().GHICHU.ToInt();
+                    }
+                }
+
+                var frm = new FrmInputNumberExportByLoaiExtend(soLuong, objMatHang, true);
+                frm.ShowDialog(this);
+
+                if (frm.TempHoaDonXuatKhoChiTiet.isNullOrZero()) return;
+                if (frm.TempHoaDonXuatKhoChiTiet.Count <= 0) return;
+
+                var lsTempHoaDonNhapKhoChiTiets = new List<TEMP_HOADONXUATKHOCHITIET>();
+
+                var isChangePrice = false;
+                foreach (var ct in frm.TempHoaDonXuatKhoChiTiet)
+                {
+                    if (ct.SOLUONGLE <= 0) continue;
+                    var slNhap = ct.SOLUONGLE;
+                    if (!CheckTonToiDa((int)slNhap)) continue;
+                    isChangePrice = (bool)ct.ISDELETE;
+
+                    var objHoaDonNhapKhoChiTiet = ct;
+
+                    objHoaDonNhapKhoChiTiet.MAHOADON = MaHoaDon;
+                    objHoaDonNhapKhoChiTiet.MACHITIETHOADON = PrefixContext.MaChiTietHoaDon(MaHoaDon, (int)ct.MAMATHANG);
+                    objHoaDonNhapKhoChiTiet.ISDELETE = false;
+
+                    lsTempHoaDonNhapKhoChiTiets.Add(objHoaDonNhapKhoChiTiet);
+                }
+
+                service = TraHangService;
+                var result = service.NhapMatHangVaoHoaDonTam(MaHoaDon, lsTempHoaDonNhapKhoChiTiets, null);
+                if (result != MethodResult.Succeed)
+                {
+                    ShowMessage(IconMessageBox.Information, service.ErrMsg);
+                }
+                else
+                {
+                    if (isChangePrice)
+                        LoadDataAllMatHang();
+                    LoadHoaDon();
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(IconMessageBox.Warning, ex.Message);
+            }
+        }
+
+        #endregion
+
+        #region Function
+
+        private void GetDataFromDgvDanhMuc()
+        {
+            try
+            {
+                if (IsSelect)
+                {
+                    MatHangModel = null;
+                    if (dgvDanhMuc.SelectedRows.Count > 0)
+                    {
+                        var row = dgvDanhMuc.SelectedRows[0];
+                        if (row == null) return;
+
+                        var sId = row.Cells["DanhMuc_IDUnit"].Value.ToString();
+                        if (sId == "") return;
+
+                        var service = TraHangService;
+                        MatHangModel = service.GetModelMatHang(sId);
+                        KhoMatHangModel = service.GetModelKhoMatHang(sId);
+                        CurrentRow = row;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrMsg = ex.Message;
+            }
+        }
+
+        private bool CheckTonToiDa(int slNhap)
+        {
+            decimal sltronghoadon = 0;
+            decimal slTonKho = 0;
+
+            var service = TraHangService;
+            ModelChiTiet = service.GetModelChiTietTam(MatHangModel.MAMATHANG, MaHoaDon);
+            KhoMatHangModel = service.GetModelKhoMatHang(MatHangModel.MAMATHANG.ToString());
+
+            if (ModelChiTiet != null) sltronghoadon = ModelChiTiet.SOLUONGLE ?? 0;
+            if (KhoMatHangModel != null) slTonKho = KhoMatHangModel.SOLUONGLE ?? 0;
+            var soLuong = slTonKho + slNhap + sltronghoadon - MatHangModel.NGUONGXUAT ?? 0;
+
+            if (soLuong > 0 && MatHangModel.NGUONGXUAT > 0)
+            {
+                if (ShowMessage(IconMessageBox.Question,
+                        "Số lượng mặt hàng này trong kho đã vượt quá ngưỡng tồn tối đa " +
+                        soLuong.ToString("N") + " mặt hàng! Bạn có muốn tiếp tục nhập mặt hàng này không?") ==
+                    DialogResult.Yes)
+                    return true;
+            }
+            else
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private void LoadHoaDon()
+        {
+            LsTempHoadonxuatkhochitiets = TraHangService.LoadHoaDonTam(MaHoaDon);
+            var list = LsTempHoadonxuatkhochitiets
+                .OrderBy(s => s.GHICHU.ToInt())
+                .Join(MatHangs, p => p.MAMATHANG, s => s.MAMATHANG, (p, s) => 
+                    new {
+                        p.IDUnit,
+                        p.MAMATHANG,
+                        s.TENMATHANG,
+                        SOLUONG = p.SOLUONGLE,
+                        GIAM = p.CHIETKHAUTHEOPHANTRAM * 100,
+                        DONGIA = p.DONGIASI,
+                        THANHTIEN = p.THANHTIENSAUCHIETKHAU_CT,
+                        p.GHICHU})
+                .ToList();
+
+            LoadData2(list);
+            var tongTien = TraHangService.CalTongTien(MaHoaDon);
+            labTongTien.Values.ExtraText = ExtendMethod.AdjustRound(decimal.ToDouble(tongTien))?.ToString(CultureInfo.InvariantCulture);
+            txtTienChi.Text = ExtendMethod.AdjustRound(decimal.ToDouble(tongTien))?.ToString(CultureInfo.InvariantCulture);
+            txtTimKiem.SelectAll();
+            txtTimKiem.Select();
         }
         #endregion
     }
