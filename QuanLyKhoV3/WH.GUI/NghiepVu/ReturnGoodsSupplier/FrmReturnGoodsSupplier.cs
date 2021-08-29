@@ -260,7 +260,7 @@ namespace WH.GUI.ReturnGoodsSupplier
                         var row = dgvDanhMuc.SelectedRows[0];
                         if (row == null) return;
 
-                        var sId = row.Cells["DanhMuc_IDUnit"].Value.ToString();
+                        var sId = row.Cells["IDUnit"].Value.ToString();
                         if (sId == "") return;
 
                         var service = TraHangService;

@@ -31,12 +31,6 @@ namespace WH.GUI.ReturnGoodsSupplier
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -46,15 +40,15 @@ namespace WH.GUI.ReturnGoodsSupplier
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.gbxInfo = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.dgvHoaDon = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column11 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column12 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column13 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column14 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.pnlThanhToan = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonPanel5 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.labGhiChu = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -88,14 +82,14 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.labID = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.gbxList = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.dgvDanhMuc = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.Column1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column2 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column3 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column4 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column5 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column8 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.Stt = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.IDUnit = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.TENMATHANG = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.GIALE = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.GIANHAP = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.TENDONVI = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.SLTON = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.GHICHU = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.kryptonPanel4 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.txtTimKiem = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.btnTimKiem = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
@@ -103,6 +97,12 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.btnCanNhap = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.btnCanXuat = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.HoaDon_STT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.Column11 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.Column12 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.Column13 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.Column14 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer.Panel1)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -192,7 +192,7 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.dgvHoaDon.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvHoaDon.ColumnHeadersHeight = 30;
             this.dgvHoaDon.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column9,
+            this.HoaDon_STT,
             this.Column10,
             this.Column11,
             this.Column12,
@@ -234,83 +234,6 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.dgvHoaDon.StateCommon.HeaderColumn.Content.Color1 = System.Drawing.Color.White;
             this.dgvHoaDon.StateCommon.HeaderColumn.Content.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvHoaDon.TabIndex = 701;
-            // 
-            // Column9
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = "0";
-            this.Column9.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Column9.HeaderText = "Stt";
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            this.Column9.Width = 30;
-            // 
-            // Column10
-            // 
-            this.Column10.DataPropertyName = "IDUnit";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Column10.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Column10.HeaderText = "Mã";
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            this.Column10.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column10.Visible = false;
-            this.Column10.Width = 100;
-            // 
-            // Column11
-            // 
-            this.Column11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column11.DataPropertyName = "TENMATHANG";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Column11.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Column11.HeaderText = "Mặt hàng";
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
-            this.Column11.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column11.Width = 435;
-            // 
-            // Column12
-            // 
-            this.Column12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Column12.DataPropertyName = "SOLUONG";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N0";
-            dataGridViewCellStyle5.NullValue = "0";
-            this.Column12.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Column12.HeaderText = "SL";
-            this.Column12.Name = "Column12";
-            this.Column12.ReadOnly = true;
-            this.Column12.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column12.Width = 49;
-            // 
-            // Column13
-            // 
-            this.Column13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Column13.DataPropertyName = "DONGIA";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "C1";
-            dataGridViewCellStyle6.NullValue = "0";
-            this.Column13.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Column13.HeaderText = "Giá trả hàng";
-            this.Column13.Name = "Column13";
-            this.Column13.ReadOnly = true;
-            this.Column13.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column13.Width = 103;
-            // 
-            // Column14
-            // 
-            this.Column14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Column14.DataPropertyName = "THANHTIEN";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "C2";
-            dataGridViewCellStyle7.NullValue = "0";
-            this.Column14.DefaultCellStyle = dataGridViewCellStyle7;
-            this.Column14.HeaderText = "Thành tiền";
-            this.Column14.Name = "Column14";
-            this.Column14.ReadOnly = true;
-            this.Column14.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column14.Width = 95;
             // 
             // pnlThanhToan
             // 
@@ -878,14 +801,14 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.dgvDanhMuc.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvDanhMuc.ColumnHeadersHeight = 30;
             this.dgvDanhMuc.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column6,
-            this.Column7,
-            this.Column5,
-            this.Column8});
+            this.Stt,
+            this.IDUnit,
+            this.TENMATHANG,
+            this.GIALE,
+            this.GIANHAP,
+            this.TENDONVI,
+            this.SLTON,
+            this.GHICHU});
             this.dgvDanhMuc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDanhMuc.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvDanhMuc.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
@@ -922,98 +845,103 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.dgvDanhMuc.StateCommon.HeaderColumn.Content.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvDanhMuc.TabIndex = 700;
             // 
-            // Column1
+            // Stt
             // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Stt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Stt.DataPropertyName = "STT";
             dataGridViewCellStyle10.Format = "N0";
-            dataGridViewCellStyle10.NullValue = "0";
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle10;
-            this.Column1.HeaderText = "Stt";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column1.Width = 30;
+            this.Stt.DefaultCellStyle = dataGridViewCellStyle10;
+            this.Stt.HeaderText = "Stt";
+            this.Stt.Name = "Stt";
+            this.Stt.ReadOnly = true;
+            this.Stt.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Stt.Width = 30;
             // 
-            // Column2
+            // IDUnit
             // 
+            this.IDUnit.DataPropertyName = "IDUnit";
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle11;
-            this.Column2.HeaderText = "Mã";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column2.Visible = false;
-            this.Column2.Width = 100;
+            dataGridViewCellStyle11.Format = "N0";
+            dataGridViewCellStyle11.NullValue = "0";
+            this.IDUnit.DefaultCellStyle = dataGridViewCellStyle11;
+            this.IDUnit.HeaderText = "Mã";
+            this.IDUnit.Name = "IDUnit";
+            this.IDUnit.ReadOnly = true;
+            this.IDUnit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.IDUnit.Visible = false;
+            this.IDUnit.Width = 100;
             // 
-            // Column3
+            // TENMATHANG
             // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column3.DataPropertyName = "TENMATHANG";
+            this.TENMATHANG.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TENMATHANG.DataPropertyName = "TENMATHANG";
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle12;
-            this.Column3.HeaderText = "Mặt hàng";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column3.Width = 251;
+            this.TENMATHANG.DefaultCellStyle = dataGridViewCellStyle12;
+            this.TENMATHANG.HeaderText = "Mặt hàng";
+            this.TENMATHANG.Name = "TENMATHANG";
+            this.TENMATHANG.ReadOnly = true;
+            this.TENMATHANG.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.TENMATHANG.Width = 251;
             // 
-            // Column4
+            // GIALE
             // 
-            this.Column4.DataPropertyName = "GIALE";
+            this.GIALE.DataPropertyName = "GIALE";
             dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle13.Format = "C1";
             dataGridViewCellStyle13.NullValue = "0";
-            this.Column4.DefaultCellStyle = dataGridViewCellStyle13;
-            this.Column4.HeaderText = "Giá bán";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column4.Width = 78;
+            this.GIALE.DefaultCellStyle = dataGridViewCellStyle13;
+            this.GIALE.HeaderText = "Giá bán";
+            this.GIALE.Name = "GIALE";
+            this.GIALE.ReadOnly = true;
+            this.GIALE.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.GIALE.Width = 78;
             // 
-            // Column6
+            // GIANHAP
             // 
+            this.GIANHAP.DataPropertyName = "GIANHAP";
             dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle14.Format = "C2";
             dataGridViewCellStyle14.NullValue = "0";
-            this.Column6.DefaultCellStyle = dataGridViewCellStyle14;
-            this.Column6.HeaderText = "Giá nhập";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Visible = false;
+            this.GIANHAP.DefaultCellStyle = dataGridViewCellStyle14;
+            this.GIANHAP.HeaderText = "Giá nhập";
+            this.GIANHAP.Name = "GIANHAP";
+            this.GIANHAP.ReadOnly = true;
+            this.GIANHAP.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.GIANHAP.Visible = false;
+            this.GIANHAP.Width = 100;
             // 
-            // Column7
+            // TENDONVI
             // 
-            this.Column7.DataPropertyName = "TENDONVI";
-            this.Column7.HeaderText = "Đơn vị";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            this.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column7.Width = 74;
+            this.TENDONVI.DataPropertyName = "TENDONVI";
+            this.TENDONVI.HeaderText = "Đơn vị";
+            this.TENDONVI.Name = "TENDONVI";
+            this.TENDONVI.ReadOnly = true;
+            this.TENDONVI.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.TENDONVI.Width = 74;
             // 
-            // Column5
+            // SLTON
             // 
-            this.Column5.DataPropertyName = "SLTON";
+            this.SLTON.DataPropertyName = "SLTON";
             dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle15.Format = "N0";
             dataGridViewCellStyle15.NullValue = "0";
-            this.Column5.DefaultCellStyle = dataGridViewCellStyle15;
-            this.Column5.HeaderText = "SL Tồn";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column5.Width = 73;
+            this.SLTON.DefaultCellStyle = dataGridViewCellStyle15;
+            this.SLTON.HeaderText = "SL Tồn";
+            this.SLTON.Name = "SLTON";
+            this.SLTON.ReadOnly = true;
+            this.SLTON.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.SLTON.Width = 73;
             // 
-            // Column8
+            // GHICHU
             // 
-            this.Column8.DataPropertyName = "GHICHU";
+            this.GHICHU.DataPropertyName = "GHICHU";
             dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Column8.DefaultCellStyle = dataGridViewCellStyle16;
-            this.Column8.HeaderText = "Ghi chú";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            this.Column8.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column8.Width = 251;
+            this.GHICHU.DefaultCellStyle = dataGridViewCellStyle16;
+            this.GHICHU.HeaderText = "Ghi chú";
+            this.GHICHU.Name = "GHICHU";
+            this.GHICHU.ReadOnly = true;
+            this.GHICHU.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.GHICHU.Width = 251;
             // 
             // kryptonPanel4
             // 
@@ -1077,6 +1005,83 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.kryptonPanel3.StateCommon.Color1 = System.Drawing.Color.Transparent;
             this.kryptonPanel3.TabIndex = 701;
             this.kryptonPanel3.Visible = false;
+            // 
+            // HoaDon_STT
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = "0";
+            this.HoaDon_STT.DefaultCellStyle = dataGridViewCellStyle2;
+            this.HoaDon_STT.HeaderText = "Stt";
+            this.HoaDon_STT.Name = "HoaDon_STT";
+            this.HoaDon_STT.ReadOnly = true;
+            this.HoaDon_STT.Width = 30;
+            // 
+            // Column10
+            // 
+            this.Column10.DataPropertyName = "IDUnit";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Column10.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Column10.HeaderText = "Mã";
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            this.Column10.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column10.Visible = false;
+            this.Column10.Width = 100;
+            // 
+            // Column11
+            // 
+            this.Column11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column11.DataPropertyName = "TENMATHANG";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Column11.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Column11.HeaderText = "Mặt hàng";
+            this.Column11.Name = "Column11";
+            this.Column11.ReadOnly = true;
+            this.Column11.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column11.Width = 435;
+            // 
+            // Column12
+            // 
+            this.Column12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Column12.DataPropertyName = "SOLUONG";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = "0";
+            this.Column12.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Column12.HeaderText = "SL";
+            this.Column12.Name = "Column12";
+            this.Column12.ReadOnly = true;
+            this.Column12.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column12.Width = 49;
+            // 
+            // Column13
+            // 
+            this.Column13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Column13.DataPropertyName = "DONGIA";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "C1";
+            dataGridViewCellStyle6.NullValue = "0";
+            this.Column13.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Column13.HeaderText = "Giá trả hàng";
+            this.Column13.Name = "Column13";
+            this.Column13.ReadOnly = true;
+            this.Column13.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column13.Width = 103;
+            // 
+            // Column14
+            // 
+            this.Column14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Column14.DataPropertyName = "THANHTIEN";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "C2";
+            dataGridViewCellStyle7.NullValue = "0";
+            this.Column14.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Column14.HeaderText = "Thành tiền";
+            this.Column14.Name = "Column14";
+            this.Column14.ReadOnly = true;
+            this.Column14.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column14.Width = 95;
             // 
             // FrmReturnGoodsSupplier
             // 
@@ -1180,15 +1185,15 @@ namespace WH.GUI.ReturnGoodsSupplier
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny btnCanNhap;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecAny btnCanXuat;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel3;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column1;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column2;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column3;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column7;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column5;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Stt;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn IDUnit;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn TENMATHANG;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn GIALE;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn GIANHAP;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn TENDONVI;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn SLTON;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn GHICHU;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HoaDon_STT;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column10;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column11;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column12;
