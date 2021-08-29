@@ -63,6 +63,7 @@
       <DependentUpon>WHEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityExtends\EntityExtend.cs" />
+    <Compile Include="EntityExtends\HOADONXUATKHO.cs" />
     <Compile Include="EntityExtends\KHACHHANG.cs" />
     <Compile Include="EntityExtends\MATHANG.cs" />
     <Compile Include="HOADONHAPKHOCHITIET.cs">

@@ -1194,31 +1194,24 @@ namespace WH.Service
                     isAdd = true;
                 }
 
-                if (maNhaCc != null)
-                {
-                    objHd.LOAIXUATKHO = 1;
-                }
-
                 objHd.MAHOADONXUAT = maHoaDon;
                 objHd.MAKHACHHANG = maKh;
                 objHd.MANHACUNGCAP = maNhaCc;
                 objHd.MACA = null;
                 objHd.SOTIENKHACHDUA_HD = soTienChi;
-                objHd.THANHTIENCHUACK_HD =
-                    tempHoadonxuatkhochitiets.Sum(s => s.THANHTIENTRUOCCHIETKHAU_CT.GetValueOrDefault());
+                objHd.THANHTIENCHUACK_HD = tempHoadonxuatkhochitiets.Sum(s => s.THANHTIENTRUOCCHIETKHAU_CT.GetValueOrDefault());
                 objHd.NGUOITAO = _userId;
                 objHd.LOAIHOADON = 2;
                 objHd.NGAYTAOHOADON = ngayTaoHd;
                 objHd.TIENCHIETKHAU_HD = tempHoadonxuatkhochitiets.Sum(s => s.CHIETKHAUTHEOTIEN.GetValueOrDefault());
                 objHd.TIENKHUYENMAI_HD = giamGia;
+                objHd.GHICHU_HD = ghiChu;
+                objHd.DATHANHTOAN = objHd.SOTIENKHACHDUA_HD.GetValueOrDefault() - objHd.SOTIENTHANHTOAN_HD.GetValueOrDefault() >= 0;
+                objHd.ISDELETE = false;
+                objHd.LOAIXUATKHO = maNhaCc ?? 1;
 
                 var totalAmount = tempHoadonxuatkhochitiets.Sum(s => s.THANHTIENSAUCHIETKHAU_CT.GetValueOrDefault());
                 objHd.SOTIENTHANHTOAN_HD = AdjustRound(decimal.ToDouble(totalAmount));
-
-                objHd.GHICHU_HD = ghiChu;
-                objHd.DATHANHTOAN = objHd.SOTIENKHACHDUA_HD.GetValueOrDefault() -
-                                    objHd.SOTIENTHANHTOAN_HD.GetValueOrDefault() >= 0;
-                objHd.ISDELETE = false;
 
                 result = isAdd ? _hoaDonXuatKhoService.Add(objHd) : _hoaDonXuatKhoService.Modify(objHd);
                 if (result != MethodResult.Succeed)
