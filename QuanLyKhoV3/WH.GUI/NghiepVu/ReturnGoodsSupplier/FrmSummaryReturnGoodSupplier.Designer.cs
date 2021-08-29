@@ -394,7 +394,7 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.HoaDon_STT.HeaderText = "Stt";
             this.HoaDon_STT.Name = "HoaDon_STT";
             this.HoaDon_STT.ReadOnly = true;
-            this.HoaDon_STT.Width = 100;
+            this.HoaDon_STT.Width = 40;
             // 
             // HoaDon_IDUnit
             // 
@@ -415,7 +415,7 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.Hoadon_TenMatHang.Name = "Hoadon_TenMatHang";
             this.Hoadon_TenMatHang.ReadOnly = true;
             this.Hoadon_TenMatHang.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Hoadon_TenMatHang.Width = 224;
+            this.Hoadon_TenMatHang.Width = 284;
             // 
             // HoaDon_SoLuong
             // 
@@ -464,6 +464,15 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.ClientSize = new System.Drawing.Size(552, 604);
             this.Controls.Add(this.gbxInfo);
             this.Name = "FrmSummaryReturnGoodSupplier";
+            this.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
+            this.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
+            this.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.StateCommon.Header.Back.Color1 = System.Drawing.Color.White;
+            this.StateCommon.Header.Back.Color2 = System.Drawing.Color.White;
+            this.StateCommon.Header.Content.ShortText.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Text = "Tóm tắt hóa đơn xuất kho trả hàng NCC";
             ((System.ComponentModel.ISupportInitialize)(this.gbxInfo.Panel)).EndInit();
             this.gbxInfo.Panel.ResumeLayout(false);

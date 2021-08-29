@@ -276,7 +276,7 @@ namespace WH.GUI.ReturnGoodsSupplier
                 }
                 else
                 {
-                    var frm = new FrmHoaDonXuatKho(MaHoaDon, NhaCungCapModel);
+                    var frm = new FrmSummaryReturnGoodSupplier(MaHoaDon, NhaCungCapModel);
                     frm.ShowDialog(this);
                     MaHoaDon = string.Empty;
                     dgvHoaDon.DataSource = null;
