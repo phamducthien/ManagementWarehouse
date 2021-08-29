@@ -63,7 +63,6 @@
       <DependentUpon>WHEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityExtends\EntityExtend.cs" />
-    <Compile Include="EntityExtends\HOADONXUATKHO.cs" />
     <Compile Include="EntityExtends\KHACHHANG.cs" />
     <Compile Include="EntityExtends\MATHANG.cs" />
     <Compile Include="HOADONHAPKHOCHITIET.cs">
@@ -143,6 +142,9 @@
       <DependentUpon>WHEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="StoredProcedureRepository.cs" />
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>WHEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="TEMP_HOADONHAPKHOCHITIET.cs">
       <DependentUpon>WHEntities.tt</DependentUpon>
     </Compile>

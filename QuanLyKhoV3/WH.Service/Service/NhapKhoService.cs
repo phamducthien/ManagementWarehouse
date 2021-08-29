@@ -232,12 +232,10 @@ namespace WH.Service
             {
                  return lstChiTiet.OrderBy(s=>s.GHICHU_CT.ToInt()).ToList().ToDatatable();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return lstChiTiet.OrderBy(s=>s.GHICHU_CT).ToList().ToDatatable();
             }
-
-            return null;
         }
 
         public DataTable ChiTietNhap(string maHoaDon)
@@ -262,16 +260,15 @@ namespace WH.Service
                     p.MATHANG?.MACODE,
                     BARCODE = p.MATHANG?.MABARCODE
                 };
+            var chiTiet = lstChiTiet.ToList();
             try
             {
-                return lstChiTiet.OrderBy(s => s.GHICHU_CT.ToInt()).ToList().ToDatatable();
+                return chiTiet.OrderBy(s => s.GHICHU_CT.ToInt()).ToList().ToDatatable();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return lstChiTiet.OrderBy(s => s.GHICHU_CT).ToList().ToDatatable();
+                return chiTiet.OrderBy(s => s.GHICHU_CT).ToList().ToDatatable();
             }
-
-            return null;
         }
 
         public DataTable PhieuChi(string maHoaDon)

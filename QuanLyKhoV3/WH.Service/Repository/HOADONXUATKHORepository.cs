@@ -101,6 +101,8 @@ namespace WH.Service.Repository
             objNew.ISDELETE = objHOADONXUATKHO.ISDELETE;
             objNew.MAKHACHHANG = objHOADONXUATKHO.MAKHACHHANG;
             objNew.MACA = objHOADONXUATKHO.MACA;
+            objNew.MANHACUNGCAP = objHOADONXUATKHO.MANHACUNGCAP;
+            objNew.LOAIXUATKHO = objHOADONXUATKHO.LOAIXUATKHO;
             objNew.isAdd = true;
             return objNew;
         }
