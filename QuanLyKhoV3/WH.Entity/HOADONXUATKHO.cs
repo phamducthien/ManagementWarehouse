@@ -40,6 +40,9 @@ namespace WH.Entity
         public Nullable<bool> ISDELETE { get; set; }
         public Nullable<System.Guid> MAKHACHHANG { get; set; }
         public Nullable<int> MACA { get; set; }
+        public Nullable<int> MANHACUNGCAP { get; set; }
+        public int LOAIXUATKHO { get; set; }
+
         //Property TIMKIEM
         public string TIMKIEM
         {

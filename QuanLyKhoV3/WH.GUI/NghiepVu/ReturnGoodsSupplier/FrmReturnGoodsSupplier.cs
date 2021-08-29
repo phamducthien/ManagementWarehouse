@@ -28,6 +28,7 @@ namespace WH.GUI.ReturnGoodsSupplier
         public TEMP_HOADONXUATKHOCHITIET ModelChiTiet { get; set; }
         public List<TEMP_HOADONXUATKHOCHITIET> LsTempHoadonxuatkhochitiets { get; set; }
         public string MaHoaDon { get; set; }
+        public int SoLuong { get; set; }
 
         private IKhachTraHangService TraHangService
         {
@@ -38,6 +39,14 @@ namespace WH.GUI.ReturnGoodsSupplier
             }
         }
 
+        private IXuatKhoService XuatKhoService
+        {
+            get
+            {
+                ReloadUnitOfWork();
+                return new XuatKhoService(UnitOfWorkAsync);
+            }
+        }
         #endregion
 
         #region Events
@@ -94,7 +103,7 @@ namespace WH.GUI.ReturnGoodsSupplier
             //btnXoaSP.Click += BtnXoaSP_Click;
             //btnCapNhat.Click += BtnCapNhat_Click;
 
-            //btnThanhToan.Click += BtnThanhToan_Click;
+            btnThanhToan.Click += BtnThanhToan_Click;
         }
 
         private void Frm_Load(object sender, EventArgs e)
@@ -102,6 +111,10 @@ namespace WH.GUI.ReturnGoodsSupplier
             ActionLoadForm();
         }
 
+        private void BtnThanhToan_Click(object sender, EventArgs e)
+        {
+            ActionThanhToan();
+        }
         #endregion
 
         #region Actions
@@ -113,7 +126,7 @@ namespace WH.GUI.ReturnGoodsSupplier
                 ShowLoad();
                 TxtMacDinh = TxtSearch;
                 LoadDataAllMatHang();
-                NhaCungCapModel = null; 
+                NhaCungCapModel = null;
                 LoadNccToGui(NhaCungCapModel);
                 dtpNgayTaoHD.Value = DateTime.Now;
                 CloseLoad();
@@ -130,8 +143,8 @@ namespace WH.GUI.ReturnGoodsSupplier
         {
             MatHangs = TraHangService.GetListMatHang();
             var stt = 1;
-            var lstMatHangs = 
-                from a in MatHangs 
+            var lstMatHangs =
+                from a in MatHangs
                 select new
                 {
                     STT = stt++,
@@ -183,60 +196,45 @@ namespace WH.GUI.ReturnGoodsSupplier
         {
             try
             {
+                //------ Lấy thông tin MatHang từ DgvDanhMuc
                 GetDataFromDgvDanhMuc();
-                var objMatHang = MatHangModel;
-                if (objMatHang == null) return;
+                if (MatHangModel == null) return;
 
-                int soLuong = 0;
-                var service = TraHangService;
+                //------ Tạo mã hóa đơn nếu chưa có
+                //------ Lấy số lượng sản phẩm trong hóa đơn tạm
                 if (MaHoaDon.IsBlank())
-                    MaHoaDon = service.CreateMaHoaDon();
+                    MaHoaDon = XuatKhoService.CreateMaHoaDon();
                 else
                 {
-                    var hoaDonXuatKhoChiTiets = service.LoadHoaDonTam(MaHoaDon);
-                    if (!hoaDonXuatKhoChiTiets.isNullOrZero())
-                    {
-                        soLuong = hoaDonXuatKhoChiTiets.OrderBy(s => s.GHICHU.ToInt()).Last().GHICHU.ToInt();
-                    }
+                    GetSoLuong();
                 }
 
-                var frm = new FrmInputNumberExportByLoaiExtend(soLuong, objMatHang, true);
+                //------ Chọn sản phẩm theo nhóm
+                var frm = new FrmInputNumberExportByLoaiExtend(SoLuong, MatHangModel, true);
                 frm.ShowDialog(this);
 
-                if (frm.TempHoaDonXuatKhoChiTiet.isNullOrZero()) return;
-                if (frm.TempHoaDonXuatKhoChiTiet.Count <= 0) return;
+                var tempHoadonxuatkhochitiets = frm.TempHoaDonXuatKhoChiTiet
+                    .Where(x => x.SOLUONGLE > 0)
+                    .ToList();
 
-                var lsTempHoaDonNhapKhoChiTiets = new List<TEMP_HOADONXUATKHOCHITIET>();
+                if (tempHoadonxuatkhochitiets.isNullOrZero()) return;
+                if (tempHoadonxuatkhochitiets.Count <= 0) return;
 
-                var isChangePrice = false;
-                foreach (var ct in frm.TempHoaDonXuatKhoChiTiet)
+                foreach (var ct in tempHoadonxuatkhochitiets)
                 {
-                    if (ct.SOLUONGLE <= 0) continue;
                     var slNhap = ct.SOLUONGLE;
-                    if (!CheckTonToiDa((int)slNhap)) continue;
-                    isChangePrice = (bool)ct.ISDELETE;
 
-                    var objHoaDonNhapKhoChiTiet = ct;
+                    if (!CheckTonToiThieu((int)ct.MAMATHANG, (int)slNhap)) continue;
 
-                    objHoaDonNhapKhoChiTiet.MAHOADON = MaHoaDon;
-                    objHoaDonNhapKhoChiTiet.MACHITIETHOADON = PrefixContext.MaChiTietHoaDon(MaHoaDon, (int)ct.MAMATHANG);
-                    objHoaDonNhapKhoChiTiet.ISDELETE = false;
-
-                    lsTempHoaDonNhapKhoChiTiets.Add(objHoaDonNhapKhoChiTiet);
+                    ct.MACHITIETHOADON = PrefixContext.MaChiTietHoaDon(MaHoaDon, (int)ct.MAMATHANG);
+                    ct.ISDELETE = false;
                 }
 
-                service = TraHangService;
-                var result = service.NhapMatHangVaoHoaDonTam(MaHoaDon, lsTempHoaDonNhapKhoChiTiets, null);
+                var result = XuatKhoService.NhapMatHangVaoHoaDonTam(MaHoaDon, tempHoadonxuatkhochitiets, null);
                 if (result != MethodResult.Succeed)
-                {
-                    ShowMessage(IconMessageBox.Information, service.ErrMsg);
-                }
+                    ShowMessage(IconMessageBox.Information, XuatKhoService.ErrMsg);
                 else
-                {
-                    if (isChangePrice)
-                        LoadDataAllMatHang();
                     LoadHoaDon();
-                }
             }
             catch (Exception ex)
             {
@@ -244,6 +242,60 @@ namespace WH.GUI.ReturnGoodsSupplier
             }
         }
 
+        private void ActionThanhToan()
+        {
+            try
+            {
+                if (MaHoaDon.IsBlank())
+                {
+                    ShowMessage(IconMessageBox.Information, "Vui lòng nhập mặt hàng vào hóa đơn trước khi thanh toán!");
+                    return;
+                }
+
+                if (NhaCungCapModel.isNull())
+                {
+                    ShowMessage(IconMessageBox.Information, "Vui lòng chọn nhà cung cấp trước khi thanh toán!");
+                    return;
+                }
+
+                if (labTongTien.Values.ExtraText.ToDecimal() == 0 &&
+                    ShowMessage(IconMessageBox.Question,
+                        "Tổng tiền hóa đơn bán hàng bằng 0, bạn có muốn tiếp tục tạo hóa đơn này không?") ==
+                    DialogResult.No)
+                    return;
+
+                if (LsTempHoadonxuatkhochitiets.isNull()) return;
+                if (dgvHoaDon.Rows.Count == 0) return;
+
+                var tienChi = txtTienChi.Text.ToDecimal();
+                decimal giamGia = 0;
+                var service = XuatKhoService;
+                var result = service.ThanhToanTemp(MaHoaDon, dtpNgayTaoHD.Value, NhaCungCapModel.MANHACUNGCAP, tienChi, giamGia, txtGhiChu.Text);
+                if (result != MethodResult.Succeed)
+                {
+                    ShowMessage(IconMessageBox.Information, service.ErrMsg);
+                }
+                else
+                {
+                    //var frm = new FrmHoaDonXuatKho(MaHoaDon, NhaCungCapModel);
+                    //frm.ShowDialog(this);
+                    //MaHoaDon = string.Empty;
+                    //dgvHoaDon.DataSource = null;
+                    //labTongTien.Values.ExtraText = 0.ToString("N2");
+                    //txtTienChi.Text = 0.ToString("N2");
+                    //txtGhiChu.Text = string.Empty;
+                    //NhaCungCapModel = null;
+                    //LoadKhToGui(NhaCungCapModel);
+                    //LoadDataAllMatHang();
+                    //dtpNgayTaoHD.Value = DateTime.Now;
+                    //frm.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(IconMessageBox.Error, ex.Message);
+            }
+        }
         #endregion
 
         #region Function
@@ -276,42 +328,14 @@ namespace WH.GUI.ReturnGoodsSupplier
             }
         }
 
-        private bool CheckTonToiDa(int slNhap)
-        {
-            decimal sltronghoadon = 0;
-            decimal slTonKho = 0;
-
-            var service = TraHangService;
-            ModelChiTiet = service.GetModelChiTietTam(MatHangModel.MAMATHANG, MaHoaDon);
-            KhoMatHangModel = service.GetModelKhoMatHang(MatHangModel.MAMATHANG.ToString());
-
-            if (ModelChiTiet != null) sltronghoadon = ModelChiTiet.SOLUONGLE ?? 0;
-            if (KhoMatHangModel != null) slTonKho = KhoMatHangModel.SOLUONGLE ?? 0;
-            var soLuong = slTonKho + slNhap + sltronghoadon - MatHangModel.NGUONGXUAT ?? 0;
-
-            if (soLuong > 0 && MatHangModel.NGUONGXUAT > 0)
-            {
-                if (ShowMessage(IconMessageBox.Question,
-                        "Số lượng mặt hàng này trong kho đã vượt quá ngưỡng tồn tối đa " +
-                        soLuong.ToString("N") + " mặt hàng! Bạn có muốn tiếp tục nhập mặt hàng này không?") ==
-                    DialogResult.Yes)
-                    return true;
-            }
-            else
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         private void LoadHoaDon()
         {
             LsTempHoadonxuatkhochitiets = TraHangService.LoadHoaDonTam(MaHoaDon);
             var list = LsTempHoadonxuatkhochitiets
                 .OrderBy(s => s.GHICHU.ToInt())
-                .Join(MatHangs, p => p.MAMATHANG, s => s.MAMATHANG, (p, s) => 
-                    new {
+                .Join(MatHangs, p => p.MAMATHANG, s => s.MAMATHANG, (p, s) =>
+                    new
+                    {
                         p.IDUnit,
                         p.MAMATHANG,
                         s.TENMATHANG,
@@ -319,7 +343,8 @@ namespace WH.GUI.ReturnGoodsSupplier
                         GIAM = p.CHIETKHAUTHEOPHANTRAM * 100,
                         DONGIA = p.DONGIASI,
                         THANHTIEN = p.THANHTIENSAUCHIETKHAU_CT,
-                        p.GHICHU})
+                        p.GHICHU
+                    })
                 .ToList();
 
             LoadData2(list);
@@ -329,6 +354,59 @@ namespace WH.GUI.ReturnGoodsSupplier
             txtTimKiem.SelectAll();
             txtTimKiem.Select();
         }
+
+        private bool CheckTonToiThieu(int maMatHang, int slNhap, bool isCapNhat = false)
+        {
+            decimal sltronghoadon = 0;
+            decimal slTonKho = 0;
+            var service = XuatKhoService;
+            ModelChiTiet = service.GetModelChiTietTam(maMatHang, MaHoaDon);
+            KhoMatHangModel = service.GetModelKhoMatHang(maMatHang.ToString());
+            var mathangModel = service.GetModelMatHang(maMatHang.ToString());
+            sltronghoadon = ModelChiTiet?.SOLUONGLE ?? 0;
+
+            if (KhoMatHangModel != null)
+            {
+                slTonKho = KhoMatHangModel.SOLUONGLE ?? 0;
+            }
+
+            int soluong = (int)(slTonKho - slNhap - sltronghoadon);
+            if (isCapNhat)
+            {
+                soluong = (int)(slTonKho - slNhap);
+            }
+
+            if (soluong < 0)
+            {
+                ShowMessage(IconMessageBox.Information,
+                    "Số lượng trong mặt hàng " + mathangModel.TENMATHANG + " trong kho chỉ còn " + soluong +
+                    " mặt hàng. Không đủ số lượng mặt hàng này để xuất!!!");
+                return false;
+            }
+
+            if (soluong <= mathangModel.NGUONGNHAP)
+            {
+                return ShowMessage(IconMessageBox.Question,
+                           "Số lượng trong mặt hàng " + mathangModel.TENMATHANG + " trong kho chỉ còn " + soluong +
+                           " mặt hàng trong kho, đã thấp hơn số mặt hàng tối thiểu " +
+                           (mathangModel?.NGUONGNHAP ?? -1).ToString("## 'mặt hàng'") +
+                           " !!! Bạn có muốn tiếp tục xuất mặt hàng này không?") ==
+                       DialogResult.Yes;
+
+            }
+            return true;
+        }
+
+        private void GetSoLuong()
+        {
+            var hoadonxuatkhochitiets = XuatKhoService.LoadHoaDonTam(MaHoaDon);
+            if (!hoadonxuatkhochitiets.isNullOrZero())
+            {
+                SoLuong = hoadonxuatkhochitiets.OrderBy(s => s.GHICHU.ToInt()).Last().GHICHU
+                    .ToInt();
+            }
+        }
+
         #endregion
     }
 }
