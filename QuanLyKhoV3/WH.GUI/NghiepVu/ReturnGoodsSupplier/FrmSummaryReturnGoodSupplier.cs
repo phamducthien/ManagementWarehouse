@@ -1,26 +1,17 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
 using Util.Pattern;
 using WH.Entity;
 using WH.Service;
 
-namespace WH.GUI
+namespace WH.GUI.ReturnGoodsSupplier
 {
-    public partial class FrmHoaDonXuatKho : FrmBase
+    public partial class FrmSummaryReturnGoodSupplier : FrmBase
     {
-        public FrmHoaDonXuatKho(string maHoaDon, KHACHHANG khachHang)
-        {
-            InitializeComponent();
-            CreateEvent();
-            IsSuccess = false;
-            KhachHang = khachHang;
-            MaHoaDon = maHoaDon;
-        }
-
-        public FrmHoaDonXuatKho(string maHoaDon, NHACUNGCAP nhaCungCap)
+        public FrmSummaryReturnGoodSupplier(string maHoaDon, NHACUNGCAP nhaCungCap)
         {
             InitializeComponent();
             CreateEvent();
@@ -32,7 +23,6 @@ namespace WH.GUI
         #region Inits
 
         public bool IsSuccess { get; set; }
-        public KHACHHANG KhachHang { get; set; }
         public NHACUNGCAP NhaCungCap { get; set; }
         public HOADONXUATKHO HoaDon { get; set; }
         public List<HOADONXUATKHOCHITIET> LstHoadonxuatkhochitiets { get; set; }
@@ -73,7 +63,7 @@ namespace WH.GUI
         {
             LstMatHangs = XuatKhoService.GetListMatHang();
             LoadHoaDon();
-            LoadKhToGui();
+            LoadNccToGui();
             txtTienChi.Select();
         }
 
@@ -108,31 +98,18 @@ namespace WH.GUI
             {
                 LoadData(list.OrderBy(s => s.GHICHU.ToInt()).ToList());
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 LoadData(list.OrderBy(s => s.GHICHU).ToList());
             }
         }
 
-        private void LoadKhToGui()
+        private void LoadNccToGui()
         {
-            if (KhachHang != null)
-            {
-                labTenKhachHang.Text = KhachHang?.TENKHACHHANG;
-                labDiaChiNCC.Text = KhachHang?.DIACHI;
-                labDienThoaiNCC.Text = KhachHang?.DIENTHOAI;
-                labDCGiaoHang.Text = KhachHang?.DIACHIGIAOHANG;
-                labDCHangDong.Text = KhachHang?.DIACHIGIAOHOADON;
-            }
-            else
-            {
-                labTenKhachHang.Text = NhaCungCap?.TENNHACUNGCAP;
-                labDiaChiNCC.Text = NhaCungCap?.DIACHI;
-                labDienThoaiNCC.Text = NhaCungCap?.DIENTHOAI;
-            }
-
-            gbxInfo.Values.Description = "Ngày tạo HĐ: " + HoaDon?.NGAYTAOHOADON?.ToFormat("dd/MM/yyyy HH:mm:ss");
-
+            labTenNcc.Text = NhaCungCap?.TENNHACUNGCAP;
+            labDiaChiNCC.Text = NhaCungCap?.DIACHI;
+            labDienThoaiNCC.Text = NhaCungCap?.DIENTHOAI;
+            gbxInfo.Values.Description = @"Ngày tạo HĐ: " + HoaDon?.NGAYTAOHOADON?.ToFormat("dd/MM/yyyy HH:mm:ss");
             labTongTien.Values.ExtraText = HoaDon?.SOTIENTHANHTOAN_HD?.ToString("N");
             txtTienChi.Text = HoaDon?.SOTIENKHACHDUA_HD?.ToString("N");
             txtGhiChu.Text = HoaDon?.GHICHU_HD;

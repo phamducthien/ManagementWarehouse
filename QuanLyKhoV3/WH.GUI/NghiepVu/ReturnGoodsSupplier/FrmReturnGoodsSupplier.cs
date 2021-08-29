@@ -175,11 +175,10 @@ namespace WH.GUI.ReturnGoodsSupplier
                 txtNhaCungCap.Text = objNhaCungCap.TENNHACUNGCAP;
                 labDiaChiNCC.Text = objNhaCungCap.DIACHI;
                 labDienThoaiNCC.Text = objNhaCungCap.DIENTHOAI;
-                labDCGiaoHang.Text = objNhaCungCap.DIACHI;
             }
             else
             {
-                txtNhaCungCap.Text = @"Chọn KH trước khi thanh toán!";
+                txtNhaCungCap.Text = @"Chọn Nhà CC trước khi thanh toán!";
                 labDiaChiNCC.Text = "";
                 labDienThoaiNCC.Text = "";
                 labDCGiaoHang.Text = "";
@@ -277,18 +276,18 @@ namespace WH.GUI.ReturnGoodsSupplier
                 }
                 else
                 {
-                    //var frm = new FrmHoaDonXuatKho(MaHoaDon, NhaCungCapModel);
-                    //frm.ShowDialog(this);
-                    //MaHoaDon = string.Empty;
-                    //dgvHoaDon.DataSource = null;
-                    //labTongTien.Values.ExtraText = 0.ToString("N2");
-                    //txtTienChi.Text = 0.ToString("N2");
-                    //txtGhiChu.Text = string.Empty;
-                    //NhaCungCapModel = null;
-                    //LoadKhToGui(NhaCungCapModel);
-                    //LoadDataAllMatHang();
-                    //dtpNgayTaoHD.Value = DateTime.Now;
-                    //frm.Dispose();
+                    var frm = new FrmHoaDonXuatKho(MaHoaDon, NhaCungCapModel);
+                    frm.ShowDialog(this);
+                    MaHoaDon = string.Empty;
+                    dgvHoaDon.DataSource = null;
+                    labTongTien.Values.ExtraText = 0.ToString("N2");
+                    txtTienChi.Text = 0.ToString("N2");
+                    txtGhiChu.Text = string.Empty;
+                    NhaCungCapModel = null;
+                    LoadNccToGui(NhaCungCapModel);
+                    LoadDataAllMatHang();
+                    dtpNgayTaoHD.Value = DateTime.Now;
+                    frm.Dispose();
                 }
             }
             catch (Exception ex)
