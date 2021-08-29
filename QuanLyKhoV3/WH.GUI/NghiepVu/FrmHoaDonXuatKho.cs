@@ -11,21 +11,12 @@ namespace WH.GUI
 {
     public partial class FrmHoaDonXuatKho : FrmBase
     {
-        public FrmHoaDonXuatKho(string maHoaDon, KHACHHANG khachHang)
+        public FrmHoaDonXuatKho(string maHoaDon, KHACHHANG khachhang)
         {
             InitializeComponent();
             CreateEvent();
             IsSuccess = false;
-            KhachHang = khachHang;
-            MaHoaDon = maHoaDon;
-        }
-
-        public FrmHoaDonXuatKho(string maHoaDon, NHACUNGCAP nhaCungCap)
-        {
-            InitializeComponent();
-            CreateEvent();
-            IsSuccess = false;
-            NhaCungCap = nhaCungCap;
+            KhachHang = khachhang;
             MaHoaDon = maHoaDon;
         }
 
@@ -33,10 +24,9 @@ namespace WH.GUI
 
         public bool IsSuccess { get; set; }
         public KHACHHANG KhachHang { get; set; }
-        public NHACUNGCAP NhaCungCap { get; set; }
         public HOADONXUATKHO HoaDon { get; set; }
         public List<HOADONXUATKHOCHITIET> LstHoadonxuatkhochitiets { get; set; }
-        public List<MATHANG> LstMatHangs { get; set; }
+        public List<MATHANG> LstMathangs { get; set; }
         public string MaHoaDon { get; set; }
 
         private IXuatKhoService XuatKhoService
@@ -71,9 +61,9 @@ namespace WH.GUI
 
         private void Frm_Load(object sender, EventArgs e)
         {
-            LstMatHangs = XuatKhoService.GetListMatHang();
+            LstMathangs = XuatKhoService.GetListMatHang();
             LoadHoaDon();
-            LoadKhToGui();
+            LoadKHToGui();
             txtTienChi.Select();
         }
 
@@ -91,7 +81,7 @@ namespace WH.GUI
             HoaDon = XuatKhoService.GetModelHoaDonXuat(MaHoaDon);
             LstHoadonxuatkhochitiets = (List<HOADONXUATKHOCHITIET>)HoaDon.HOADONXUATKHOCHITIETs;
             var list = (from p in LstHoadonxuatkhochitiets
-                        join s in LstMatHangs on p.MAMATHANG equals s.MAMATHANG
+                        join s in LstMathangs on p.MAMATHANG equals s.MAMATHANG
                         select new
                         {
                             p.IDUnit,
@@ -114,23 +104,13 @@ namespace WH.GUI
             }
         }
 
-        private void LoadKhToGui()
+        private void LoadKHToGui()
         {
-            if (KhachHang != null)
-            {
-                labTenKhachHang.Text = KhachHang?.TENKHACHHANG;
-                labDiaChiNCC.Text = KhachHang?.DIACHI;
-                labDienThoaiNCC.Text = KhachHang?.DIENTHOAI;
-                labDCGiaoHang.Text = KhachHang?.DIACHIGIAOHANG;
-                labDCHangDong.Text = KhachHang?.DIACHIGIAOHOADON;
-            }
-            else
-            {
-                labTenKhachHang.Text = NhaCungCap?.TENNHACUNGCAP;
-                labDiaChiNCC.Text = NhaCungCap?.DIACHI;
-                labDienThoaiNCC.Text = NhaCungCap?.DIENTHOAI;
-            }
-
+            labTenKhachHang.Text = KhachHang?.TENKHACHHANG;
+            labDiaChiNCC.Text = KhachHang?.DIACHI;
+            labDienThoaiNCC.Text = KhachHang?.DIENTHOAI;
+            labDCGiaoHang.Text = KhachHang?.DIACHIGIAOHANG;
+            labDCHangDong.Text = KhachHang?.DIACHIGIAOHOADON;
             gbxInfo.Values.Description = "Ngày tạo HĐ: " + HoaDon?.NGAYTAOHOADON?.ToFormat("dd/MM/yyyy HH:mm:ss");
 
             labTongTien.Values.ExtraText = HoaDon?.SOTIENTHANHTOAN_HD?.ToString("N");
