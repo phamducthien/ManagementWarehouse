@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "cac009b2-6297-4ac4-b9ef-e64cb5e4252e": {
+      "ProjectGuid": "cac009b2-6297-4ac4-b9ef-e64cb5e4252e",
+      "DisplayName": "WH.GUI",
+      "ColorIndex": 0
+    },
+    "733477e2-deb4-463a-86d0-ce108ce8b094": {
+      "ProjectGuid": "733477e2-deb4-463a-86d0-ce108ce8b094",
+      "DisplayName": "WH.Service",
+      "ColorIndex": 1
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 2
+}
