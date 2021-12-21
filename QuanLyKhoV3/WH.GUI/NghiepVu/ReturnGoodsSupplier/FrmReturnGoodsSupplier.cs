@@ -47,6 +47,7 @@ namespace WH.GUI.ReturnGoodsSupplier
                 return new XuatKhoService(UnitOfWorkAsync);
             }
         }
+
         #endregion
 
         #region Events
@@ -97,11 +98,11 @@ namespace WH.GUI.ReturnGoodsSupplier
             btnSelectKH.Click += BtnSelectNCC_Click;
             //btnAddKH.Click += BtnAddNCC_Click;
 
-            //btnTangSL.Click += BtnTangSL_Click;
-            //btnGiamSL.Click += BtnGiamSL_Click;
-            //btnHuyHD.Click += BtnHuyHD_Click;
-            //btnXoaSP.Click += BtnXoaSP_Click;
-            //btnCapNhat.Click += BtnCapNhat_Click;
+            btnTangSL.Click += BtnTangSL_Click;
+            btnGiamSL.Click += BtnGiamSL_Click;
+            btnHuyHD.Click += BtnHuyHD_Click;
+            btnXoaSP.Click += BtnXoaSP_Click;
+            btnCapNhat.Click += BtnCapNhat_Click;
 
             btnThanhToan.Click += BtnThanhToan_Click;
         }
@@ -115,6 +116,32 @@ namespace WH.GUI.ReturnGoodsSupplier
         {
             ActionThanhToan();
         }
+
+        private void BtnTangSL_Click(object sender, EventArgs e)
+        {
+            ActionTangSoLuong();
+        }
+
+        private void BtnGiamSL_Click(object sender, EventArgs e)
+        {
+            ActionGiamSoLuong();
+        }
+
+        private void BtnHuyHD_Click(object sender, EventArgs e)
+        {
+            ActionXoaHoaDon();
+        }
+
+        private void BtnXoaSP_Click(object sender, EventArgs e)
+        {
+            ActionHuyMatHang();
+        }
+
+        private void BtnCapNhat_Click(object sender, EventArgs e)
+        {
+            ActionCapNhatMatHang();
+        }
+
         #endregion
 
         #region Actions
@@ -295,6 +322,7 @@ namespace WH.GUI.ReturnGoodsSupplier
                 ShowMessage(IconMessageBox.Error, ex.Message);
             }
         }
+
         #endregion
 
         #region Function
@@ -356,43 +384,76 @@ namespace WH.GUI.ReturnGoodsSupplier
 
         private bool CheckTonToiThieu(int maMatHang, int slNhap, bool isCapNhat = false)
         {
-            decimal sltronghoadon = 0;
             decimal slTonKho = 0;
             var service = XuatKhoService;
             ModelChiTiet = service.GetModelChiTietTam(maMatHang, MaHoaDon);
             KhoMatHangModel = service.GetModelKhoMatHang(maMatHang.ToString());
-            var mathangModel = service.GetModelMatHang(maMatHang.ToString());
-            sltronghoadon = ModelChiTiet?.SOLUONGLE ?? 0;
+            var matHangModel = service.GetModelMatHang(maMatHang.ToString());
+            var sltronghoadon = ModelChiTiet?.SOLUONGLE ?? 0;
 
             if (KhoMatHangModel != null)
             {
                 slTonKho = KhoMatHangModel.SOLUONGLE ?? 0;
             }
 
-            int soluong = (int)(slTonKho - slNhap - sltronghoadon);
+            var soLuong = (int)(slTonKho - slNhap - sltronghoadon);
             if (isCapNhat)
             {
-                soluong = (int)(slTonKho - slNhap);
+                soLuong = (int)(slTonKho - slNhap);
             }
 
-            if (soluong < 0)
+            if (soLuong < 0)
             {
                 ShowMessage(IconMessageBox.Information,
-                    "Số lượng trong mặt hàng " + mathangModel.TENMATHANG + " trong kho chỉ còn " + soluong +
+                    "Số lượng trong mặt hàng " + matHangModel.TENMATHANG + " trong kho chỉ còn " + soLuong +
                     " mặt hàng. Không đủ số lượng mặt hàng này để xuất!!!");
                 return false;
             }
 
-            if (soluong <= mathangModel.NGUONGNHAP)
+            if (soLuong <= matHangModel.NGUONGNHAP)
             {
                 return ShowMessage(IconMessageBox.Question,
-                           "Số lượng trong mặt hàng " + mathangModel.TENMATHANG + " trong kho chỉ còn " + soluong +
+                           "Số lượng trong mặt hàng " + matHangModel.TENMATHANG + " trong kho chỉ còn " + soLuong +
                            " mặt hàng trong kho, đã thấp hơn số mặt hàng tối thiểu " +
-                           (mathangModel?.NGUONGNHAP ?? -1).ToString("## 'mặt hàng'") +
+                           (matHangModel.NGUONGNHAP ?? -1).ToString("## 'mặt hàng'") +
                            " !!! Bạn có muốn tiếp tục xuất mặt hàng này không?") ==
                        DialogResult.Yes;
 
             }
+            return true;
+        }
+
+        private bool CheckTonToiThieu(int slNhap, bool isCapNhat = false)
+        {
+            decimal sltronghoadon = 0;
+            decimal slTonKho = 0;
+            var service = XuatKhoService;
+            ModelChiTiet = service.GetModelChiTietTam(MatHangModel.MAMATHANG, MaHoaDon);
+            KhoMatHangModel = service.GetModelKhoMatHang(MatHangModel.MAMATHANG.ToString());
+            var matHangModel = service.GetModelMatHang(MatHangModel.MAMATHANG.ToString());
+            if (ModelChiTiet != null)
+                sltronghoadon = ModelChiTiet.SOLUONGLE ?? 0;
+            if (KhoMatHangModel != null)
+                slTonKho = KhoMatHangModel.SOLUONGLE ?? 0;
+            var soLuong = slTonKho - slNhap - sltronghoadon;
+            if (isCapNhat)
+                soLuong = slTonKho - slNhap;
+
+            if (soLuong < 0)
+            {
+                ShowMessage(IconMessageBox.Information,
+                    "Số lượng trong mặt hàng trong kho chỉ còn " + soLuong +
+                    " mặt hàng. Không đủ số lượng mặt hàng này để xuất!!!");
+                return false;
+            }
+
+            if (soLuong <= MatHangModel.NGUONGNHAP)
+                return ShowMessage(IconMessageBox.Question,
+                           "Số lượng trong mặt hàng trong kho chỉ còn " + soLuong +
+                           " mặt hàng trong kho, đã thấp hơn số mặt hàng tối thiểu " +
+                           matHangModel?.NGUONGNHAP.Value.ToString("## 'mặt hàng'") +
+                           " !!! Bạn có muốn tiếp tục xuất mặt hàng này không?") ==
+                       DialogResult.Yes;
             return true;
         }
 
@@ -403,6 +464,225 @@ namespace WH.GUI.ReturnGoodsSupplier
             {
                 SoLuong = hoadonxuatkhochitiets.OrderBy(s => s.GHICHU.ToInt()).Last().GHICHU
                     .ToInt();
+            }
+        }
+
+        private void ActionTangSoLuong()
+        {
+            try
+            {
+                GetDataFromDgvHoaDon();
+                var objChiTiet = ModelChiTiet;
+                if (objChiTiet == null)
+                {
+                    ShowMessage(IconMessageBox.Information, "Không tìm thấy sản phẩm trong hóa đơn!");
+                    return;
+                }
+
+                var soLuongTang = 1;
+                if (!CheckTonToiThieu(soLuongTang)) return;
+
+                if (MaHoaDon.IsBlank() || dgvHoaDon.Rows.Count == 0)
+                {
+                    ShowMessage(IconMessageBox.Information, "Không có sản phẩm trong hóa đơn!");
+                    return;
+                }
+
+                var nhapKhoService = XuatKhoService;
+                var result = nhapKhoService.TangSoLuong(objChiTiet.MACHITIETHOADON, soLuongTang);
+                if (result != MethodResult.Succeed)
+                    ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
+                else
+                    LoadHoaDon();
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(IconMessageBox.Warning, ex.Message);
+            }
+        }
+
+        private void ActionGiamSoLuong()
+        {
+            try
+            {
+                GetDataFromDgvHoaDon();
+                var objChiTiet = ModelChiTiet;
+                if (objChiTiet == null)
+                {
+                    ShowMessage(IconMessageBox.Information, "Không tìm thấy sản phẩm trong hóa đơn!");
+                    return;
+                }
+
+                var soLuongGiam = 1;
+                if (MaHoaDon.IsBlank() || dgvHoaDon.Rows.Count == 0)
+                {
+                    ShowMessage(IconMessageBox.Information, "Không có sản phẩm trong hóa đơn!");
+                    return;
+                }
+
+                if (objChiTiet.SOLUONGLE - soLuongGiam <= 0)
+                {
+                    ShowMessage(IconMessageBox.Information, "không thể giảm được nũa!");
+                    return;
+                }
+
+                var nhapKhoService = XuatKhoService;
+                var result = nhapKhoService.GiamSoLuong(objChiTiet.MACHITIETHOADON, soLuongGiam);
+                if (result != MethodResult.Succeed)
+                    ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
+                else
+                    LoadHoaDon();
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(IconMessageBox.Warning, ex.Message);
+            }
+        }
+
+        private void ActionXoaHoaDon()
+        {
+            try
+            {
+                if (MaHoaDon.IsBlank() || dgvHoaDon.Rows.Count == 0)
+                {
+                    ShowMessage(IconMessageBox.Information, "Không có sản phẩm trong hóa đơn!");
+                    return;
+                }
+
+                var nhapKhoService = XuatKhoService;
+                var result = nhapKhoService.XoaHoaDonTam(MaHoaDon);
+                if (result != MethodResult.Succeed)
+                {
+                    ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
+                }
+                else
+                {
+                    txtTienChi.Text = 0.ToString("N1");
+                    var totalAmount = XuatKhoService.CalTotalAmountHoaDonTam(MaHoaDon);
+                    labTongTien.Values.ExtraText = ExtendMethod.AdjustRound(decimal.ToDouble(totalAmount))?.ToString(CultureInfo.InvariantCulture);
+                    MaHoaDon = "";
+                    dgvHoaDon.DataSource = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(IconMessageBox.Warning, ex.Message);
+            }
+        }
+
+        private void ActionHuyMatHang()
+        {
+            try
+            {
+                GetDataFromDgvHoaDon();
+                var objChiTiet = ModelChiTiet;
+                if (objChiTiet == null)
+                {
+                    ShowMessage(IconMessageBox.Information, "Không tìm thấy sản phẩm trong hóa đơn!");
+                    return;
+                }
+
+                if (MaHoaDon.IsBlank() || dgvHoaDon.Rows.Count == 0)
+                {
+                    ShowMessage(IconMessageBox.Information, "Không có sản phẩm trong hóa đơn!");
+                    return;
+                }
+
+                var nhapKhoService = XuatKhoService;
+                var lsTempHoaDonNhapKhoChiTiets = new List<TEMP_HOADONXUATKHOCHITIET>
+                {
+                    objChiTiet
+                };
+                var result = nhapKhoService.HuyMatHangTrongHoaDonTam(MaHoaDon, lsTempHoaDonNhapKhoChiTiets);
+                if (result != MethodResult.Succeed)
+                    ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
+                else
+                    LoadHoaDon();
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(IconMessageBox.Warning, ex.Message);
+            }
+        }
+
+        private void ActionCapNhatMatHang()
+        {
+            try
+            {
+                GetDataFromDgvHoaDon();
+                var objChiTiet = ModelChiTiet;
+                if (objChiTiet == null)
+                {
+                    ShowMessage(IconMessageBox.Information, "Không tìm thấy sản phẩm trong hóa đơn!");
+                    return;
+                }
+
+                var objMatHang = XuatKhoService.GetModel_MH_T_HD_XK_CT(objChiTiet);
+                var frm = new FrmInputNumberExport(objMatHang, (decimal)objChiTiet.DONGIASI, (double)objChiTiet.CHIETKHAUTHEOPHANTRAM, (decimal)objChiTiet.SOLUONGLE);
+                frm.ShowDialog();
+                var soLuongNhap = frm.NumImport;
+                var giaBan = frm.GiaBan;
+                if (soLuongNhap <= 0)
+                {
+                    ShowMessage(IconMessageBox.Information, "Số lượng cập nhật phải lớn hơn 0!");
+                    return;
+                }
+
+                if (!CheckTonToiThieu(soLuongNhap, true)) return;
+
+                if (MaHoaDon.IsBlank() || dgvHoaDon.Rows.Count == 0)
+                {
+                    ShowMessage(IconMessageBox.Information, "Không có sản phẩm trong hóa đơn!");
+                    return;
+                }
+
+                var nhapKhoService = XuatKhoService;
+
+                objChiTiet.DONGIASI = giaBan;
+                objChiTiet.SOLUONGLE = soLuongNhap;
+
+                var lsTempHoaDonNhapKhoChiTiets = new List<TEMP_HOADONXUATKHOCHITIET>
+                {
+                    objChiTiet
+                };
+
+                var result = nhapKhoService.CapNhatMatHangTrongHoaDonTam(lsTempHoaDonNhapKhoChiTiets);
+                if (result != MethodResult.Succeed)
+                    ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
+                else
+                    LoadHoaDon();
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(IconMessageBox.Warning, ex.Message);
+            }
+        }
+
+        private void GetDataFromDgvHoaDon()
+        {
+            try
+            {
+                if (IsSelect)
+                {
+                    ModelChiTiet = null;
+                    if (dgvHoaDon.SelectedRows.Count > 0)
+                    {
+                        var row = dgvHoaDon.SelectedRows[0];
+                        if (row == null) return;
+
+                        var sId = row.Cells["HoaDon_IDUnit1"].Value.ToString();
+
+                        if (sId == "") return;
+                        var service = XuatKhoService;
+                        ModelChiTiet = service.GetModelChiTietTam(sId);
+                        KhoMatHangModel = service.GetModelKhoMatHang(ModelChiTiet.MAMATHANG.ToString());
+                        CurrentRow2 = row;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrMsg = ex.Message;
             }
         }
 

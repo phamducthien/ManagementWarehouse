@@ -98,7 +98,7 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.btnCanXuat = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.HoaDon_Stt = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column10 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.HoaDon_IDUnit1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.Column11 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.Column12 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.Column13 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
@@ -193,7 +193,7 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.dgvHoaDon.ColumnHeadersHeight = 30;
             this.dgvHoaDon.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.HoaDon_Stt,
-            this.Column10,
+            this.HoaDon_IDUnit1,
             this.Column11,
             this.Column12,
             this.Column13,
@@ -1018,17 +1018,17 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.HoaDon_Stt.ReadOnly = true;
             this.HoaDon_Stt.Width = 50;
             // 
-            // Column10
+            // HoaDon_IDUnit1
             // 
-            this.Column10.DataPropertyName = "IDUnit";
+            this.HoaDon_IDUnit1.DataPropertyName = "IDUnit";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Column10.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Column10.HeaderText = "Mã";
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            this.Column10.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column10.Visible = false;
-            this.Column10.Width = 100;
+            this.HoaDon_IDUnit1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.HoaDon_IDUnit1.HeaderText = "Mã";
+            this.HoaDon_IDUnit1.Name = "HoaDon_IDUnit1";
+            this.HoaDon_IDUnit1.ReadOnly = true;
+            this.HoaDon_IDUnit1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.HoaDon_IDUnit1.Visible = false;
+            this.HoaDon_IDUnit1.Width = 100;
             // 
             // Column11
             // 
@@ -1195,7 +1195,7 @@ namespace WH.GUI.ReturnGoodsSupplier
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn SLTON;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn GHICHU;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn HoaDon_Stt;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column10;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn HoaDon_IDUnit1;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column11;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column12;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column13;
