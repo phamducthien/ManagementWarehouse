@@ -1008,7 +1008,7 @@ namespace WH.GUI.ReturnGoodsSupplier
             // 
             // HoaDon_Stt
             // 
-            this.HoaDon_Stt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.HoaDon_Stt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle2.Format = "N0";
             dataGridViewCellStyle2.NullValue = "0";
@@ -1016,7 +1016,7 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.HoaDon_Stt.HeaderText = "Stt";
             this.HoaDon_Stt.Name = "HoaDon_Stt";
             this.HoaDon_Stt.ReadOnly = true;
-            this.HoaDon_Stt.Width = 50;
+            this.HoaDon_Stt.Width = 53;
             // 
             // HoaDon_IDUnit1
             // 
@@ -1026,7 +1026,7 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.HoaDon_IDUnit1.HeaderText = "Mã";
             this.HoaDon_IDUnit1.Name = "HoaDon_IDUnit1";
             this.HoaDon_IDUnit1.ReadOnly = true;
-            this.HoaDon_IDUnit1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.HoaDon_IDUnit1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.HoaDon_IDUnit1.Visible = false;
             this.HoaDon_IDUnit1.Width = 100;
             // 
@@ -1039,8 +1039,8 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.Column11.HeaderText = "Mặt hàng";
             this.Column11.Name = "Column11";
             this.Column11.ReadOnly = true;
-            this.Column11.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column11.Width = 415;
+            this.Column11.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column11.Width = 412;
             // 
             // Column12
             // 
@@ -1053,7 +1053,7 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.Column12.HeaderText = "SL";
             this.Column12.Name = "Column12";
             this.Column12.ReadOnly = true;
-            this.Column12.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column12.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column12.Width = 49;
             // 
             // Column13
@@ -1067,7 +1067,7 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.Column13.HeaderText = "Giá trả hàng";
             this.Column13.Name = "Column13";
             this.Column13.ReadOnly = true;
-            this.Column13.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column13.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column13.Width = 103;
             // 
             // Column14
@@ -1081,7 +1081,7 @@ namespace WH.GUI.ReturnGoodsSupplier
             this.Column14.HeaderText = "Thành tiền";
             this.Column14.Name = "Column14";
             this.Column14.ReadOnly = true;
-            this.Column14.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column14.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column14.Width = 95;
             // 
             // FrmReturnGoodsSupplier

@@ -363,6 +363,7 @@ namespace WH.GUI.ReturnGoodsSupplier
                 .Join(MatHangs, p => p.MAMATHANG, s => s.MAMATHANG, (p, s) =>
                     new
                     {
+                        stt=1,
                         p.IDUnit,
                         p.MAMATHANG,
                         s.TENMATHANG,
@@ -522,7 +523,7 @@ namespace WH.GUI.ReturnGoodsSupplier
 
                 if (objChiTiet.SOLUONGLE - soLuongGiam <= 0)
                 {
-                    ShowMessage(IconMessageBox.Information, "không thể giảm được nũa!");
+                    ShowMessage(IconMessageBox.Information, "không thể giảm được nữa!");
                     return;
                 }
 
