@@ -277,7 +277,12 @@ namespace WH.Report.ReportFunction
             var sumObj = data.Compute("sum(TONGTIEN)", null);
             return (decimal) sumObj;
         }
-
+        public DataTable Cmd_GetExportBills_ByNCC(string soLuongHdLoad, string maNcc, string batDau,
+            string ketThuc)
+        {
+            var data = GetExportBillNccs(soLuongHdLoad, string.Empty, maNcc, batDau, ketThuc);
+            return data;
+        }
         #endregion Get Cong No Khach Hang
 
         #region Get Cong No Nha Cung Cap
@@ -917,6 +922,53 @@ namespace WH.Report.ReportFunction
         }
 
         #endregion Get Chi Tiet Ban Si
+
+        #region Get thông tin trả hàng nhà cung cấp
+        private DataTable GetExportBillNccs(string soLuongHdLoad, string maNhanVien, string maNcc, string batDau,
+            string ketThuc)
+        {
+            var sqlSelect = $@"
+SELECT {soLuongHdLoad}
+    hd.MAHOADONXUAT as MAHOADONXUAT, 
+    hd.SOTIENTHANHTOAN_HD as TONGTIENHOADON, 
+    hd.TIENKHUYENMAI_HD as TIENKHUYENMAI,
+    isnull(TablePhieuThu.TONGTIENTHU, 0) as SOTIENKHACHDUA,
+    (hd.SOTIENTHANHTOAN_HD - isnull(TablePhieuThu.TONGTIENTHU, 0)) as CONGNO,
+    hd.NGAYTAOHOADON as NgayTaoHoaDon,
+    ncc.MANHACUNGCAP as MACODE, 
+    ncc.TENNHACUNGCAP, 
+    ncc.NGUOIDAIDIEN";
+
+            var sqlFrom = @" 
+FROM NGUOIDUNG nd, NHACUNGCAP ncc, HOADONXUATKHO hd 
+LEFT JOIN (
+    SELECT SUM(pt.TIENTHANHTOAN) as TONGTIENTHU, MAHOADONXUATKHO as MAHOADONXUATKHO 
+    FROM PHIEUTHU pt 
+    group by MAHOADONXUATKHO
+    ) as TablePhieuThu ON hd.MAHOADONXUAT = TablePhieuThu.MAHOADONXUATKHO ";
+
+            var sqlWhere = " WHERE nd.MANGUOIDUNG= hd.NGUOITAO and ncc.MANHACUNGCAP = HD.MANHACUNGCAP";
+
+            if (maNhanVien != "")
+                sqlWhere += " AND ND.MANGUOIDUNG ='" + maNhanVien + "' ";
+
+            if (maNcc != "")
+                sqlWhere += " AND HD.MANHACUNGCAP ='" + maNcc + "' ";
+
+            if (batDau != "")
+                sqlWhere += " AND HD.NGAYTAOHOADON >= '" + batDau + "' ";
+
+            if (ketThuc != "")
+                sqlWhere += " AND HD.NGAYTAOHOADON <= '" + ketThuc + "' ";
+
+            var sqlOrderBy = " ORDER BY HD.NGAYTAOHOADON DESC";
+
+            var sql = sqlSelect + sqlFrom + sqlWhere + sqlOrderBy;
+            var data = LoadToDataTable(sql);
+
+            return data;
+        }
+        #endregion
     }
 
     #region Enum Bill

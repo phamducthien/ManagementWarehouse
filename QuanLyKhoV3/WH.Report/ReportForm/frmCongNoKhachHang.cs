@@ -19,12 +19,12 @@ namespace WH.Report.ReportForm
     /// <summary>
     ///     Mô tả danh sách hóa đơn xuất kho
     /// </summary>
-    public partial class FrmCongNoKhangHang : MetroForm
+    public partial class FrmCongNoKhachHang : MetroForm
     {
         private readonly ReportRules _exe;
-        private IUnitOfWorkAsync unitOfWorkAsync;
+        private IUnitOfWorkAsync _unitOfWorkAsync;
 
-        public FrmCongNoKhangHang()
+        public FrmCongNoKhachHang()
         {
             InitializeComponent();
             _exe = new ReportRules();
@@ -32,9 +32,9 @@ namespace WH.Report.ReportForm
 
         private void ReloadUnitOfWork()
         {
-            if (unitOfWorkAsync != null) unitOfWorkAsync.Dispose();
-            unitOfWorkAsync = null;
-            unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
+            _unitOfWorkAsync?.Dispose();
+            _unitOfWorkAsync = null;
+            _unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
         }
 
         private DataTable GetBills(string soLuongHdLoad, string batDau, string ketThuc)
@@ -342,7 +342,7 @@ namespace WH.Report.ReportForm
                 {
                     var ID = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
-                    IXuatKhoService service = new XuatKhoService(unitOfWorkAsync);
+                    IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
                     var hdKho = service.GetModelHoaDonXuat(ID);
                     if (hdKho != null)
                     {
@@ -370,7 +370,7 @@ namespace WH.Report.ReportForm
                 {
                     var ID = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
-                    IXuatKhoService service = new XuatKhoService(unitOfWorkAsync);
+                    IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
                     var hdKho = service.GetModelHoaDonXuat(ID);
                     btnXemChiTiet.Enabled = true;
                 }
@@ -392,7 +392,7 @@ namespace WH.Report.ReportForm
                 {
                     var ID = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
-                    IXuatKhoService service = new XuatKhoService(unitOfWorkAsync);
+                    IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
                     var hdKho = service.GetModelHoaDonXuat(ID);
                 }
             }

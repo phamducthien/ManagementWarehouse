@@ -140,6 +140,12 @@
     <Compile Include="ReportForm\frmChiTietSanPhamTraHang.Designer.cs">
       <DependentUpon>frmChiTietSanPhamTraHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportForm\frmTraHangNhaCungCap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmTraHangNhaCungCap.designer.cs">
+      <DependentUpon>frmTraHangNhaCungCap.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportForm\frmTienLai.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,11 +220,11 @@
     <Compile Include="ReportForm\frmChonKhachHangByGrid.designer.cs">
       <DependentUpon>frmChonKhachHangByGrid.cs</DependentUpon>
     </Compile>
-    <Compile Include="ReportForm\frmCongNoKhangHang.cs">
+    <Compile Include="ReportForm\frmCongNoKhachHang.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ReportForm\frmCongNoKhangHang.designer.cs">
-      <DependentUpon>frmCongNoKhangHang.cs</DependentUpon>
+    <Compile Include="ReportForm\frmCongNoKhachHang.designer.cs">
+      <DependentUpon>frmCongNoKhachHang.cs</DependentUpon>
     </Compile>
     <Compile Include="ReportForm\frmCongNoNhaCungCap.cs">
       <SubType>Form</SubType>
@@ -305,6 +311,9 @@
     <EmbeddedResource Include="ReportForm\frmChiTietSanPhamTraHang.resx">
       <DependentUpon>frmChiTietSanPhamTraHang.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmTraHangNhaCungCap.resx">
+      <DependentUpon>frmTraHangNhaCungCap.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportForm\frmTienLai.resx">
       <DependentUpon>frmTienLai.cs</DependentUpon>
     </EmbeddedResource>
@@ -351,8 +360,8 @@
     <EmbeddedResource Include="ReportForm\frmChonKhachHangByGrid.resx">
       <DependentUpon>frmChonKhachHangByGrid.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReportForm\frmCongNoKhangHang.resx">
-      <DependentUpon>frmCongNoKhangHang.cs</DependentUpon>
+    <EmbeddedResource Include="ReportForm\frmCongNoKhachHang.resx">
+      <DependentUpon>frmCongNoKhachHang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForm\frmCongNoNhaCungCap.resx">
       <DependentUpon>frmCongNoNhaCungCap.cs</DependentUpon>

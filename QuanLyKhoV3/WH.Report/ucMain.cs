@@ -68,7 +68,7 @@ namespace WH.Report
         private void btnCongNo_KhachHang_Click(object sender, EventArgs e)
         {
             Hide();
-            var frm = new FrmCongNoKhangHang();
+            var frm = new FrmCongNoKhachHang();
             frm.ShowDialog();
             Show();
         }
@@ -185,6 +185,14 @@ namespace WH.Report
                 frm1.ShowDialog();
             }
 
+            Show();
+        }
+
+        private void btn_TraHang_NCC_Click(object sender, EventArgs e)
+        {
+            Hide();
+            var frm = new FrmTraHangNhaCungCap();
+            frm.ShowDialog();
             Show();
         }
     }
