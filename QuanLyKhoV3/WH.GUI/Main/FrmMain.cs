@@ -184,6 +184,7 @@ namespace WH.GUI
             var frm = new FrmListExportWarehouse();
             frm.ShowDialog();
             Show();
+            Activate();
         }
 
         private void btnThncc_Click(object sender, EventArgs e)
@@ -194,6 +195,7 @@ namespace WH.GUI
             var frm = new FrmReturnGoodsSupplier();
             frm.ShowDialog();
             Show();
+            Activate();
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
