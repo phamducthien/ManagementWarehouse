@@ -184,7 +184,6 @@ namespace WH.GUI
             var frm = new FrmListExportWarehouse();
             frm.ShowDialog();
             Show();
-            Activate();
         }
 
         private void btnThncc_Click(object sender, EventArgs e)
