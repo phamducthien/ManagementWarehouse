@@ -9,6 +9,7 @@ using Util.Pattern;
 using WH.Entity;
 using WH.Model;
 using WH.Service;
+using WH.Service.ReturnGoodsSupplier;
 
 namespace WH.GUI.ReturnGoodsSupplier
 {
@@ -39,12 +40,12 @@ namespace WH.GUI.ReturnGoodsSupplier
             }
         }
 
-        private IXuatKhoService XuatKhoService
+        public IReturnGoodsSupplierServices ReturnGoodsSupplierServices
         {
             get
             {
                 ReloadUnitOfWork();
-                return new XuatKhoService(UnitOfWorkAsync);
+                return new ReturnGoodsSupplierServices(UnitOfWorkAsync);
             }
         }
 
@@ -229,7 +230,7 @@ namespace WH.GUI.ReturnGoodsSupplier
                 //------ Tạo mã hóa đơn nếu chưa có
                 //------ Lấy số lượng sản phẩm trong hóa đơn tạm
                 if (MaHoaDon.IsBlank())
-                    MaHoaDon = XuatKhoService.CreateMaHoaDon();
+                    MaHoaDon = ReturnGoodsSupplierServices.CreateMaHoaDon();
                 else
                 {
                     GetSoLuong();
@@ -256,9 +257,9 @@ namespace WH.GUI.ReturnGoodsSupplier
                     ct.ISDELETE = false;
                 }
 
-                var result = XuatKhoService.NhapMatHangVaoHoaDonTam(MaHoaDon, tempHoadonxuatkhochitiets, null);
+                var result = ReturnGoodsSupplierServices.NhapMatHangVaoHoaDonTam(MaHoaDon, tempHoadonxuatkhochitiets, null);
                 if (result != MethodResult.Succeed)
-                    ShowMessage(IconMessageBox.Information, XuatKhoService.ErrMsg);
+                    ShowMessage(IconMessageBox.Information, ReturnGoodsSupplierServices.ErrMsg);
                 else
                     LoadHoaDon();
             }
@@ -295,11 +296,10 @@ namespace WH.GUI.ReturnGoodsSupplier
 
                 var tienChi = txtTienChi.Text.ToDecimal();
                 decimal giamGia = 0;
-                var service = XuatKhoService;
-                var result = service.ThanhToanTemp(MaHoaDon, dtpNgayTaoHD.Value, NhaCungCapModel.MANHACUNGCAP, tienChi, giamGia, txtGhiChu.Text);
+                var result = ReturnGoodsSupplierServices.ThanhToanTemp(MaHoaDon, dtpNgayTaoHD.Value, NhaCungCapModel.MANHACUNGCAP, tienChi, giamGia, txtGhiChu.Text);
                 if (result != MethodResult.Succeed)
                 {
-                    ShowMessage(IconMessageBox.Information, service.ErrMsg);
+                    ShowMessage(IconMessageBox.Information, ReturnGoodsSupplierServices.ErrMsg);
                 }
                 else
                 {
@@ -386,10 +386,9 @@ namespace WH.GUI.ReturnGoodsSupplier
         private bool CheckTonToiThieu(int maMatHang, int slNhap, bool isCapNhat = false)
         {
             decimal slTonKho = 0;
-            var service = XuatKhoService;
-            ModelChiTiet = service.GetModelChiTietTam(maMatHang, MaHoaDon);
-            KhoMatHangModel = service.GetModelKhoMatHang(maMatHang.ToString());
-            var matHangModel = service.GetModelMatHang(maMatHang.ToString());
+            ModelChiTiet = ReturnGoodsSupplierServices.GetModelChiTietTam(maMatHang, MaHoaDon);
+            KhoMatHangModel = ReturnGoodsSupplierServices.GetModelKhoMatHang(maMatHang.ToString());
+            var matHangModel = ReturnGoodsSupplierServices.GetModelMatHang(maMatHang.ToString());
             var sltronghoadon = ModelChiTiet?.SOLUONGLE ?? 0;
 
             if (KhoMatHangModel != null)
@@ -428,10 +427,9 @@ namespace WH.GUI.ReturnGoodsSupplier
         {
             decimal sltronghoadon = 0;
             decimal slTonKho = 0;
-            var service = XuatKhoService;
-            ModelChiTiet = service.GetModelChiTietTam(MatHangModel.MAMATHANG, MaHoaDon);
-            KhoMatHangModel = service.GetModelKhoMatHang(MatHangModel.MAMATHANG.ToString());
-            var matHangModel = service.GetModelMatHang(MatHangModel.MAMATHANG.ToString());
+            ModelChiTiet = ReturnGoodsSupplierServices.GetModelChiTietTam(MatHangModel.MAMATHANG, MaHoaDon);
+            KhoMatHangModel = ReturnGoodsSupplierServices.GetModelKhoMatHang(MatHangModel.MAMATHANG.ToString());
+            var matHangModel = ReturnGoodsSupplierServices.GetModelMatHang(MatHangModel.MAMATHANG.ToString());
             if (ModelChiTiet != null)
                 sltronghoadon = ModelChiTiet.SOLUONGLE ?? 0;
             if (KhoMatHangModel != null)
@@ -460,7 +458,7 @@ namespace WH.GUI.ReturnGoodsSupplier
 
         private void GetSoLuong()
         {
-            var hoadonxuatkhochitiets = XuatKhoService.LoadHoaDonTam(MaHoaDon);
+            var hoadonxuatkhochitiets = ReturnGoodsSupplierServices.LoadHoaDonTam(MaHoaDon);
             if (!hoadonxuatkhochitiets.isNullOrZero())
             {
                 SoLuong = hoadonxuatkhochitiets.OrderBy(s => s.GHICHU.ToInt()).Last().GHICHU
@@ -489,10 +487,9 @@ namespace WH.GUI.ReturnGoodsSupplier
                     return;
                 }
 
-                var nhapKhoService = XuatKhoService;
-                var result = nhapKhoService.TangSoLuong(objChiTiet.MACHITIETHOADON, soLuongTang);
+                var result = ReturnGoodsSupplierServices.TangSoLuong(objChiTiet.MACHITIETHOADON, soLuongTang);
                 if (result != MethodResult.Succeed)
-                    ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
+                    ShowMessage(IconMessageBox.Information, ReturnGoodsSupplierServices.ErrMsg);
                 else
                     LoadHoaDon();
             }
@@ -527,10 +524,9 @@ namespace WH.GUI.ReturnGoodsSupplier
                     return;
                 }
 
-                var nhapKhoService = XuatKhoService;
-                var result = nhapKhoService.GiamSoLuong(objChiTiet.MACHITIETHOADON, soLuongGiam);
+                var result = ReturnGoodsSupplierServices.GiamSoLuong(objChiTiet.MACHITIETHOADON, soLuongGiam);
                 if (result != MethodResult.Succeed)
-                    ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
+                    ShowMessage(IconMessageBox.Information, ReturnGoodsSupplierServices.ErrMsg);
                 else
                     LoadHoaDon();
             }
@@ -550,16 +546,15 @@ namespace WH.GUI.ReturnGoodsSupplier
                     return;
                 }
 
-                var nhapKhoService = XuatKhoService;
-                var result = nhapKhoService.XoaHoaDonTam(MaHoaDon);
+                var result = ReturnGoodsSupplierServices.XoaHoaDonTam(MaHoaDon);
                 if (result != MethodResult.Succeed)
                 {
-                    ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
+                    ShowMessage(IconMessageBox.Information, ReturnGoodsSupplierServices.ErrMsg);
                 }
                 else
                 {
                     txtTienChi.Text = 0.ToString("N1");
-                    var totalAmount = XuatKhoService.CalTotalAmountHoaDonTam(MaHoaDon);
+                    var totalAmount = ReturnGoodsSupplierServices.CalTotalAmountHoaDonTam(MaHoaDon);
                     labTongTien.Values.ExtraText = ExtendMethod.AdjustRound(decimal.ToDouble(totalAmount))?.ToString(CultureInfo.InvariantCulture);
                     MaHoaDon = "";
                     dgvHoaDon.DataSource = null;
@@ -589,14 +584,13 @@ namespace WH.GUI.ReturnGoodsSupplier
                     return;
                 }
 
-                var nhapKhoService = XuatKhoService;
                 var lsTempHoaDonNhapKhoChiTiets = new List<TEMP_HOADONXUATKHOCHITIET>
                 {
                     objChiTiet
                 };
-                var result = nhapKhoService.HuyMatHangTrongHoaDonTam(MaHoaDon, lsTempHoaDonNhapKhoChiTiets);
+                var result = ReturnGoodsSupplierServices.HuyMatHangTrongHoaDonTam(MaHoaDon, lsTempHoaDonNhapKhoChiTiets);
                 if (result != MethodResult.Succeed)
-                    ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
+                    ShowMessage(IconMessageBox.Information, ReturnGoodsSupplierServices.ErrMsg);
                 else
                     LoadHoaDon();
             }
@@ -618,7 +612,7 @@ namespace WH.GUI.ReturnGoodsSupplier
                     return;
                 }
 
-                var objMatHang = XuatKhoService.GetModel_MH_T_HD_XK_CT(objChiTiet);
+                var objMatHang = ReturnGoodsSupplierServices.GetModel_MH_T_HD_XK_CT(objChiTiet);
                 var frm = new FrmInputNumberExport(objMatHang, (decimal)objChiTiet.DONGIASI, (double)objChiTiet.CHIETKHAUTHEOPHANTRAM, (decimal)objChiTiet.SOLUONGLE);
                 frm.ShowDialog();
                 var soLuongNhap = frm.NumImport;
@@ -637,8 +631,6 @@ namespace WH.GUI.ReturnGoodsSupplier
                     return;
                 }
 
-                var nhapKhoService = XuatKhoService;
-
                 objChiTiet.DONGIASI = giaBan;
                 objChiTiet.SOLUONGLE = soLuongNhap;
 
@@ -647,9 +639,9 @@ namespace WH.GUI.ReturnGoodsSupplier
                     objChiTiet
                 };
 
-                var result = nhapKhoService.CapNhatMatHangTrongHoaDonTam(lsTempHoaDonNhapKhoChiTiets);
+                var result = ReturnGoodsSupplierServices.CapNhatMatHangTrongHoaDonTam(lsTempHoaDonNhapKhoChiTiets);
                 if (result != MethodResult.Succeed)
-                    ShowMessage(IconMessageBox.Information, nhapKhoService.ErrMsg);
+                    ShowMessage(IconMessageBox.Information, ReturnGoodsSupplierServices.ErrMsg);
                 else
                     LoadHoaDon();
             }
@@ -674,9 +666,8 @@ namespace WH.GUI.ReturnGoodsSupplier
                         var sId = row.Cells["HoaDon_IDUnit1"].Value.ToString();
 
                         if (sId == "") return;
-                        var service = XuatKhoService;
-                        ModelChiTiet = service.GetModelChiTietTam(sId);
-                        KhoMatHangModel = service.GetModelKhoMatHang(ModelChiTiet.MAMATHANG.ToString());
+                        ModelChiTiet = ReturnGoodsSupplierServices.GetModelChiTietTam(sId);
+                        KhoMatHangModel = ReturnGoodsSupplierServices.GetModelKhoMatHang(ModelChiTiet.MAMATHANG.ToString());
                         CurrentRow2 = row;
                     }
                 }
