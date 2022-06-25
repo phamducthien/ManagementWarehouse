@@ -9,6 +9,7 @@ using ComponentFactory.Krypton.Toolkit;
 using MetroUI.Forms;
 using Repository.Pattern.UnitOfWork;
 using WH.Model.Properties;
+using WH.Service;
 using WH.Service.Repository.Core;
 using WH.Service.Service;
 

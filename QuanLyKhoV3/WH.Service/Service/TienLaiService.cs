@@ -8,18 +8,18 @@ using Service.Pattern;
 using Util.Pattern;
 using WH.Entity;
 using WH.Model.Properties;
+using WH.Service.Service;
 
-namespace WH.Service.Service
+namespace WH.Service
 {
     public interface ITienLaiService : IService
     {
-        DataTable DanhSachTienLai(DateTime NgayBatDau, DateTime NgayKetThuc);
-        DataTable DanhSachTienLaiTheoKhachHang(DateTime NgayBatDau, DateTime NgayKetThuc);
+        DataTable DanhSachTienLai(DateTime ngayBatDau, DateTime ngayKetThuc);
+        DataTable DanhSachTienLaiTheoKhachHang(DateTime ngayBatDau, DateTime ngayKetThuc);
     }
 
     public class TienLaiService : global::Service.Pattern.Service, ITienLaiService
     {
-        private IHOADONNHAPXUATCHITIETService _hoadonhapxuatchitietService;
         private IHOADONNHAPXUATService _hoadonnhapxuatService;
         private IHOADONXUATKHOCHITIETService _hoadonxuatkhochitietService;
         private IHOADONXUATKHOService _hoadonxuatkhoService;
@@ -239,7 +239,7 @@ namespace WH.Service.Service
         protected override void InitRepositories()
         {
             _hoadonnhapxuatService = new HOADONNHAPXUATService(_unitOfWork);
-            _hoadonhapxuatchitietService = new HOADONNHAPXUATCHITIETService(_unitOfWork);
+            new HOADONNHAPXUATCHITIETService(_unitOfWork);
             _hoadonxuatkhoService = new HOADONXUATKHOService(_unitOfWork);
             _khachhangService = new KHACHHANGService(_unitOfWork);
             _hoadonxuatkhochitietService = new HOADONXUATKHOCHITIETService(_unitOfWork);
