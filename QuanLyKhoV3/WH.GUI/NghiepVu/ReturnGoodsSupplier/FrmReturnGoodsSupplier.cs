@@ -178,7 +178,6 @@ namespace WH.GUI.ReturnGoodsSupplier
                     STT = stt++,
                     a.IDUnit,
                     a.TENMATHANG,
-                    a.GIALE,
                     a.GIANHAP,
                     a.TENDONVI,
                     a.SLTON,
@@ -237,10 +236,10 @@ namespace WH.GUI.ReturnGoodsSupplier
                 }
 
                 //------ Chọn sản phẩm theo nhóm
-                var frm = new FrmInputNumberExportByLoaiExtend(SoLuong, MatHangModel, true);
+                var frm = new FrmInputNumberExportByLoaiExtend(SoLuong, MatHangModel, false, true, MaHoaDon);
                 frm.ShowDialog(this);
 
-                var tempHoadonxuatkhochitiets = frm.TempHoaDonXuatKhoChiTiet
+                var tempHoadonxuatkhochitiets = frm.LstChiTietNhap
                     .Where(x => x.SOLUONGLE > 0)
                     .ToList();
 
@@ -368,8 +367,7 @@ namespace WH.GUI.ReturnGoodsSupplier
                         p.MAMATHANG,
                         s.TENMATHANG,
                         SOLUONG = p.SOLUONGLE,
-                        GIAM = p.CHIETKHAUTHEOPHANTRAM * 100,
-                        DONGIA = p.DONGIASI,
+                        GIANHAP = p.DONGIASI,
                         THANHTIEN = p.THANHTIENSAUCHIETKHAU_CT,
                         p.GHICHU
                     })
