@@ -15,7 +15,7 @@ namespace WH.Report
 {
     public partial class FrmSelectKhachHang : KryptonForm
     {
-        private IUnitOfWorkAsync unitOfWorkAsync;
+        private IUnitOfWorkAsync _unitOfWorkAsync;
 
         public FrmSelectKhachHang()
         {
@@ -24,9 +24,9 @@ namespace WH.Report
 
         private void ReloadUnitOfWork()
         {
-            if (unitOfWorkAsync != null) unitOfWorkAsync.Dispose();
-            unitOfWorkAsync = null;
-            unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
+            if (_unitOfWorkAsync != null) _unitOfWorkAsync.Dispose();
+            _unitOfWorkAsync = null;
+            _unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
         }
 
         #region Init
@@ -39,7 +39,7 @@ namespace WH.Report
             get
             {
                 ReloadUnitOfWork();
-                return new KHACHHANGService(unitOfWorkAsync);
+                return new KHACHHANGService(_unitOfWorkAsync);
             }
         }
 
@@ -188,8 +188,7 @@ namespace WH.Report
 
         private void txtTimKiem_Enter(object sender, EventArgs e)
         {
-            var kryptonTextBox = sender as KryptonTextBox;
-            if (kryptonTextBox != null)
+            if (sender is KryptonTextBox kryptonTextBox)
             {
                 var txt = kryptonTextBox;
                 txt.StateCommon.Back.Color1 = Color.FromArgb(255, 255, 128);
@@ -198,8 +197,7 @@ namespace WH.Report
 
         private void txtTimKiem_Leave(object sender, EventArgs e)
         {
-            var kryptonTextBox = sender as KryptonTextBox;
-            if (kryptonTextBox != null)
+            if (sender is KryptonTextBox kryptonTextBox)
             {
                 var txt = kryptonTextBox;
                 txt.StateCommon.Back.Color1 = Color.White;
@@ -210,8 +208,7 @@ namespace WH.Report
         {
             if (e.KeyChar == '\r')
             {
-                var textBox = sender as KryptonTextBox;
-                if (textBox != null)
+                if (sender is KryptonTextBox textBox)
                 {
                     var txt1 = textBox;
                     txt1.Select();
@@ -228,7 +225,8 @@ namespace WH.Report
         private void LoadDataAll()
         {
             var record = 1;
-            var data = from p in Service.Search(s =>
+            var data = 
+                (from p in Service.Search(s =>
                     s.ISUSE == true && s.ISDELETE == false &&
                     s.MAKHACHHANG.ToString().ToLower() != "56dbc32e-11d7-4175-a7ac-608ccbf962d7" &&
                     s.MAKHACHHANG.ToString().ToLower() != "66dbc32e-11d7-4175-a7ac-608ccbf962d7")
@@ -249,7 +247,7 @@ namespace WH.Report
                     DOANHTHU = p.HOADONXUATKHOes.Sum(s => s.SOTIENTHANHTOAN_HD),
                     DATHU = p.HOADONXUATKHOes.Sum(s => s.SOTIENKHACHDUA_HD),
                     CONGNO = p.HOADONXUATKHOes.Sum(s => s.SOTIENKHACHDUA_HD - s.SOTIENTHANHTOAN_HD)
-                };
+                }).Take(20);
 
             LoadData(data.ToList().ToDatatable());
         }

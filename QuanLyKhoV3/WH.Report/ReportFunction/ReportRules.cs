@@ -13,7 +13,11 @@ namespace WH.Report.ReportFunction
             DataTable dt;
             try
             {
-                var cmd = new SqlCommand(command, GlobalContext.ServerConnection);
+                var cmd = new SqlCommand(command, GlobalContext.ServerConnection)
+                {
+                    CommandTimeout = 60
+                };
+
                 var sda = new SqlDataAdapter(cmd);
                 dt = new DataTable();
                 sda.Fill(dt);
@@ -78,25 +82,31 @@ namespace WH.Report.ReportFunction
 
         private DataTable GetReceiptBills(string maCodeKhachHang, string batDau, string ketThuc)
         {
-            var sqlSelect =
-                "SELECT DISTINCT kh.MAKHACHHANG,kh.TENKHACHHANG, mh.MAMATHANG, mh.TENMATHANG, isnull(SUM(ct.SOLUONGLE), 0) as SOLUONGBAN, SUM(isnull(ct.THANHTIENSAUCHIETKHAU_CT, 0)) as TongTienBan,kh.CODEKHACHHANG ";
-            var sqlFrom = "FROM HOADONXUATKHOCHITIET ct, HOADONXUATKHO hd, MATHANG mh, KHACHHANG kh ";
-            var sqlWhere =
-                "WHERE ct.MAHOADON = hd.MAHOADONXUAT and mh.MAMATHANG = ct.MAMATHANG and kh.MAKHACHHANG = hd.MAKHACHHANG ";
-            var sqlGroupBy =
-                "GROUP BY mh.MAMATHANG,mh.TENMATHANG,mh.SOLUONGQUYDOI, kh.MAKHACHHANG, kh.TENKHACHHANG,kh.CODEKHACHHANG ";
-            var sqlOrderBy = "order by kh.MAKHACHHANG,kh.CODEKHACHHANG, kh.TENKHACHHANG,mh.MAMATHANG,mh.TENMATHANG";
+            var sqlSelect = @"
+SELECT kh.MAKHACHHANG,
+    kh.TENKHACHHANG, 
+    mh.MAMATHANG, 
+    mh.TENMATHANG, 
+    ISNULL(SUM(ct.SOLUONGLE), 0) AS SOLUONGBAN, 
+    SUM(isnull(ct.THANHTIENSAUCHIETKHAU_CT, 0)) AS TongTienBan,
+    kh.CODEKHACHHANG 
+FROM HOADONXUATKHOCHITIET AS ct, HOADONXUATKHO AS hd, MATHANG AS mh, KHACHHANG AS kh
+WHERE ct.MAHOADON = hd.MAHOADONXUAT AND mh.MAMATHANG = ct.MAMATHANG AND kh.MAKHACHHANG = hd.MAKHACHHANG";
 
-            if (maCodeKhachHang != "")
-                sqlWhere += " AND kh.CODEKHACHHANG = N'" + maCodeKhachHang + "' ";
+            var groupAndOrder = @"
+GROUP BY mh.MAMATHANG,mh.TENMATHANG,mh.SOLUONGQUYDOI, kh.MAKHACHHANG, kh.TENKHACHHANG,kh.CODEKHACHHANG 
+ORDER BY kh.MAKHACHHANG,kh.CODEKHACHHANG, kh.TENKHACHHANG, mh.MAMATHANG, mh.TENMATHANG";
 
-            if (batDau != "")
-                sqlWhere += " AND hd.NGAYTAOHOADON >= '" + batDau + "' ";
+            if (!string.IsNullOrWhiteSpace(maCodeKhachHang))
+                sqlSelect += $" AND kh.CODEKHACHHANG = N'{maCodeKhachHang}' ";
 
-            if (ketThuc != "")
-                sqlWhere += " AND hd.NGAYTAOHOADON <= '" + ketThuc + "' ";
+            if (!string.IsNullOrWhiteSpace(batDau))
+                sqlSelect += $" AND hd.NGAYTAOHOADON >= '{batDau}' ";
 
-            var sql = sqlSelect + sqlFrom + sqlWhere + sqlGroupBy + sqlOrderBy;
+            if (!string.IsNullOrWhiteSpace(ketThuc))
+                sqlSelect += $" AND hd.NGAYTAOHOADON <= '{ketThuc}' ";
+
+            var sql = sqlSelect + groupAndOrder;
             var data = LoadToDataTable(sql);
             return data;
         }
@@ -138,32 +148,32 @@ namespace WH.Report.ReportFunction
         public decimal Cmd_CalDaThu_DoanhThuKhachHang(DataTable data)
         {
             var sumObj = data.Compute("sum(SOTIENKHACHDUA)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
 
         public decimal Cmd_CalDaThu_DoanhThu1KhachHang(DataTable data)
         {
             var sumObj = data.Compute("sum(TongTienBan)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_CalConLai_DoanhThuKhachHang(DataTable data)
         {
             var sumObj = data.Compute("sum(CONLAI)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_calGiamGia_DoanhThuKhachHang(DataTable data)
         {
             var sumObj = data.Compute("sum(GIAMGIA)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_calTongTienHoaDon_DoanhThuKhachHang(DataTable data)
         {
             var sumObj = data.Compute("sum(TIENHOADON)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         //Get Top doannh thu
@@ -204,37 +214,41 @@ namespace WH.Report.ReportFunction
         private DataTable GetExportBills(string soLuongHdLoad, string maNhanVien, string maKhachHang, string batDau,
             string ketThuc)
         {
-            var sqlSelect = "SELECT " + soLuongHdLoad +
-                            " hd.MAHOADONXUAT as MAHOADONXUAT, hd.SOTIENTHANHTOAN_HD as TONGTIENHOADON, hd.TIENKHUYENMAI_HD as TIENKHUYENMAI, isnull(TablePhieuThu.TONGTIENTHU, 0) as SOTIENKHACHDUA, (hd.SOTIENTHANHTOAN_HD - isnull(TablePhieuThu.TONGTIENTHU, 0)) as CONGNO, hd.NGAYTAOHOADON as NgayTaoHoaDon, " +
-                            "\"TinhTrang\" =" +
-                            "CASE " +
-                            "when(hd.SOTIENTHANHTOAN_HD - isnull(TablePhieuThu.TONGTIENTHU, 0)) <= 0 THEN N'Đã Thanh Toán' " +
-                            "ELSE N'Chưa Thanh Toán' " +
-                            "END" +
-                            " ,kh.CODEKHACHHANG as MACODE, kh.MABARCODE, kh.TENKHACHHANG";
+            var sqlSelect =
+                $@"
+SELECT {soLuongHdLoad} 
+    hd.MAHOADONXUAT AS MAHOADONXUAT, 
+    hd.NGAYTAOHOADON AS NgayTaoHoaDon, 
+    kh.CODEKHACHHANG AS MACODE,
+    kh.MABARCODE,
+    kh.TENKHACHHANG,
+    hd.SOTIENTHANHTOAN_HD AS TONGTIENHOADON, 
+    hd.TIENKHUYENMAI_HD AS TIENKHUYENMAI,
+    ISNULL(TablePhieuThu.TONGTIENTHU, 0) AS SOTIENKHACHDUA,
+    hd.SOTIENTHANHTOAN_HD AS SOTIENTHANHTOAN_HD, 
+    ISNULL(TablePhieuThu.TONGTIENTHU, 0) as TONGTIENTHU
+FROM NGUOIDUNG AS nd, KHACHHANG AS kh, HOADONXUATKHO AS hd 
+LEFT JOIN (
+    SELECT SUM(pt.TIENTHANHTOAN) AS TONGTIENTHU, MAHOADONXUATKHO AS MAHOADONXUATKHO 
+    FROM PHIEUTHU AS pt 
+    GROUP BY MAHOADONXUATKHO ) AS TablePhieuThu ON hd.MAHOADONXUAT = TablePhieuThu.MAHOADONXUATKHO 
+WHERE nd.MANGUOIDUNG= hd.NGUOITAO and kh.MAKHACHHANG = HD.MAKHACHHANG";
 
-            var sqlfrom = " FROM NGUOIDUNG nd, KHACHHANG kh, HOADONXUATKHO hd left join " +
-                          " (select SUM(pt.TIENTHANHTOAN) as TONGTIENTHU, MAHOADONXUATKHO as MAHOADONXUATKHO " +
-                          " from PHIEUTHU pt " +
-                          " group by MAHOADONXUATKHO) as TablePhieuThu on hd.MAHOADONXUAT = TablePhieuThu.MAHOADONXUATKHO ";
+            if (!string.IsNullOrWhiteSpace(maNhanVien))
+                sqlSelect += $@" AND ND.MANGUOIDUNG ='{maNhanVien}' ";
 
-            var sqlWhere = " WHERE nd.MANGUOIDUNG= hd.NGUOITAO and kh.MAKHACHHANG = HD.MAKHACHHANG";
+            if (!string.IsNullOrWhiteSpace(maKhachHang))
+                sqlSelect += $@" AND HD.MAKHACHHANG ='{maKhachHang}' ";
 
-            if (maNhanVien != "")
-                sqlWhere += " AND ND.MANGUOIDUNG ='" + maNhanVien + "' ";
+            if (!string.IsNullOrWhiteSpace(batDau))
+                sqlSelect += $@" AND HD.NGAYTAOHOADON >= '{batDau}' ";
 
-            if (maKhachHang != "")
-                sqlWhere += " AND HD.MAKHACHHANG ='" + maKhachHang + "' ";
-
-            if (batDau != "")
-                sqlWhere += " AND HD.NGAYTAOHOADON >= '" + batDau + "' ";
-
-            if (ketThuc != "")
-                sqlWhere += " AND HD.NGAYTAOHOADON <= '" + ketThuc + "' ";
+            if (!string.IsNullOrWhiteSpace(ketThuc))
+                sqlSelect += $@" AND HD.NGAYTAOHOADON <= '{ketThuc}' ";
 
             var sqlOrderBy = " ORDER BY HD.NGAYTAOHOADON DESC";
 
-            var sql = sqlSelect + sqlfrom + sqlWhere + sqlOrderBy;
+            var sql = sqlSelect + sqlOrderBy;
             var data = LoadToDataTable(sql);
 
             return data;
@@ -256,26 +270,28 @@ namespace WH.Report.ReportFunction
 
         public decimal Cmd_CalConLai_CongNoKhachHang(DataTable data)
         {
-            var sumObj = data.Compute("sum(CONGNO)", null);
-            return (decimal) sumObj;
+            var sumObj1 = data.Compute("SUM(SOTIENTHANHTOAN_HD)", null);
+            var sumObj2 = data.Compute("SUM(TONGTIENTHU)", null);
+            var sumObj = (decimal)sumObj1 - (decimal)sumObj2;
+            return sumObj;
         }
 
         public decimal Cmd_CalDaThu_CongNoKhachHang(DataTable data)
         {
             var sumObj = data.Compute("sum(DATHU)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_calGiamGia_CongNoKhachHang(DataTable data)
         {
             var sumObj = data.Compute("sum(GIAMGIA)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_calTongTienHoaDon_CongNoKhachHang(DataTable data)
         {
             var sumObj = data.Compute("sum(TONGTIEN)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
         public DataTable Cmd_GetExportBills_ByNCC(string soLuongHdLoad, string maNcc, string batDau,
             string ketThuc)
@@ -343,25 +359,25 @@ namespace WH.Report.ReportFunction
         public decimal Cmd_CalConLai_CongNoNhaCungCap(DataTable data)
         {
             var sumObj = data.Compute("sum(CONGNO)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_CalDaChi_CongNoNhaCungCap(DataTable data)
         {
             var sumObj = data.Compute("sum(DATRA)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_calGiamGia_CongNoNhaCungCap(DataTable data)
         {
             var sumObj = data.Compute("sum(GIAMGIA)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_calTongTienHoaDon_CongNoNhaCungCap(DataTable data)
         {
             var sumObj = data.Compute("sum(TONGTIEN)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         #endregion Get Cong No Nha Cung Cap
@@ -422,25 +438,25 @@ namespace WH.Report.ReportFunction
         public decimal Cmd_CalConLai_DoanhThuNhaCungCap(DataTable data)
         {
             var sumObj = data.Compute("sum(CONNO)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_CalDaChi_DoanhThuNhaCungCap(DataTable data)
         {
             var sumObj = data.Compute("sum(SOTIENTHANHTOAN)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_calGiamGia_DoanhThuNhaCungCap(DataTable data)
         {
             var sumObj = data.Compute("sum(GIAMGIA)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_calTongTienHoaDon_DoanhThuNhaCungCap(DataTable data)
         {
             var sumObj = data.Compute("sum(TIENHOADON)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         #endregion Get Doanh Thu Nha Cung Cap

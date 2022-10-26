@@ -220,11 +220,11 @@
     <Compile Include="ReportForm\frmChonKhachHangByGrid.designer.cs">
       <DependentUpon>frmChonKhachHangByGrid.cs</DependentUpon>
     </Compile>
-    <Compile Include="ReportForm\frmCongNoKhachHang.cs">
+    <Compile Include="ReportForm\FrmCongNoKhachHang.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ReportForm\frmCongNoKhachHang.designer.cs">
-      <DependentUpon>frmCongNoKhachHang.cs</DependentUpon>
+    <Compile Include="ReportForm\FrmCongNoKhachHang.designer.cs">
+      <DependentUpon>FrmCongNoKhachHang.cs</DependentUpon>
     </Compile>
     <Compile Include="ReportForm\frmCongNoNhaCungCap.cs">
       <SubType>Form</SubType>
@@ -360,8 +360,8 @@
     <EmbeddedResource Include="ReportForm\frmChonKhachHangByGrid.resx">
       <DependentUpon>frmChonKhachHangByGrid.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReportForm\frmCongNoKhachHang.resx">
-      <DependentUpon>frmCongNoKhachHang.cs</DependentUpon>
+    <EmbeddedResource Include="ReportForm\FrmCongNoKhachHang.resx">
+      <DependentUpon>FrmCongNoKhachHang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForm\frmCongNoNhaCungCap.resx">
       <DependentUpon>frmCongNoNhaCungCap.cs</DependentUpon>
