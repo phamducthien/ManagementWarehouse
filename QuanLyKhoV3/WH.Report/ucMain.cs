@@ -17,12 +17,13 @@ namespace WH.Report
 
         private void btnDoanhThu_KhachHang_Click(object sender, EventArgs e)
         {
-            Hide();
+            //Hide();
             var frm = new FrmSelectDate();
             var frmKhachHang = new FrmSelectKhachHang();
             if (frm.ShowDialog() == DialogResult.OK)
                 if (frmKhachHang.ShowDialog() == DialogResult.OK)
                 {
+                    frmKhachHang.Hide();
                     var frm1 = new frmPhieuThuKhachHang(FrmSelectDate.DateFrom, FrmSelectDate.DateTo,
                         frmKhachHang.Model.CODEKHACHHANG);
                     frm1.ShowDialog();
@@ -68,7 +69,7 @@ namespace WH.Report
         private void btnCongNo_KhachHang_Click(object sender, EventArgs e)
         {
             Hide();
-            var frm = new FrmCongNoKhangHang();
+            var frm = new FrmCongNoKhachHang();
             frm.ShowDialog();
             Show();
         }
