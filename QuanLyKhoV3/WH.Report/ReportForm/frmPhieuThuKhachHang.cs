@@ -95,9 +95,9 @@ namespace WH.Report.ReportForm
             dgv.AutoGenerateColumns = false;
             try
             {
-                CalBill(data);
                 if (data == null) return;
                 if (data.Rows.Count == 0) return;
+                CalBill(data);
                 var count = 0;
                 foreach (DataRow drow in data.Rows)
                 {
@@ -116,22 +116,15 @@ namespace WH.Report.ReportForm
 
         private void CalBill(DataTable data)
         {
-            if (data != null && data.Rows.Count > 0)
-            {
-                var dathu = _exe.Cmd_CalDaThu_DoanhThu1KhachHang(data);
-                //decimal conlai = _exe.Cmd_CalConLai_DoanhThuKhachHang(data);
-                //decimal tongtienhoadon = _exe.Cmd_calTongTienHoaDon_DoanhThuKhachHang(data);
-                //decimal giamgia = _exe.Cmd_calGiamGia_DoanhThuKhachHang(data);
-                var sdathu = @" -> Đã thu : " + dathu.ToString("N");
-                //string sConLai = @" - Tiền khách nợ: " + string.Format("{0:####,0 đ}", conlai);
-                //string sTienHoaDon = @"Tiền hóa đơn: " + string.Format("{0:####,0 đ}", tongtienhoadon);
-                //string sTienGiamGia = @" - Giảm giá: " + string.Format("{0:####,0 đ}", giamgia);
-                labDoanhThu.Text = sdathu; //sTienHoaDon + sTienGiamGia + +sConLai;
-            }
-            else
-            {
-                labDoanhThu.Text = @"Không có dữ liệu!";
-            }
+            var dathu = _exe.Cmd_CalDaThu_DoanhThu1KhachHang(data);
+            //decimal conlai = _exe.Cmd_CalConLai_DoanhThuKhachHang(data);
+            //decimal tongtienhoadon = _exe.Cmd_calTongTienHoaDon_DoanhThuKhachHang(data);
+            //decimal giamgia = _exe.Cmd_calGiamGia_DoanhThuKhachHang(data);
+            var sdathu = @" -> Đã thu : " + dathu.ToString("N");
+            //string sConLai = @" - Tiền khách nợ: " + string.Format("{0:####,0 đ}", conlai);
+            //string sTienHoaDon = @"Tiền hóa đơn: " + string.Format("{0:####,0 đ}", tongtienhoadon);
+            //string sTienGiamGia = @" - Giảm giá: " + string.Format("{0:####,0 đ}", giamgia);
+            labDoanhThu.Text = sdathu; //sTienHoaDon + sTienGiamGia + +sConLai;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
