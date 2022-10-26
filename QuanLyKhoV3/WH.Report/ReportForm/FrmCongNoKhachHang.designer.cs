@@ -6,7 +6,7 @@ using HLVControl.Grid.Data;
 
 namespace WH.Report.ReportForm
 {
-    partial class FrmCongNoKhangHang
+    partial class FrmCongNoKhachHang
     {
         /// <summary>
         /// Required designer variable.
@@ -35,7 +35,7 @@ namespace WH.Report.ReportForm
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCongNoKhangHang));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCongNoKhachHang));
             HLVControl.Grid.Render.MetroTreeListRenderer metroTreeListRenderer1 = new HLVControl.Grid.Render.MetroTreeListRenderer();
             this.btnPrinter = new System.Windows.Forms.Button();
             this.btnTimKiem = new System.Windows.Forms.Button();
@@ -573,7 +573,7 @@ namespace WH.Report.ReportForm
             this.labDoanhThu.Text = "0 vnđ";
             this.labDoanhThu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // FrmCongNoKhangHang
+            // FrmCongNoKhachHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -589,7 +589,7 @@ namespace WH.Report.ReportForm
             this.Controls.Add(this.btnTop50);
             this.Controls.Add(this.btnTop10);
             this.Controls.Add(this.btnExit);
-            this.Name = "FrmCongNoKhangHang";
+            this.Name = "FrmCongNoKhachHang";
             this.Resizable = false;
             this.Text = "Danh Sách Hóa Đơn Xuất Kho";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

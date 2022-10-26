@@ -68,7 +68,7 @@ namespace WH.Report
         private void btnCongNo_KhachHang_Click(object sender, EventArgs e)
         {
             Hide();
-            var frm = new FrmCongNoKhangHang();
+            var frm = new FrmCongNoKhachHang();
             frm.ShowDialog();
             Show();
         }

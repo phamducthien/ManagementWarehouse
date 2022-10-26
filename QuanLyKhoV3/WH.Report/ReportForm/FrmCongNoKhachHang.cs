@@ -19,12 +19,12 @@ namespace WH.Report.ReportForm
     /// <summary>
     ///     Mô tả danh sách hóa đơn xuất kho
     /// </summary>
-    public partial class FrmCongNoKhangHang : MetroForm
+    public partial class FrmCongNoKhachHang : MetroForm
     {
         private readonly ReportRules _exe;
-        private IUnitOfWorkAsync unitOfWorkAsync;
+        private IUnitOfWorkAsync _unitOfWorkAsync;
 
-        public FrmCongNoKhangHang()
+        public FrmCongNoKhachHang()
         {
             InitializeComponent();
             _exe = new ReportRules();
@@ -32,9 +32,9 @@ namespace WH.Report.ReportForm
 
         private void ReloadUnitOfWork()
         {
-            if (unitOfWorkAsync != null) unitOfWorkAsync.Dispose();
-            unitOfWorkAsync = null;
-            unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
+            if (_unitOfWorkAsync != null) _unitOfWorkAsync.Dispose();
+            _unitOfWorkAsync = null;
+            _unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
         }
 
         private DataTable GetBills(string soLuongHdLoad, string batDau, string ketThuc)
@@ -82,20 +82,20 @@ namespace WH.Report.ReportForm
                 if (data == null) return;
                 if (data.Rows.Count == 0) return;
                 var count = 0;
-                foreach (DataRow drow in data.Rows)
+                foreach (DataRow dataRow in data.Rows)
                 {
                     var row = treeDanhMuc.CreateRow();
                     row.Cells.Add(new TreeListCell(count + 1));
-                    row.Cells.Add(new TreeListCell(drow[0].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[5]));
-                    row.Cells.Add(new TreeListCell(drow[7].ToString())); // MaCodeKhach hang
-                    row.Cells.Add(new TreeListCell(drow[8].ToString())); // barcode Khach Hang
-                    row.Cells.Add(new TreeListCell(drow[9].ToString())); // Ten Khach hang
-                    row.Cells.Add(new TreeListCell(drow[1].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[2].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[3].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[4].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[8].ToString()));
+                    row.Cells.Add(new TreeListCell(dataRow[0].ToString()));
+                    row.Cells.Add(new TreeListCell(dataRow[5]));
+                    row.Cells.Add(new TreeListCell(dataRow[7].ToString())); // MaCodeKhach hang
+                    row.Cells.Add(new TreeListCell(dataRow[8].ToString())); // barcode Khach Hang
+                    row.Cells.Add(new TreeListCell(dataRow[9].ToString())); // Ten Khach hang
+                    row.Cells.Add(new TreeListCell(dataRow[1].ToString()));
+                    row.Cells.Add(new TreeListCell(dataRow[2].ToString()));
+                    row.Cells.Add(new TreeListCell(dataRow[3].ToString()));
+                    row.Cells.Add(new TreeListCell(dataRow[4].ToString()));
+                    row.Cells.Add(new TreeListCell(dataRow[8].ToString()));
                     row.Tag = count;
 
                     treeDanhMuc.Rows.Add(row);
@@ -337,18 +337,19 @@ namespace WH.Report.ReportForm
             try
             {
                 treeDanhMuc.Refresh();
-                var row = e.RelatedElement as TreeListRow;
-                if (row != null)
+                if (e.RelatedElement is TreeListRow row)
                 {
-                    var ID = row.Cells["_colBillID"].Value.ToString();
+                    var id = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
-                    IXuatKhoService service = new XuatKhoService(unitOfWorkAsync);
-                    var hdKho = service.GetModelHoaDonXuat(ID);
+                    IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
+                    var hdKho = service.GetModelHoaDonXuat(id);
                     if (hdKho != null)
                     {
                         var lst = hdKho.HOADONXUATKHOCHITIETs.ToList();
-                        var frm = new frmChiTietHoaDonBanHang(hdKho, lst);
-                        frm.StartPosition = FormStartPosition.Manual;
+                        var frm = new frmChiTietHoaDonBanHang(hdKho, lst)
+                        {
+                            StartPosition = FormStartPosition.Manual
+                        };
                         frm.ShowDialog(this);
                     }
                 }
@@ -365,12 +366,11 @@ namespace WH.Report.ReportForm
             try
             {
                 treeDanhMuc.Refresh();
-                var row = e.RelatedElement as TreeListRow;
-                if (row != null)
+                if (e.RelatedElement is TreeListRow row)
                 {
                     var ID = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
-                    IXuatKhoService service = new XuatKhoService(unitOfWorkAsync);
+                    IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
                     var hdKho = service.GetModelHoaDonXuat(ID);
                     btnXemChiTiet.Enabled = true;
                 }
@@ -387,16 +387,15 @@ namespace WH.Report.ReportForm
             try
             {
                 treeDanhMuc.Refresh();
-                var row = treeDanhMuc.SelectedElements[0] as TreeListRow;
-                if (row != null)
+                if (treeDanhMuc.SelectedElements[0] is TreeListRow row)
                 {
                     var ID = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
-                    IXuatKhoService service = new XuatKhoService(unitOfWorkAsync);
+                    IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
                     var hdKho = service.GetModelHoaDonXuat(ID);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //MessageBox.Show("Lỗi: Không thể chọn dữ liệu." + " " + ex.Message);
                 MessageBox.Show(@"Bạn hãy chọn lại hóa đơn cần xem.");
