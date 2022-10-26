@@ -204,37 +204,39 @@ namespace WH.Report.ReportFunction
         private DataTable GetExportBills(string soLuongHdLoad, string maNhanVien, string maKhachHang, string batDau,
             string ketThuc)
         {
-            var sqlSelect = "SELECT " + soLuongHdLoad +
-                            " hd.MAHOADONXUAT as MAHOADONXUAT, hd.SOTIENTHANHTOAN_HD as TONGTIENHOADON, hd.TIENKHUYENMAI_HD as TIENKHUYENMAI, isnull(TablePhieuThu.TONGTIENTHU, 0) as SOTIENKHACHDUA, (hd.SOTIENTHANHTOAN_HD - isnull(TablePhieuThu.TONGTIENTHU, 0)) as CONGNO, hd.NGAYTAOHOADON as NgayTaoHoaDon, " +
-                            "\"TinhTrang\" =" +
-                            "CASE " +
-                            "when(hd.SOTIENTHANHTOAN_HD - isnull(TablePhieuThu.TONGTIENTHU, 0)) <= 0 THEN N'Đã Thanh Toán' " +
-                            "ELSE N'Chưa Thanh Toán' " +
-                            "END" +
-                            " ,kh.CODEKHACHHANG as MACODE, kh.MABARCODE, kh.TENKHACHHANG";
+            var sqlSelect = 
+$@"
+SELECT {soLuongHdLoad} 
+    hd.MAHOADONXUAT AS MAHOADONXUAT, 
+    hd.SOTIENTHANHTOAN_HD AS TONGTIENHOADON, 
+    hd.TIENKHUYENMAI_HD AS TIENKHUYENMAI, 
+    ISNULL(TablePhieuThu.TONGTIENTHU, 0) AS SOTIENKHACHDUA, 
+    (hd.SOTIENTHANHTOAN_HD - ISNULL(TablePhieuThu.TONGTIENTHU, 0)) AS CONGNO, 
+    hd.NGAYTAOHOADON AS NgayTaoHoaDon, 
+    TinhTrang = CASE WHEN(hd.SOTIENTHANHTOAN_HD - isnull(TablePhieuThu.TONGTIENTHU, 0)) <= 0 THEN N'Đã Thanh Toán' ELSE N'Chưa Thanh Toán' END,
+    kh.CODEKHACHHANG AS MACODE, kh.MABARCODE, kh.TENKHACHHANG
+FROM NGUOIDUNG nd, KHACHHANG kh, HOADONXUATKHO hd 
+LEFT JOIN (
+    SELECT SUM(pt.TIENTHANHTOAN) AS TONGTIENTHU, MAHOADONXUATKHO AS MAHOADONXUATKHO 
+    FROM PHIEUTHU AS pt 
+    GROUP BY MAHOADONXUATKHO ) AS TablePhieuThu ON hd.MAHOADONXUAT = TablePhieuThu.MAHOADONXUATKHO 
+WHERE nd.MANGUOIDUNG= hd.NGUOITAO and kh.MAKHACHHANG = HD.MAKHACHHANG";
 
-            var sqlfrom = " FROM NGUOIDUNG nd, KHACHHANG kh, HOADONXUATKHO hd left join " +
-                          " (select SUM(pt.TIENTHANHTOAN) as TONGTIENTHU, MAHOADONXUATKHO as MAHOADONXUATKHO " +
-                          " from PHIEUTHU pt " +
-                          " group by MAHOADONXUATKHO) as TablePhieuThu on hd.MAHOADONXUAT = TablePhieuThu.MAHOADONXUATKHO ";
+            if (!string.IsNullOrWhiteSpace(maNhanVien))
+                sqlSelect += $@" AND ND.MANGUOIDUNG ='{maNhanVien}' ";
 
-            var sqlWhere = " WHERE nd.MANGUOIDUNG= hd.NGUOITAO and kh.MAKHACHHANG = HD.MAKHACHHANG";
+            if (!string.IsNullOrWhiteSpace(maKhachHang))
+                sqlSelect += $@" AND HD.MAKHACHHANG ='{maKhachHang}' ";
 
-            if (maNhanVien != "")
-                sqlWhere += " AND ND.MANGUOIDUNG ='" + maNhanVien + "' ";
+            if (!string.IsNullOrWhiteSpace(batDau))
+                sqlSelect += $@" AND HD.NGAYTAOHOADON >= '{batDau}' ";
 
-            if (maKhachHang != "")
-                sqlWhere += " AND HD.MAKHACHHANG ='" + maKhachHang + "' ";
-
-            if (batDau != "")
-                sqlWhere += " AND HD.NGAYTAOHOADON >= '" + batDau + "' ";
-
-            if (ketThuc != "")
-                sqlWhere += " AND HD.NGAYTAOHOADON <= '" + ketThuc + "' ";
+            if (!string.IsNullOrWhiteSpace(ketThuc))
+                sqlSelect += $@" AND HD.NGAYTAOHOADON <= '{ketThuc}' ";
 
             var sqlOrderBy = " ORDER BY HD.NGAYTAOHOADON DESC";
 
-            var sql = sqlSelect + sqlfrom + sqlWhere + sqlOrderBy;
+            var sql = sqlSelect + sqlOrderBy;
             var data = LoadToDataTable(sql);
 
             return data;

@@ -78,9 +78,9 @@ namespace WH.Report.ReportForm
             treeDanhMuc.Rows.Clear();
             try
             {
-                CalBill(data);
                 if (data == null) return;
                 if (data.Rows.Count == 0) return;
+                CalBill(data);
                 var count = 0;
                 foreach (DataRow dataRow in data.Rows)
                 {
@@ -113,22 +113,15 @@ namespace WH.Report.ReportForm
 
         private void CalBill(DataTable data)
         {
-            if (data != null && data.Rows.Count > 0)
-            {
-                //decimal dathu = _exe.Cmd_CalDaThu_CongNoKhachHang(data);
-                var conlai = _exe.Cmd_CalConLai_CongNoKhachHang(data);
-                //decimal tongtienhoadon = _exe.Cmd_calTongTienHoaDon_CongNoKhachHang(data);
-                //decimal giamgia = _exe.Cmd_calGiamGia_CongNoKhachHang(data);
-                //string sdathu = @" - Đã thu : " + string.Format("{0:####,0 đ}", dathu);
-                var sConLai = @" -> Tiền khách nợ: " + conlai.ToString("N");
-                //string sTienHoaDon = @"Tiền hóa đơn: " + string.Format("{0:####,0 đ}", tongtienhoadon);
-                //string sTienGiamGia = @" - Giảm giá: " + string.Format("{0:####,0 đ}", giamgia);
-                labDoanhThu.Text = sConLai; //sTienHoaDon + sTienGiamGia + sdathu + sConLai;
-            }
-            else
-            {
-                labDoanhThu.Text = @"Không có dữ liệu!";
-            }
+            //decimal dathu = _exe.Cmd_CalDaThu_CongNoKhachHang(data);
+            var conlai = _exe.Cmd_CalConLai_CongNoKhachHang(data);
+            //decimal tongtienhoadon = _exe.Cmd_calTongTienHoaDon_CongNoKhachHang(data);
+            //decimal giamgia = _exe.Cmd_calGiamGia_CongNoKhachHang(data);
+            //string sdathu = @" - Đã thu : " + string.Format("{0:####,0 đ}", dathu);
+            var sConLai = @" -> Tiền khách nợ: " + conlai.ToString("N");
+            //string sTienHoaDon = @"Tiền hóa đơn: " + string.Format("{0:####,0 đ}", tongtienhoadon);
+            //string sTienGiamGia = @" - Giảm giá: " + string.Format("{0:####,0 đ}", giamgia);
+            labDoanhThu.Text = sConLai; //sTienHoaDon + sTienGiamGia + sdathu + sConLai;
         }
 
         private void btnTheoNgay_Click(object sender, EventArgs e)
@@ -368,14 +361,14 @@ namespace WH.Report.ReportForm
                 treeDanhMuc.Refresh();
                 if (e.RelatedElement is TreeListRow row)
                 {
-                    var ID = row.Cells["_colBillID"].Value.ToString();
+                    var id = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
                     IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
-                    var hdKho = service.GetModelHoaDonXuat(ID);
+                    var hdKho = service.GetModelHoaDonXuat(id);
                     btnXemChiTiet.Enabled = true;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show(@"Bạn hãy chọn lại hóa đơn cần xem.");
                 //MessageBox.Show("Lỗi: Không thể chọn dữ liệu." + " " + ex.Message);
@@ -387,13 +380,11 @@ namespace WH.Report.ReportForm
             try
             {
                 treeDanhMuc.Refresh();
-                if (treeDanhMuc.SelectedElements[0] is TreeListRow row)
-                {
-                    var ID = row.Cells["_colBillID"].Value.ToString();
-                    ReloadUnitOfWork();
-                    IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
-                    var hdKho = service.GetModelHoaDonXuat(ID);
-                }
+                if (!(treeDanhMuc.SelectedElements[0] is TreeListRow row)) return;
+                var id = row.Cells["_colBillID"].Value.ToString();
+                ReloadUnitOfWork();
+                IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
+                var hdKho = service.GetModelHoaDonXuat(id);
             }
             catch (Exception)
             {
