@@ -87,15 +87,23 @@ namespace WH.Report.ReportForm
                     var row = treeDanhMuc.CreateRow();
                     row.Cells.Add(new TreeListCell(count + 1));
                     row.Cells.Add(new TreeListCell(dataRow[0].ToString()));
-                    row.Cells.Add(new TreeListCell(dataRow[5]));
-                    row.Cells.Add(new TreeListCell(dataRow[7].ToString())); // MaCodeKhach hang
-                    row.Cells.Add(new TreeListCell(dataRow[8].ToString())); // barcode Khach Hang
-                    row.Cells.Add(new TreeListCell(dataRow[9].ToString())); // Ten Khach hang
-                    row.Cells.Add(new TreeListCell(dataRow[1].ToString()));
-                    row.Cells.Add(new TreeListCell(dataRow[2].ToString()));
-                    row.Cells.Add(new TreeListCell(dataRow[3].ToString()));
-                    row.Cells.Add(new TreeListCell(dataRow[4].ToString()));
-                    row.Cells.Add(new TreeListCell(dataRow[8].ToString()));
+                    row.Cells.Add(new TreeListCell(dataRow[1]));
+                    row.Cells.Add(new TreeListCell(dataRow[2].ToString())); // MaCodeKhach hang
+                    row.Cells.Add(new TreeListCell(dataRow[3].ToString())); // barcode Khach Hang
+                    row.Cells.Add(new TreeListCell(dataRow[4].ToString())); // Ten Khach hang
+                    row.Cells.Add(new TreeListCell(dataRow[5].ToString()));
+                    row.Cells.Add(new TreeListCell(dataRow[6].ToString()));
+                    row.Cells.Add(new TreeListCell(dataRow[7].ToString()));
+                    var tinhTrang = "Chưa Thanh Toán";
+                    var soTienThanhToan = decimal.Parse(dataRow[8].ToString());
+                    var tongTienThu = decimal.Parse(dataRow[9].ToString());
+                    var congNo = soTienThanhToan - tongTienThu;
+                    if (congNo <= 0)
+                    {
+                        tinhTrang = "Đã Thanh Toán";
+                    }
+                    row.Cells.Add(new TreeListCell(congNo));
+                    row.Cells.Add(new TreeListCell(tinhTrang));
                     row.Tag = count;
 
                     treeDanhMuc.Rows.Add(row);

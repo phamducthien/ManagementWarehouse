@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HLVControl.Grid.Data;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -204,23 +205,55 @@ namespace WH.Report.ReportFunction
         private DataTable GetExportBills(string soLuongHdLoad, string maNhanVien, string maKhachHang, string batDau,
             string ketThuc)
         {
-            var sqlSelect = 
-$@"
+            var sqlSelect =
+                $@"
 SELECT {soLuongHdLoad} 
     hd.MAHOADONXUAT AS MAHOADONXUAT, 
-    hd.SOTIENTHANHTOAN_HD AS TONGTIENHOADON, 
-    hd.TIENKHUYENMAI_HD AS TIENKHUYENMAI, 
-    ISNULL(TablePhieuThu.TONGTIENTHU, 0) AS SOTIENKHACHDUA, 
-    (hd.SOTIENTHANHTOAN_HD - ISNULL(TablePhieuThu.TONGTIENTHU, 0)) AS CONGNO, 
     hd.NGAYTAOHOADON AS NgayTaoHoaDon, 
-    TinhTrang = CASE WHEN(hd.SOTIENTHANHTOAN_HD - isnull(TablePhieuThu.TONGTIENTHU, 0)) <= 0 THEN N'Đã Thanh Toán' ELSE N'Chưa Thanh Toán' END,
-    kh.CODEKHACHHANG AS MACODE, kh.MABARCODE, kh.TENKHACHHANG
-FROM NGUOIDUNG nd, KHACHHANG kh, HOADONXUATKHO hd 
+    kh.CODEKHACHHANG AS MACODE,
+    kh.MABARCODE,
+    kh.TENKHACHHANG,
+    hd.SOTIENTHANHTOAN_HD AS TONGTIENHOADON, 
+    hd.TIENKHUYENMAI_HD AS TIENKHUYENMAI,
+    ISNULL(TablePhieuThu.TONGTIENTHU, 0) AS SOTIENKHACHDUA,
+    hd.SOTIENTHANHTOAN_HD AS SOTIENTHANHTOAN_HD, 
+    ISNULL(TablePhieuThu.TONGTIENTHU, 0) as TONGTIENTHU
+FROM NGUOIDUNG AS nd, KHACHHANG AS kh, HOADONXUATKHO AS hd 
 LEFT JOIN (
     SELECT SUM(pt.TIENTHANHTOAN) AS TONGTIENTHU, MAHOADONXUATKHO AS MAHOADONXUATKHO 
     FROM PHIEUTHU AS pt 
     GROUP BY MAHOADONXUATKHO ) AS TablePhieuThu ON hd.MAHOADONXUAT = TablePhieuThu.MAHOADONXUATKHO 
 WHERE nd.MANGUOIDUNG= hd.NGUOITAO and kh.MAKHACHHANG = HD.MAKHACHHANG";
+
+            //row.Cells.Add(new TreeListCell(dataRow[0].ToString()));
+            //row.Cells.Add(new TreeListCell(dataRow[5]));
+            //row.Cells.Add(new TreeListCell(dataRow[7].ToString())); // MaCodeKhach hang
+            //row.Cells.Add(new TreeListCell(dataRow[8].ToString())); // barcode Khach Hang
+            //row.Cells.Add(new TreeListCell(dataRow[9].ToString())); // Ten Khach hang
+            //row.Cells.Add(new TreeListCell(dataRow[1].ToString()));
+            //row.Cells.Add(new TreeListCell(dataRow[2].ToString()));
+            //row.Cells.Add(new TreeListCell(dataRow[3].ToString()));
+            //row.Cells.Add(new TreeListCell(dataRow[4].ToString()));
+            //row.Cells.Add(new TreeListCell(dataRow[8].ToString()));
+
+            //$@"
+            //SELECT {soLuongHdLoad} 
+            // 0   hd.MAHOADONXUAT AS MAHOADONXUAT, 
+            // 1   hd.SOTIENTHANHTOAN_HD AS TONGTIENHOADON, 
+            // 2   hd.TIENKHUYENMAI_HD AS TIENKHUYENMAI, 
+            // 3   ISNULL(TablePhieuThu.TONGTIENTHU, 0) AS SOTIENKHACHDUA, 
+            // 4   (hd.SOTIENTHANHTOAN_HD - ISNULL(TablePhieuThu.TONGTIENTHU, 0)) AS CONGNO, 
+            // 5   hd.NGAYTAOHOADON AS NgayTaoHoaDon, 
+            // 6   TinhTrang = CASE WHEN(hd.SOTIENTHANHTOAN_HD - ISNULL(TablePhieuThu.TONGTIENTHU, 0)) <= 0 THEN N'Đã Thanh Toán' ELSE N'Chưa Thanh Toán' END,
+            // 7   kh.CODEKHACHHANG AS MACODE,
+            // 8   kh.MABARCODE,
+            // 9   kh.TENKHACHHANG
+            //FROM NGUOIDUNG AS nd, KHACHHANG AS kh, HOADONXUATKHO AS hd 
+            //LEFT JOIN (
+            //    SELECT SUM(pt.TIENTHANHTOAN) AS TONGTIENTHU, MAHOADONXUATKHO AS MAHOADONXUATKHO 
+            //    FROM PHIEUTHU AS pt 
+            //    GROUP BY MAHOADONXUATKHO ) AS TablePhieuThu ON hd.MAHOADONXUAT = TablePhieuThu.MAHOADONXUATKHO 
+            //WHERE nd.MANGUOIDUNG= hd.NGUOITAO and kh.MAKHACHHANG = HD.MAKHACHHANG";
 
             if (!string.IsNullOrWhiteSpace(maNhanVien))
                 sqlSelect += $@" AND ND.MANGUOIDUNG ='{maNhanVien}' ";
@@ -258,8 +291,10 @@ WHERE nd.MANGUOIDUNG= hd.NGUOITAO and kh.MAKHACHHANG = HD.MAKHACHHANG";
 
         public decimal Cmd_CalConLai_CongNoKhachHang(DataTable data)
         {
-            var sumObj = data.Compute("sum(CONGNO)", null);
-            return (decimal) sumObj;
+            var sumObj1 = data.Compute("SUM(SOTIENTHANHTOAN_HD)", null);
+            var sumObj2 = data.Compute("SUM(TONGTIENTHU)", null);
+            var sumObj = (decimal)sumObj1 - (decimal)sumObj2;
+            return sumObj;
         }
 
         public decimal Cmd_CalDaThu_CongNoKhachHang(DataTable data)
