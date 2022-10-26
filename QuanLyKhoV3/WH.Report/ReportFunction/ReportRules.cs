@@ -225,36 +225,6 @@ LEFT JOIN (
     GROUP BY MAHOADONXUATKHO ) AS TablePhieuThu ON hd.MAHOADONXUAT = TablePhieuThu.MAHOADONXUATKHO 
 WHERE nd.MANGUOIDUNG= hd.NGUOITAO and kh.MAKHACHHANG = HD.MAKHACHHANG";
 
-            //row.Cells.Add(new TreeListCell(dataRow[0].ToString()));
-            //row.Cells.Add(new TreeListCell(dataRow[5]));
-            //row.Cells.Add(new TreeListCell(dataRow[7].ToString())); // MaCodeKhach hang
-            //row.Cells.Add(new TreeListCell(dataRow[8].ToString())); // barcode Khach Hang
-            //row.Cells.Add(new TreeListCell(dataRow[9].ToString())); // Ten Khach hang
-            //row.Cells.Add(new TreeListCell(dataRow[1].ToString()));
-            //row.Cells.Add(new TreeListCell(dataRow[2].ToString()));
-            //row.Cells.Add(new TreeListCell(dataRow[3].ToString()));
-            //row.Cells.Add(new TreeListCell(dataRow[4].ToString()));
-            //row.Cells.Add(new TreeListCell(dataRow[8].ToString()));
-
-            //$@"
-            //SELECT {soLuongHdLoad} 
-            // 0   hd.MAHOADONXUAT AS MAHOADONXUAT, 
-            // 1   hd.SOTIENTHANHTOAN_HD AS TONGTIENHOADON, 
-            // 2   hd.TIENKHUYENMAI_HD AS TIENKHUYENMAI, 
-            // 3   ISNULL(TablePhieuThu.TONGTIENTHU, 0) AS SOTIENKHACHDUA, 
-            // 4   (hd.SOTIENTHANHTOAN_HD - ISNULL(TablePhieuThu.TONGTIENTHU, 0)) AS CONGNO, 
-            // 5   hd.NGAYTAOHOADON AS NgayTaoHoaDon, 
-            // 6   TinhTrang = CASE WHEN(hd.SOTIENTHANHTOAN_HD - ISNULL(TablePhieuThu.TONGTIENTHU, 0)) <= 0 THEN N'Đã Thanh Toán' ELSE N'Chưa Thanh Toán' END,
-            // 7   kh.CODEKHACHHANG AS MACODE,
-            // 8   kh.MABARCODE,
-            // 9   kh.TENKHACHHANG
-            //FROM NGUOIDUNG AS nd, KHACHHANG AS kh, HOADONXUATKHO AS hd 
-            //LEFT JOIN (
-            //    SELECT SUM(pt.TIENTHANHTOAN) AS TONGTIENTHU, MAHOADONXUATKHO AS MAHOADONXUATKHO 
-            //    FROM PHIEUTHU AS pt 
-            //    GROUP BY MAHOADONXUATKHO ) AS TablePhieuThu ON hd.MAHOADONXUAT = TablePhieuThu.MAHOADONXUATKHO 
-            //WHERE nd.MANGUOIDUNG= hd.NGUOITAO and kh.MAKHACHHANG = HD.MAKHACHHANG";
-
             if (!string.IsNullOrWhiteSpace(maNhanVien))
                 sqlSelect += $@" AND ND.MANGUOIDUNG ='{maNhanVien}' ";
 
