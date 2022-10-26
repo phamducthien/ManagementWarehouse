@@ -228,7 +228,8 @@ namespace WH.Report
         private void LoadDataAll()
         {
             var record = 1;
-            var data = from p in Service.Search(s =>
+            var data = 
+                (from p in Service.Search(s =>
                     s.ISUSE == true && s.ISDELETE == false &&
                     s.MAKHACHHANG.ToString().ToLower() != "56dbc32e-11d7-4175-a7ac-608ccbf962d7" &&
                     s.MAKHACHHANG.ToString().ToLower() != "66dbc32e-11d7-4175-a7ac-608ccbf962d7")
@@ -249,7 +250,7 @@ namespace WH.Report
                     DOANHTHU = p.HOADONXUATKHOes.Sum(s => s.SOTIENTHANHTOAN_HD),
                     DATHU = p.HOADONXUATKHOes.Sum(s => s.SOTIENKHACHDUA_HD),
                     CONGNO = p.HOADONXUATKHOes.Sum(s => s.SOTIENKHACHDUA_HD - s.SOTIENTHANHTOAN_HD)
-                };
+                }).Take(20);
 
             LoadData(data.ToList().ToDatatable());
         }
