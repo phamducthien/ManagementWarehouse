@@ -1,5 +1,4 @@
-﻿using HLVControl.Grid.Data;
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -14,7 +13,11 @@ namespace WH.Report.ReportFunction
             DataTable dt;
             try
             {
-                var cmd = new SqlCommand(command, GlobalContext.ServerConnection);
+                var cmd = new SqlCommand(command, GlobalContext.ServerConnection)
+                {
+                    CommandTimeout = 60
+                };
+                
                 var sda = new SqlDataAdapter(cmd);
                 dt = new DataTable();
                 sda.Fill(dt);
