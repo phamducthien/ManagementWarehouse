@@ -57,7 +57,6 @@ namespace WH.Report.ReportForm
             unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
         }
 
-        //SELECT TOP 10 kv.TEN as KHUVUC,kh.TENKHACHHANG,kh.DIACHI,kh.DIENTHOAI, pt.MAHOADONTHU as MAPHIEUTHU,pt.MAHOADONXUATKHO as MAHOADON, hd.THANHTIENCHUACK_HD as TIENHOADON, hd.SOTIENTHANHTOAN_HD as CONLAI,pt.TIENTHANHTOAN as DATHU, pt.NGAYTHANHTOAN as NGAYTHANHTOAN,pt.DIENGIAI as GHICHU, kh.CODEKHACHHANG, kh.MABARCODE, nv.TENNGUOIDUNG,HD.TIENCHIETKHAU_HD AS GIAMGIA  FROM PHIEUTHU pt, KHACHHANG kh, KHACHHANGKHUVUC kv, HOADONXUATKHO hd, NGUOIDUNG nv WHERE pt.MAHOADONXUATKHO=hd.MAHOADONXUAT and hd.MAKHACHHANG=kh.MAKHACHHANG and kh.MAKHUVUC = kv.MAKHUVUC and nv.MANGUOIDUNG=hd.NGUOITAO AND pt.MAHOADONTHU like 'PT%'  ORDER BY PT.NGAYTHANHTOAN DESC
         private DataTable GetBills(string soLuongHdLoad, string macodekhachhang, string batDau, string ketThuc)
         {
             var data = _exe.Cmd_GetReceiptBills_ByKhachHang(macodekhachhang, batDau, ketThuc);

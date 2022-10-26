@@ -17,7 +17,7 @@ namespace WH.Report.ReportFunction
                 {
                     CommandTimeout = 60
                 };
-                
+
                 var sda = new SqlDataAdapter(cmd);
                 dt = new DataTable();
                 sda.Fill(dt);
@@ -82,25 +82,31 @@ namespace WH.Report.ReportFunction
 
         private DataTable GetReceiptBills(string maCodeKhachHang, string batDau, string ketThuc)
         {
-            var sqlSelect =
-                "SELECT DISTINCT kh.MAKHACHHANG,kh.TENKHACHHANG, mh.MAMATHANG, mh.TENMATHANG, isnull(SUM(ct.SOLUONGLE), 0) as SOLUONGBAN, SUM(isnull(ct.THANHTIENSAUCHIETKHAU_CT, 0)) as TongTienBan,kh.CODEKHACHHANG ";
-            var sqlFrom = "FROM HOADONXUATKHOCHITIET ct, HOADONXUATKHO hd, MATHANG mh, KHACHHANG kh ";
-            var sqlWhere =
-                "WHERE ct.MAHOADON = hd.MAHOADONXUAT and mh.MAMATHANG = ct.MAMATHANG and kh.MAKHACHHANG = hd.MAKHACHHANG ";
-            var sqlGroupBy =
-                "GROUP BY mh.MAMATHANG,mh.TENMATHANG,mh.SOLUONGQUYDOI, kh.MAKHACHHANG, kh.TENKHACHHANG,kh.CODEKHACHHANG ";
-            var sqlOrderBy = "order by kh.MAKHACHHANG,kh.CODEKHACHHANG, kh.TENKHACHHANG,mh.MAMATHANG,mh.TENMATHANG";
+            var sqlSelect = @"
+SELECT kh.MAKHACHHANG,
+    kh.TENKHACHHANG, 
+    mh.MAMATHANG, 
+    mh.TENMATHANG, 
+    ISNULL(SUM(ct.SOLUONGLE), 0) AS SOLUONGBAN, 
+    SUM(isnull(ct.THANHTIENSAUCHIETKHAU_CT, 0)) AS TongTienBan,
+    kh.CODEKHACHHANG 
+FROM HOADONXUATKHOCHITIET AS ct, HOADONXUATKHO AS hd, MATHANG AS mh, KHACHHANG AS kh
+WHERE ct.MAHOADON = hd.MAHOADONXUAT AND mh.MAMATHANG = ct.MAMATHANG AND kh.MAKHACHHANG = hd.MAKHACHHANG";
 
-            if (maCodeKhachHang != "")
-                sqlWhere += " AND kh.CODEKHACHHANG = N'" + maCodeKhachHang + "' ";
+            var groupAndOrder = @"
+GROUP BY mh.MAMATHANG,mh.TENMATHANG,mh.SOLUONGQUYDOI, kh.MAKHACHHANG, kh.TENKHACHHANG,kh.CODEKHACHHANG 
+ORDER BY kh.MAKHACHHANG,kh.CODEKHACHHANG, kh.TENKHACHHANG, mh.MAMATHANG, mh.TENMATHANG";
 
-            if (batDau != "")
-                sqlWhere += " AND hd.NGAYTAOHOADON >= '" + batDau + "' ";
+            if (!string.IsNullOrWhiteSpace(maCodeKhachHang))
+                sqlSelect += $" AND kh.CODEKHACHHANG = N'{maCodeKhachHang}' ";
 
-            if (ketThuc != "")
-                sqlWhere += " AND hd.NGAYTAOHOADON <= '" + ketThuc + "' ";
+            if (!string.IsNullOrWhiteSpace(batDau))
+                sqlSelect += $" AND hd.NGAYTAOHOADON >= '{batDau}' ";
 
-            var sql = sqlSelect + sqlFrom + sqlWhere + sqlGroupBy + sqlOrderBy;
+            if (!string.IsNullOrWhiteSpace(ketThuc))
+                sqlSelect += $" AND hd.NGAYTAOHOADON <= '{ketThuc}' ";
+
+            var sql = sqlSelect + groupAndOrder;
             var data = LoadToDataTable(sql);
             return data;
         }
@@ -142,32 +148,32 @@ namespace WH.Report.ReportFunction
         public decimal Cmd_CalDaThu_DoanhThuKhachHang(DataTable data)
         {
             var sumObj = data.Compute("sum(SOTIENKHACHDUA)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
 
         public decimal Cmd_CalDaThu_DoanhThu1KhachHang(DataTable data)
         {
             var sumObj = data.Compute("sum(TongTienBan)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_CalConLai_DoanhThuKhachHang(DataTable data)
         {
             var sumObj = data.Compute("sum(CONLAI)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_calGiamGia_DoanhThuKhachHang(DataTable data)
         {
             var sumObj = data.Compute("sum(GIAMGIA)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_calTongTienHoaDon_DoanhThuKhachHang(DataTable data)
         {
             var sumObj = data.Compute("sum(TIENHOADON)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         //Get Top doannh thu
@@ -273,19 +279,19 @@ WHERE nd.MANGUOIDUNG= hd.NGUOITAO and kh.MAKHACHHANG = HD.MAKHACHHANG";
         public decimal Cmd_CalDaThu_CongNoKhachHang(DataTable data)
         {
             var sumObj = data.Compute("sum(DATHU)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_calGiamGia_CongNoKhachHang(DataTable data)
         {
             var sumObj = data.Compute("sum(GIAMGIA)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_calTongTienHoaDon_CongNoKhachHang(DataTable data)
         {
             var sumObj = data.Compute("sum(TONGTIEN)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         #endregion Get Cong No Khach Hang
@@ -348,25 +354,25 @@ WHERE nd.MANGUOIDUNG= hd.NGUOITAO and kh.MAKHACHHANG = HD.MAKHACHHANG";
         public decimal Cmd_CalConLai_CongNoNhaCungCap(DataTable data)
         {
             var sumObj = data.Compute("sum(CONGNO)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_CalDaChi_CongNoNhaCungCap(DataTable data)
         {
             var sumObj = data.Compute("sum(DATRA)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_calGiamGia_CongNoNhaCungCap(DataTable data)
         {
             var sumObj = data.Compute("sum(GIAMGIA)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_calTongTienHoaDon_CongNoNhaCungCap(DataTable data)
         {
             var sumObj = data.Compute("sum(TONGTIEN)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         #endregion Get Cong No Nha Cung Cap
@@ -427,25 +433,25 @@ WHERE nd.MANGUOIDUNG= hd.NGUOITAO and kh.MAKHACHHANG = HD.MAKHACHHANG";
         public decimal Cmd_CalConLai_DoanhThuNhaCungCap(DataTable data)
         {
             var sumObj = data.Compute("sum(CONNO)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_CalDaChi_DoanhThuNhaCungCap(DataTable data)
         {
             var sumObj = data.Compute("sum(SOTIENTHANHTOAN)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_calGiamGia_DoanhThuNhaCungCap(DataTable data)
         {
             var sumObj = data.Compute("sum(GIAMGIA)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         public decimal Cmd_calTongTienHoaDon_DoanhThuNhaCungCap(DataTable data)
         {
             var sumObj = data.Compute("sum(TIENHOADON)", null);
-            return (decimal) sumObj;
+            return (decimal)sumObj;
         }
 
         #endregion Get Doanh Thu Nha Cung Cap
