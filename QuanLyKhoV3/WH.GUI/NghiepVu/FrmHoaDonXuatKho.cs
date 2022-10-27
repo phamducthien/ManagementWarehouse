@@ -1,6 +1,9 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
+using DocumentFormat.OpenXml.Drawing.Charts;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Windows.Forms;
 using Util.Pattern;
@@ -28,7 +31,7 @@ namespace WH.GUI
         public List<HOADONXUATKHOCHITIET> LstHoadonxuatkhochitiets { get; set; }
         public List<MATHANG> LstMathangs { get; set; }
         public string MaHoaDon { get; set; }
-
+        private PrintDocument printDocument1 = new PrintDocument();
         private IXuatKhoService XuatKhoService
         {
             get
@@ -70,6 +73,21 @@ namespace WH.GUI
         private void DgvHoaDon_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             dgvHoaDon.Rows[e.RowIndex].Cells[0].Value = e.RowIndex + 1;
+        }
+
+        private void printDocument2_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            e.Graphics.DrawImage(bmp, 0, 0);
+        }
+
+        Bitmap bmp;
+        private void btnPrinter_Click(object sender, EventArgs e)
+        {
+            Graphics g = this.CreateGraphics();
+            bmp = new Bitmap(this.Size.Width, this.Size.Height, g);
+            Graphics mg = Graphics.FromImage(bmp);
+            mg.CopyFromScreen(this.Location.X, this.Location.Y, 0, 0, this.Size);
+            printPreviewDialog1.ShowDialog();
         }
 
         #endregion

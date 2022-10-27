@@ -207,18 +207,7 @@ namespace WH.Report.ReportForm
                     dialog.Dispose();
                     dialog = null;
                 }
-
-                //Hết savedialog
             }
-
-            //if (treeDanhMuc.Rows.Count > 0)
-            //{
-            //    var export = new FrmDmExportExcel("CONGNOKHACHHANG_" + DateTime.Now.ToString("ddMMyyyy_HHmm"),
-            //        treeDanhMuc);
-            //    if (export.ShowDialog() == DialogResult.OK)
-            //    {
-            //    }
-            //}
         }
 
         //==============================================================
