@@ -573,6 +573,7 @@
     <EmbeddedResource Include="NghiepVu\ExportWarehouse\frmPrint.resx">
       <DependentUpon>frmPrint.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NghiepVu\ExportWarehouse\rptReceipt.rdlc" />
     <EmbeddedResource Include="NghiepVu\FrmCongNoKhachHang.resx">
       <DependentUpon>FrmCongNoKhachHang.cs</DependentUpon>
     </EmbeddedResource>
