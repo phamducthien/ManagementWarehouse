@@ -104,6 +104,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DLL\MetroUI.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.WinForms.v12.12.0.0.1\lib\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -259,6 +262,7 @@
     <Compile Include="DanhMuc\FrmSelectDonVi.Designer.cs">
       <DependentUpon>FrmSelectDonVi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dto\Receipt.cs" />
     <Compile Include="HeThong\FrmCauHinhKetNoi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -336,6 +340,12 @@
     </Compile>
     <Compile Include="NghiepVu\ExportWarehouse\FrmEditExportWarehouse.Designer.cs">
       <DependentUpon>FrmEditExportWarehouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NghiepVu\ExportWarehouse\frmPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NghiepVu\ExportWarehouse\frmPrint.Designer.cs">
+      <DependentUpon>frmPrint.cs</DependentUpon>
     </Compile>
     <Compile Include="NghiepVu\FrmCongNoKhachHang.cs">
       <SubType>Form</SubType>
@@ -559,6 +569,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NghiepVu\ExportWarehouse\FrmEditExportWarehouse.resx">
       <DependentUpon>FrmEditExportWarehouse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NghiepVu\ExportWarehouse\frmPrint.resx">
+      <DependentUpon>frmPrint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NghiepVu\FrmCongNoKhachHang.resx">
       <DependentUpon>FrmCongNoKhachHang.cs</DependentUpon>
