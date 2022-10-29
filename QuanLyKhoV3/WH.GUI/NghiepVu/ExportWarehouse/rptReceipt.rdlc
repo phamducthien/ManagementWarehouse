@@ -81,7 +81,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.14459in</Top>
+            <Top>0.125in</Top>
             <Left>2.41542in</Left>
             <Height>0.27083in</Height>
             <Width>1.36458in</Width>
@@ -303,7 +303,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>pDate</rd:DefaultName>
-            <Top>0.36334in</Top>
+            <Top>0.33556in</Top>
             <Left>4.0925in</Left>
             <Height>0.25in</Height>
             <Width>1.57292in</Width>
@@ -869,11 +869,45 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Cơ sở Inox Hữu Hạnh D&amp;H</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>0.14583in</Top>
+            <Left>0.35292in</Left>
+            <Height>0.25in</Height>
+            <Width>1.88542in</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
         <Height>2.96875in</Height>
         <Style />
       </Body>
-      <Width>5.89459in</Width>
+      <Width>6.47792in</Width>
       <Page>
         <PageHeight>8.27in</PageHeight>
         <PageWidth>5.83in</PageWidth>
