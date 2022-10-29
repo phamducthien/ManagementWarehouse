@@ -17,7 +17,6 @@ namespace WH.GUI.Dto
 
     public class ReceiptItem
     {
-        public string IDUnit { get; set; }
         public int ProductCode { get; set; }
         public string ProductName { get; set; }
         public decimal Units { get; set; }

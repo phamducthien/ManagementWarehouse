@@ -84,7 +84,7 @@ namespace WH.GUI
                 TotalAmount = (decimal)HoaDon.SOTIENTHANHTOAN_HD,
                 CreatedDate = (DateTime)HoaDon.NGAYTAOHOADON
             };
-
+  
             var printer = new FrmPrint(receipt, ReceiptItems);
             printer.ShowDialog(this);
             printer.Dispose();
@@ -111,7 +111,20 @@ namespace WH.GUI
                     THANHTIEN = p.THANHTIENSAUCHIETKHAU_CT,
                     p.GHICHU
                 }).ToList();
-
+            ReceiptItems = new List<ReceiptItem>();
+            foreach (var item in list)
+            {
+                var receipt = new ReceiptItem
+                {
+                    ProductCode = item.MAMATHANG,
+                    ProductName = item.TENMATHANG,
+                    Units = (decimal)item.SOLUONG,
+                    Discount = (double)item.GIAM,
+                    Price = (decimal)item.DONGIA,
+                    Amount = (decimal)item.THANHTIEN,
+                    Description = item.GHICHU
+                };
+            }
             try
             {
                 LoadData(list.OrderBy(s => s.GHICHU.ToInt()).ToList());
