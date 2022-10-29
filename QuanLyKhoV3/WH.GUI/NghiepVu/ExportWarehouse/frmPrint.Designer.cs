@@ -1,6 +1,6 @@
 ﻿namespace WH.GUI.ExportWarehouse
 {
-    partial class frmPrint
+    partial class FrmPrint
     {
         /// <summary>
         /// Required designer variable.
@@ -37,16 +37,17 @@
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "WH.GUI.NghiepVu.ExportWarehouse.rptReceipt.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
+            this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.Size = new System.Drawing.Size(800, 529);
             this.reportViewer1.TabIndex = 0;
             // 
-            // frmPrint
+            // FrmPrint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 529);
             this.Controls.Add(this.reportViewer1);
-            this.Name = "frmPrint";
+            this.Name = "FrmPrint";
             this.Text = "Print";
             this.Load += new System.EventHandler(this.frmPrint_Load);
             this.ResumeLayout(false);

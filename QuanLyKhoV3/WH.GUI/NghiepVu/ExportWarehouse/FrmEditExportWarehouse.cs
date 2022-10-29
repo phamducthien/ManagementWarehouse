@@ -35,7 +35,6 @@ namespace WH.GUI.ExportWarehouse
                 ReloadUnitOfWork();
                 IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
                 var dt = service.DanhSachChiTietXuat(hdXuatKho.MAHOADONXUAT);
-                dgvHoaDon.DataSource = null;
                 dgvHoaDon.AutoGenerateColumns = false;
                 dgvHoaDon.DataSource = dt;
                 HoaDonXuatKhoChiTiets = XuatKhoService.LoadHoaDon(MaHoaDon);

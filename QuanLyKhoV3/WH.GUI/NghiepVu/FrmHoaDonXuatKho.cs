@@ -1,11 +1,12 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
-using System.Drawing.Printing;
 using System.Linq;
 using System.Windows.Forms;
 using Util.Pattern;
 using WH.Entity;
+using WH.GUI.Dto;
+using WH.GUI.ExportWarehouse;
 using WH.Service;
 
 namespace WH.GUI
@@ -27,9 +28,9 @@ namespace WH.GUI
         public KHACHHANG KhachHang { get; set; }
         public HOADONXUATKHO HoaDon { get; set; }
         public List<HOADONXUATKHOCHITIET> LstHoadonxuatkhochitiets { get; set; }
-        public List<MATHANG> LstMathangs { get; set; }
+        public List<MATHANG> LstMatHangs { get; set; }
+        public List<ReceiptItem> ReceiptItems { get; set; }
         public string MaHoaDon { get; set; }
-        private PrintDocument printDocument1 = new PrintDocument();
         private IXuatKhoService XuatKhoService
         {
             get
@@ -62,7 +63,7 @@ namespace WH.GUI
 
         private void Frm_Load(object sender, EventArgs e)
         {
-            LstMathangs = XuatKhoService.GetListMatHang();
+            LstMatHangs = XuatKhoService.GetListMatHang();
             LoadHoaDon();
             LoadKHToGui();
             txtTienChi.Select();
@@ -75,7 +76,18 @@ namespace WH.GUI
 
         private void btnPrinter_Click(object sender, EventArgs e)
         {
+            var receipt = new Receipt
+            {
+                CustomerName = KhachHang.TENKHACHHANG,
+                Phone = KhachHang.DIENTHOAI,
+                Payment = (decimal)HoaDon.SOTIENKHACHDUA_HD,
+                TotalAmount = (decimal)HoaDon.SOTIENTHANHTOAN_HD,
+                CreatedDate = (DateTime)HoaDon.NGAYTAOHOADON
+            };
 
+            var printer = new FrmPrint(receipt, ReceiptItems);
+            printer.ShowDialog(this);
+            printer.Dispose();
         }
 
         #endregion
@@ -87,18 +99,18 @@ namespace WH.GUI
             HoaDon = XuatKhoService.GetModelHoaDonXuat(MaHoaDon);
             LstHoadonxuatkhochitiets = (List<HOADONXUATKHOCHITIET>)HoaDon.HOADONXUATKHOCHITIETs;
             var list = (from p in LstHoadonxuatkhochitiets
-                        join s in LstMathangs on p.MAMATHANG equals s.MAMATHANG
-                        select new
-                        {
-                            p.IDUnit,
-                            s.MAMATHANG,
-                            s.TENMATHANG,
-                            SOLUONG = p.SOLUONGLE,
-                            GIAM = p.CHIETKHAUTHEOPHANTRAM * 100,
-                            DONGIA = p.DONGIASI,
-                            THANHTIEN = p.THANHTIENSAUCHIETKHAU_CT,
-                            p.GHICHU
-                        }).ToList();
+                join s in LstMatHangs on p.MAMATHANG equals s.MAMATHANG
+                select new
+                {
+                    p.IDUnit,
+                    s.MAMATHANG,
+                    s.TENMATHANG,
+                    SOLUONG = p.SOLUONGLE,
+                    GIAM = p.CHIETKHAUTHEOPHANTRAM * 100,
+                    DONGIA = p.DONGIASI,
+                    THANHTIEN = p.THANHTIENSAUCHIETKHAU_CT,
+                    p.GHICHU
+                }).ToList();
 
             try
             {
