@@ -80,7 +80,6 @@ namespace WH.GUI
             {
                 CustomerName = KhachHang.TENKHACHHANG,
                 Phone = KhachHang.DIENTHOAI,
-                Payment = (decimal)HoaDon.SOTIENKHACHDUA_HD,
                 TotalAmount = (decimal)HoaDon.SOTIENTHANHTOAN_HD,
                 CreatedDate = (DateTime)HoaDon.NGAYTAOHOADON
             };

@@ -9,7 +9,6 @@ namespace WH.GUI.Dto
         public string Address { get; set; }
         public string Phone { get; set; }
         public decimal TotalAmount { get; set; }
-        public decimal Payment { get; set; }
         public DateTime CreatedDate { get; set; }
 
         public List<ReceiptItem> ReceiptItems { get; set; }

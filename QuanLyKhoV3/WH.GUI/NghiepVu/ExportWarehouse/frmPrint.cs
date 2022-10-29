@@ -29,7 +29,6 @@ namespace WH.GUI.ExportWarehouse
                 new ReportParameter("pAddress", _receipt.Address),
                 new ReportParameter("pDate", _receipt.CreatedDate.ToString("dd/mm/yyyy hh:mm:ss")),
                 new ReportParameter("pTotalAmount", _receipt.TotalAmount.ToString(CultureInfo.InvariantCulture)),
-                new ReportParameter("pPayment", _receipt.Payment.ToString(CultureInfo.InvariantCulture)),
             };
             reportViewer1.LocalReport.SetParameters(para);
             reportViewer1.LocalReport.DataSources.Add(rds);
