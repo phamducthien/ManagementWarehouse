@@ -112,10 +112,13 @@ namespace WH.GUI
                     p.GHICHU
                 }).ToList();
             ReceiptItems = new List<ReceiptItem>();
+
+            var number = 1;
             foreach (var item in list)
             {
                 var receipt = new ReceiptItem
                 {
+                    Number = number,
                     ProductCode = item.MAMATHANG,
                     ProductName = item.TENMATHANG,
                     Units = (decimal)item.SOLUONG,
@@ -124,6 +127,8 @@ namespace WH.GUI
                     Amount = (decimal)item.THANHTIEN,
                     Description = item.GHICHU
                 };
+                ReceiptItems.Add(receipt);
+                number++;
             }
             try
             {

@@ -27,7 +27,7 @@ namespace WH.GUI.ExportWarehouse
                 new ReportParameter("pCustomerName", _receipt.CustomerName),
                 new ReportParameter("pPhone", _receipt.Phone),
                 new ReportParameter("pAddress", _receipt.Address),
-                new ReportParameter("pDate", DateTime.Now.ToShortDateString()),
+                new ReportParameter("pDate", DateTime.Now.ToLongDateString()),
                 new ReportParameter("pTotalAmount", _receipt.TotalAmount.ToString(CultureInfo.InvariantCulture)),
                 new ReportParameter("pPayment", _receipt.Payment.ToString(CultureInfo.InvariantCulture)),
             };
