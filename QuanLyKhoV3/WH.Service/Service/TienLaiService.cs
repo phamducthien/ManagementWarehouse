@@ -38,15 +38,22 @@ namespace WH.Service
                 p.NGAYTAOHOADON >= ngayBatDau && 
                 p.NGAYTAOHOADON <= ngayKetThuc);
 
+            var dsKhachHangMuaHang = dsHoaDonXuatKho.Select(x => x.KHACHHANG.MAKHACHHANG).ToHashSet();
+
             var dsHoaDonTra = _hoaDonNhapXuatService.Search(p => 
                 p.NGAYTAOHOADON >= ngayBatDau && 
                 p.NGAYTAOHOADON <= ngayKetThuc);
+
+            var dsKhachHangTraHang = dsHoaDonTra.Select(x => x.KHACHHANG.MAKHACHHANG).ToHashSet();
+
+           dsKhachHangMuaHang.UnionWith(dsKhachHangTraHang);
 
             var dsKhachHang = _khachhangService.Search(s =>
                 s.ISUSE == true && 
                 s.ISDELETE == false &&
                 s.MAKHACHHANG.ToString().ToLower() != "56dbc32e-11d7-4175-a7ac-608ccbf962d7" &&
-                s.MAKHACHHANG.ToString().ToLower() != "66dbc32e-11d7-4175-a7ac-608ccbf962d7");
+                s.MAKHACHHANG.ToString().ToLower() != "66dbc32e-11d7-4175-a7ac-608ccbf962d7" &&
+                dsKhachHangMuaHang.Contains(s.MAKHACHHANG));
 
             var count = 1;
 
