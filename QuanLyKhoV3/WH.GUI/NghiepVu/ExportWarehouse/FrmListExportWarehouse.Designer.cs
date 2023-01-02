@@ -55,7 +55,6 @@ namespace WH.GUI.ExportWarehouse
             this._colTienKM = new HLVControl.Grid.Data.TreeListColumn();
             this._colTienThu = new HLVControl.Grid.Data.TreeListColumn();
             this._colConLai = new HLVControl.Grid.Data.TreeListColumn();
-            this._colTinhTrang = new HLVControl.Grid.Data.TreeListColumn();
             this.btnTheoNgay = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.CheckSet = new ComponentFactory.Krypton.Toolkit.KryptonCheckSet(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.CheckSet)).BeginInit();
@@ -163,7 +162,6 @@ namespace WH.GUI.ExportWarehouse
             this.treeDanhMuc.Columns.Add(this._colTienKM);
             this.treeDanhMuc.Columns.Add(this._colTienThu);
             this.treeDanhMuc.Columns.Add(this._colConLai);
-            this.treeDanhMuc.Columns.Add(this._colTinhTrang);
             this.treeDanhMuc.Cursor = System.Windows.Forms.Cursors.Default;
             this.treeDanhMuc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeDanhMuc.FixedColumnCount = 0;
@@ -462,30 +460,6 @@ namespace WH.GUI.ExportWarehouse
             this._colConLai.Width = 120;
             this._colConLai.WordWrap = false;
             // 
-            // _colTinhTrang
-            // 
-            this._colTinhTrang.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
-            this._colTinhTrang.AlignCellVertical = System.Drawing.StringAlignment.Center;
-            this._colTinhTrang.AlignHeaderHorizontal = System.Drawing.StringAlignment.Near;
-            this._colTinhTrang.AlignHeaderVertical = System.Drawing.StringAlignment.Near;
-            this._colTinhTrang.AllowEdit = false;
-            this._colTinhTrang.AllowResize = true;
-            this._colTinhTrang.ColumnImage = null;
-            this._colTinhTrang.DataPropertyName = null;
-            this._colTinhTrang.Filter = null;
-            this._colTinhTrang.FormatString = "";
-            this._colTinhTrang.Grouped = false;
-            this._colTinhTrang.HeaderFormatFlags = System.Drawing.StringFormatFlags.NoWrap;
-            this._colTinhTrang.MinWidth = 0;
-            this._colTinhTrang.Name = "_colTinhTrang";
-            this._colTinhTrang.ShowCellSelection = true;
-            this._colTinhTrang.SortDirection = System.Windows.Forms.SortOrder.None;
-            this._colTinhTrang.Text = "Tình Trạng";
-            this._colTinhTrang.TextNonDisplay = null;
-            this._colTinhTrang.Visible = true;
-            this._colTinhTrang.Width = 100;
-            this._colTinhTrang.WordWrap = false;
-            // 
             // btnTheoNgay
             // 
             this.btnTheoNgay.Location = new System.Drawing.Point(882, 9);
@@ -545,7 +519,6 @@ namespace WH.GUI.ExportWarehouse
         private KryptonCheckButton btnTheoNgay;
         private TreeListColumn _colNgayTao;
         private KryptonCheckSet CheckSet;
-        private TreeListColumn _colTinhTrang;
         private TreeListColumn _colTenKH;
         private TreeListColumn _colMaCode;
         private TreeListColumn _colBarCode;
