@@ -34,9 +34,13 @@ namespace WH.Service
 
         public List<TienLaiDto> DanhSachTienLaiTheoKhachHang(DateTime ngayBatDau, DateTime ngayKetThuc)
         {
-            var lstHoaDonXuatKho = _hoadonxuatkhoService.Search(p => p.NGAYTAOHOADON >= ngayBatDau && p.NGAYTAOHOADON <= ngayKetThuc);
+            var lstHoaDonXuatKho = _hoadonxuatkhoService.Search(p => 
+                p.NGAYTAOHOADON >= ngayBatDau && 
+                p.NGAYTAOHOADON <= ngayKetThuc);
 
-            var lstHoaDonTra = _hoaDonNhapXuatService.Search(p => p.NGAYTAOHOADON >= ngayBatDau && p.NGAYTAOHOADON <= ngayKetThuc);
+            var lstHoaDonTra = _hoaDonNhapXuatService.Search(p => 
+                p.NGAYTAOHOADON >= ngayBatDau && 
+                p.NGAYTAOHOADON <= ngayKetThuc);
 
             var lstKhachHang = _khachhangService.Search(s =>
                 s.ISUSE == true && s.ISDELETE == false &&
@@ -49,15 +53,15 @@ namespace WH.Service
 
             foreach (var o in lstKhachHang)
             {
-                var templstHoaDonXuatKho = lstHoaDonXuatKho.Where(s => s.MAKHACHHANG == o.MAKHACHHANG).ToList();
-                var templstHoaDonTra = lstHoaDonTra.Where(s => s.MAKHACHHANG == o.MAKHACHHANG).ToList();
+                var hoaDonXuatKhoByKhachHang = lstHoaDonXuatKho.Where(s => s.MAKHACHHANG == o.MAKHACHHANG).ToList();
+                var hoaDonTraByKhachHang = lstHoaDonTra.Where(s => s.MAKHACHHANG == o.MAKHACHHANG).ToList();
 
-                var tongban = GetTongBan(templstHoaDonXuatKho);
-                var tongnhap = GetTongNhap(templstHoaDonXuatKho);
-                var tongtra = GetTongTra(templstHoaDonTra);
-                var tonglai = tongban - tongnhap - tongtra ;
-                var hinhanh = tonglai == 0 ? Resources.status3 :
-                              tonglai < 0 ? Resources.status1 : Resources.status2;
+                var tongBan = GetTongBan(hoaDonXuatKhoByKhachHang);
+                var tongNhap = GetTongNhap(hoaDonXuatKhoByKhachHang);
+                var tongTra = GetTongTra(hoaDonTraByKhachHang);
+                var tongLai = tongBan - tongNhap - tongTra ;
+                var hinhAnh = tongLai == 0 ? Resources.status3 :
+                              tongLai < 0 ? Resources.status1 : Resources.status2;
                 tienLais.Add(new TienLaiDto
                 {
                     Stt = count++,
@@ -65,11 +69,11 @@ namespace WH.Service
                     MaCodeKhachHang = o.CODEKHACHHANG,
                     BarCodeKhachHang = o.MABARCODE,
                     TenKhachHang = o.TENKHACHHANG,
-                    TongTienBan = tongban,
-                    TongTienNhap = tongnhap,
-                    TongTienTra = tongtra,
-                    TongTienLai = tonglai,
-                    HinhAnhDanhGia = hinhanh,
+                    TongTienBan = tongBan,
+                    TongTienNhap = tongNhap,
+                    TongTienTra = tongTra,
+                    TongTienLai = tongLai,
+                    HinhAnhDanhGia = hinhAnh,
                 });
             }
 
