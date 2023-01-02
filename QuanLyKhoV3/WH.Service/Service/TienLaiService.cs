@@ -34,35 +34,42 @@ namespace WH.Service
 
         public List<TienLaiDto> DanhSachTienLaiTheoKhachHang(DateTime ngayBatDau, DateTime ngayKetThuc)
         {
-            var lstHoaDonXuatKho = _hoadonxuatkhoService.Search(p => 
+            var dsHoaDonXuatKho = _hoadonxuatkhoService.Search(p => 
                 p.NGAYTAOHOADON >= ngayBatDau && 
                 p.NGAYTAOHOADON <= ngayKetThuc);
 
-            var lstHoaDonTra = _hoaDonNhapXuatService.Search(p => 
+            var dsHoaDonTra = _hoaDonNhapXuatService.Search(p => 
                 p.NGAYTAOHOADON >= ngayBatDau && 
                 p.NGAYTAOHOADON <= ngayKetThuc);
 
-            var lstKhachHang = _khachhangService.Search(s =>
-                s.ISUSE == true && s.ISDELETE == false &&
+            var dsKhachHang = _khachhangService.Search(s =>
+                s.ISUSE == true && 
+                s.ISDELETE == false &&
                 s.MAKHACHHANG.ToString().ToLower() != "56dbc32e-11d7-4175-a7ac-608ccbf962d7" &&
                 s.MAKHACHHANG.ToString().ToLower() != "66dbc32e-11d7-4175-a7ac-608ccbf962d7");
 
             var count = 1;
 
-            var tienLais = new List<TienLaiDto>();
+            var dsTienLai = new List<TienLaiDto>();
 
-            foreach (var o in lstKhachHang)
+            foreach (var o in dsKhachHang)
             {
-                var hoaDonXuatKhoByKhachHang = lstHoaDonXuatKho.Where(s => s.MAKHACHHANG == o.MAKHACHHANG).ToList();
-                var hoaDonTraByKhachHang = lstHoaDonTra.Where(s => s.MAKHACHHANG == o.MAKHACHHANG).ToList();
+                var dsHoaDonXuatKhoTheoKhachHang = dsHoaDonXuatKho
+                    .Where(s => s.MAKHACHHANG == o.MAKHACHHANG)
+                    .ToList();
 
-                var tongBan = GetTongBan(hoaDonXuatKhoByKhachHang);
-                var tongNhap = GetTongNhap(hoaDonXuatKhoByKhachHang);
-                var tongTra = GetTongTra(hoaDonTraByKhachHang);
+                var dsHoaDonTraTheoKhachHang = dsHoaDonTra
+                    .Where(s => s.MAKHACHHANG == o.MAKHACHHANG)
+                    .ToList();
+
+                var tongBan = GetTongBan(dsHoaDonXuatKhoTheoKhachHang);
+                var tongNhap = GetTongNhap(dsHoaDonXuatKhoTheoKhachHang);
+                var tongTra = GetTongTra(dsHoaDonTraTheoKhachHang);
                 var tongLai = tongBan - tongNhap - tongTra ;
                 var hinhAnh = tongLai == 0 ? Resources.status3 :
                               tongLai < 0 ? Resources.status1 : Resources.status2;
-                tienLais.Add(new TienLaiDto
+
+                dsTienLai.Add(new TienLaiDto
                 {
                     Stt = count++,
                     MaKhachHang = o.MAKHACHHANG,
@@ -77,7 +84,7 @@ namespace WH.Service
                 });
             }
 
-            return tienLais;
+            return dsTienLai;
         }
 
         private decimal GetTongBan(List<HOADONXUATKHO> lstHoaDonXuat)
