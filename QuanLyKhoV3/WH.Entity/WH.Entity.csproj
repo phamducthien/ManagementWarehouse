@@ -142,9 +142,6 @@
       <DependentUpon>WHEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="StoredProcedureRepository.cs" />
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>WHEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="TEMP_HOADONHAPKHOCHITIET.cs">
       <DependentUpon>WHEntities.tt</DependentUpon>
     </Compile>

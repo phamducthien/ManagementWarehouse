@@ -264,7 +264,6 @@
       <DependentUpon>WH.Service.Service.tt</DependentUpon>
     </Compile>
     <Compile Include="Service\KhachTraHangService.cs" />
-    <Compile Include="Service\ReturnGoodsSupplier\ReturnGoodsSupplierServices.cs" />
     <Compile Include="Service\TienLaiService.cs" />
     <Compile Include="Service\XuatKhoService.cs" />
     <Compile Include="Service\NhapKhoService.cs" />

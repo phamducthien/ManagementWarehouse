@@ -36,6 +36,7 @@ namespace WH.Report
                 MessageBox.Show(@"Bạn cần chọn ngày tháng trước.");
 
             Show();
+            //btnDoanhThu_KhachHang.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
         }
 
         private void btnDoanhThu_NCC_Click(object sender, EventArgs e)
@@ -44,12 +45,12 @@ namespace WH.Report
             var frm = new FrmSelectDate();
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                var frmNcc = new FrmSelectNhaCungCap();
-                frmNcc.ShowDialog();
-                if (!frmNcc.Model.isNull())
+                var frmNCC = new FrmSelectNhaCungCap();
+                frmNCC.ShowDialog();
+                if (!frmNCC.Model.isNull())
                 {
                     var frm1 = new FrmDoanhThuNhaCungCap(FrmSelectDate.DateFrom, FrmSelectDate.DateTo,
-                        frmNcc.Model.MANHACUNGCAP.ToString());
+                        frmNCC.Model.MANHACUNGCAP.ToString());
                     frm1.ShowDialog();
                 }
                 else
@@ -185,14 +186,6 @@ namespace WH.Report
                 frm1.ShowDialog();
             }
 
-            Show();
-        }
-
-        private void btn_TraHang_NCC_Click(object sender, EventArgs e)
-        {
-            Hide();
-            var frm = new FrmTraHangNhaCungCap();
-            frm.ShowDialog();
             Show();
         }
     }

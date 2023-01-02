@@ -171,8 +171,8 @@ namespace WH.Service.Service
     		}
             return result;
         }
-
-        public MethodResult Modify(TEMP_HOADONXUATKHOCHITIET entity, bool isCommited,bool isModifyChild)
+    
+    	public MethodResult Modify(TEMP_HOADONXUATKHOCHITIET entity, bool isCommited,bool isModifyChild)
     	{
                 MethodResult result = MethodResult.Succeed;
                 try

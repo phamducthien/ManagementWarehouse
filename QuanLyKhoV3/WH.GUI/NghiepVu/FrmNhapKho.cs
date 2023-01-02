@@ -429,7 +429,8 @@ namespace WH.GUI
 
                     var objHoadonhapkhochitiet = ct;
                     objHoadonhapkhochitiet.MAHOADON = MaHoaDon;
-                    objHoadonhapkhochitiet.MACHITIETHOADON = PrefixContext.MaChiTietHoaDon(MaHoaDon, (int)ct.MAMATHANG);
+                    objHoadonhapkhochitiet.MACHITIETHOADON =
+                        PrefixContext.MaChiTietHoaDon(MaHoaDon, (int)ct.MAMATHANG);
                     objHoadonhapkhochitiet.ISDELETE = false;
 
                     lsTempHoadonhapkhochitiets.Add(objHoadonhapkhochitiet);

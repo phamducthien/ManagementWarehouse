@@ -5,6 +5,8 @@ using System.Linq;
 using System.Windows.Forms;
 using Util.Pattern;
 using WH.Entity;
+using WH.GUI.Dto;
+using WH.GUI.ExportWarehouse;
 using WH.Service;
 
 namespace WH.GUI
@@ -26,9 +28,9 @@ namespace WH.GUI
         public KHACHHANG KhachHang { get; set; }
         public HOADONXUATKHO HoaDon { get; set; }
         public List<HOADONXUATKHOCHITIET> LstHoadonxuatkhochitiets { get; set; }
-        public List<MATHANG> LstMathangs { get; set; }
+        public List<MATHANG> LstMatHangs { get; set; }
+        public List<ReceiptItem> ReceiptItems { get; set; }
         public string MaHoaDon { get; set; }
-
         private IXuatKhoService XuatKhoService
         {
             get
@@ -61,7 +63,7 @@ namespace WH.GUI
 
         private void Frm_Load(object sender, EventArgs e)
         {
-            LstMathangs = XuatKhoService.GetListMatHang();
+            LstMatHangs = XuatKhoService.GetListMatHang();
             LoadHoaDon();
             LoadKHToGui();
             txtTienChi.Select();
@@ -70,6 +72,21 @@ namespace WH.GUI
         private void DgvHoaDon_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             dgvHoaDon.Rows[e.RowIndex].Cells[0].Value = e.RowIndex + 1;
+        }
+
+        private void btnPrinter_Click(object sender, EventArgs e)
+        {
+            var receipt = new Receipt
+            {
+                CustomerName = KhachHang.TENKHACHHANG,
+                Phone = KhachHang.DIENTHOAI,
+                TotalAmount = (decimal)HoaDon.SOTIENTHANHTOAN_HD,
+                CreatedDate = (DateTime)HoaDon.NGAYTAOHOADON
+            };
+  
+            var printer = new FrmPrint(receipt, ReceiptItems);
+            printer.ShowDialog(this);
+            printer.Dispose();
         }
 
         #endregion
@@ -81,19 +98,37 @@ namespace WH.GUI
             HoaDon = XuatKhoService.GetModelHoaDonXuat(MaHoaDon);
             LstHoadonxuatkhochitiets = (List<HOADONXUATKHOCHITIET>)HoaDon.HOADONXUATKHOCHITIETs;
             var list = (from p in LstHoadonxuatkhochitiets
-                        join s in LstMathangs on p.MAMATHANG equals s.MAMATHANG
-                        select new
-                        {
-                            p.IDUnit,
-                            s.MAMATHANG,
-                            s.TENMATHANG,
-                            SOLUONG = p.SOLUONGLE,
-                            GIAM = p.CHIETKHAUTHEOPHANTRAM * 100,
-                            DONGIA = p.DONGIASI,
-                            THANHTIEN = p.THANHTIENSAUCHIETKHAU_CT,
-                            p.GHICHU
-                        }).ToList();
+                join s in LstMatHangs on p.MAMATHANG equals s.MAMATHANG
+                select new
+                {
+                    p.IDUnit,
+                    s.MAMATHANG,
+                    s.TENMATHANG,
+                    SOLUONG = p.SOLUONGLE,
+                    GIAM = p.CHIETKHAUTHEOPHANTRAM * 100,
+                    DONGIA = p.DONGIASI,
+                    THANHTIEN = p.THANHTIENSAUCHIETKHAU_CT,
+                    p.GHICHU
+                }).ToList();
+            ReceiptItems = new List<ReceiptItem>();
 
+            var number = 1;
+            foreach (var item in list)
+            {
+                var receipt = new ReceiptItem
+                {
+                    Number = number,
+                    ProductCode = item.MAMATHANG,
+                    ProductName = item.TENMATHANG,
+                    Units = (decimal)item.SOLUONG,
+                    Discount = (double)item.GIAM,
+                    Price = (decimal)item.DONGIA,
+                    Amount = (decimal)item.THANHTIEN,
+                    Description = item.GHICHU
+                };
+                ReceiptItems.Add(receipt);
+                number++;
+            }
             try
             {
                 LoadData(list.OrderBy(s => s.GHICHU.ToInt()).ToList());

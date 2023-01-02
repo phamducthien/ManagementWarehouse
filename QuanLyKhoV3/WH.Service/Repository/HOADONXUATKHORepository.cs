@@ -64,18 +64,26 @@ namespace WH.Service.Repository
 
         public HOADONXUATKHO CreateNew()
         {
+
             HOADONXUATKHO _obj = Create();
-            _obj.MACA = null;
-            _obj.MAKHACHHANG = null;
-            _obj.MANHACUNGCAP = null;
+
+            //_obj.CA = null;//object
+            _obj.MACA = null;////Nullable<int>
+                             //_obj.KHACHHANG = null;//object
+            _obj.MAKHACHHANG = null;////Nullable<System.Guid>
+                                    //_obj.HOADONXUATKHOCHITIETs = null;//List
+                                    //_obj.HOADONXUATKHOCHITIETs = new List<HOADONXUATKHOCHITIET>();//List
+                                    //_obj.PHIEUTHUs = null;//List
+                                    //_obj.PHIEUTHUs = new List<PHIEUTHU>();//List
+                                    //Primary Key
             _obj.MAHOADONXUAT = DateTime.Now.ToString("ddMMyyyyHHmmssfff"); //string
-            _obj.HANTHANHTOAN = null;
-            _obj.GHICHU_HD = string.Empty;
-            _obj.DATHANHTOAN = null;
-            _obj.NGUOITAO = string.Empty;
-            _obj.NGAYTAOHOADON = null;
-            _obj.ISDELETE = null;
-            _obj.LOAIXUATKHO = 0;
+
+            _obj.HANTHANHTOAN = null;//Nullable<System.DateTime>
+            _obj.GHICHU_HD = string.Empty;//string
+            _obj.DATHANHTOAN = null;//Nullable<bool>
+            _obj.NGUOITAO = string.Empty;//string
+            _obj.NGAYTAOHOADON = null;//Nullable<System.DateTime>
+            _obj.ISDELETE = null;//Nullable<bool>
             return _obj;
         }
 
@@ -101,8 +109,6 @@ namespace WH.Service.Repository
             objNew.ISDELETE = objHOADONXUATKHO.ISDELETE;
             objNew.MAKHACHHANG = objHOADONXUATKHO.MAKHACHHANG;
             objNew.MACA = objHOADONXUATKHO.MACA;
-            objNew.MANHACUNGCAP = objHOADONXUATKHO.MANHACUNGCAP;
-            objNew.LOAIXUATKHO = objHOADONXUATKHO.LOAIXUATKHO;
             objNew.isAdd = true;
             return objNew;
         }
@@ -130,7 +136,6 @@ namespace WH.Service.Repository
             objNew.isUpdate = true;
             return objNew;
         }
-        
         public HOADONXUATKHO Clone(HOADONXUATKHO objHOADONXUATKHO)
         {
             if (objHOADONXUATKHO == null) return null;
@@ -153,8 +158,6 @@ namespace WH.Service.Repository
                 objNew.ISDELETE = objHOADONXUATKHO.ISDELETE;
                 objNew.MAKHACHHANG = objHOADONXUATKHO.MAKHACHHANG;
                 objNew.MACA = objHOADONXUATKHO.MACA;
-                objNew.MANHACUNGCAP = objHOADONXUATKHO.MANHACUNGCAP;
-                objNew.LOAIXUATKHO = objHOADONXUATKHO.LOAIXUATKHO;
                 objNew.isAdd = true;
             }
             else

@@ -21,7 +21,7 @@ namespace WH.GUI.ExportWarehouse
     public partial class FrmListExportWarehouse : MetroForm
     {
         private readonly ReportRules _exe;
-        private IUnitOfWorkAsync _unitOfWorkAsync;
+        private IUnitOfWorkAsync unitOfWorkAsync;
 
         public FrmListExportWarehouse()
         {
@@ -31,9 +31,9 @@ namespace WH.GUI.ExportWarehouse
 
         private void ReloadUnitOfWork()
         {
-            _unitOfWorkAsync?.Dispose();
-            _unitOfWorkAsync = null;
-            _unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
+            unitOfWorkAsync?.Dispose();
+            unitOfWorkAsync = null;
+            unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
         }
 
         private DataTable GetBills(string soLuongHdLoad, string batDau, string ketThuc)
@@ -85,14 +85,14 @@ namespace WH.GUI.ExportWarehouse
                     var row = treeDanhMuc.CreateRow();
                     row.Cells.Add(new TreeListCell(count + 1));
                     row.Cells.Add(new TreeListCell(drow[0].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[5]));
-                    row.Cells.Add(new TreeListCell(drow[7].ToString())); // MaCodeKhach hang
-                    row.Cells.Add(new TreeListCell(drow[8].ToString())); // barcode Khach Hang
-                    row.Cells.Add(new TreeListCell(drow[9].ToString())); // Ten Khach hang
-                    row.Cells.Add(new TreeListCell(drow[1].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[2].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[3].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[4].ToString()));
+
+                    row.Cells.Add(new TreeListCell(drow[1]));
+                    row.Cells.Add(new TreeListCell(drow[2].ToString())); // MaCodeKhach hang
+                    row.Cells.Add(new TreeListCell(drow[3].ToString())); // barcode Khach Hang
+                    row.Cells.Add(new TreeListCell(drow[4].ToString())); // Ten Khach hang
+                    row.Cells.Add(new TreeListCell(drow[5].ToString()));
+                    row.Cells.Add(new TreeListCell(drow[6].ToString()));
+                    row.Cells.Add(new TreeListCell(drow[7].ToString()));
                     row.Cells.Add(new TreeListCell(drow[8].ToString()));
                     row.Tag = count;
 
@@ -253,11 +253,11 @@ namespace WH.GUI.ExportWarehouse
                 {
                     var id = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
-                    IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
+                    IXuatKhoService service = new XuatKhoService(unitOfWorkAsync);
                     var hdKho = service.GetModelHoaDonXuat(id);
                     if (hdKho == null) return;
                     var lst = hdKho.HOADONXUATKHOCHITIETs.ToList();
-                    var frm = new FrmEditExportWarehouse(hdKho, lst, _unitOfWorkAsync);
+                    var frm = new FrmEditExportWarehouse(hdKho, lst, unitOfWorkAsync);
                     frm.ShowDialog(this);
                 }
             }

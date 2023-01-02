@@ -59,10 +59,10 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>A86AEEF9F7CFAA344DB5B57D926C49086C71840E</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>819151B2FC75D5D477C765AAE79EB1ABEC7CE169</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>QuanLyKhoV3_2_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>QuanLyKhoV3_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -180,7 +180,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="QuanLyKhoV3_2_TemporaryKey.pfx" />
+    <None Include="QuanLyKhoV3_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

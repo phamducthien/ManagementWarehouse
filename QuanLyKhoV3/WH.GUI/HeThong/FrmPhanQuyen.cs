@@ -23,7 +23,6 @@ namespace WH.GUI
         public NGUOIDUNG Model { get; set; }
         public List<NGUOIDUNG> DataList { get; set; }
 
-        private List<NGUOIDUNG> _dataListNguoiDung;
         private List<CHUCNANG> _dataListChucNangs;
 
         private INGUOIDUNGService Service

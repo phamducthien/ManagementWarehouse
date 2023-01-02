@@ -49,7 +49,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.btn_TraHang_NCC = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonCheckSet)).BeginInit();
             this.SuspendLayout();
             // 
@@ -141,7 +140,7 @@
             // btnSanPham_NCC
             // 
             this.btnSanPham_NCC.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSanPham_NCC.Location = new System.Drawing.Point(515, 172);
+            this.btnSanPham_NCC.Location = new System.Drawing.Point(515, 135);
             this.btnSanPham_NCC.Name = "btnSanPham_NCC";
             this.btnSanPham_NCC.Size = new System.Drawing.Size(226, 63);
             this.btnSanPham_NCC.StateCheckedNormal.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(227)))), ((int)(((byte)(241)))));
@@ -189,7 +188,7 @@
             // btnCongNo_NCC
             // 
             this.btnCongNo_NCC.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnCongNo_NCC.Location = new System.Drawing.Point(283, 172);
+            this.btnCongNo_NCC.Location = new System.Drawing.Point(283, 135);
             this.btnCongNo_NCC.Name = "btnCongNo_NCC";
             this.btnCongNo_NCC.Size = new System.Drawing.Size(226, 63);
             this.btnCongNo_NCC.StateCheckedNormal.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(227)))), ((int)(((byte)(241)))));
@@ -220,7 +219,7 @@
             // btnDoanhThu_NCC
             // 
             this.btnDoanhThu_NCC.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnDoanhThu_NCC.Location = new System.Drawing.Point(51, 172);
+            this.btnDoanhThu_NCC.Location = new System.Drawing.Point(51, 135);
             this.btnDoanhThu_NCC.Name = "btnDoanhThu_NCC";
             this.btnDoanhThu_NCC.Size = new System.Drawing.Size(226, 63);
             this.btnDoanhThu_NCC.StateCheckedNormal.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(227)))), ((int)(((byte)(241)))));
@@ -268,7 +267,7 @@
             // btnHoaDonHangTra
             // 
             this.btnHoaDonHangTra.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnHoaDonHangTra.Location = new System.Drawing.Point(283, 241);
+            this.btnHoaDonHangTra.Location = new System.Drawing.Point(283, 204);
             this.btnHoaDonHangTra.Name = "btnHoaDonHangTra";
             this.btnHoaDonHangTra.Size = new System.Drawing.Size(226, 63);
             this.btnHoaDonHangTra.StateCheckedNormal.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(227)))), ((int)(((byte)(241)))));
@@ -299,7 +298,7 @@
             // btnSanPhamDaTra
             // 
             this.btnSanPhamDaTra.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSanPhamDaTra.Location = new System.Drawing.Point(515, 241);
+            this.btnSanPhamDaTra.Location = new System.Drawing.Point(515, 204);
             this.btnSanPhamDaTra.Name = "btnSanPhamDaTra";
             this.btnSanPhamDaTra.Size = new System.Drawing.Size(226, 63);
             this.btnSanPhamDaTra.StateCheckedNormal.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(227)))), ((int)(((byte)(241)))));
@@ -330,7 +329,7 @@
             // btnTienLai
             // 
             this.btnTienLai.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnTienLai.Location = new System.Drawing.Point(51, 241);
+            this.btnTienLai.Location = new System.Drawing.Point(51, 204);
             this.btnTienLai.Name = "btnTienLai";
             this.btnTienLai.Size = new System.Drawing.Size(226, 63);
             this.btnTienLai.StateCheckedNormal.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(227)))), ((int)(((byte)(241)))));
@@ -361,7 +360,7 @@
             // btnSanPham_KhachHang
             // 
             this.btnSanPham_KhachHang.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSanPham_KhachHang.Location = new System.Drawing.Point(515, 103);
+            this.btnSanPham_KhachHang.Location = new System.Drawing.Point(515, 66);
             this.btnSanPham_KhachHang.Name = "btnSanPham_KhachHang";
             this.btnSanPham_KhachHang.Size = new System.Drawing.Size(226, 63);
             this.btnSanPham_KhachHang.StateCheckedNormal.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(227)))), ((int)(((byte)(241)))));
@@ -392,7 +391,7 @@
             // btnCongNo_KhachHang
             // 
             this.btnCongNo_KhachHang.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnCongNo_KhachHang.Location = new System.Drawing.Point(283, 103);
+            this.btnCongNo_KhachHang.Location = new System.Drawing.Point(283, 66);
             this.btnCongNo_KhachHang.Name = "btnCongNo_KhachHang";
             this.btnCongNo_KhachHang.Size = new System.Drawing.Size(226, 63);
             this.btnCongNo_KhachHang.StateCheckedNormal.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(227)))), ((int)(((byte)(241)))));
@@ -423,7 +422,7 @@
             // btnDoanhThu_KhachHang
             // 
             this.btnDoanhThu_KhachHang.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnDoanhThu_KhachHang.Location = new System.Drawing.Point(51, 103);
+            this.btnDoanhThu_KhachHang.Location = new System.Drawing.Point(51, 66);
             this.btnDoanhThu_KhachHang.Name = "btnDoanhThu_KhachHang";
             this.btnDoanhThu_KhachHang.Size = new System.Drawing.Size(226, 63);
             this.btnDoanhThu_KhachHang.StateCheckedNormal.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(227)))), ((int)(((byte)(241)))));
@@ -497,42 +496,10 @@
             this.panel5.TabIndex = 651;
             this.panel5.Visible = false;
             // 
-            // btn_TraHang_NCC
-            // 
-            this.btn_TraHang_NCC.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn_TraHang_NCC.Location = new System.Drawing.Point(51, 310);
-            this.btn_TraHang_NCC.Name = "btn_TraHang_NCC";
-            this.btn_TraHang_NCC.Size = new System.Drawing.Size(226, 67);
-            this.btn_TraHang_NCC.StateCheckedNormal.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(227)))), ((int)(((byte)(241)))));
-            this.btn_TraHang_NCC.StateCheckedNormal.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(227)))), ((int)(((byte)(241)))));
-            this.btn_TraHang_NCC.StateCheckedNormal.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(227)))), ((int)(((byte)(241)))));
-            this.btn_TraHang_NCC.StateCheckedNormal.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(227)))), ((int)(((byte)(241)))));
-            this.btn_TraHang_NCC.StateCheckedNormal.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.btn_TraHang_NCC.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.btn_TraHang_NCC.StateCommon.Border.Rounding = 10;
-            this.btn_TraHang_NCC.StateCommon.Border.Width = 1;
-            this.btn_TraHang_NCC.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.btn_TraHang_NCC.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_TraHang_NCC.StateNormal.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(227)))), ((int)(((byte)(241)))));
-            this.btn_TraHang_NCC.StateNormal.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(227)))), ((int)(((byte)(241)))));
-            this.btn_TraHang_NCC.StateNormal.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(227)))), ((int)(((byte)(241)))));
-            this.btn_TraHang_NCC.StateNormal.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(227)))), ((int)(((byte)(241)))));
-            this.btn_TraHang_NCC.StateNormal.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.btn_TraHang_NCC.TabIndex = 686;
-            this.btn_TraHang_NCC.Values.Text = "Danh sách hóa đơn \r\ntrả hàng ncc";
-            this.btn_TraHang_NCC.Click += new System.EventHandler(this.btn_TraHang_NCC_Click);
-            // 
             // ucMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btn_TraHang_NCC);
             this.Controls.Add(this.btnSanPham_KhachHang);
             this.Controls.Add(this.btnCongNo_KhachHang);
             this.Controls.Add(this.btnDoanhThu_KhachHang);
@@ -553,7 +520,7 @@
             this.Controls.Add(this.btnDoanhThu_NCC);
             this.Controls.Add(this.btnHoaDonXuatKhachHang);
             this.Name = "ucMain";
-            this.Size = new System.Drawing.Size(793, 406);
+            this.Size = new System.Drawing.Size(793, 333);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonCheckSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -582,6 +549,5 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckButton btnSanPham_KhachHang;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckButton btnCongNo_KhachHang;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckButton btnDoanhThu_KhachHang;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckButton btn_TraHang_NCC;
     }
 }

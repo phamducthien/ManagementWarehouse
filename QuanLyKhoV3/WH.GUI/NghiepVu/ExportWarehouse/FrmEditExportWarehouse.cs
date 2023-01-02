@@ -35,7 +35,6 @@ namespace WH.GUI.ExportWarehouse
                 ReloadUnitOfWork();
                 IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
                 var dt = service.DanhSachChiTietXuat(hdXuatKho.MAHOADONXUAT);
-                dgvHoaDon.DataSource = null;
                 dgvHoaDon.AutoGenerateColumns = false;
                 dgvHoaDon.DataSource = dt;
                 HoaDonXuatKhoChiTiets = XuatKhoService.LoadHoaDon(MaHoaDon);
@@ -169,7 +168,7 @@ namespace WH.GUI.ExportWarehouse
         private void Frm_Load(object sender, EventArgs e)
         {
             ActionLoadForm();
-            ResumeLayout();
+            this.ResumeLayout();
         }
 
         private void DgvDanhMuc_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -633,7 +632,7 @@ namespace WH.GUI.ExportWarehouse
         {
             DataList = XuatKhoService.GetListMatHang();
             int soThuTu = 1;
-            var lstMatHangs = from a in DataList
+            var lstMatHangs = from a in this.DataList
                               select new
                               {
                                   STT = soThuTu++,
@@ -654,7 +653,7 @@ namespace WH.GUI.ExportWarehouse
         {
             DataList = XuatKhoService.GetListMatHangCanNhap();
             int soThuTu = 1;
-            var lstMatHangs = from a in DataList
+            var lstMatHangs = from a in this.DataList
                               select new
                               {
                                   STT = soThuTu++,
@@ -675,7 +674,7 @@ namespace WH.GUI.ExportWarehouse
         {
             DataList = XuatKhoService.GetListMatHangCanXuat();
             int soThuTu = 1;
-            var lstMatHangs = from a in DataList
+            var lstMatHangs = from a in this.DataList
                               select new
                               {
                                   STT = soThuTu++,
@@ -699,28 +698,28 @@ namespace WH.GUI.ExportWarehouse
             var service = XuatKhoService;
             ModelChiTiet = service.GetModelChiTiet(MatHangModel.MAMATHANG, MaHoaDon);
             KhoMatHangModel = service.GetModelKhoMatHang(MatHangModel.MAMATHANG.ToString());
-            var matHangModel = service.GetModelMatHang(MatHangModel.MAMATHANG.ToString());
+            var mathangModel = service.GetModelMatHang(MatHangModel.MAMATHANG.ToString());
             if (ModelChiTiet != null)
                 slTrongHoaDon = ModelChiTiet.SOLUONGLE ?? 0;
             if (KhoMatHangModel != null)
                 slTonKho = KhoMatHangModel.SOLUONGLE ?? 0;
-            var soLuong = slTonKho - slNhap - slTrongHoaDon;
+            var soluong = slTonKho - slNhap - slTrongHoaDon;
             if (isCapNhat)
-                soLuong = slTonKho - slNhap;
+                soluong = slTonKho - slNhap;
 
-            if (soLuong < 0)
+            if (soluong < 0)
             {
                 ShowMessage(IconMessageBox.Information,
-                    "Số lượng trong mặt hàng trong kho chỉ còn " + soLuong +
+                    "Số lượng trong mặt hàng trong kho chỉ còn " + soluong +
                     " mặt hàng. Không đủ số lượng mặt hàng này để xuất!!!");
                 return false;
             }
 
-            if (soLuong <= MatHangModel.NGUONGNHAP)
+            if (soluong <= MatHangModel.NGUONGNHAP)
                 return ShowMessage(IconMessageBox.Question,
-                           "Số lượng trong mặt hàng trong kho chỉ còn " + soLuong +
+                           "Số lượng trong mặt hàng trong kho chỉ còn " + soluong +
                            " mặt hàng trong kho, đã thấp hơn số mặt hàng tối thiểu " +
-                           matHangModel?.NGUONGNHAP.Value.ToString("## 'mặt hàng'") +
+                           mathangModel?.NGUONGNHAP.Value.ToString("## 'mặt hàng'") +
                            " !!! Bạn có muốn tiếp tục xuất mặt hàng này không?") ==
                        DialogResult.Yes;
             return true;
