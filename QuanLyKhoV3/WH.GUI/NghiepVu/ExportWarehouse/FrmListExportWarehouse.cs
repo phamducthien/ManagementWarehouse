@@ -85,14 +85,14 @@ namespace WH.GUI.ExportWarehouse
                     var row = treeDanhMuc.CreateRow();
                     row.Cells.Add(new TreeListCell(count + 1));
                     row.Cells.Add(new TreeListCell(drow[0].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[5]));
-                    row.Cells.Add(new TreeListCell(drow[7].ToString())); // MaCodeKhach hang
-                    row.Cells.Add(new TreeListCell(drow[8].ToString())); // barcode Khach Hang
-                    row.Cells.Add(new TreeListCell(drow[9].ToString())); // Ten Khach hang
-                    row.Cells.Add(new TreeListCell(drow[1].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[2].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[3].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[4].ToString()));
+
+                    row.Cells.Add(new TreeListCell(drow[1]));
+                    row.Cells.Add(new TreeListCell(drow[2].ToString())); // MaCodeKhach hang
+                    row.Cells.Add(new TreeListCell(drow[3].ToString())); // barcode Khach Hang
+                    row.Cells.Add(new TreeListCell(drow[4].ToString())); // Ten Khach hang
+                    row.Cells.Add(new TreeListCell(drow[5].ToString()));
+                    row.Cells.Add(new TreeListCell(drow[6].ToString()));
+                    row.Cells.Add(new TreeListCell(drow[7].ToString()));
                     row.Cells.Add(new TreeListCell(drow[8].ToString()));
                     row.Tag = count;
 
