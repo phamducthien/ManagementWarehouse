@@ -38,15 +38,15 @@ namespace WH.Service
                 p.NGAYTAOHOADON >= ngayBatDau && 
                 p.NGAYTAOHOADON <= ngayKetThuc);
 
-            var dsKhachHangMuaHang = dsHoaDonXuatKho.Select(x => x.KHACHHANG.MAKHACHHANG).ToHashSet();
+            var dsKhachHangMuaHang = dsHoaDonXuatKho.Select(x => x.KHACHHANG?.MAKHACHHANG).ToList();
 
             var dsHoaDonTra = _hoaDonNhapXuatService.Search(p => 
                 p.NGAYTAOHOADON >= ngayBatDau && 
                 p.NGAYTAOHOADON <= ngayKetThuc);
 
-            var dsKhachHangTraHang = dsHoaDonTra.Select(x => x.KHACHHANG.MAKHACHHANG).ToHashSet();
+            var dsKhachHangTraHang = dsHoaDonTra.Select(x => x.KHACHHANG?.MAKHACHHANG).ToList();
 
-           dsKhachHangMuaHang.UnionWith(dsKhachHangTraHang);
+           dsKhachHangMuaHang.Union(dsKhachHangTraHang).ToHashSet();
 
             var dsKhachHang = _khachhangService.Search(s =>
                 s.ISUSE == true && 
