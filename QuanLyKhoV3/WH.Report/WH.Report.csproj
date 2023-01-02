@@ -140,6 +140,12 @@
     <Compile Include="ReportForm\frmChiTietSanPhamTraHang.Designer.cs">
       <DependentUpon>frmChiTietSanPhamTraHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportForm\frmTraHangNhaCungCap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm\frmTraHangNhaCungCap.designer.cs">
+      <DependentUpon>frmTraHangNhaCungCap.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportForm\frmTienLai.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -304,6 +310,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForm\frmChiTietSanPhamTraHang.resx">
       <DependentUpon>frmChiTietSanPhamTraHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForm\frmTraHangNhaCungCap.resx">
+      <DependentUpon>frmTraHangNhaCungCap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForm\frmTienLai.resx">
       <DependentUpon>frmTienLai.cs</DependentUpon>

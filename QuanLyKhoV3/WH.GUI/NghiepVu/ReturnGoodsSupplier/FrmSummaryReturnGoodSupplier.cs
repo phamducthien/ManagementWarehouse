@@ -1,32 +1,32 @@
-﻿using ComponentFactory.Krypton.Toolkit;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
 using Util.Pattern;
 using WH.Entity;
 using WH.Service;
 
-namespace WH.GUI
+namespace WH.GUI.ReturnGoodsSupplier
 {
-    public partial class FrmHoaDonXuatKho : FrmBase
+    public partial class FrmSummaryReturnGoodSupplier : FrmBase
     {
-        public FrmHoaDonXuatKho(string maHoaDon, KHACHHANG khachhang)
+        public FrmSummaryReturnGoodSupplier(string maHoaDon, NHACUNGCAP nhaCungCap)
         {
             InitializeComponent();
             CreateEvent();
             IsSuccess = false;
-            KhachHang = khachhang;
+            NhaCungCap = nhaCungCap;
             MaHoaDon = maHoaDon;
         }
 
         #region Inits
 
         public bool IsSuccess { get; set; }
-        public KHACHHANG KhachHang { get; set; }
+        public NHACUNGCAP NhaCungCap { get; set; }
         public HOADONXUATKHO HoaDon { get; set; }
         public List<HOADONXUATKHOCHITIET> LstHoadonxuatkhochitiets { get; set; }
-        public List<MATHANG> LstMathangs { get; set; }
+        public List<MATHANG> LstMatHangs { get; set; }
         public string MaHoaDon { get; set; }
 
         private IXuatKhoService XuatKhoService
@@ -61,9 +61,9 @@ namespace WH.GUI
 
         private void Frm_Load(object sender, EventArgs e)
         {
-            LstMathangs = XuatKhoService.GetListMatHang();
+            LstMatHangs = XuatKhoService.GetListMatHang();
             LoadHoaDon();
-            LoadKHToGui();
+            LoadNccToGui();
             txtTienChi.Select();
         }
 
@@ -81,7 +81,7 @@ namespace WH.GUI
             HoaDon = XuatKhoService.GetModelHoaDonXuat(MaHoaDon);
             LstHoadonxuatkhochitiets = (List<HOADONXUATKHOCHITIET>)HoaDon.HOADONXUATKHOCHITIETs;
             var list = (from p in LstHoadonxuatkhochitiets
-                        join s in LstMathangs on p.MAMATHANG equals s.MAMATHANG
+                        join s in LstMatHangs on p.MAMATHANG equals s.MAMATHANG
                         select new
                         {
                             p.IDUnit,
@@ -98,21 +98,18 @@ namespace WH.GUI
             {
                 LoadData(list.OrderBy(s => s.GHICHU.ToInt()).ToList());
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 LoadData(list.OrderBy(s => s.GHICHU).ToList());
             }
         }
 
-        private void LoadKHToGui()
+        private void LoadNccToGui()
         {
-            labTenKhachHang.Text = KhachHang?.TENKHACHHANG;
-            labDiaChiNCC.Text = KhachHang?.DIACHI;
-            labDienThoaiNCC.Text = KhachHang?.DIENTHOAI;
-            labDCGiaoHang.Text = KhachHang?.DIACHIGIAOHANG;
-            labDCHangDong.Text = KhachHang?.DIACHIGIAOHOADON;
-            gbxInfo.Values.Description = "Ngày tạo HĐ: " + HoaDon?.NGAYTAOHOADON?.ToFormat("dd/MM/yyyy HH:mm:ss");
-
+            labTenNcc.Text = NhaCungCap?.TENNHACUNGCAP;
+            labDiaChiNCC.Text = NhaCungCap?.DIACHI;
+            labDienThoaiNCC.Text = NhaCungCap?.DIENTHOAI;
+            gbxInfo.Values.Description = @"Ngày tạo HĐ: " + HoaDon?.NGAYTAOHOADON?.ToFormat("dd/MM/yyyy HH:mm:ss");
             labTongTien.Values.ExtraText = HoaDon?.SOTIENTHANHTOAN_HD?.ToString("N");
             txtTienChi.Text = HoaDon?.SOTIENKHACHDUA_HD?.ToString("N");
             txtGhiChu.Text = HoaDon?.GHICHU_HD;

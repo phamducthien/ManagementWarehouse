@@ -11,16 +11,22 @@ using Repository.Pattern.UnitOfWork;
 using WH.Model.Properties;
 using WH.Service;
 using WH.Service.Repository.Core;
+using WH.Service.Service;
 
 namespace WH.Report.ReportForm
 {
     // ReSharper disable once InconsistentNaming
     public partial class frmTienLai : MetroForm
     {
-        private readonly DateTime _batDau;
-        private readonly DateTime _ketThuc;
-        private ITienLaiService _service;
-        private IUnitOfWorkAsync _unitOfWorkAsync;
+        private readonly DateTime _batdau;
+
+        private readonly DateTime _ketthuc;
+
+        //private IXuatKhoService service;
+        private ITienLaiService service;
+        //private ProfitModel model;
+
+        private IUnitOfWorkAsync unitOfWorkAsync;
 
         public frmTienLai(DateTime batDau, DateTime ketThuc)
         {
@@ -29,22 +35,23 @@ namespace WH.Report.ReportForm
 
             InitializeComponent();
 
-            this._batDau = batDau;
-            this._ketThuc = ketThuc;
+            _batdau = batDau;
+            _ketthuc = ketThuc;
         }
 
         private void ReloadUnitOfWork()
         {
-            if (_unitOfWorkAsync != null) _unitOfWorkAsync.Dispose();
-            _unitOfWorkAsync = null;
-            _unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
+            if (unitOfWorkAsync != null) unitOfWorkAsync.Dispose();
+            unitOfWorkAsync = null;
+            unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
         }
 
         private void frmSanPhamHoanTra_Load(object sender, EventArgs e)
         {
             ReloadUnitOfWork();
-            _service = new TienLaiService(_unitOfWorkAsync);
-            GetBills(_batDau, _ketThuc);
+            //service = new XuatKhoService(unitOfWorkAsync);
+            service = new TienLaiService(unitOfWorkAsync);
+            GetBills(_batdau, _ketthuc);
             FrmFlash.CloseSplash();
         }
 
@@ -53,20 +60,32 @@ namespace WH.Report.ReportForm
             dgvHoaDon.Rows.Clear();
             try
             {
-                var tienLais = _service.DanhSachTienLaiTheoKhachHang(
+                //var lstHoaDon = service.GetListHoaDonXuatKhoTheoNgay(Convert.ToDateTime(batDau.ToString("yyyy/MM/dd HH:mm:ss")), Convert.ToDateTime(ketThuc.ToString("yyyy/MM/dd HH:mm:ss")));
+                //if (lstHoaDon == null) return;
+                //if (lstHoaDon.Count == 0) return;
+
+                //model = new ProfitModel(lstHoaDon);
+
+                //dgvHoaDon.DataSource = null;
+                //dgvHoaDon.AutoGenerateColumns = false;
+                //dgvHoaDon.DataSource = model.dtOutput;
+                //dgvHoaDon.Refresh();
+
+
+                var dt = service.DanhSachTienLaiTheoKhachHang(
                     Convert.ToDateTime(batDau.ToString("yyyy/MM/dd HH:mm:ss")),
                     Convert.ToDateTime(ketThuc.ToString("yyyy/MM/dd HH:mm:ss")));
-                if (tienLais == null) return;
-                if (tienLais.Count == 0) return;
+                if (dt == null) return;
+                if (dt.Rows.Count == 0) return;
                 dgvHoaDon.DataSource = null;
                 dgvHoaDon.AutoGenerateColumns = false;
-                dgvHoaDon.DataSource = tienLais;
+                dgvHoaDon.DataSource = dt;
                 dgvHoaDon.Refresh();
 
-                lblTongTienNhap.Text = tienLais.AsEnumerable().Sum(x=>x.TongTienNhap).ToString("N2");
-                lblTongTienBan.Text = tienLais.AsEnumerable().Sum(x=>x.TongTienBan).ToString("N2");
-                labTongTienTra.Text = tienLais.AsEnumerable().Sum(x=>x.TongTienTra).ToString("N2");
-                var tongLai = tienLais.AsEnumerable().Sum(x=>x.TongTienLai);
+                lblTongTienNhap.Text = dt.AsEnumerable().Sum(r => r.Field<decimal>("TONGTIENNHAP")).ToString("N2");
+                lblTongTienBan.Text = dt.AsEnumerable().Sum(r => r.Field<decimal>("TONGTIENBAN")).ToString("N2");
+                labTongTienTra.Text = dt.AsEnumerable().Sum(r => r.Field<decimal>("TONGTIENTRA")).ToString("N2");
+                var tongLai = dt.AsEnumerable().Sum(r => r.Field<decimal>("TONGTIENLAI"));
                 lblTongTienLai.Text = tongLai.ToString("N2");
                 pictureTrangThai.Image = tongLai == 0 ? Resources.status3 :
                     tongLai < 0 ? Resources.status1 : Resources.status2;
@@ -74,7 +93,7 @@ namespace WH.Report.ReportForm
             catch (Exception ex)
             {
                 MessageBox.Show(@"Không có dữ liệu!\n" + ex.Message);
-                DialogResult = DialogResult.Cancel;
+                this.DialogResult = DialogResult.Cancel;
             }
         }
 
@@ -91,8 +110,10 @@ namespace WH.Report.ReportForm
             foreach (DataGridViewColumn column in dgvHoaDon.Columns)
             {
                 if (!column.Visible) continue;
-                dt.Columns.Add(column.HeaderText,
-                    column is DataGridViewImageColumn ? typeof(string) : column.ValueType);
+                if (column is DataGridViewImageColumn)
+                    dt.Columns.Add(column.HeaderText, typeof(string));
+                else
+                    dt.Columns.Add(column.HeaderText, column.ValueType);
             }
 
             //Adding the Rows
@@ -100,15 +121,16 @@ namespace WH.Report.ReportForm
             {
                 if (!row.Visible) continue;
                 dt.Rows.Add();
+                var i = 0;
                 foreach (DataGridViewCell cell in row.Cells)
                 {
                     if (!cell.Visible) continue;
                     if (cell is DataGridViewImageCell)
                     {
-                        var tienLai = Convert.ToDecimal(row.Cells["colTienLai"].Value.ToString());
-                        if (tienLai < 0)
+                        var TienLai = Convert.ToDecimal(row.Cells["colTienLai"].Value.ToString());
+                        if (TienLai < 0)
                             dt.Rows[dt.Rows.Count - 1][cell.ColumnIndex] = "Lỗ";
-                        else if (tienLai > 0)
+                        else if (TienLai > 0)
                             dt.Rows[dt.Rows.Count - 1][cell.ColumnIndex] = "Lãi";
                         else
                             dt.Rows[dt.Rows.Count - 1][cell.ColumnIndex] = "Huề";
@@ -117,6 +139,8 @@ namespace WH.Report.ReportForm
                     {
                         dt.Rows[dt.Rows.Count - 1][cell.ColumnIndex] = cell.Value.ToString();
                     }
+
+                    i++;
                 }
             }
 
@@ -131,20 +155,21 @@ namespace WH.Report.ReportForm
                 var dialog = new SaveFileDialog();
                 dialog.InitialDirectory = folderPath;
                 dialog.DefaultExt = "xlsx";
-                dialog.Filter = @"Excel WorkBook (*.xlsx)|*.xlsx";
+                dialog.Filter = "Excel WorkBook (*.xlsx)|*.xlsx";
                 dialog.AddExtension = true;
                 dialog.RestoreDirectory = true;
-                dialog.Title = @"Lưu File Tại";
+                dialog.Title = "Lưu File Tại";
                 dialog.FileName = @"TienLai_" + DateTime.Now.ToString("yyyyMMddHHmmss");
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     wb.SaveAs(dialog.FileName);
-                    MessageBox.Show(@"Đã xuất file tại :" + dialog.FileName);
+                    MessageBox.Show("Đã xuất file tại :" + dialog.FileName);
                     dialog.Dispose();
+                    dialog = null;
                 }
 
-                //Hết save dialog
+                //Hết savedialog
             }
         }
 
@@ -182,11 +207,14 @@ namespace WH.Report.ReportForm
                 }
             }
 
-            currRow.Selected = true;
-            dgv.FirstDisplayedScrollingRowIndex = currRow.Index;
-            dgv.Select();
-            dgv.Focus();
-            dgv.Refresh();
+            if (currRow != null)
+            {
+                currRow.Selected = true;
+                dgv.FirstDisplayedScrollingRowIndex = currRow.Index;
+                dgv.Select();
+                dgv.Focus();
+                dgv.Refresh();
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -244,6 +272,20 @@ namespace WH.Report.ReportForm
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             SearchProvider.SmartSearch(dgvHoaDon, txtTimKiem.Text.Trim());
+        }
+
+        private void dgvHoaDon_CellMouseDoubleClick_1(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            try
+            {
+                //string Ma = dgvHoaDon.SelectedRows[0].Cells["colMaHoaDon"].Value.ToString();
+                //PriceCalculateModelCollection collection = model.lstCollection.FirstOrDefault(x => x.MaHoaDon == Ma);
+                //frmChiTietHoaDonLaiLo frm = new frmChiTietHoaDonLaiLo(collection);
+                //frm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using HLVControl.Grid;
+﻿using ClosedXML.Excel;
+using HLVControl.Grid;
 using HLVControl.Grid.Data;
 using HLVControl.Grid.Events;
 using MetroUI.Forms;
@@ -6,24 +7,24 @@ using Repository.Pattern.UnitOfWork;
 using System;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using WH.Report.ReportForm;
 using WH.Report.ReportFunction;
 using WH.Service;
 using WH.Service.Repository.Core;
 
-namespace WH.GUI.ExportWarehouse
+namespace WH.Report.ReportForm
 {
     /// <summary>
     ///     Mô tả danh sách hóa đơn xuất kho
     /// </summary>
-    public partial class FrmListExportWarehouse : MetroForm
+    public partial class FrmCongNoKhachHang : MetroForm
     {
         private readonly ReportRules _exe;
         private IUnitOfWorkAsync _unitOfWorkAsync;
 
-        public FrmListExportWarehouse()
+        public FrmCongNoKhachHang()
         {
             InitializeComponent();
             _exe = new ReportRules();
@@ -31,7 +32,7 @@ namespace WH.GUI.ExportWarehouse
 
         private void ReloadUnitOfWork()
         {
-            _unitOfWorkAsync?.Dispose();
+            if (_unitOfWorkAsync != null) _unitOfWorkAsync.Dispose();
             _unitOfWorkAsync = null;
             _unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
         }
@@ -79,21 +80,30 @@ namespace WH.GUI.ExportWarehouse
             {
                 if (data == null) return;
                 if (data.Rows.Count == 0) return;
+                CalBill(data);
                 var count = 0;
-                foreach (DataRow drow in data.Rows)
+                foreach (DataRow dataRow in data.Rows)
                 {
                     var row = treeDanhMuc.CreateRow();
                     row.Cells.Add(new TreeListCell(count + 1));
-                    row.Cells.Add(new TreeListCell(drow[0].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[5]));
-                    row.Cells.Add(new TreeListCell(drow[7].ToString())); // MaCodeKhach hang
-                    row.Cells.Add(new TreeListCell(drow[8].ToString())); // barcode Khach Hang
-                    row.Cells.Add(new TreeListCell(drow[9].ToString())); // Ten Khach hang
-                    row.Cells.Add(new TreeListCell(drow[1].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[2].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[3].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[4].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[8].ToString()));
+                    row.Cells.Add(new TreeListCell(dataRow[0].ToString()));
+                    row.Cells.Add(new TreeListCell(dataRow[1]));
+                    row.Cells.Add(new TreeListCell(dataRow[2].ToString())); // MaCodeKhach hang
+                    row.Cells.Add(new TreeListCell(dataRow[3].ToString())); // barcode Khach Hang
+                    row.Cells.Add(new TreeListCell(dataRow[4].ToString())); // Ten Khach hang
+                    row.Cells.Add(new TreeListCell(dataRow[5].ToString()));
+                    row.Cells.Add(new TreeListCell(dataRow[6].ToString()));
+                    row.Cells.Add(new TreeListCell(dataRow[7].ToString()));
+                    var tinhTrang = "Chưa Thanh Toán";
+                    var soTienThanhToan = decimal.Parse(dataRow[8].ToString());
+                    var tongTienThu = decimal.Parse(dataRow[9].ToString());
+                    var congNo = soTienThanhToan - tongTienThu;
+                    if (congNo <= 0)
+                    {
+                        tinhTrang = "Đã Thanh Toán";
+                    }
+                    row.Cells.Add(new TreeListCell(congNo));
+                    row.Cells.Add(new TreeListCell(tinhTrang));
                     row.Tag = count;
 
                     treeDanhMuc.Rows.Add(row);
@@ -107,6 +117,19 @@ namespace WH.GUI.ExportWarehouse
             {
                 MessageBox.Show(@"Không thể tải thông tin!");
             }
+        }
+
+        private void CalBill(DataTable data)
+        {
+            //decimal dathu = _exe.Cmd_CalDaThu_CongNoKhachHang(data);
+            var conlai = _exe.Cmd_CalConLai_CongNoKhachHang(data);
+            //decimal tongtienhoadon = _exe.Cmd_calTongTienHoaDon_CongNoKhachHang(data);
+            //decimal giamgia = _exe.Cmd_calGiamGia_CongNoKhachHang(data);
+            //string sdathu = @" - Đã thu : " + string.Format("{0:####,0 đ}", dathu);
+            var sConLai = @" -> Tiền khách nợ: " + conlai.ToString("N");
+            //string sTienHoaDon = @"Tiền hóa đơn: " + string.Format("{0:####,0 đ}", tongtienhoadon);
+            //string sTienGiamGia = @" - Giảm giá: " + string.Format("{0:####,0 đ}", giamgia);
+            labDoanhThu.Text = sConLai; //sTienHoaDon + sTienGiamGia + sdathu + sConLai;
         }
 
         private void btnTheoNgay_Click(object sender, EventArgs e)
@@ -136,7 +159,66 @@ namespace WH.GUI.ExportWarehouse
 
         private void frmCongNoKhachHang_Load(object sender, EventArgs e)
         {
+            btnXemChiTiet.Enabled = true;
             LoadBill(GetTop10());
+        }
+
+        private void btnPrinter_Click(object sender, EventArgs e)
+        {
+            if (treeDanhMuc.Rows.Count <= 0) return;
+            var dt = new DataTable();
+            var numCol = treeDanhMuc.Columns.Count;
+            foreach (TreeListColumn column in treeDanhMuc.Columns) dt.Columns.Add(column.Text, typeof(string));
+
+            //Adding the Rows
+            foreach (TreeListRow row in treeDanhMuc.Rows)
+            {
+                dt.Rows.Add();
+                var cellIndex = 0;
+                foreach (TreeListCell cell in row.Cells)
+                {
+                    dt.Rows[dt.Rows.Count - 1][cellIndex++] = cell.Value.ToString();
+                    if (cellIndex == numCol)
+                        cellIndex = 0;
+                }
+            }
+
+            //Exporting to Excel
+            var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
+            using (var wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt, "Danh Sách Hóa Đơn Xuất");
+
+                //save file region here
+                var dialog = new SaveFileDialog();
+                dialog.InitialDirectory = folderPath;
+                dialog.DefaultExt = "xlsx";
+                dialog.Filter = "Excel WorkBook (*.xlsx)|*.xlsx";
+                dialog.AddExtension = true;
+                dialog.RestoreDirectory = true;
+                dialog.Title = "Lưu File Tại";
+                dialog.FileName = @"DSHoaDonXuatKho_" + DateTime.Now.ToString("yyyyMMddHHmmss");
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    wb.SaveAs(dialog.FileName);
+                    MessageBox.Show("Đã xuất file tại :" + dialog.FileName);
+                    dialog.Dispose();
+                    dialog = null;
+                }
+
+                //Hết savedialog
+            }
+
+            //if (treeDanhMuc.Rows.Count > 0)
+            //{
+            //    var export = new FrmDmExportExcel("CONGNOKHACHHANG_" + DateTime.Now.ToString("ddMMyyyy_HHmm"),
+            //        treeDanhMuc);
+            //    if (export.ShowDialog() == DialogResult.OK)
+            //    {
+            //    }
+            //}
         }
 
         //==============================================================
@@ -190,6 +272,13 @@ namespace WH.GUI.ExportWarehouse
         {
             switch (keyData)
             {
+                case Keys.Enter:
+                    if (treeDanhMuc.Focused)
+                        btnPrinter.PerformClick();
+                    if (txtTimKiem.Focused)
+                        btnTimKiem.PerformClick();
+                    return true;
+
                 case Keys.F2:
                     txtTimKiem.Select();
                     btnTimKiem.PerformClick();
@@ -255,14 +344,20 @@ namespace WH.GUI.ExportWarehouse
                     ReloadUnitOfWork();
                     IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
                     var hdKho = service.GetModelHoaDonXuat(id);
-                    if (hdKho == null) return;
-                    var lst = hdKho.HOADONXUATKHOCHITIETs.ToList();
-                    var frm = new FrmEditExportWarehouse(hdKho, lst, _unitOfWorkAsync);
-                    frm.ShowDialog(this);
+                    if (hdKho != null)
+                    {
+                        var lst = hdKho.HOADONXUATKHOCHITIETs.ToList();
+                        var frm = new frmChiTietHoaDonBanHang(hdKho, lst)
+                        {
+                            StartPosition = FormStartPosition.Manual
+                        };
+                        frm.ShowDialog(this);
+                    }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                //MessageBox.Show("Lỗi: Không thể chọn dữ liệu." + " " + ex.Message);
                 MessageBox.Show(@"Bạn hãy chọn lại hóa đơn cần xem.");
             }
         }
@@ -272,13 +367,36 @@ namespace WH.GUI.ExportWarehouse
             try
             {
                 treeDanhMuc.Refresh();
-                if (e.RelatedElement is TreeListRow)
+                if (e.RelatedElement is TreeListRow row)
                 {
+                    var id = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
+                    IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
+                    var hdKho = service.GetModelHoaDonXuat(id);
+                    btnXemChiTiet.Enabled = true;
                 }
             }
             catch (Exception)
             {
+                MessageBox.Show(@"Bạn hãy chọn lại hóa đơn cần xem.");
+                //MessageBox.Show("Lỗi: Không thể chọn dữ liệu." + " " + ex.Message);
+            }
+        }
+
+        private void btnXemChiTiet_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                treeDanhMuc.Refresh();
+                if (!(treeDanhMuc.SelectedElements[0] is TreeListRow row)) return;
+                var id = row.Cells["_colBillID"].Value.ToString();
+                ReloadUnitOfWork();
+                IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
+                var hdKho = service.GetModelHoaDonXuat(id);
+            }
+            catch (Exception)
+            {
+                //MessageBox.Show("Lỗi: Không thể chọn dữ liệu." + " " + ex.Message);
                 MessageBox.Show(@"Bạn hãy chọn lại hóa đơn cần xem.");
             }
         }

@@ -67,7 +67,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationModel.cs" />
-    <Compile Include="Dto\TienLai\TienLaiDto.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="FixedStrings.cs" />
     <Compile Include="GlobalContext.cs" />
@@ -135,7 +134,6 @@
   <ItemGroup>
     <None Include="Resources\status3.png" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

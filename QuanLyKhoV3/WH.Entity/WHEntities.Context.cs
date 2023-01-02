@@ -60,5 +60,6 @@ namespace WH.Entity
         public virtual DbSet<TEMP_HOADONXUATKHO> TEMP_HOADONXUATKHO { get; set; }
         public virtual DbSet<TEMP_HOADONXUATKHOCHITIET> TEMP_HOADONXUATKHOCHITIET { get; set; }
         public virtual DbSet<THONGTINTHE> THONGTINTHEs { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

@@ -1,13 +1,12 @@
-﻿using ComponentFactory.Krypton.Toolkit;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
 using HLVControl.Grid;
 using HLVControl.Grid.Data;
-using MetroUI.Forms;
-using System.ComponentModel;
-using System.Windows.Forms;
 
-namespace WH.GUI.ExportWarehouse
+namespace WH.Report.ReportForm
 {
-    partial class FrmListExportWarehouse : MetroForm
+    partial class FrmTraHangNhaCungCap
     {
         /// <summary>
         /// Required designer variable.
@@ -36,8 +35,9 @@ namespace WH.GUI.ExportWarehouse
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmListExportWarehouse));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmTraHangNhaCungCap));
             HLVControl.Grid.Render.MetroTreeListRenderer metroTreeListRenderer1 = new HLVControl.Grid.Render.MetroTreeListRenderer();
+            this.btnPrinter = new System.Windows.Forms.Button();
             this.btnTimKiem = new System.Windows.Forms.Button();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.btnAll = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
@@ -49,17 +49,36 @@ namespace WH.GUI.ExportWarehouse
             this._colBillID = new HLVControl.Grid.Data.TreeListColumn();
             this._colNgayTao = new HLVControl.Grid.Data.TreeListColumn();
             this._colMaCode = new HLVControl.Grid.Data.TreeListColumn();
-            this._colBarCode = new HLVControl.Grid.Data.TreeListColumn();
             this._colTenKH = new HLVControl.Grid.Data.TreeListColumn();
             this._colTongTien = new HLVControl.Grid.Data.TreeListColumn();
-            this._colTienKM = new HLVControl.Grid.Data.TreeListColumn();
-            this._colTienThu = new HLVControl.Grid.Data.TreeListColumn();
-            this._colConLai = new HLVControl.Grid.Data.TreeListColumn();
-            this._colTinhTrang = new HLVControl.Grid.Data.TreeListColumn();
             this.btnTheoNgay = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.CheckSet = new ComponentFactory.Krypton.Toolkit.KryptonCheckSet(this.components);
+            this.pnlInfo = new System.Windows.Forms.Panel();
+            this.labDoanhThu = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.CheckSet)).BeginInit();
+            this.pnlInfo.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // btnPrinter
+            // 
+            this.btnPrinter.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.btnPrinter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnPrinter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnPrinter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrinter.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrinter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnPrinter.Image = global::WH.Report.Properties.Resources.MayIn1;
+            this.btnPrinter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPrinter.Location = new System.Drawing.Point(1069, 9);
+            this.btnPrinter.Name = "btnPrinter";
+            this.btnPrinter.Size = new System.Drawing.Size(112, 45);
+            this.btnPrinter.TabIndex = 634;
+            this.btnPrinter.Tag = "timkiem";
+            this.btnPrinter.Text = "(Crtl+P)";
+            this.btnPrinter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrinter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrinter.UseVisualStyleBackColor = true;
+            this.btnPrinter.Click += new System.EventHandler(this.btnPrinter_Click);
             // 
             // btnTimKiem
             // 
@@ -69,7 +88,7 @@ namespace WH.GUI.ExportWarehouse
             this.btnTimKiem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTimKiem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTimKiem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.btnTimKiem.Image = global::WH.GUI.Properties.Resources.TimKiem;
+            this.btnTimKiem.Image = global::WH.Report.Properties.Resources.TimKiem;
             this.btnTimKiem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTimKiem.Location = new System.Drawing.Point(619, 9);
             this.btnTimKiem.Name = "btnTimKiem";
@@ -127,7 +146,7 @@ namespace WH.GUI.ExportWarehouse
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnExit.FlatAppearance.BorderSize = 0;
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExit.Image = global::WH.GUI.Properties.Resources.Exit;
+            this.btnExit.Image = global::WH.Report.Properties.Resources.Exit;
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnExit.Location = new System.Drawing.Point(1187, 18);
             this.btnExit.Name = "btnExit";
@@ -157,13 +176,8 @@ namespace WH.GUI.ExportWarehouse
             this.treeDanhMuc.Columns.Add(this._colBillID);
             this.treeDanhMuc.Columns.Add(this._colNgayTao);
             this.treeDanhMuc.Columns.Add(this._colMaCode);
-            this.treeDanhMuc.Columns.Add(this._colBarCode);
             this.treeDanhMuc.Columns.Add(this._colTenKH);
             this.treeDanhMuc.Columns.Add(this._colTongTien);
-            this.treeDanhMuc.Columns.Add(this._colTienKM);
-            this.treeDanhMuc.Columns.Add(this._colTienThu);
-            this.treeDanhMuc.Columns.Add(this._colConLai);
-            this.treeDanhMuc.Columns.Add(this._colTinhTrang);
             this.treeDanhMuc.Cursor = System.Windows.Forms.Cursors.Default;
             this.treeDanhMuc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeDanhMuc.FixedColumnCount = 0;
@@ -210,7 +224,7 @@ namespace WH.GUI.ExportWarehouse
             this.treeDanhMuc.ShowSelection = true;
             this.treeDanhMuc.ShowSelectionBorder = true;
             this.treeDanhMuc.ShowSummaryRow = false;
-            this.treeDanhMuc.Size = new System.Drawing.Size(1188, 401);
+            this.treeDanhMuc.Size = new System.Drawing.Size(1188, 368);
             this.treeDanhMuc.SummaryRowHeight = 45;
             this.treeDanhMuc.TabIndex = 635;
             this.treeDanhMuc.Text = "treeListView";
@@ -312,35 +326,11 @@ namespace WH.GUI.ExportWarehouse
             this._colMaCode.Name = "_colMaCode";
             this._colMaCode.ShowCellSelection = true;
             this._colMaCode.SortDirection = System.Windows.Forms.SortOrder.None;
-            this._colMaCode.Text = "Mã Code";
+            this._colMaCode.Text = "Mã NCC";
             this._colMaCode.TextNonDisplay = null;
             this._colMaCode.Visible = true;
             this._colMaCode.Width = 101;
             this._colMaCode.WordWrap = false;
-            // 
-            // _colBarCode
-            // 
-            this._colBarCode.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
-            this._colBarCode.AlignCellVertical = System.Drawing.StringAlignment.Center;
-            this._colBarCode.AlignHeaderHorizontal = System.Drawing.StringAlignment.Near;
-            this._colBarCode.AlignHeaderVertical = System.Drawing.StringAlignment.Near;
-            this._colBarCode.AllowEdit = false;
-            this._colBarCode.AllowResize = true;
-            this._colBarCode.ColumnImage = null;
-            this._colBarCode.DataPropertyName = null;
-            this._colBarCode.Filter = null;
-            this._colBarCode.FormatString = "";
-            this._colBarCode.Grouped = false;
-            this._colBarCode.HeaderFormatFlags = System.Drawing.StringFormatFlags.NoWrap;
-            this._colBarCode.MinWidth = 0;
-            this._colBarCode.Name = "_colBarCode";
-            this._colBarCode.ShowCellSelection = true;
-            this._colBarCode.SortDirection = System.Windows.Forms.SortOrder.None;
-            this._colBarCode.Text = "Barcode";
-            this._colBarCode.TextNonDisplay = null;
-            this._colBarCode.Visible = true;
-            this._colBarCode.Width = 100;
-            this._colBarCode.WordWrap = false;
             // 
             // _colTenKH
             // 
@@ -360,7 +350,7 @@ namespace WH.GUI.ExportWarehouse
             this._colTenKH.Name = "_colTenKH";
             this._colTenKH.ShowCellSelection = true;
             this._colTenKH.SortDirection = System.Windows.Forms.SortOrder.None;
-            this._colTenKH.Text = "Tên KH";
+            this._colTenKH.Text = "Tên NCC";
             this._colTenKH.TextNonDisplay = null;
             this._colTenKH.Visible = true;
             this._colTenKH.Width = 200;
@@ -390,102 +380,6 @@ namespace WH.GUI.ExportWarehouse
             this._colTongTien.Width = 120;
             this._colTongTien.WordWrap = false;
             // 
-            // _colTienKM
-            // 
-            this._colTienKM.AlignCellHorizontal = System.Drawing.StringAlignment.Far;
-            this._colTienKM.AlignCellVertical = System.Drawing.StringAlignment.Center;
-            this._colTienKM.AlignHeaderHorizontal = System.Drawing.StringAlignment.Center;
-            this._colTienKM.AlignHeaderVertical = System.Drawing.StringAlignment.Center;
-            this._colTienKM.AllowEdit = false;
-            this._colTienKM.AllowResize = false;
-            this._colTienKM.ColumnImage = null;
-            this._colTienKM.DataPropertyName = null;
-            this._colTienKM.Filter = null;
-            this._colTienKM.FormatString = "";
-            this._colTienKM.Grouped = false;
-            this._colTienKM.HeaderFormatFlags = System.Drawing.StringFormatFlags.NoWrap;
-            this._colTienKM.MinWidth = 120;
-            this._colTienKM.Name = "_colTienKM";
-            this._colTienKM.ShowCellSelection = true;
-            this._colTienKM.SortDirection = System.Windows.Forms.SortOrder.None;
-            this._colTienKM.Text = "Tiền KM";
-            this._colTienKM.TextNonDisplay = "Tiền khuyến mãi cho khách hàng.";
-            this._colTienKM.Visible = true;
-            this._colTienKM.Width = 120;
-            this._colTienKM.WordWrap = false;
-            // 
-            // _colTienThu
-            // 
-            this._colTienThu.AlignCellHorizontal = System.Drawing.StringAlignment.Far;
-            this._colTienThu.AlignCellVertical = System.Drawing.StringAlignment.Center;
-            this._colTienThu.AlignHeaderHorizontal = System.Drawing.StringAlignment.Center;
-            this._colTienThu.AlignHeaderVertical = System.Drawing.StringAlignment.Center;
-            this._colTienThu.AllowEdit = false;
-            this._colTienThu.AllowResize = false;
-            this._colTienThu.ColumnImage = null;
-            this._colTienThu.DataPropertyName = null;
-            this._colTienThu.Filter = null;
-            this._colTienThu.FormatString = "";
-            this._colTienThu.Grouped = false;
-            this._colTienThu.HeaderFormatFlags = System.Drawing.StringFormatFlags.NoWrap;
-            this._colTienThu.MinWidth = 120;
-            this._colTienThu.Name = "_colTienThu";
-            this._colTienThu.ShowCellSelection = true;
-            this._colTienThu.SortDirection = System.Windows.Forms.SortOrder.None;
-            this._colTienThu.Text = "Đã thu";
-            this._colTienThu.TextNonDisplay = "Số tiền khách hàng đã trả trước";
-            this._colTienThu.Visible = true;
-            this._colTienThu.Width = 120;
-            this._colTienThu.WordWrap = false;
-            // 
-            // _colConLai
-            // 
-            this._colConLai.AlignCellHorizontal = System.Drawing.StringAlignment.Far;
-            this._colConLai.AlignCellVertical = System.Drawing.StringAlignment.Center;
-            this._colConLai.AlignHeaderHorizontal = System.Drawing.StringAlignment.Center;
-            this._colConLai.AlignHeaderVertical = System.Drawing.StringAlignment.Center;
-            this._colConLai.AllowEdit = false;
-            this._colConLai.AllowResize = false;
-            this._colConLai.ColumnImage = null;
-            this._colConLai.DataPropertyName = null;
-            this._colConLai.Filter = null;
-            this._colConLai.FormatString = "";
-            this._colConLai.Grouped = false;
-            this._colConLai.HeaderFormatFlags = System.Drawing.StringFormatFlags.NoWrap;
-            this._colConLai.MinWidth = 120;
-            this._colConLai.Name = "_colConLai";
-            this._colConLai.ShowCellSelection = true;
-            this._colConLai.SortDirection = System.Windows.Forms.SortOrder.None;
-            this._colConLai.Text = "Công nợ";
-            this._colConLai.TextNonDisplay = null;
-            this._colConLai.Visible = true;
-            this._colConLai.Width = 120;
-            this._colConLai.WordWrap = false;
-            // 
-            // _colTinhTrang
-            // 
-            this._colTinhTrang.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
-            this._colTinhTrang.AlignCellVertical = System.Drawing.StringAlignment.Center;
-            this._colTinhTrang.AlignHeaderHorizontal = System.Drawing.StringAlignment.Near;
-            this._colTinhTrang.AlignHeaderVertical = System.Drawing.StringAlignment.Near;
-            this._colTinhTrang.AllowEdit = false;
-            this._colTinhTrang.AllowResize = true;
-            this._colTinhTrang.ColumnImage = null;
-            this._colTinhTrang.DataPropertyName = null;
-            this._colTinhTrang.Filter = null;
-            this._colTinhTrang.FormatString = "";
-            this._colTinhTrang.Grouped = false;
-            this._colTinhTrang.HeaderFormatFlags = System.Drawing.StringFormatFlags.NoWrap;
-            this._colTinhTrang.MinWidth = 0;
-            this._colTinhTrang.Name = "_colTinhTrang";
-            this._colTinhTrang.ShowCellSelection = true;
-            this._colTinhTrang.SortDirection = System.Windows.Forms.SortOrder.None;
-            this._colTinhTrang.Text = "Tình Trạng";
-            this._colTinhTrang.TextNonDisplay = null;
-            this._colTinhTrang.Visible = true;
-            this._colTinhTrang.Width = 100;
-            this._colTinhTrang.WordWrap = false;
-            // 
             // btnTheoNgay
             // 
             this.btnTheoNgay.Location = new System.Drawing.Point(882, 9);
@@ -503,32 +397,60 @@ namespace WH.GUI.ExportWarehouse
             this.CheckSet.CheckButtons.Add(this.btnTop10);
             this.CheckSet.CheckedButton = this.btnTop10;
             // 
-            // FrmListExportWarehouse
+            // pnlInfo
+            // 
+            this.pnlInfo.BackColor = System.Drawing.Color.White;
+            this.pnlInfo.Controls.Add(this.labDoanhThu);
+            this.pnlInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlInfo.Location = new System.Drawing.Point(20, 428);
+            this.pnlInfo.Name = "pnlInfo";
+            this.pnlInfo.Size = new System.Drawing.Size(1188, 33);
+            this.pnlInfo.TabIndex = 637;
+            // 
+            // labDoanhThu
+            // 
+            this.labDoanhThu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labDoanhThu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labDoanhThu.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labDoanhThu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.labDoanhThu.Location = new System.Drawing.Point(0, 0);
+            this.labDoanhThu.Name = "labDoanhThu";
+            this.labDoanhThu.Size = new System.Drawing.Size(1188, 33);
+            this.labDoanhThu.TabIndex = 1;
+            this.labDoanhThu.Text = "0 vnđ";
+            this.labDoanhThu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // FrmTraHangNhaCungCap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1228, 481);
             this.ControlBox = false;
             this.Controls.Add(this.treeDanhMuc);
+            this.Controls.Add(this.pnlInfo);
             this.Controls.Add(this.btnTheoNgay);
+            this.Controls.Add(this.btnPrinter);
             this.Controls.Add(this.btnTimKiem);
             this.Controls.Add(this.txtTimKiem);
             this.Controls.Add(this.btnAll);
             this.Controls.Add(this.btnTop50);
             this.Controls.Add(this.btnTop10);
             this.Controls.Add(this.btnExit);
-            this.Name = "FrmListExportWarehouse";
+            this.Name = "FrmTraHangNhaCungCap";
             this.Resizable = false;
-            this.Text = "Danh Sách Hóa Đơn Xuất Kho";
+            this.Text = "DS Hóa Đơn Xuất Kho Trả Hàng NCC";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmCongNoKhachHang_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CheckSet)).EndInit();
+            this.pnlInfo.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
+
+        private Button btnPrinter;
         private Button btnTimKiem;
         private TextBox txtTimKiem;
         private KryptonCheckButton btnAll;
@@ -538,16 +460,13 @@ namespace WH.GUI.ExportWarehouse
         private TreeListView treeDanhMuc;
         private TreeListColumn _colStt;
         private TreeListColumn _colBillID;
-        private TreeListColumn _colTienKM;
         private TreeListColumn _colTongTien;
-        private TreeListColumn _colTienThu;
-        private TreeListColumn _colConLai;
         private KryptonCheckButton btnTheoNgay;
         private TreeListColumn _colNgayTao;
         private KryptonCheckSet CheckSet;
-        private TreeListColumn _colTinhTrang;
         private TreeListColumn _colTenKH;
         private TreeListColumn _colMaCode;
-        private TreeListColumn _colBarCode;
+        private Panel pnlInfo;
+        private Label labDoanhThu;
     }
 }
