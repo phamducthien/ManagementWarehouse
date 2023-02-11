@@ -189,7 +189,7 @@ namespace WH.Report.ReportForm
             this.treeDanhMuc.Columns.Add(this._colConLai);
             this.treeDanhMuc.Columns.Add(this._colNgayTao);
             this.treeDanhMuc.Columns.Add(this._colNhanVien);
-            this.treeDanhMuc.Cursor = System.Windows.Forms.Cursors.VSplit;
+            this.treeDanhMuc.Cursor = System.Windows.Forms.Cursors.Default;
             this.treeDanhMuc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeDanhMuc.FixedColumnCount = 0;
             this.treeDanhMuc.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -471,7 +471,9 @@ namespace WH.Report.ReportForm
             this._colNgayTao.AllowResize = true;
             this._colNgayTao.ColumnImage = null;
             this._colNgayTao.DataPropertyName = null;
+            this._colNgayTao.Editor = typeof(HLVControl.Grid.Editor.TreeListDateTimeEditor);
             this._colNgayTao.Filter = null;
+            this._colNgayTao.FilterRowEditor = typeof(HLVControl.Grid.Editor.TreeListDateTimeEditor);
             this._colNgayTao.FormatString = "";
             this._colNgayTao.Grouped = false;
             this._colNgayTao.HeaderFormatFlags = System.Drawing.StringFormatFlags.NoWrap;

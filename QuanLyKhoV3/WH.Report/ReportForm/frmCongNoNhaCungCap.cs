@@ -20,7 +20,7 @@ namespace WH.Report.ReportForm
     public partial class FrmCongNoNhaCungCap : MetroForm
     {
         private readonly ReportRules _exe;
-        private IUnitOfWorkAsync unitOfWorkAsync;
+        private IUnitOfWorkAsync _unitOfWorkAsync;
 
         public FrmCongNoNhaCungCap()
         {
@@ -30,9 +30,9 @@ namespace WH.Report.ReportForm
 
         private void ReloadUnitOfWork()
         {
-            if (unitOfWorkAsync != null) unitOfWorkAsync.Dispose();
-            unitOfWorkAsync = null;
-            unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
+            if (_unitOfWorkAsync != null) _unitOfWorkAsync.Dispose();
+            _unitOfWorkAsync = null;
+            _unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
         }
 
         private DataTable GetBills(string soLuongHdLoad, string batDau, string ketThuc)
@@ -339,7 +339,7 @@ namespace WH.Report.ReportForm
                 {
                     var ID = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
-                    INhapKhoService service = new NhapKhoService(unitOfWorkAsync);
+                    INhapKhoService service = new NhapKhoService(_unitOfWorkAsync);
                     var hdKho = service.GetModelHoaDonNhap(ID);
                     if (hdKho != null)
                     {
@@ -365,7 +365,7 @@ namespace WH.Report.ReportForm
                 {
                     var ID = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
-                    INhapKhoService service = new NhapKhoService(unitOfWorkAsync);
+                    INhapKhoService service = new NhapKhoService(_unitOfWorkAsync);
                     //HOADONNHAPKHO hdKho = service.GetModelHoaDonNhap(ID);
                     btnXemChiTiet.Enabled = true;
                 }
@@ -386,7 +386,7 @@ namespace WH.Report.ReportForm
                 {
                     var ID = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
-                    INhapKhoService service = new NhapKhoService(unitOfWorkAsync);
+                    INhapKhoService service = new NhapKhoService(_unitOfWorkAsync);
                     //HOADONNHAPKHO hdKho = service.GetModelHoaDonNhap(ID);
                 }
             }
