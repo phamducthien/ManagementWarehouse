@@ -20,12 +20,12 @@ namespace WH.Report.ReportForm
     /// <summary>
     ///     Mô tả danh sách hóa đơn xuất kho
     /// </summary>
-    public partial class frmCongNoNhaCungCap : MetroForm
+    public partial class FrmCongNoNhaCungCap : MetroForm
     {
         private readonly ReportRules _exe;
         private IUnitOfWorkAsync _unitOfWorkAsync;
 
-        public frmCongNoNhaCungCap()
+        public FrmCongNoNhaCungCap()
         {
             InitializeComponent();
             _exe = new ReportRules();
@@ -99,19 +99,6 @@ namespace WH.Report.ReportForm
                     row.Cells.Add(new TreeListCell(dataRow[4].ToString().ToDecimal().ToString("N")));
 
                     row.Cells.Add(new TreeListCell(dataRow[6].ToString()));
-
-                    //var tinhTrang = "Chưa Thanh Toán";
-                    //var soTienThanhToan = decimal.Parse(dataRow[8].ToString());
-                    //var tongTienThu = decimal.Parse(dataRow[9].ToString());
-                    //var congNo = soTienThanhToan - tongTienThu;
-                    //if (congNo <= 0)
-                    //{
-                    //    tinhTrang = "Đã Thanh Toán";
-                    //}
-                    //row.Cells.Add(new TreeListCell(congNo));
-                    //row.Cells.Add(new TreeListCell(tinhTrang));
-                    //row.Tag = count;
-
                     treeDanhMuc.Rows.Add(row);
                     count++;
                 }
@@ -127,15 +114,16 @@ namespace WH.Report.ReportForm
 
         private void CalBill(DataTable data)
         {
-            //decimal dathu = _exe.Cmd_CalDaChi_CongNoNhaCungCap(data);
-            var conlai = _exe.Cmd_CalConLai_CongNoNhaCungCap(data);
-            //decimal tongtienhoadon = _exe.Cmd_calTongTienHoaDon_CongNoNhaCungCap(data);
-            //decimal giamgia = _exe.Cmd_calGiamGia_CongNoNhaCungCap(data);
-            //string sdathu = @" - Đã chi : " + string.Format("{0:####,0 đ}", dathu);
-            var sConLai = @" -> Tiền nợ : " + conlai.ToString("N");
-            //string sTienHoaDon = @"Tiền hóa đơn : " + string.Format("{0:####,0 đ}", tongtienhoadon);
-            //string sTienGiamGia = @" - Giảm giá : " + string.Format("{0:####,0 đ}", giamgia);
-            labDoanhThu.Text = sConLai; //sTienHoaDon + sTienGiamGia + sdathu + sConLai;
+            if (data != null && data.Rows.Count > 0)
+            {
+                var conLai = _exe.Cmd_CalConLai_CongNoNhaCungCap(data);
+                var sConLai = @" -> Tiền nợ : " + conLai.ToString("N");
+                labDoanhThu.Text = sConLai; 
+            }
+            else
+            {
+                labDoanhThu.Text = @"Không có dữ liệu!";
+            }
         }
 
         private void btnTheoNgay_Click(object sender, EventArgs e)
@@ -165,7 +153,6 @@ namespace WH.Report.ReportForm
 
         private void frmCongNoKhachHang_Load(object sender, EventArgs e)
         {
-            btnXemChiTiet.Enabled = true;
             LoadBill(GetTop10());
         }
 
@@ -194,37 +181,27 @@ namespace WH.Report.ReportForm
             if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
             using (var wb = new XLWorkbook())
             {
-                wb.Worksheets.Add(dt, "Danh Sách Hóa Đơn Xuất");
+                wb.Worksheets.Add(dt, "Danh Sách Hóa Đơn Nhập Kho");
 
                 //save file region here
                 var dialog = new SaveFileDialog();
                 dialog.InitialDirectory = folderPath;
                 dialog.DefaultExt = "xlsx";
-                dialog.Filter = "Excel WorkBook (*.xlsx)|*.xlsx";
+                dialog.Filter = @"Excel WorkBook (*.xlsx)|*.xlsx";
                 dialog.AddExtension = true;
                 dialog.RestoreDirectory = true;
-                dialog.Title = "Lưu File Tại";
-                dialog.FileName = @"DSHoaDonXuatKho_" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                dialog.Title = @"Lưu File Tại";
+                dialog.FileName = @"DSHoaDonNhapKho" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     wb.SaveAs(dialog.FileName);
-                    MessageBox.Show("Đã xuất file tại :" + dialog.FileName);
+                    MessageBox.Show(@"Đã xuất file tại :" + dialog.FileName);
                     dialog.Dispose();
                     dialog = null;
                 }
 
-                //Hết savedialog
             }
-
-            //if (treeDanhMuc.Rows.Count > 0)
-            //{
-            //    var export = new FrmDmExportExcel("CONGNOKHACHHANG_" + DateTime.Now.ToString("ddMMyyyy_HHmm"),
-            //        treeDanhMuc);
-            //    if (export.ShowDialog() == DialogResult.OK)
-            //    {
-            //    }
-            //}
         }
 
         //==============================================================
@@ -344,27 +321,24 @@ namespace WH.Report.ReportForm
             try
             {
                 treeDanhMuc.Refresh();
-                if (e.RelatedElement is TreeListRow row)
+                var row = e.RelatedElement as TreeListRow;
+                if (row != null)
                 {
-                    var id = row.Cells["_colBillID"].Value.ToString();
+                    var ID = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
-                    IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
-                    var hdKho = service.GetModelHoaDonXuat(id);
+                    INhapKhoService service = new NhapKhoService(_unitOfWorkAsync);
+                    var hdKho = service.GetModelHoaDonNhap(ID);
                     if (hdKho != null)
                     {
-                        var lst = hdKho.HOADONXUATKHOCHITIETs.ToList();
-                        var frm = new frmChiTietHoaDonBanHang(hdKho, lst)
-                        {
-                            StartPosition = FormStartPosition.Manual
-                        };
+                        var lst = hdKho.HOADONHAPKHOCHITIETs.OrderByDescending(s => s.GHICHU_CT).ToList();
+                        var frm = new frmChiTietHoaDonNhapHang(hdKho, lst);
                         frm.ShowDialog(this);
                     }
                 }
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Lỗi: Không thể chọn dữ liệu." + " " + ex.Message);
-                MessageBox.Show(@"Bạn hãy chọn lại hóa đơn cần xem.");
+                MessageBox.Show("Lỗi: Không thể chọn dữ liệu." + " " + ex.Message);
             }
         }
 
@@ -373,19 +347,19 @@ namespace WH.Report.ReportForm
             try
             {
                 treeDanhMuc.Refresh();
-                if (e.RelatedElement is TreeListRow row)
+                var row = e.RelatedElement as TreeListRow;
+                if (row != null)
                 {
-                    var id = row.Cells["_colBillID"].Value.ToString();
+                    var ID = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
-                    IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
-                    var hdKho = service.GetModelHoaDonXuat(id);
+                    INhapKhoService service = new NhapKhoService(_unitOfWorkAsync);
+                    //HOADONNHAPKHO hdKho = service.GetModelHoaDonNhap(ID);
                     btnXemChiTiet.Enabled = true;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show(@"Bạn hãy chọn lại hóa đơn cần xem.");
-                //MessageBox.Show("Lỗi: Không thể chọn dữ liệu." + " " + ex.Message);
+                MessageBox.Show("Lỗi: Không thể chọn dữ liệu." + " " + ex.Message);
             }
         }
 
@@ -394,16 +368,18 @@ namespace WH.Report.ReportForm
             try
             {
                 treeDanhMuc.Refresh();
-                if (!(treeDanhMuc.SelectedElements[0] is TreeListRow row)) return;
-                var id = row.Cells["_colBillID"].Value.ToString();
-                ReloadUnitOfWork();
-                IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
-                var hdKho = service.GetModelHoaDonXuat(id);
+                var row = treeDanhMuc.SelectedElements[0] as TreeListRow;
+                if (row != null)
+                {
+                    var ID = row.Cells["_colBillID"].Value.ToString();
+                    ReloadUnitOfWork();
+                    INhapKhoService service = new NhapKhoService(_unitOfWorkAsync);
+                    //HOADONNHAPKHO hdKho = service.GetModelHoaDonNhap(ID);
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //MessageBox.Show("Lỗi: Không thể chọn dữ liệu." + " " + ex.Message);
-                MessageBox.Show(@"Bạn hãy chọn lại hóa đơn cần xem.");
+                MessageBox.Show("Lỗi: Không thể chọn dữ liệu." + " " + ex.Message);
             }
         }
     }

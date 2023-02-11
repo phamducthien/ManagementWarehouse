@@ -77,7 +77,7 @@ namespace WH.Report
         private void btnCongNo_NCC_Click(object sender, EventArgs e)
         {
             Hide();
-            var frm = new frmCongNoNhaCungCap();
+            var frm = new FrmCongNoNhaCungCap();
             frm.ShowDialog();
             Show();
         }
