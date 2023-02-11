@@ -140,12 +140,6 @@
     <Compile Include="ReportForm\frmChiTietSanPhamTraHang.Designer.cs">
       <DependentUpon>frmChiTietSanPhamTraHang.cs</DependentUpon>
     </Compile>
-    <Compile Include="ReportForm\frmCongNoNhaCungCap.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ReportForm\frmCongNoNhaCungCap.designer.cs">
-      <DependentUpon>frmCongNoNhaCungCap.cs</DependentUpon>
-    </Compile>
     <Compile Include="ReportForm\frmTienLai.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -226,11 +220,11 @@
     <Compile Include="ReportForm\FrmCongNoKhachHang.designer.cs">
       <DependentUpon>FrmCongNoKhachHang.cs</DependentUpon>
     </Compile>
-    <Compile Include="ReportForm\frmCongNoNhaCungCap123123.cs">
+    <Compile Include="ReportForm\frmCongNoNhaCungCap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ReportForm\frmCongNoNhaCungCap123123.designer.cs">
-      <DependentUpon>frmCongNoNhaCungCap123123.cs</DependentUpon>
+    <Compile Include="ReportForm\frmCongNoNhaCungCap.designer.cs">
+      <DependentUpon>frmCongNoNhaCungCap.cs</DependentUpon>
     </Compile>
     <Compile Include="ReportForm\frmDM_ExportExcel.cs">
       <SubType>Form</SubType>
@@ -311,9 +305,6 @@
     <EmbeddedResource Include="ReportForm\frmChiTietSanPhamTraHang.resx">
       <DependentUpon>frmChiTietSanPhamTraHang.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReportForm\frmCongNoNhaCungCap.resx">
-      <DependentUpon>frmCongNoNhaCungCap.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ReportForm\frmTienLai.resx">
       <DependentUpon>frmTienLai.cs</DependentUpon>
     </EmbeddedResource>
@@ -363,8 +354,8 @@
     <EmbeddedResource Include="ReportForm\FrmCongNoKhachHang.resx">
       <DependentUpon>FrmCongNoKhachHang.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReportForm\frmCongNoNhaCungCap123123.resx">
-      <DependentUpon>frmCongNoNhaCungCap123123.cs</DependentUpon>
+    <EmbeddedResource Include="ReportForm\frmCongNoNhaCungCap.resx">
+      <DependentUpon>frmCongNoNhaCungCap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForm\frmDM_ExportExcel.resx">
       <DependentUpon>frmDM_ExportExcel.cs</DependentUpon>
