@@ -47,15 +47,15 @@ namespace WH.Report.ReportForm
             this.treeDanhMuc = new HLVControl.Grid.TreeListView();
             this._colStt = new HLVControl.Grid.Data.TreeListColumn();
             this._colBillID = new HLVControl.Grid.Data.TreeListColumn();
-            this._colTenNCC = new HLVControl.Grid.Data.TreeListColumn();
+            this._colNgayTao = new HLVControl.Grid.Data.TreeListColumn();
             this._colDienThoai = new HLVControl.Grid.Data.TreeListColumn();
             this._colDiDong = new HLVControl.Grid.Data.TreeListColumn();
+            this._colTenNCC = new HLVControl.Grid.Data.TreeListColumn();
             this._colTongTien = new HLVControl.Grid.Data.TreeListColumn();
             this._colTienKM = new HLVControl.Grid.Data.TreeListColumn();
             this._colTienThu = new HLVControl.Grid.Data.TreeListColumn();
             this._colConLai = new HLVControl.Grid.Data.TreeListColumn();
-            this._colNgayTao = new HLVControl.Grid.Data.TreeListColumn();
-            this._colNhanVien = new HLVControl.Grid.Data.TreeListColumn();
+            this._colTrangThai = new HLVControl.Grid.Data.TreeListColumn();
             this.btnTheoNgay = new ComponentFactory.Krypton.Toolkit.KryptonCheckButton();
             this.CheckSet = new ComponentFactory.Krypton.Toolkit.KryptonCheckSet(this.components);
             this.pnlInfo = new System.Windows.Forms.Panel();
@@ -180,6 +180,7 @@ namespace WH.Report.ReportForm
             this.treeDanhMuc.ColumnHeadersHeight = 40;
             this.treeDanhMuc.Columns.Add(this._colStt);
             this.treeDanhMuc.Columns.Add(this._colBillID);
+            this.treeDanhMuc.Columns.Add(this._colNgayTao);
             this.treeDanhMuc.Columns.Add(this._colTenNCC);
             this.treeDanhMuc.Columns.Add(this._colDienThoai);
             this.treeDanhMuc.Columns.Add(this._colDiDong);
@@ -187,9 +188,8 @@ namespace WH.Report.ReportForm
             this.treeDanhMuc.Columns.Add(this._colTienKM);
             this.treeDanhMuc.Columns.Add(this._colTienThu);
             this.treeDanhMuc.Columns.Add(this._colConLai);
-            this.treeDanhMuc.Columns.Add(this._colNgayTao);
-            this.treeDanhMuc.Columns.Add(this._colNhanVien);
-            this.treeDanhMuc.Cursor = System.Windows.Forms.Cursors.VSplit;
+            this.treeDanhMuc.Columns.Add(this._colTrangThai);
+            this.treeDanhMuc.Cursor = System.Windows.Forms.Cursors.Default;
             this.treeDanhMuc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeDanhMuc.FixedColumnCount = 0;
             this.treeDanhMuc.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -283,7 +283,7 @@ namespace WH.Report.ReportForm
             this._colBillID.FormatString = "";
             this._colBillID.Grouped = false;
             this._colBillID.HeaderFormatFlags = System.Drawing.StringFormatFlags.NoWrap;
-            this._colBillID.MinWidth = 200;
+            this._colBillID.MinWidth = 120;
             this._colBillID.Name = "_colBillID";
             this._colBillID.ShowCellSelection = true;
             this._colBillID.SortDirection = System.Windows.Forms.SortOrder.None;
@@ -292,6 +292,80 @@ namespace WH.Report.ReportForm
             this._colBillID.Visible = true;
             this._colBillID.Width = 200;
             this._colBillID.WordWrap = false;
+            // 
+            // _colNgayTao
+            // 
+            this._colNgayTao.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
+            this._colNgayTao.AlignCellVertical = System.Drawing.StringAlignment.Center;
+            this._colNgayTao.AlignHeaderHorizontal = System.Drawing.StringAlignment.Near;
+            this._colNgayTao.AlignHeaderVertical = System.Drawing.StringAlignment.Near;
+            this._colNgayTao.AllowEdit = false;
+            this._colNgayTao.AllowResize = true;
+            this._colNgayTao.ColumnImage = null;
+            this._colNgayTao.DataPropertyName = null;
+            this._colNgayTao.Editor = typeof(HLVControl.Grid.Editor.TreeListDateTimeEditor);
+            this._colNgayTao.Filter = null;
+            this._colNgayTao.FilterRowEditor = typeof(HLVControl.Grid.Editor.TreeListDateTimeEditor);
+            this._colNgayTao.FormatString = "";
+            this._colNgayTao.Grouped = false;
+            this._colNgayTao.HeaderFormatFlags = System.Drawing.StringFormatFlags.NoWrap;
+            this._colNgayTao.MinWidth = 0;
+            this._colNgayTao.Name = "_colNgayTao";
+            this._colNgayTao.ShowCellSelection = true;
+            this._colNgayTao.SortDirection = System.Windows.Forms.SortOrder.None;
+            this._colNgayTao.Text = "Ngày Tạo";
+            this._colNgayTao.TextNonDisplay = null;
+            this._colNgayTao.Visible = true;
+            this._colNgayTao.Width = 121;
+            this._colNgayTao.WordWrap = false;
+            // 
+            // _colDienThoai
+            // 
+            this._colDienThoai.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
+            this._colDienThoai.AlignCellVertical = System.Drawing.StringAlignment.Center;
+            this._colDienThoai.AlignHeaderHorizontal = System.Drawing.StringAlignment.Near;
+            this._colDienThoai.AlignHeaderVertical = System.Drawing.StringAlignment.Near;
+            this._colDienThoai.AllowEdit = false;
+            this._colDienThoai.AllowResize = true;
+            this._colDienThoai.ColumnImage = null;
+            this._colDienThoai.DataPropertyName = null;
+            this._colDienThoai.Filter = null;
+            this._colDienThoai.FormatString = "";
+            this._colDienThoai.Grouped = false;
+            this._colDienThoai.HeaderFormatFlags = System.Drawing.StringFormatFlags.NoWrap;
+            this._colDienThoai.MinWidth = 0;
+            this._colDienThoai.Name = "_colDienThoai";
+            this._colDienThoai.ShowCellSelection = true;
+            this._colDienThoai.SortDirection = System.Windows.Forms.SortOrder.None;
+            this._colDienThoai.Text = "Điện thoại";
+            this._colDienThoai.TextNonDisplay = null;
+            this._colDienThoai.Visible = true;
+            this._colDienThoai.Width = 101;
+            this._colDienThoai.WordWrap = false;
+            // 
+            // _colDiDong
+            // 
+            this._colDiDong.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
+            this._colDiDong.AlignCellVertical = System.Drawing.StringAlignment.Center;
+            this._colDiDong.AlignHeaderHorizontal = System.Drawing.StringAlignment.Near;
+            this._colDiDong.AlignHeaderVertical = System.Drawing.StringAlignment.Near;
+            this._colDiDong.AllowEdit = false;
+            this._colDiDong.AllowResize = true;
+            this._colDiDong.ColumnImage = null;
+            this._colDiDong.DataPropertyName = null;
+            this._colDiDong.Filter = null;
+            this._colDiDong.FormatString = "";
+            this._colDiDong.Grouped = false;
+            this._colDiDong.HeaderFormatFlags = System.Drawing.StringFormatFlags.NoWrap;
+            this._colDiDong.MinWidth = 0;
+            this._colDiDong.Name = "_colDiDong";
+            this._colDiDong.ShowCellSelection = true;
+            this._colDiDong.SortDirection = System.Windows.Forms.SortOrder.None;
+            this._colDiDong.Text = "Di động";
+            this._colDiDong.TextNonDisplay = null;
+            this._colDiDong.Visible = true;
+            this._colDiDong.Width = 100;
+            this._colDiDong.WordWrap = false;
             // 
             // _colTenNCC
             // 
@@ -314,60 +388,12 @@ namespace WH.Report.ReportForm
             this._colTenNCC.Text = "Tên NCC";
             this._colTenNCC.TextNonDisplay = null;
             this._colTenNCC.Visible = true;
-            this._colTenNCC.Width = 300;
+            this._colTenNCC.Width = 200;
             this._colTenNCC.WordWrap = false;
-            // 
-            // _colDienThoai
-            // 
-            this._colDienThoai.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
-            this._colDienThoai.AlignCellVertical = System.Drawing.StringAlignment.Center;
-            this._colDienThoai.AlignHeaderHorizontal = System.Drawing.StringAlignment.Near;
-            this._colDienThoai.AlignHeaderVertical = System.Drawing.StringAlignment.Near;
-            this._colDienThoai.AllowEdit = false;
-            this._colDienThoai.AllowResize = true;
-            this._colDienThoai.ColumnImage = null;
-            this._colDienThoai.DataPropertyName = null;
-            this._colDienThoai.Filter = null;
-            this._colDienThoai.FormatString = "";
-            this._colDienThoai.Grouped = false;
-            this._colDienThoai.HeaderFormatFlags = System.Drawing.StringFormatFlags.NoWrap;
-            this._colDienThoai.MinWidth = 0;
-            this._colDienThoai.Name = "_colDienThoai";
-            this._colDienThoai.ShowCellSelection = true;
-            this._colDienThoai.SortDirection = System.Windows.Forms.SortOrder.None;
-            this._colDienThoai.Text = "Điện Thoại";
-            this._colDienThoai.TextNonDisplay = null;
-            this._colDienThoai.Visible = true;
-            this._colDienThoai.Width = 100;
-            this._colDienThoai.WordWrap = false;
-            // 
-            // _colDiDong
-            // 
-            this._colDiDong.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
-            this._colDiDong.AlignCellVertical = System.Drawing.StringAlignment.Center;
-            this._colDiDong.AlignHeaderHorizontal = System.Drawing.StringAlignment.Near;
-            this._colDiDong.AlignHeaderVertical = System.Drawing.StringAlignment.Near;
-            this._colDiDong.AllowEdit = false;
-            this._colDiDong.AllowResize = true;
-            this._colDiDong.ColumnImage = null;
-            this._colDiDong.DataPropertyName = null;
-            this._colDiDong.Filter = null;
-            this._colDiDong.FormatString = "";
-            this._colDiDong.Grouped = false;
-            this._colDiDong.HeaderFormatFlags = System.Drawing.StringFormatFlags.NoWrap;
-            this._colDiDong.MinWidth = 0;
-            this._colDiDong.Name = "_colDiDong";
-            this._colDiDong.ShowCellSelection = true;
-            this._colDiDong.SortDirection = System.Windows.Forms.SortOrder.None;
-            this._colDiDong.Text = "Di Động";
-            this._colDiDong.TextNonDisplay = null;
-            this._colDiDong.Visible = true;
-            this._colDiDong.Width = 100;
-            this._colDiDong.WordWrap = false;
             // 
             // _colTongTien
             // 
-            this._colTongTien.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
+            this._colTongTien.AlignCellHorizontal = System.Drawing.StringAlignment.Far;
             this._colTongTien.AlignCellVertical = System.Drawing.StringAlignment.Center;
             this._colTongTien.AlignHeaderHorizontal = System.Drawing.StringAlignment.Center;
             this._colTongTien.AlignHeaderVertical = System.Drawing.StringAlignment.Center;
@@ -391,7 +417,7 @@ namespace WH.Report.ReportForm
             // 
             // _colTienKM
             // 
-            this._colTienKM.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
+            this._colTienKM.AlignCellHorizontal = System.Drawing.StringAlignment.Far;
             this._colTienKM.AlignCellVertical = System.Drawing.StringAlignment.Center;
             this._colTienKM.AlignHeaderHorizontal = System.Drawing.StringAlignment.Center;
             this._colTienKM.AlignHeaderVertical = System.Drawing.StringAlignment.Center;
@@ -415,7 +441,7 @@ namespace WH.Report.ReportForm
             // 
             // _colTienThu
             // 
-            this._colTienThu.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
+            this._colTienThu.AlignCellHorizontal = System.Drawing.StringAlignment.Far;
             this._colTienThu.AlignCellVertical = System.Drawing.StringAlignment.Center;
             this._colTienThu.AlignHeaderHorizontal = System.Drawing.StringAlignment.Center;
             this._colTienThu.AlignHeaderVertical = System.Drawing.StringAlignment.Center;
@@ -431,7 +457,7 @@ namespace WH.Report.ReportForm
             this._colTienThu.Name = "_colTienThu";
             this._colTienThu.ShowCellSelection = true;
             this._colTienThu.SortDirection = System.Windows.Forms.SortOrder.None;
-            this._colTienThu.Text = "Đã chi";
+            this._colTienThu.Text = "Đã thu";
             this._colTienThu.TextNonDisplay = "Số tiền khách hàng đã trả trước";
             this._colTienThu.Visible = true;
             this._colTienThu.Width = 120;
@@ -439,7 +465,7 @@ namespace WH.Report.ReportForm
             // 
             // _colConLai
             // 
-            this._colConLai.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
+            this._colConLai.AlignCellHorizontal = System.Drawing.StringAlignment.Far;
             this._colConLai.AlignCellVertical = System.Drawing.StringAlignment.Center;
             this._colConLai.AlignHeaderHorizontal = System.Drawing.StringAlignment.Center;
             this._colConLai.AlignHeaderVertical = System.Drawing.StringAlignment.Center;
@@ -455,59 +481,35 @@ namespace WH.Report.ReportForm
             this._colConLai.Name = "_colConLai";
             this._colConLai.ShowCellSelection = true;
             this._colConLai.SortDirection = System.Windows.Forms.SortOrder.None;
-            this._colConLai.Text = "Còn nợ";
+            this._colConLai.Text = "Công nợ";
             this._colConLai.TextNonDisplay = null;
             this._colConLai.Visible = true;
             this._colConLai.Width = 120;
             this._colConLai.WordWrap = false;
             // 
-            // _colNgayTao
+            // _colTrangThai
             // 
-            this._colNgayTao.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
-            this._colNgayTao.AlignCellVertical = System.Drawing.StringAlignment.Center;
-            this._colNgayTao.AlignHeaderHorizontal = System.Drawing.StringAlignment.Near;
-            this._colNgayTao.AlignHeaderVertical = System.Drawing.StringAlignment.Near;
-            this._colNgayTao.AllowEdit = false;
-            this._colNgayTao.AllowResize = true;
-            this._colNgayTao.ColumnImage = null;
-            this._colNgayTao.DataPropertyName = null;
-            this._colNgayTao.Filter = null;
-            this._colNgayTao.FormatString = "";
-            this._colNgayTao.Grouped = false;
-            this._colNgayTao.HeaderFormatFlags = System.Drawing.StringFormatFlags.NoWrap;
-            this._colNgayTao.MinWidth = 120;
-            this._colNgayTao.Name = "_colNgayTao";
-            this._colNgayTao.ShowCellSelection = true;
-            this._colNgayTao.SortDirection = System.Windows.Forms.SortOrder.None;
-            this._colNgayTao.Text = "Ngày tạo";
-            this._colNgayTao.TextNonDisplay = null;
-            this._colNgayTao.Visible = true;
-            this._colNgayTao.Width = 121;
-            this._colNgayTao.WordWrap = false;
-            // 
-            // _colNhanVien
-            // 
-            this._colNhanVien.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
-            this._colNhanVien.AlignCellVertical = System.Drawing.StringAlignment.Center;
-            this._colNhanVien.AlignHeaderHorizontal = System.Drawing.StringAlignment.Center;
-            this._colNhanVien.AlignHeaderVertical = System.Drawing.StringAlignment.Center;
-            this._colNhanVien.AllowEdit = false;
-            this._colNhanVien.AllowResize = true;
-            this._colNhanVien.ColumnImage = null;
-            this._colNhanVien.DataPropertyName = null;
-            this._colNhanVien.Filter = null;
-            this._colNhanVien.FormatString = "";
-            this._colNhanVien.Grouped = false;
-            this._colNhanVien.HeaderFormatFlags = System.Drawing.StringFormatFlags.NoWrap;
-            this._colNhanVien.MinWidth = 0;
-            this._colNhanVien.Name = "_colNhanVien";
-            this._colNhanVien.ShowCellSelection = true;
-            this._colNhanVien.SortDirection = System.Windows.Forms.SortOrder.None;
-            this._colNhanVien.Text = "Trạng Thái";
-            this._colNhanVien.TextNonDisplay = null;
-            this._colNhanVien.Visible = true;
-            this._colNhanVien.Width = 99;
-            this._colNhanVien.WordWrap = false;
+            this._colTrangThai.AlignCellHorizontal = System.Drawing.StringAlignment.Near;
+            this._colTrangThai.AlignCellVertical = System.Drawing.StringAlignment.Center;
+            this._colTrangThai.AlignHeaderHorizontal = System.Drawing.StringAlignment.Near;
+            this._colTrangThai.AlignHeaderVertical = System.Drawing.StringAlignment.Near;
+            this._colTrangThai.AllowEdit = false;
+            this._colTrangThai.AllowResize = true;
+            this._colTrangThai.ColumnImage = null;
+            this._colTrangThai.DataPropertyName = null;
+            this._colTrangThai.Filter = null;
+            this._colTrangThai.FormatString = "";
+            this._colTrangThai.Grouped = false;
+            this._colTrangThai.HeaderFormatFlags = System.Drawing.StringFormatFlags.NoWrap;
+            this._colTrangThai.MinWidth = 0;
+            this._colTrangThai.Name = "_colTrangThai";
+            this._colTrangThai.ShowCellSelection = true;
+            this._colTrangThai.SortDirection = System.Windows.Forms.SortOrder.None;
+            this._colTrangThai.Text = "Trạng Thái";
+            this._colTrangThai.TextNonDisplay = null;
+            this._colTrangThai.Visible = true;
+            this._colTrangThai.Width = 100;
+            this._colTrangThai.WordWrap = false;
             // 
             // btnTheoNgay
             // 
@@ -546,10 +548,10 @@ namespace WH.Report.ReportForm
             this.btnXemChiTiet.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXemChiTiet.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnXemChiTiet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnXemChiTiet.Location = new System.Drawing.Point(994, 0);
+            this.btnXemChiTiet.Location = new System.Drawing.Point(970, 0);
             this.btnXemChiTiet.Name = "btnXemChiTiet";
             this.btnXemChiTiet.Size = new System.Drawing.Size(109, 33);
-            this.btnXemChiTiet.TabIndex = 638;
+            this.btnXemChiTiet.TabIndex = 635;
             this.btnXemChiTiet.Tag = "timkiem";
             this.btnXemChiTiet.Text = "Xem Chi Tiết";
             this.btnXemChiTiet.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -571,7 +573,7 @@ namespace WH.Report.ReportForm
             this.labDoanhThu.Text = "0 vnđ";
             this.labDoanhThu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // FrmCongNoNhaCungCap
+            // frmCongNoNhaCungCap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -589,7 +591,7 @@ namespace WH.Report.ReportForm
             this.Controls.Add(this.btnExit);
             this.Name = "FrmCongNoNhaCungCap";
             this.Resizable = false;
-            this.Text = "Danh Sách Hóa Đơn Nhập Kho";
+            this.Text = "Danh Sách Hóa Đơn Xuất Kho";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmCongNoKhachHang_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CheckSet)).EndInit();
@@ -615,15 +617,15 @@ namespace WH.Report.ReportForm
         private TreeListColumn _colTongTien;
         private TreeListColumn _colTienThu;
         private TreeListColumn _colConLai;
-        private TreeListColumn _colNhanVien;
         private KryptonCheckButton btnTheoNgay;
         private TreeListColumn _colNgayTao;
         private KryptonCheckSet CheckSet;
         private Panel pnlInfo;
         private Label labDoanhThu;
+        private TreeListColumn _colTrangThai;
         private TreeListColumn _colTenNCC;
+        private Button btnXemChiTiet;
         private TreeListColumn _colDienThoai;
         private TreeListColumn _colDiDong;
-        private Button btnXemChiTiet;
     }
 }

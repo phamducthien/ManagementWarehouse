@@ -1,15 +1,15 @@
-﻿using System;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-using ClosedXML.Excel;
+﻿using ClosedXML.Excel;
 using HLVControl.Grid;
 using HLVControl.Grid.Data;
 using HLVControl.Grid.Events;
 using MetroUI.Forms;
 using Repository.Pattern.UnitOfWork;
+using System;
+using System.Data;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 using Util.Pattern;
 using WH.Report.ReportFunction;
 using WH.Service;
@@ -17,10 +17,13 @@ using WH.Service.Repository.Core;
 
 namespace WH.Report.ReportForm
 {
+    /// <summary>
+    ///     Mô tả danh sách hóa đơn xuất kho
+    /// </summary>
     public partial class FrmCongNoNhaCungCap : MetroForm
     {
         private readonly ReportRules _exe;
-        private IUnitOfWorkAsync unitOfWorkAsync;
+        private IUnitOfWorkAsync _unitOfWorkAsync;
 
         public FrmCongNoNhaCungCap()
         {
@@ -30,9 +33,9 @@ namespace WH.Report.ReportForm
 
         private void ReloadUnitOfWork()
         {
-            if (unitOfWorkAsync != null) unitOfWorkAsync.Dispose();
-            unitOfWorkAsync = null;
-            unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
+            if (_unitOfWorkAsync != null) _unitOfWorkAsync.Dispose();
+            _unitOfWorkAsync = null;
+            _unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
         }
 
         private DataTable GetBills(string soLuongHdLoad, string batDau, string ketThuc)
@@ -75,27 +78,27 @@ namespace WH.Report.ReportForm
             treeDanhMuc.Rows.Clear();
             try
             {
-                CalBill(data);
                 if (data == null) return;
                 if (data.Rows.Count == 0) return;
+                CalBill(data);
                 var count = 0;
-                foreach (DataRow drow in data.Rows)
+                foreach (DataRow dataRow in data.Rows)
                 {
                     var row = treeDanhMuc.CreateRow();
                     row.Cells.Add(new TreeListCell(count + 1));
-                    row.Cells.Add(new TreeListCell(drow[0].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[7].ToString())); //TEN KHACHHANG 
-                    row.Cells.Add(new TreeListCell(drow[8].ToString())); // DIEN THOAI
-                    row.Cells.Add(new TreeListCell(drow[9].ToString())); // DI DONG
-                    row.Cells.Add(new TreeListCell(drow[1].ToString().ToDecimal().ToString("N")));
-                    row.Cells.Add(new TreeListCell(drow[2].ToString().ToDecimal().ToString("N")));
-                    row.Cells.Add(new TreeListCell(drow[3].ToString().ToDecimal().ToString("N")));
-                    row.Cells.Add(new TreeListCell(drow[4].ToString().ToDecimal().ToString("N")));
-                    row.Cells.Add(new TreeListCell(drow[5].ToString()));
-                    row.Cells.Add(new TreeListCell(drow[6].ToString()));
+                    row.Cells.Add(new TreeListCell(dataRow[0].ToString()));
+                    row.Cells.Add(new TreeListCell(dataRow[5]));
 
-                    row.Tag = count;
+                    row.Cells.Add(new TreeListCell(dataRow[7].ToString())); //TEN KHACHHANG 
+                    row.Cells.Add(new TreeListCell(dataRow[8].ToString())); // DIEN THOAI
+                    row.Cells.Add(new TreeListCell(dataRow[9].ToString())); // DI DONG
 
+                    row.Cells.Add(new TreeListCell(dataRow[1].ToString().ToDecimal().ToString("N")));
+                    row.Cells.Add(new TreeListCell(dataRow[2].ToString().ToDecimal().ToString("N")));
+                    row.Cells.Add(new TreeListCell(dataRow[3].ToString().ToDecimal().ToString("N")));
+                    row.Cells.Add(new TreeListCell(dataRow[4].ToString().ToDecimal().ToString("N")));
+
+                    row.Cells.Add(new TreeListCell(dataRow[6].ToString()));
                     treeDanhMuc.Rows.Add(row);
                     count++;
                 }
@@ -105,7 +108,7 @@ namespace WH.Report.ReportForm
             }
             catch (Exception)
             {
-                throw new Exception("LoadBill");
+                MessageBox.Show(@"Không thể tải thông tin!");
             }
         }
 
@@ -113,15 +116,9 @@ namespace WH.Report.ReportForm
         {
             if (data != null && data.Rows.Count > 0)
             {
-                //decimal dathu = _exe.Cmd_CalDaChi_CongNoNhaCungCap(data);
-                var conlai = _exe.Cmd_CalConLai_CongNoNhaCungCap(data);
-                //decimal tongtienhoadon = _exe.Cmd_calTongTienHoaDon_CongNoNhaCungCap(data);
-                //decimal giamgia = _exe.Cmd_calGiamGia_CongNoNhaCungCap(data);
-                //string sdathu = @" - Đã chi : " + string.Format("{0:####,0 đ}", dathu);
-                var sConLai = @" -> Tiền nợ : " + conlai.ToString("N");
-                //string sTienHoaDon = @"Tiền hóa đơn : " + string.Format("{0:####,0 đ}", tongtienhoadon);
-                //string sTienGiamGia = @" - Giảm giá : " + string.Format("{0:####,0 đ}", giamgia);
-                labDoanhThu.Text = sConLai; //sTienHoaDon + sTienGiamGia + sdathu + sConLai;
+                var conLai = _exe.Cmd_CalConLai_CongNoNhaCungCap(data);
+                var sConLai = @" -> Tiền nợ : " + conLai.ToString("N");
+                labDoanhThu.Text = sConLai; 
             }
             else
             {
@@ -190,31 +187,21 @@ namespace WH.Report.ReportForm
                 var dialog = new SaveFileDialog();
                 dialog.InitialDirectory = folderPath;
                 dialog.DefaultExt = "xlsx";
-                dialog.Filter = "Excel WorkBook (*.xlsx)|*.xlsx";
+                dialog.Filter = @"Excel WorkBook (*.xlsx)|*.xlsx";
                 dialog.AddExtension = true;
                 dialog.RestoreDirectory = true;
-                dialog.Title = "Lưu File Tại";
+                dialog.Title = @"Lưu File Tại";
                 dialog.FileName = @"DSHoaDonNhapKho" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     wb.SaveAs(dialog.FileName);
-                    MessageBox.Show("Đã xuất file tại :" + dialog.FileName);
+                    MessageBox.Show(@"Đã xuất file tại :" + dialog.FileName);
                     dialog.Dispose();
                     dialog = null;
                 }
 
-                //Hết savedialog
             }
-
-            //if (treeDanhMuc.Rows.Count > 0)
-            //{
-            //    var export = new FrmDmExportExcel("CONGNO_NHACUNGCAP_" + DateTime.Now.ToString("ddMMyyyy_HHmm"),
-            //        treeDanhMuc);
-            //    if (export.ShowDialog() == DialogResult.OK)
-            //    {
-            //    }
-            //}
         }
 
         //==============================================================
@@ -339,7 +326,7 @@ namespace WH.Report.ReportForm
                 {
                     var ID = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
-                    INhapKhoService service = new NhapKhoService(unitOfWorkAsync);
+                    INhapKhoService service = new NhapKhoService(_unitOfWorkAsync);
                     var hdKho = service.GetModelHoaDonNhap(ID);
                     if (hdKho != null)
                     {
@@ -365,7 +352,7 @@ namespace WH.Report.ReportForm
                 {
                     var ID = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
-                    INhapKhoService service = new NhapKhoService(unitOfWorkAsync);
+                    INhapKhoService service = new NhapKhoService(_unitOfWorkAsync);
                     //HOADONNHAPKHO hdKho = service.GetModelHoaDonNhap(ID);
                     btnXemChiTiet.Enabled = true;
                 }
@@ -386,7 +373,7 @@ namespace WH.Report.ReportForm
                 {
                     var ID = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
-                    INhapKhoService service = new NhapKhoService(unitOfWorkAsync);
+                    INhapKhoService service = new NhapKhoService(_unitOfWorkAsync);
                     //HOADONNHAPKHO hdKho = service.GetModelHoaDonNhap(ID);
                 }
             }
