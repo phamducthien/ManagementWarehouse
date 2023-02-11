@@ -226,12 +226,6 @@
     <Compile Include="ReportForm\FrmCongNoKhachHang.designer.cs">
       <DependentUpon>FrmCongNoKhachHang.cs</DependentUpon>
     </Compile>
-    <Compile Include="ReportForm\frmCongNoNhaCungCap1222.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ReportForm\frmCongNoNhaCungCap1222.designer.cs">
-      <DependentUpon>frmCongNoNhaCungCap1222.cs</DependentUpon>
-    </Compile>
     <Compile Include="ReportForm\frmDM_ExportExcel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -362,9 +356,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForm\FrmCongNoKhachHang.resx">
       <DependentUpon>FrmCongNoKhachHang.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ReportForm\frmCongNoNhaCungCap1222.resx">
-      <DependentUpon>frmCongNoNhaCungCap1222.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForm\frmDM_ExportExcel.resx">
       <DependentUpon>frmDM_ExportExcel.cs</DependentUpon>
