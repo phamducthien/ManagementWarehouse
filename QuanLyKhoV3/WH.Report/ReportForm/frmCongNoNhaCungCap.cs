@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using Util.Pattern;
 using WH.Report.ReportFunction;
 using WH.Service;
 using WH.Service.Repository.Core;
@@ -39,8 +40,7 @@ namespace WH.Report.ReportForm
 
         private DataTable GetBills(string soLuongHdLoad, string batDau, string ketThuc)
         {
-            var data = _exe.Cmd_GetExportBills_ByKhachHang(soLuongHdLoad, "", batDau, ketThuc,
-                StateBill.ChuaThanhToan);
+            var data = _exe.Cmd_GetImportBills_ByNCC(soLuongHdLoad, "", batDau, ketThuc);
             return data;
         }
 
@@ -87,24 +87,30 @@ namespace WH.Report.ReportForm
                     var row = treeDanhMuc.CreateRow();
                     row.Cells.Add(new TreeListCell(count + 1));
                     row.Cells.Add(new TreeListCell(dataRow[0].ToString()));
-                    row.Cells.Add(new TreeListCell(dataRow[1]));
-                    row.Cells.Add(new TreeListCell(dataRow[2].ToString())); // MaCodeKhach hang
-                    row.Cells.Add(new TreeListCell(dataRow[3].ToString())); // barcode Khach Hang
-                    row.Cells.Add(new TreeListCell(dataRow[4].ToString())); // Ten Khach hang
-                    row.Cells.Add(new TreeListCell(dataRow[5].ToString()));
+                    row.Cells.Add(new TreeListCell(dataRow[5]));
+
+                    row.Cells.Add(new TreeListCell(dataRow[7].ToString())); //TEN KHACHHANG 
+                    row.Cells.Add(new TreeListCell(dataRow[8].ToString())); // DIEN THOAI
+                    row.Cells.Add(new TreeListCell(dataRow[9].ToString())); // DI DONG
+
+                    row.Cells.Add(new TreeListCell(dataRow[1].ToString().ToDecimal().ToString("N")));
+                    row.Cells.Add(new TreeListCell(dataRow[2].ToString().ToDecimal().ToString("N")));
+                    row.Cells.Add(new TreeListCell(dataRow[3].ToString().ToDecimal().ToString("N")));
+                    row.Cells.Add(new TreeListCell(dataRow[4].ToString().ToDecimal().ToString("N")));
+
                     row.Cells.Add(new TreeListCell(dataRow[6].ToString()));
-                    row.Cells.Add(new TreeListCell(dataRow[7].ToString()));
-                    var tinhTrang = "Chưa Thanh Toán";
-                    var soTienThanhToan = decimal.Parse(dataRow[8].ToString());
-                    var tongTienThu = decimal.Parse(dataRow[9].ToString());
-                    var congNo = soTienThanhToan - tongTienThu;
-                    if (congNo <= 0)
-                    {
-                        tinhTrang = "Đã Thanh Toán";
-                    }
-                    row.Cells.Add(new TreeListCell(congNo));
-                    row.Cells.Add(new TreeListCell(tinhTrang));
-                    row.Tag = count;
+
+                    //var tinhTrang = "Chưa Thanh Toán";
+                    //var soTienThanhToan = decimal.Parse(dataRow[8].ToString());
+                    //var tongTienThu = decimal.Parse(dataRow[9].ToString());
+                    //var congNo = soTienThanhToan - tongTienThu;
+                    //if (congNo <= 0)
+                    //{
+                    //    tinhTrang = "Đã Thanh Toán";
+                    //}
+                    //row.Cells.Add(new TreeListCell(congNo));
+                    //row.Cells.Add(new TreeListCell(tinhTrang));
+                    //row.Tag = count;
 
                     treeDanhMuc.Rows.Add(row);
                     count++;
@@ -121,14 +127,14 @@ namespace WH.Report.ReportForm
 
         private void CalBill(DataTable data)
         {
-            //decimal dathu = _exe.Cmd_CalDaThu_CongNoKhachHang(data);
-            var conlai = _exe.Cmd_CalConLai_CongNoKhachHang(data);
-            //decimal tongtienhoadon = _exe.Cmd_calTongTienHoaDon_CongNoKhachHang(data);
-            //decimal giamgia = _exe.Cmd_calGiamGia_CongNoKhachHang(data);
-            //string sdathu = @" - Đã thu : " + string.Format("{0:####,0 đ}", dathu);
-            var sConLai = @" -> Tiền khách nợ: " + conlai.ToString("N");
-            //string sTienHoaDon = @"Tiền hóa đơn: " + string.Format("{0:####,0 đ}", tongtienhoadon);
-            //string sTienGiamGia = @" - Giảm giá: " + string.Format("{0:####,0 đ}", giamgia);
+            //decimal dathu = _exe.Cmd_CalDaChi_CongNoNhaCungCap(data);
+            var conlai = _exe.Cmd_CalConLai_CongNoNhaCungCap(data);
+            //decimal tongtienhoadon = _exe.Cmd_calTongTienHoaDon_CongNoNhaCungCap(data);
+            //decimal giamgia = _exe.Cmd_calGiamGia_CongNoNhaCungCap(data);
+            //string sdathu = @" - Đã chi : " + string.Format("{0:####,0 đ}", dathu);
+            var sConLai = @" -> Tiền nợ : " + conlai.ToString("N");
+            //string sTienHoaDon = @"Tiền hóa đơn : " + string.Format("{0:####,0 đ}", tongtienhoadon);
+            //string sTienGiamGia = @" - Giảm giá : " + string.Format("{0:####,0 đ}", giamgia);
             labDoanhThu.Text = sConLai; //sTienHoaDon + sTienGiamGia + sdathu + sConLai;
         }
 

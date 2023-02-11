@@ -32,7 +32,7 @@ namespace WH.Report.ReportFunction
             return dt;
         }
 
-        public DataTable LoadToDataTable(string sql)
+        private DataTable LoadToDataTable(string sql)
         {
             var dt = LoadDataTable(sql);
             return dt;
@@ -302,24 +302,24 @@ WHERE nd.MANGUOIDUNG= hd.NGUOITAO and kh.MAKHACHHANG = HD.MAKHACHHANG";
             string ketThuc)
         {
             var sqlSelect = $@"
-            SELECT {soLuongHdLoad} 
-                hd.MAHOADONNHAP AS MAHOADONNHAP, 
-                hd.SOTIENTHANHTOAN_HD AS TONGTIENHOADON, 
-                hd.CHIETKHAUTHEOTIEN_HD AS TIENCHIETKHAU, 
-                isnull(TablePhieuChi.TONGTIENTRA, 0) AS SOTIENTHANHTOAN, 
-                (hd.SOTIENTHANHTOAN_HD - isnull(TablePhieuChi.TONGTIENTRA, 0)) AS CONGNO, 
-                hd.NGAYTAOHOADON AS NgayTaoHoaDon,
-                TinhTrang = CASE when(hd.SOTIENTHANHTOAN_HD - isnull(TablePhieuChi.TONGTIENTRA, 0)) <=0 THEN N'Đã Thanh Toán' ELSE N'Chưa Thanh Toán' END,
-                ncc.TENNHACUNGCAP AS TENNHACUNGCAP, 
-                ncc.DIENTHOAI AS DIENTHOAI, 
-                ncc.DIDONG AS DIDONG
-            FROM NGUOIDUNG AS nd, NHACUNGCAP AS ncc, HOADONNHAPKHO AS hd 
-            LEFT JOIN (
-                SELECT SUM(pc.TIENTHANHTOAN) as TONGTIENTRA, MAHOADONNHAPKHO as MAHOADONNHAPKHO
-                FROM PHIEUCHI pc
-                GROUP BY MAHOADONNHAPKHO
-                ) as TablePhieuChi on hd.MAHOADONNHAP = TablePhieuChi.MAHOADONNHAPKHO
-            WHERE nd.MANGUOIDUNG=hd.NGUOITAO and ncc.MANHACUNGCAP = HD.MANHACUNGCAP
+SELECT {soLuongHdLoad} 
+    hd.MAHOADONNHAP AS MAHOADONNHAP, 
+    hd.SOTIENTHANHTOAN_HD AS TONGTIENHOADON, 
+    hd.CHIETKHAUTHEOTIEN_HD AS TIENCHIETKHAU, 
+    isnull(TablePhieuChi.TONGTIENTRA, 0) AS SOTIENTHANHTOAN, 
+    (hd.SOTIENTHANHTOAN_HD - isnull(TablePhieuChi.TONGTIENTRA, 0)) AS CONGNO, 
+    hd.NGAYTAOHOADON AS NgayTaoHoaDon,
+    TinhTrang = CASE when(hd.SOTIENTHANHTOAN_HD - isnull(TablePhieuChi.TONGTIENTRA, 0)) <=0 THEN N'Đã Thanh Toán' ELSE N'Chưa Thanh Toán' END,
+    ncc.TENNHACUNGCAP AS TENNHACUNGCAP, 
+    ncc.DIENTHOAI AS DIENTHOAI, 
+    ncc.DIDONG AS DIDONG
+FROM NGUOIDUNG AS nd, NHACUNGCAP AS ncc, HOADONNHAPKHO AS hd 
+LEFT JOIN (
+    SELECT SUM(pc.TIENTHANHTOAN) as TONGTIENTRA, MAHOADONNHAPKHO as MAHOADONNHAPKHO
+    FROM PHIEUCHI pc
+    GROUP BY MAHOADONNHAPKHO
+    ) as TablePhieuChi on hd.MAHOADONNHAP = TablePhieuChi.MAHOADONNHAPKHO
+WHERE nd.MANGUOIDUNG=hd.NGUOITAO and ncc.MANHACUNGCAP = HD.MANHACUNGCAP
             ";
 
             if (maNhanVien != "")
