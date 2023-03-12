@@ -275,7 +275,7 @@ namespace WH.Service
                     if (objMatHang == null) continue;
                     ct.CHIETKHAUTHEOTIEN = 0;
                     if (objMatHang.CHIETKHAU != null)
-                        ct.CHIETKHAUTHEOTIEN = ct.SOLUONGLE * ct.DONGIASI * (decimal)objMatHang.CHIETKHAU ?? 0;
+                        ct.CHIETKHAUTHEOTIEN = ct.SOLUONGLE * ct.DONGIASI * (decimal)ct.CHIETKHAUTHEOPHANTRAM ?? 0;
 
                     ct.THANHTIENTRUOCCHIETKHAU_CT = ct.SOLUONGLE * ct.DONGIASI;
                     ct.THANHTIENSAUCHIETKHAU_CT = ct.THANHTIENTRUOCCHIETKHAU_CT - ct.CHIETKHAUTHEOTIEN;
@@ -577,7 +577,7 @@ namespace WH.Service
                     {
                         ct.CHIETKHAUTHEOTIEN = 0;
                         if (objMathang.CHIETKHAU != null)
-                            ct.CHIETKHAUTHEOTIEN = ct.SOLUONGLE * ct.DONGIASI * (decimal)objMathang.CHIETKHAU ?? 0;
+                            ct.CHIETKHAUTHEOTIEN = ct.SOLUONGLE * ct.DONGIASI * (decimal)ct.CHIETKHAUTHEOPHANTRAM ?? 0;
 
                         ct.THANHTIENTRUOCCHIETKHAU_CT = ct.SOLUONGLE * ct.DONGIASI;
                         ct.THANHTIENSAUCHIETKHAU_CT = ct.THANHTIENTRUOCCHIETKHAU_CT - ct.CHIETKHAUTHEOTIEN;
@@ -1408,7 +1408,7 @@ namespace WH.Service
         {
             if (maChiTiet.isNull())
             {
-                ErrMsg = "Mat Hang Khong Co Trong Hoa Don!!!";
+                ErrMsg = "Mặt hàng không có trong hóa đơn!!!";
                 return MethodResult.Failed;
             }
 
