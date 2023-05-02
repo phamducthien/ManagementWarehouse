@@ -12,25 +12,19 @@ namespace WH.GUI
         public int NumImport { get; set; }
         public decimal GiaBan { get; set; }
         public double ChietKhau { get; set; }
-        public bool IsChangePrice { get; set; }
 
-        public readonly decimal OldGia;
-        public readonly decimal Sl;
         #endregion
 
         public FrmInputNumberExport(MATHANG objMatHang, decimal giaBan, double chietKhau = 0, decimal sl = 1)
         {
-            IsChangePrice = false;
             GiaBan = giaBan;
             ChietKhau = chietKhau;
-            Sl = sl;
             if (!GiaBan.isNull())
             {
                 InitializeComponent();
-                OldGia = objMatHang.GIALE ?? 0;
 
                 numGiaNhap.Value = GiaBan;
-                NumSoLuongNhap.Value = Sl;
+                NumSoLuongNhap.Value = sl;
                 labTenMatHang.Text = objMatHang.TENMATHANG;
                 Model = objMatHang;
                 btnUpGiaNhap.Tag = btnDownGiaNhap.Tag = numGiaNhap.Name;

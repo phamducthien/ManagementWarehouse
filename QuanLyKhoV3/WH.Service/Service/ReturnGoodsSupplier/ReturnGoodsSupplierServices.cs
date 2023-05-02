@@ -36,6 +36,10 @@ namespace WH.Service.ReturnGoodsSupplier
         MethodResult CapNhatMatHangTrongHoaDonTam(List<TEMP_HOADONXUATKHOCHITIET> tempHoaDonNhapKhoChitTiets, bool isCommitted = true);
 
         TEMP_HOADONXUATKHOCHITIET GetModelChiTietTam(string maChiTiet);
+
+        List<MATHANG> GetListMatHang();
+        List<MATHANG> SearchMatHang(string textSearch);
+        decimal CalTongTien(string maHoaDon);
     }
 
     public class ReturnGoodsSupplierServices : global::Service.Pattern.Service, IReturnGoodsSupplierServices
@@ -638,6 +642,30 @@ namespace WH.Service.ReturnGoodsSupplier
                 remainder = 0.5;
             }
             return (decimal?)(whole + remainder);
+        }
+
+        public List<MATHANG> GetListMatHang()
+        {
+            return
+                _matHangService.Search(
+                    s =>
+                        s.ISDELETE == false && s.ISUSE == true &&
+                        s.KHOMATHANGs.FirstOrDefault(p => p.MAMATHANG == s.MAMATHANG) != null).ToList();
+        }
+
+        public List<MATHANG> SearchMatHang(string textSearch)
+        {
+            return
+                _matHangService.Search(
+                    s =>
+                        s.ISDELETE == false && s.ISUSE == true &&
+                        s.KHOMATHANGs.FirstOrDefault(p => p.MAMATHANG == s.MAMATHANG) != null, textSearch);
+        }
+
+        public decimal CalTongTien(string maHoaDon)
+        {
+            var tongtien = LoadHoaDonTam(maHoaDon).Sum(s => s.THANHTIENSAUCHIETKHAU_CT ?? 0);
+            return tongtien;
         }
     }
 }

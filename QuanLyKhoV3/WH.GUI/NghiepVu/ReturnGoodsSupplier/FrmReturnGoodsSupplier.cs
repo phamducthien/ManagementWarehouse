@@ -8,7 +8,6 @@ using Service.Pattern;
 using Util.Pattern;
 using WH.Entity;
 using WH.Model;
-using WH.Service;
 using WH.Service.ReturnGoodsSupplier;
 
 namespace WH.GUI.ReturnGoodsSupplier
@@ -30,15 +29,6 @@ namespace WH.GUI.ReturnGoodsSupplier
         public List<TEMP_HOADONXUATKHOCHITIET> LsTempHoadonxuatkhochitiets { get; set; }
         public string MaHoaDon { get; set; }
         public int SoLuong { get; set; }
-
-        private IKhachTraHangService TraHangService
-        {
-            get
-            {
-                ReloadUnitOfWork();
-                return new KhachTraHangService(UnitOfWorkAsync);
-            }
-        }
 
         public IReturnGoodsSupplierServices ReturnGoodsSupplierServices
         {
@@ -93,7 +83,7 @@ namespace WH.GUI.ReturnGoodsSupplier
             //btnAll.Click += BtnAll_Click;
             //btnCanNhap.Click += BtnCanNhap_Click;
             //btnCanXuat.Click += BtnCanXuat_Click;
-            //btnTimKiem.Click += BtnTimKiem_Click;
+            btnTimKiem.Click += btnTimKiem_Click;
             //txtTimKiem.TextChanged += TxtTimKiem_TextChanged;
 
             btnSelectKH.Click += BtnSelectNCC_Click;
@@ -143,6 +133,11 @@ namespace WH.GUI.ReturnGoodsSupplier
             ActionCapNhatMatHang();
         }
 
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            ActionTimKiem();
+        }
+
         #endregion
 
         #region Actions
@@ -169,7 +164,7 @@ namespace WH.GUI.ReturnGoodsSupplier
 
         private void LoadDataAllMatHang()
         {
-            MatHangs = TraHangService.GetListMatHang();
+            MatHangs = ReturnGoodsSupplierServices.GetListMatHang();
             var stt = 1;
             var lstMatHangs =
                 from a in MatHangs
@@ -268,6 +263,22 @@ namespace WH.GUI.ReturnGoodsSupplier
             }
         }
 
+        private void ActionTimKiem()
+        {
+            try
+            {
+                var textSearch = txtTimKiem.Text.Trim();
+                var lstMatHangs = ReturnGoodsSupplierServices.SearchMatHang(textSearch);
+                LoadData(lstMatHangs.ToDatatable());
+                txtTimKiem.SelectAll();
+                txtTimKiem.Select();
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(IconMessageBox.Warning, ex.Message);
+            }
+        }
+
         private void ActionThanhToan()
         {
             try
@@ -341,7 +352,7 @@ namespace WH.GUI.ReturnGoodsSupplier
                         var sId = row.Cells["IDUnit"].Value.ToString();
                         if (sId == "") return;
 
-                        var service = TraHangService;
+                        var service = ReturnGoodsSupplierServices;
                         MatHangModel = service.GetModelMatHang(sId);
                         KhoMatHangModel = service.GetModelKhoMatHang(sId);
                         CurrentRow = row;
@@ -356,13 +367,13 @@ namespace WH.GUI.ReturnGoodsSupplier
 
         private void LoadHoaDon()
         {
-            LsTempHoadonxuatkhochitiets = TraHangService.LoadHoaDonTam(MaHoaDon);
+            LsTempHoadonxuatkhochitiets = ReturnGoodsSupplierServices.LoadHoaDonTam(MaHoaDon);
             var list = LsTempHoadonxuatkhochitiets
                 .OrderBy(s => s.GHICHU.ToInt())
                 .Join(MatHangs, p => p.MAMATHANG, s => s.MAMATHANG, (p, s) =>
                     new
                     {
-                        stt=1,
+                        stt = 1,
                         p.IDUnit,
                         p.MAMATHANG,
                         s.TENMATHANG,
@@ -374,7 +385,7 @@ namespace WH.GUI.ReturnGoodsSupplier
                 .ToList();
 
             LoadData2(list);
-            var tongTien = TraHangService.CalTongTien(MaHoaDon);
+            var tongTien = ReturnGoodsSupplierServices.CalTongTien(MaHoaDon);
             labTongTien.Values.ExtraText = ExtendMethod.AdjustRound(decimal.ToDouble(tongTien))?.ToString(CultureInfo.InvariantCulture);
             txtTienChi.Text = ExtendMethod.AdjustRound(decimal.ToDouble(tongTien))?.ToString(CultureInfo.InvariantCulture);
             txtTimKiem.SelectAll();
@@ -611,7 +622,8 @@ namespace WH.GUI.ReturnGoodsSupplier
                 }
 
                 var objMatHang = ReturnGoodsSupplierServices.GetModel_MH_T_HD_XK_CT(objChiTiet);
-                var frm = new FrmInputNumberExport(objMatHang, (decimal)objChiTiet.DONGIASI, (double)objChiTiet.CHIETKHAUTHEOPHANTRAM, (decimal)objChiTiet.SOLUONGLE);
+                // trả nhà cung cấp chiết khấu = 0
+                var frm = new FrmInputNumberExport(objMatHang, (decimal)objChiTiet.DONGIASI, 0, (decimal)objChiTiet.SOLUONGLE);
                 frm.ShowDialog();
                 var soLuongNhap = frm.NumImport;
                 var giaBan = frm.GiaBan;
