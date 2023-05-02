@@ -21,7 +21,7 @@ namespace WH.GUI.ExportWarehouse
     public partial class FrmListExportWarehouse : MetroForm
     {
         private readonly ReportRules _exe;
-        private IUnitOfWorkAsync unitOfWorkAsync;
+        private IUnitOfWorkAsync _unitOfWorkAsync;
 
         public FrmListExportWarehouse()
         {
@@ -31,9 +31,9 @@ namespace WH.GUI.ExportWarehouse
 
         private void ReloadUnitOfWork()
         {
-            unitOfWorkAsync?.Dispose();
-            unitOfWorkAsync = null;
-            unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
+            _unitOfWorkAsync?.Dispose();
+            _unitOfWorkAsync = null;
+            _unitOfWorkAsync = UnitOfWorkFactory.MakeUnitOfWork();
         }
 
         private DataTable GetBills(string soLuongHdLoad, string batDau, string ketThuc)
@@ -253,11 +253,11 @@ namespace WH.GUI.ExportWarehouse
                 {
                     var id = row.Cells["_colBillID"].Value.ToString();
                     ReloadUnitOfWork();
-                    IXuatKhoService service = new XuatKhoService(unitOfWorkAsync);
+                    IXuatKhoService service = new XuatKhoService(_unitOfWorkAsync);
                     var hdKho = service.GetModelHoaDonXuat(id);
                     if (hdKho == null) return;
                     var lst = hdKho.HOADONXUATKHOCHITIETs.ToList();
-                    var frm = new FrmEditExportWarehouse(hdKho, lst, unitOfWorkAsync);
+                    var frm = new FrmEditExportWarehouse(hdKho, lst, _unitOfWorkAsync);
                     frm.ShowDialog(this);
                 }
             }

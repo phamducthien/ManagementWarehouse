@@ -36,6 +36,7 @@ namespace WH.Service
         MethodResult CapNhatMatHangTrongHoaDonTam(List<TEMP_HOADONXUATKHOCHITIET> tempHoaDonNhapKhoChitTiets, bool isCommitted = true);
         MethodResult XoaHoaDonTam(string maHoaDon, bool isCommitted = true);
         MethodResult ThanhToanTemp(string maHoaDon, DateTime ngayTaoHd, Guid maKh = default, decimal soTienChi = 0, decimal giamGia = 0, string ghiChu = "", bool isCommitted = true);
+        MethodResult ThanhToanTemp(string maHoaDon, DateTime ngayTaoHd, int maNhaCc, decimal soTienChi = 0, decimal giamGia = 0, string ghiChu = "", bool isCommitted = true);
         TEMP_HOADONXUATKHOCHITIET GetModelChiTietTam(string maChiTiet);
         TEMP_HOADONXUATKHOCHITIET GetModelChiTietTam(int maMatHang, string maHoaDon);
 
@@ -275,7 +276,7 @@ namespace WH.Service
                     if (objMatHang == null) continue;
                     ct.CHIETKHAUTHEOTIEN = 0;
                     if (objMatHang.CHIETKHAU != null)
-                        ct.CHIETKHAUTHEOTIEN = ct.SOLUONGLE * ct.DONGIASI * (decimal)ct.CHIETKHAUTHEOPHANTRAM ?? 0;
+                        ct.CHIETKHAUTHEOTIEN = ct.SOLUONGLE * ct.DONGIASI * (decimal)objMatHang.CHIETKHAU ?? 0;
 
                     ct.THANHTIENTRUOCCHIETKHAU_CT = ct.SOLUONGLE * ct.DONGIASI;
                     ct.THANHTIENSAUCHIETKHAU_CT = ct.THANHTIENTRUOCCHIETKHAU_CT - ct.CHIETKHAUTHEOTIEN;
@@ -410,13 +411,6 @@ namespace WH.Service
                         result = _hoaDonXuatKhoChiTietService.Modify(hoaDonXuatKhoChiTiet);
                         if (result != MethodResult.Succeed)
                             goto loi2;
-
-                        //var objKhoMatHang = _khoMatHangService.Find(s => s.MAKHO == hoaDonXuatKhoChiTiet.MAKHO && s.MAMATHANG == hoaDonXuatKhoChiTiet.MAMATHANG);
-                        //if (objKhoMatHang == null) continue;
-                        //objKhoMatHang.SOLUONGLE -= hoaDonXuatKhoChiTiet.SOLUONGLE;
-                        //result = _khoMatHangService.Modify(objKhoMatHang);
-                        //if (result != MethodResult.Succeed)
-                        //    goto loi5;
                     }
 
                 //4.Cập nhật  Phieu Chi
@@ -465,22 +459,10 @@ namespace WH.Service
                 ErrMsg = _phieuThuService.ErrMsg;
                 return MethodResult.Failed;
             }
-            loi5:
-            {
-                _unitOfWork?.Rollback();
-                ErrMsg = _khoMatHangService.ErrMsg;
-                return MethodResult.Failed;
-            }
             loi4:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = "Không có mặt hàng trong hóa đơn!";
-                return MethodResult.Failed;
-            }
-            loi6:
-            {
-                _unitOfWork?.Rollback();
-                ErrMsg = _tempHoaDonXuatKhoChiTietService.ErrMsg;
                 return MethodResult.Failed;
             }
         }
@@ -577,7 +559,7 @@ namespace WH.Service
                     {
                         ct.CHIETKHAUTHEOTIEN = 0;
                         if (objMathang.CHIETKHAU != null)
-                            ct.CHIETKHAUTHEOTIEN = ct.SOLUONGLE * ct.DONGIASI * (decimal)ct.CHIETKHAUTHEOPHANTRAM ?? 0;
+                            ct.CHIETKHAUTHEOTIEN = ct.SOLUONGLE * ct.DONGIASI * (decimal)objMathang.CHIETKHAU ?? 0;
 
                         ct.THANHTIENTRUOCCHIETKHAU_CT = ct.SOLUONGLE * ct.DONGIASI;
                         ct.THANHTIENSAUCHIETKHAU_CT = ct.THANHTIENTRUOCCHIETKHAU_CT - ct.CHIETKHAUTHEOTIEN;
@@ -719,31 +701,32 @@ namespace WH.Service
 
         public DataTable GetListMatHangTheoNgay(DateTime batDau, DateTime ketThuc, int? maMatHang)
         {
-            int count = 1;
+            var count = 1;
             var lst =
                 from p in _hoaDonXuatKhoChiTietService
                     .Search(p => p.HOADONXUATKHO.NGAYTAOHOADON >= batDau && p.HOADONXUATKHO.NGAYTAOHOADON <= ketThuc && p.MAMATHANG == maMatHang)
                 select new
                 {
                     STT = count++,
-                    MAHOADON = p.MAHOADON,
-                    MAMATHANG = p.MAMATHANG,
-                    TENKHACHHANG = p.HOADONXUATKHO.KHACHHANG.TENKHACHHANG,
+                    p.MAHOADON,
+                    p.MAMATHANG,
+                    p.HOADONXUATKHO.KHACHHANG.TENKHACHHANG,
                     NGAYTAOHOADON = p.HOADONXUATKHO.NGAYTAOHOADON.ToString(),
-                    TENMATHANG = p.MATHANG.TENMATHANG,
+                    p.MATHANG.TENMATHANG,
                     SOLUONG = p.SOLUONGLE,
                     DONGIA = p.DONGIASI,
                     THANHTIEN = p.THANHTIENSAUCHIETKHAU_CT,
                     p.GHICHU
                 };
 
+            var enumerable = lst.ToList();
             try
             {
-                return lst.OrderBy(s => s.GHICHU.ToInt()).ToList().ToDatatable();
+                return enumerable.OrderBy(s => s.GHICHU.ToInt()).ToList().ToDatatable();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return lst.OrderBy(s => s.GHICHU).ToList().ToDatatable();
+                return enumerable.OrderBy(s => s.GHICHU).ToList().ToDatatable();
             }
         }
 
@@ -1063,11 +1046,8 @@ namespace WH.Service
                             objct.SOLUONGLE += ct.SOLUONGLE;
                             objct.DONGIASI = ct.DONGIASI;
                             objct.THANHTIENTRUOCCHIETKHAU_CT = objct.SOLUONGLE * objct.DONGIASI;
-                            objct.CHIETKHAUTHEOTIEN = objct.THANHTIENTRUOCCHIETKHAU_CT *
-                                                      (decimal)objct.CHIETKHAUTHEOPHANTRAM;
-
+                            objct.CHIETKHAUTHEOTIEN = objct.THANHTIENTRUOCCHIETKHAU_CT * (decimal)objct.CHIETKHAUTHEOPHANTRAM;
                             objct.THANHTIENSAUCHIETKHAU_CT = objct.THANHTIENTRUOCCHIETKHAU_CT - objct.CHIETKHAUTHEOTIEN;
-                            //objct.GHICHU = DateTime.Now.ToString("G");
 
                             result = _tempHoaDonXuatKhoChiTietService.Modify(objct);
                             if (result != MethodResult.Succeed)
@@ -1151,19 +1131,27 @@ namespace WH.Service
         public MethodResult ThanhToanTemp(string maHoaDon, DateTime ngayTaoHd, Guid maKh, decimal soTienChi, decimal giamGia,
             string ghiChu, bool isCommitted = true)
         {
-            //Ma Khach Hang Mac Dinh : "56DBC32E-11D7-4175-A7AC-608CCBF962D7"// Khach VIP SI
-            //1.Get DS Chi Tiet Tam Boi Ma Hoa Don
-            //2.Tao Hoa Don
-            //3.Them Chi Tiet
-            //4.Tao Phieu thu
-            //if (maKh == Guid.Empty)
-            //{
-            //    maKh = "56DBC32E-11D7-4175-A7AC-608CCBF962D7".ToGuid();
-            //}
+            return ThanhToanTemp(maHoaDon, ngayTaoHd, maKh, null, soTienChi, giamGia, ghiChu, isCommitted);
+        }
 
+        public MethodResult ThanhToanTemp(string maHoaDon, DateTime ngayTaoHd, int maNhaCc, decimal soTienChi, decimal giamGia,
+            string ghiChu, bool isCommitted = true)
+        {
+            return ThanhToanTemp(maHoaDon, ngayTaoHd, null, maNhaCc, soTienChi, giamGia, ghiChu, isCommitted);
+        }
+
+        public MethodResult ThanhToanTemp(string maHoaDon, DateTime ngayTaoHd, Guid? maKh, int? maNhaCc, decimal soTienChi,
+            decimal giamGia, string ghiChu, bool isCommitted = true)
+        {
             if (maHoaDon.isNull())
             {
                 ErrMsg = "Hoa Don Chua Duoc Khoi Tao!!!";
+                return MethodResult.Failed;
+            }
+
+            if (maKh != null && maNhaCc != null)
+            {
+                ErrMsg = "Không thể xuất kho cho khách hàng và nhà CC cùng một lúc";
                 return MethodResult.Failed;
             }
 
@@ -1175,9 +1163,9 @@ namespace WH.Service
                     _unitOfWork.BeginTransaction();
 
                 //1.Get DS Chi Tiet Tam Boi Ma Hoa Don
-                var lsTempHoadonhapkhochitiets =
+                var tempHoadonxuatkhochitiets =
                     _tempHoaDonXuatKhoChiTietService.Search(s => s.ISDELETE == false && s.MAHOADON == maHoaDon);
-                if (lsTempHoadonhapkhochitiets.isNull())
+                if (tempHoadonxuatkhochitiets.isNull())
                     goto loi4;
 
                 //2.Tao Hoa Don
@@ -1190,23 +1178,25 @@ namespace WH.Service
 
                 objHd.MAHOADONXUAT = maHoaDon;
                 objHd.MAKHACHHANG = maKh;
+                objHd.MANHACUNGCAP = maNhaCc;
                 objHd.MACA = null;
                 objHd.SOTIENKHACHDUA_HD = soTienChi;
-                objHd.THANHTIENCHUACK_HD =
-                    lsTempHoadonhapkhochitiets.Sum(s => s.THANHTIENTRUOCCHIETKHAU_CT.GetValueOrDefault());
+                objHd.THANHTIENCHUACK_HD = tempHoadonxuatkhochitiets.Sum(s => s.THANHTIENTRUOCCHIETKHAU_CT.GetValueOrDefault());
                 objHd.NGUOITAO = _userId;
                 objHd.LOAIHOADON = 2;
                 objHd.NGAYTAOHOADON = ngayTaoHd;
-                objHd.TIENCHIETKHAU_HD = lsTempHoadonhapkhochitiets.Sum(s => s.CHIETKHAUTHEOTIEN.GetValueOrDefault());
+                objHd.TIENCHIETKHAU_HD = tempHoadonxuatkhochitiets.Sum(s => s.CHIETKHAUTHEOTIEN.GetValueOrDefault());
                 objHd.TIENKHUYENMAI_HD = giamGia;
-
-                var totalAmount = lsTempHoadonhapkhochitiets.Sum(s => s.THANHTIENSAUCHIETKHAU_CT.GetValueOrDefault());
-                objHd.SOTIENTHANHTOAN_HD = AdjustRound(decimal.ToDouble(totalAmount));
-
                 objHd.GHICHU_HD = ghiChu;
-                objHd.DATHANHTOAN = objHd.SOTIENKHACHDUA_HD.GetValueOrDefault() -
-                                    objHd.SOTIENTHANHTOAN_HD.GetValueOrDefault() >= 0;
+                objHd.DATHANHTOAN = objHd.SOTIENKHACHDUA_HD.GetValueOrDefault() - objHd.SOTIENTHANHTOAN_HD.GetValueOrDefault() >= 0;
                 objHd.ISDELETE = false;
+                if (maNhaCc != null)
+                {
+                    objHd.LOAIXUATKHO = 1;
+                }
+                
+                var totalAmount = tempHoadonxuatkhochitiets.Sum(s => s.THANHTIENSAUCHIETKHAU_CT.GetValueOrDefault());
+                objHd.SOTIENTHANHTOAN_HD = AdjustRound(decimal.ToDouble(totalAmount));
 
                 result = isAdd ? _hoaDonXuatKhoService.Add(objHd) : _hoaDonXuatKhoService.Modify(objHd);
                 if (result != MethodResult.Succeed)
@@ -1214,45 +1204,42 @@ namespace WH.Service
 
                 //2.Them Chi Tiet Mat Hang Temp
                 isAdd = false;
-                if (!lsTempHoadonhapkhochitiets.isNull())
-                    foreach (var ct in lsTempHoadonhapkhochitiets)
+                if (!tempHoadonxuatkhochitiets.isNull())
+                    foreach (var ct in tempHoadonxuatkhochitiets)
                     {
-                        var objct = _hoaDonXuatKhoChiTietService.Find(s => s.MACHITIETHOADON == ct.MACHITIETHOADON);
-                        if (objct.isNull())
+                        var hoaDonXuatKhoChiTiet = _hoaDonXuatKhoChiTietService.Find(s => s.MACHITIETHOADON == ct.MACHITIETHOADON);
+                        if (hoaDonXuatKhoChiTiet.isNull())
                         {
                             isAdd = true;
-                            objct = _hoaDonXuatKhoChiTietService.CreateNew();
+                            hoaDonXuatKhoChiTiet = _hoaDonXuatKhoChiTietService.CreateNew();
                         }
 
-                        objct.MAHOADON = maHoaDon;
-                        objct.MAKHO = ct.MAKHO;
-                        objct.MAMATHANG = ct.MAMATHANG;
-                        objct.MACHITIETHOADON = ct.MACHITIETHOADON;
-                        objct.DONGIASI = ct.DONGIASI;
-                        objct.GHICHU = ct.GHICHU;
-                        objct.ISDELETE = false;
-                        objct.SOLUONGLE = ct.SOLUONGLE;
-                        objct.SOLUONGSI = ct.SOLUONGSI;
-                        objct.CHIETKHAUTHEOPHANTRAM = ct.CHIETKHAUTHEOPHANTRAM;
-                        objct.CHIETKHAUTHEOTIEN = ct.CHIETKHAUTHEOTIEN;
-                        objct.THANHTIENSAUCHIETKHAU_CT = ct.THANHTIENSAUCHIETKHAU_CT;
-                        objct.THANHTIENTRUOCCHIETKHAU_CT = ct.THANHTIENTRUOCCHIETKHAU_CT;
+                        hoaDonXuatKhoChiTiet.MAHOADON = maHoaDon;
+                        hoaDonXuatKhoChiTiet.MAKHO = ct.MAKHO;
+                        hoaDonXuatKhoChiTiet.MAMATHANG = ct.MAMATHANG;
+                        hoaDonXuatKhoChiTiet.MACHITIETHOADON = ct.MACHITIETHOADON;
+                        hoaDonXuatKhoChiTiet.DONGIASI = ct.DONGIASI;
+                        hoaDonXuatKhoChiTiet.GHICHU = ct.GHICHU;
+                        hoaDonXuatKhoChiTiet.ISDELETE = false;
+                        hoaDonXuatKhoChiTiet.SOLUONGLE = ct.SOLUONGLE;
+                        hoaDonXuatKhoChiTiet.SOLUONGSI = ct.SOLUONGSI;
+                        hoaDonXuatKhoChiTiet.CHIETKHAUTHEOPHANTRAM = ct.CHIETKHAUTHEOPHANTRAM;
+                        hoaDonXuatKhoChiTiet.CHIETKHAUTHEOTIEN = ct.CHIETKHAUTHEOTIEN;
+                        hoaDonXuatKhoChiTiet.THANHTIENSAUCHIETKHAU_CT = ct.THANHTIENSAUCHIETKHAU_CT;
+                        hoaDonXuatKhoChiTiet.THANHTIENTRUOCCHIETKHAU_CT = ct.THANHTIENTRUOCCHIETKHAU_CT;
 
                         result = isAdd
-                            ? _hoaDonXuatKhoChiTietService.Add(objct)
-                            : _hoaDonXuatKhoChiTietService.Modify(objct);
+                            ? _hoaDonXuatKhoChiTietService.Add(hoaDonXuatKhoChiTiet)
+                            : _hoaDonXuatKhoChiTietService.Modify(hoaDonXuatKhoChiTiet);
                         if (result != MethodResult.Succeed)
                             goto loi2;
 
-                        var objKhomathang =
-                            _khoMatHangService.Find(s => s.MAKHO == objct.MAKHO && s.MAMATHANG == objct.MAMATHANG);
-                        if (objKhomathang != null)
-                        {
-                            objKhomathang.SOLUONGLE -= objct.SOLUONGLE;
-                            result = _khoMatHangService.Modify(objKhomathang);
-                            if (result != MethodResult.Succeed)
-                                goto loi5;
-                        }
+                        var objKhoMatHang = _khoMatHangService.Find(s => s.MAKHO == hoaDonXuatKhoChiTiet.MAKHO && s.MAMATHANG == hoaDonXuatKhoChiTiet.MAMATHANG);
+                        if (objKhoMatHang == null) continue;
+                        objKhoMatHang.SOLUONGLE -= hoaDonXuatKhoChiTiet.SOLUONGLE;
+                        result = _khoMatHangService.Modify(objKhoMatHang);
+                        if (result != MethodResult.Succeed)
+                            goto loi5;
                     }
 
                 //4.Tao Phieu Chi
@@ -1271,8 +1258,8 @@ namespace WH.Service
                         goto loi3;
                 }
 
-                if (!lsTempHoadonhapkhochitiets.isNull())
-                    foreach (var ct in lsTempHoadonhapkhochitiets)
+                if (!tempHoadonxuatkhochitiets.isNull())
+                    foreach (var ct in tempHoadonxuatkhochitiets)
                     {
                         result = _tempHoaDonXuatKhoChiTietService.Remove(ct);
                         if (result != MethodResult.Succeed)
@@ -1280,7 +1267,7 @@ namespace WH.Service
                     }
 
                 //4.Luu
-                if (isCommitted && result == MethodResult.Succeed)
+                if (isCommitted)
                     _unitOfWork?.Commit();
             }
             catch (Exception exception)
@@ -1408,7 +1395,7 @@ namespace WH.Service
         {
             if (maChiTiet.isNull())
             {
-                ErrMsg = "Mặt hàng không có trong hóa đơn!!!";
+                ErrMsg = "Mat Hang Khong Co Trong Hoa Don!!!";
                 return MethodResult.Failed;
             }
 

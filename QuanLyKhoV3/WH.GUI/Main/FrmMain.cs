@@ -194,6 +194,7 @@ namespace WH.GUI
             var frm = new FrmReturnGoodsSupplier();
             frm.ShowDialog();
             Show();
+            Activate();
         }
 
         private void FrmMain_Load(object sender, EventArgs e)

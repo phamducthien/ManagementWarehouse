@@ -32,7 +32,7 @@ namespace WH.Report.ReportFunction
             return dt;
         }
 
-        private DataTable LoadToDataTable(string sql)
+        public DataTable LoadToDataTable(string sql)
         {
             var dt = LoadDataTable(sql);
             return dt;
@@ -225,8 +225,7 @@ SELECT {soLuongHdLoad}
     hd.SOTIENTHANHTOAN_HD AS TONGTIENHOADON, 
     hd.TIENKHUYENMAI_HD AS TIENKHUYENMAI,
     ISNULL(TablePhieuThu.TONGTIENTHU, 0) AS SOTIENKHACHDUA,
-    hd.SOTIENTHANHTOAN_HD AS SOTIENTHANHTOAN_HD, 
-    ISNULL(TablePhieuThu.TONGTIENTHU, 0) as TONGTIENTHU
+    hd.SOTIENTHANHTOAN_HD AS SOTIENTHANHTOAN_HD
 FROM NGUOIDUNG AS nd, KHACHHANG AS kh, HOADONXUATKHO AS hd 
 LEFT JOIN (
     SELECT SUM(pt.TIENTHANHTOAN) AS TONGTIENTHU, MAHOADONXUATKHO AS MAHOADONXUATKHO 
@@ -293,7 +292,12 @@ WHERE nd.MANGUOIDUNG= hd.NGUOITAO and kh.MAKHACHHANG = HD.MAKHACHHANG";
             var sumObj = data.Compute("sum(TONGTIEN)", null);
             return (decimal)sumObj;
         }
-
+        public DataTable Cmd_GetExportBills_ByNCC(string soLuongHdLoad, string maNcc, string batDau,
+            string ketThuc)
+        {
+            var data = GetExportBillNccs(soLuongHdLoad, string.Empty, maNcc, batDau, ketThuc);
+            return data;
+        }
         #endregion Get Cong No Khach Hang
 
         #region Get Cong No Nha Cung Cap
@@ -301,42 +305,37 @@ WHERE nd.MANGUOIDUNG= hd.NGUOITAO and kh.MAKHACHHANG = HD.MAKHACHHANG";
         private DataTable GetImportBills(string soLuongHdLoad, string maNhanVien, string maKhachHang, string batDau,
             string ketThuc)
         {
-            var sqlSelect = $@"
-SELECT {soLuongHdLoad} 
-    hd.MAHOADONNHAP AS MAHOADONNHAP, 
-    hd.SOTIENTHANHTOAN_HD AS TONGTIENHOADON, 
-    hd.CHIETKHAUTHEOTIEN_HD AS TIENCHIETKHAU, 
-    isnull(TablePhieuChi.TONGTIENTRA, 0) AS SOTIENTHANHTOAN, 
-    (hd.SOTIENTHANHTOAN_HD - isnull(TablePhieuChi.TONGTIENTRA, 0)) AS CONGNO, 
-    hd.NGAYTAOHOADON AS NgayTaoHoaDon,
-    TinhTrang = CASE when(hd.SOTIENTHANHTOAN_HD - isnull(TablePhieuChi.TONGTIENTRA, 0)) <=0 THEN N'Đã Thanh Toán' ELSE N'Chưa Thanh Toán' END,
-    ncc.TENNHACUNGCAP AS TENNHACUNGCAP, 
-    ncc.DIENTHOAI AS DIENTHOAI, 
-    ncc.DIDONG AS DIDONG
-FROM NGUOIDUNG AS nd, NHACUNGCAP AS ncc, HOADONNHAPKHO AS hd 
-LEFT JOIN (
-    SELECT SUM(pc.TIENTHANHTOAN) as TONGTIENTRA, MAHOADONNHAPKHO as MAHOADONNHAPKHO
-    FROM PHIEUCHI pc
-    GROUP BY MAHOADONNHAPKHO
-    ) as TablePhieuChi on hd.MAHOADONNHAP = TablePhieuChi.MAHOADONNHAPKHO
-WHERE nd.MANGUOIDUNG=hd.NGUOITAO and ncc.MANHACUNGCAP = HD.MANHACUNGCAP
-            ";
+            var sqlSelect = "SELECT " + soLuongHdLoad +
+                            " hd.MAHOADONNHAP as MAHOADONNHAP, hd.SOTIENTHANHTOAN_HD as TONGTIENHOADON, hd.CHIETKHAUTHEOTIEN_HD as TIENCHIETKHAU, isnull(TablePhieuChi.TONGTIENTRA, 0) as SOTIENTHANHTOAN, (hd.SOTIENTHANHTOAN_HD - isnull(TablePhieuChi.TONGTIENTRA, 0)) as CONGNO, hd.NGAYTAOHOADON as NgayTaoHoaDon, " +
+                            "\"TinhTrang\" = " +
+                            "CASE " +
+                            "when(hd.SOTIENTHANHTOAN_HD - isnull(TablePhieuChi.TONGTIENTRA, 0)) <=0 THEN N'Đã Thanh Toán' " +
+                            "ELSE N'Chưa Thanh Toán' " +
+                            "END " +
+                            " ,ncc.TENNHACUNGCAP as TENNHACUNGCAP, ncc.DIENTHOAI as DIENTHOAI, ncc.DIDONG as DIDONG";
+            ;
+            var sqlFrom = " FROM NGUOIDUNG nd, NHACUNGCAP ncc, HOADONNHAPKHO hd left join " +
+                          "(select SUM(pc.TIENTHANHTOAN) as TONGTIENTRA, MAHOADONNHAPKHO as MAHOADONNHAPKHO " +
+                          "from PHIEUCHI pc " +
+                          " group by MAHOADONNHAPKHO) as TablePhieuChi on hd.MAHOADONNHAP = TablePhieuChi.MAHOADONNHAPKHO";
+
+            var sqlWhere = " WHERE nd.MANGUOIDUNG=hd.NGUOITAO and ncc.MANHACUNGCAP = HD.MANHACUNGCAP";
 
             if (maNhanVien != "")
-                sqlSelect += " AND nd.MANGUOIDUNG ='" + maNhanVien + "' ";
+                sqlWhere += " AND nd.MANGUOIDUNG ='" + maNhanVien + "' ";
 
             if (maKhachHang != "")
-                sqlSelect += " AND HD.MANHACUNGCAP ='" + maKhachHang + "' ";
+                sqlWhere += " AND HD.MANHACUNGCAP ='" + maKhachHang + "' ";
 
             if (batDau != "")
-                sqlSelect += " AND HD.NGAYTAOHOADON >= '" + batDau + "' ";
+                sqlWhere += " AND HD.NGAYTAOHOADON >= '" + batDau + "' ";
 
             if (ketThuc != "")
-                sqlSelect += " AND HD.NGAYTAOHOADON <= '" + ketThuc + "' ";
+                sqlWhere += " AND HD.NGAYTAOHOADON <= '" + ketThuc + "' ";
 
             const string sqlOrderBy = " ORDER BY HD.NGAYTAOHOADON DESC";
 
-            var sql = sqlSelect + sqlOrderBy;
+            var sql = sqlSelect + sqlFrom + sqlWhere + sqlOrderBy;
             var data = LoadToDataTable(sql);
 
             return data;
@@ -938,6 +937,53 @@ WHERE nd.MANGUOIDUNG=hd.NGUOITAO and ncc.MANHACUNGCAP = HD.MANHACUNGCAP
         }
 
         #endregion Get Chi Tiet Ban Si
+
+        #region Get thông tin trả hàng nhà cung cấp
+        private DataTable GetExportBillNccs(string soLuongHdLoad, string maNhanVien, string maNcc, string batDau,
+            string ketThuc)
+        {
+            var sqlSelect = $@"
+SELECT {soLuongHdLoad}
+    hd.MAHOADONXUAT as MAHOADONXUAT, 
+    hd.SOTIENTHANHTOAN_HD as TONGTIENHOADON, 
+    hd.TIENKHUYENMAI_HD as TIENKHUYENMAI,
+    isnull(TablePhieuThu.TONGTIENTHU, 0) as SOTIENKHACHDUA,
+    (hd.SOTIENTHANHTOAN_HD - isnull(TablePhieuThu.TONGTIENTHU, 0)) as CONGNO,
+    hd.NGAYTAOHOADON as NgayTaoHoaDon,
+    ncc.MANHACUNGCAP as MACODE, 
+    ncc.TENNHACUNGCAP, 
+    ncc.NGUOIDAIDIEN";
+
+            var sqlFrom = @" 
+FROM NGUOIDUNG nd, NHACUNGCAP ncc, HOADONXUATKHO hd 
+LEFT JOIN (
+    SELECT SUM(pt.TIENTHANHTOAN) as TONGTIENTHU, MAHOADONXUATKHO as MAHOADONXUATKHO 
+    FROM PHIEUTHU pt 
+    group by MAHOADONXUATKHO
+    ) as TablePhieuThu ON hd.MAHOADONXUAT = TablePhieuThu.MAHOADONXUATKHO ";
+
+            var sqlWhere = " WHERE nd.MANGUOIDUNG= hd.NGUOITAO and ncc.MANHACUNGCAP = HD.MANHACUNGCAP";
+
+            if (maNhanVien != "")
+                sqlWhere += " AND ND.MANGUOIDUNG ='" + maNhanVien + "' ";
+
+            if (maNcc != "")
+                sqlWhere += " AND HD.MANHACUNGCAP ='" + maNcc + "' ";
+
+            if (batDau != "")
+                sqlWhere += " AND HD.NGAYTAOHOADON >= '" + batDau + "' ";
+
+            if (ketThuc != "")
+                sqlWhere += " AND HD.NGAYTAOHOADON <= '" + ketThuc + "' ";
+
+            var sqlOrderBy = " ORDER BY HD.NGAYTAOHOADON DESC";
+
+            var sql = sqlSelect + sqlFrom + sqlWhere + sqlOrderBy;
+            var data = LoadToDataTable(sql);
+
+            return data;
+        }
+        #endregion
     }
 
     #region Enum Bill

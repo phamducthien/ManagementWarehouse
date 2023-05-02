@@ -433,6 +433,12 @@
     <Compile Include="NghiepVu\ReturnGoodsSupplier\FrmReturnGoodsSupplier.Designer.cs">
       <DependentUpon>FrmReturnGoodsSupplier.cs</DependentUpon>
     </Compile>
+    <Compile Include="NghiepVu\ReturnGoodsSupplier\FrmSummaryReturnGoodSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NghiepVu\ReturnGoodsSupplier\FrmSummaryReturnGoodSupplier.Designer.cs">
+      <DependentUpon>FrmSummaryReturnGoodSupplier.cs</DependentUpon>
+    </Compile>
     <Compile Include="NghiepVu\ucMatHangXuatKho.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -607,6 +613,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NghiepVu\ReturnGoodsSupplier\FrmReturnGoodsSupplier.resx">
       <DependentUpon>FrmReturnGoodsSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NghiepVu\ReturnGoodsSupplier\FrmSummaryReturnGoodSupplier.resx">
+      <DependentUpon>FrmSummaryReturnGoodSupplier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NghiepVu\ucMatHangXuatKho.resx">
       <DependentUpon>ucMatHangXuatKho.cs</DependentUpon>

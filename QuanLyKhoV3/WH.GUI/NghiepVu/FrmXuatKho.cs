@@ -360,10 +360,10 @@ namespace WH.GUI
             try
             {
                 GetDataFromDgvDanhMuc();
-                var matHang = Model;
-                if (matHang == null) return;
+                var objMathang = Model;
+                if (objMathang == null) return;
 
-                int soLuong = 0;
+                int soluong = 0;
                 var xuatKhoService = XuatKhoService;
 
                 var listct = xuatKhoService.LoadHoaDonTam(MaHoaDon);
@@ -373,12 +373,12 @@ namespace WH.GUI
                 {
                     if (!listct.isNullOrZero())
                     {
-                        soLuong = listct.OrderBy(s => s.GHICHU.ToInt()).Last().GHICHU
+                        soluong = listct.OrderBy(s => s.GHICHU.ToInt()).Last().GHICHU
                             .ToInt();
                     }
                 }
 
-                var frm = new FrmInputNumberExportByLoaiExtend(soLuong, matHang, true);
+                var frm = new FrmInputNumberExportByLoaiExtend(soluong, objMathang, true);
                 frm.ShowDialog(this);
 
                 if (frm.TempHoaDonXuatKhoChiTiet.isNullOrZero()) return;
