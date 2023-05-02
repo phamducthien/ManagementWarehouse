@@ -239,12 +239,12 @@ namespace WH.GUI.ReturnGoodsSupplier
                 var frm = new FrmInputNumberExportByLoaiExtend(SoLuong, MatHangModel, false, true, MaHoaDon);
                 frm.ShowDialog(this);
 
+                if (frm.LstChiTietNhap.isNullOrZero()) return;
+                if (frm.LstChiTietNhap.Count <= 0) return;
+
                 var tempHoadonxuatkhochitiets = frm.LstChiTietNhap
                     .Where(x => x.SOLUONGLE > 0)
                     .ToList();
-
-                if (tempHoadonxuatkhochitiets.isNullOrZero()) return;
-                if (tempHoadonxuatkhochitiets.Count <= 0) return;
 
                 foreach (var ct in tempHoadonxuatkhochitiets)
                 {
