@@ -114,7 +114,7 @@ namespace WH.GUI
             {
                 var frm = new FrmKhuVuc();
                 frm.ShowDialog();
-                if (frm.IsSuccessfuly)
+                if (frm.IsSuccessfully)
                 {
                     txtKhuVuc.Text = frm.Model?.TEN;
                     labMaKV.Text = frm.Model?.MAKHUVUC.ToString();
@@ -334,13 +334,13 @@ namespace WH.GUI
             if (result != MethodResult.Succeed)
             {
                 IsChange = false;
-                IsSuccessfuly = false;
+                IsSuccessfully = false;
                 ShowMessage(IconMessageBox.Error, service.ErrMsg);
                 return;
             }
 
             IsChange = true;
-            IsSuccessfuly = true;
+            IsSuccessfully = true;
             ThaoTac = ThaoTac.Xem;
             LoadDataAll();
             SelectedRow(dgvDanhMuc.Rows[dgvDanhMuc.RowCount - 1]);
@@ -358,13 +358,13 @@ namespace WH.GUI
             if (result != MethodResult.Succeed)
             {
                 IsChange = false;
-                IsSuccessfuly = false;
+                IsSuccessfully = false;
                 ShowMessage(IconMessageBox.Error, service.ErrMsg);
                 return;
             }
             var index = CurrentRow.Index;
             IsChange = true;
-            IsSuccessfuly = true;
+            IsSuccessfully = true;
             ThaoTac = ThaoTac.Xem;
             LoadDataAll();
 
@@ -396,14 +396,14 @@ namespace WH.GUI
             if (result != MethodResult.Succeed)
             {
                 IsChange = false;
-                IsSuccessfuly = false;
+                IsSuccessfully = false;
                 ShowMessage(IconMessageBox.Warning, "Không thể xóa vì dữ liệu này đang được sử dụng!");
                 //ShowMessage(IconMessageBox.Error, service.ErrMsg);
                 return;
             }
 
             IsChange = true;
-            IsSuccessfuly = true;
+            IsSuccessfully = true;
             ThaoTac = ThaoTac.Xem;
             LoadDataAll();
 
@@ -717,7 +717,7 @@ namespace WH.GUI
                     else
                     {
                         IsChange = true;
-                        IsSuccessfuly = true;
+                        IsSuccessfully = true;
                         ThaoTac = ThaoTac.Xem;
                         LoadDataAll();
 

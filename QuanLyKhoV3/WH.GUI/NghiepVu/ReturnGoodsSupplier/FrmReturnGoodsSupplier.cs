@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using ComponentFactory.Krypton.Toolkit;
+using Repository.Pattern.UnitOfWork;
 using Service.Pattern;
 using Util.Pattern;
 using WH.Entity;
@@ -21,6 +22,7 @@ namespace WH.GUI.ReturnGoodsSupplier
         }
 
         #region Init
+
         public MATHANG MatHangModel { get; set; }
         public List<MATHANG> MatHangs { get; set; }
         public NHACUNGCAP NhaCungCapModel { get; set; }

@@ -17,7 +17,7 @@ namespace WH.GUI
             InitializeComponent();
             CreateEvent();
 
-            IsSuccessfuly = false;
+            IsSuccessfully = false;
         }
 
         private List<ExcelHoaDonModelService.HoaDonNhapExcelModel> _lstDonNhapExcelModels { get; set; }
