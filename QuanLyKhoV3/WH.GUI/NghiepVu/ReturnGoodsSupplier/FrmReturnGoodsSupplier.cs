@@ -47,7 +47,7 @@ namespace WH.GUI.ReturnGoodsSupplier
         {
             Frm = this;
             BtnLuu = null;
-            TxtSearch = txtTimKiem;
+            TxtSearch = TxtTimKiem;
             DgView = dgvDanhMuc;
             DgView2 = dgvHoaDon;
             GbxInfo = gbxInfo;
@@ -80,11 +80,8 @@ namespace WH.GUI.ReturnGoodsSupplier
             //dgvHoaDon.SelectionChanged += DgvHoaDon_SelectionChanged;
             //dgvHoaDon.CellMouseDoubleClick += DgvHoaDon_CellMouseDoubleClick;
 
-            //btnAll.Click += BtnAll_Click;
-            //btnCanNhap.Click += BtnCanNhap_Click;
-            //btnCanXuat.Click += BtnCanXuat_Click;
-            btnTimKiem.Click += btnTimKiem_Click;
-            //txtTimKiem.TextChanged += TxtTimKiem_TextChanged;
+            btnAll.Click += BtnAll_Click;
+            btnTimKiem.Click += BtnTimKiem_Click;
 
             btnSelectKH.Click += BtnSelectNCC_Click;
             //btnAddKH.Click += BtnAddNCC_Click;
@@ -133,9 +130,14 @@ namespace WH.GUI.ReturnGoodsSupplier
             ActionCapNhatMatHang();
         }
 
-        private void btnTimKiem_Click(object sender, EventArgs e)
+        private void BtnTimKiem_Click(object sender, EventArgs e)
         {
             ActionTimKiem();
+        }
+
+        private void BtnAll_Click(object sender, EventArgs e)
+        {
+            LoadDataAllMatHang();
         }
 
         #endregion
@@ -153,7 +155,7 @@ namespace WH.GUI.ReturnGoodsSupplier
                 LoadNccToGui(NhaCungCapModel);
                 dtpNgayTaoHD.Value = DateTime.Now;
                 CloseLoad();
-                txtTimKiem.Select();
+                TxtTimKiem.Select();
             }
             catch (Exception exception)
             {
@@ -267,11 +269,11 @@ namespace WH.GUI.ReturnGoodsSupplier
         {
             try
             {
-                var textSearch = txtTimKiem.Text.Trim();
+                var textSearch = TxtTimKiem.Text.Trim();
                 var lstMatHangs = ReturnGoodsSupplierServices.SearchMatHang(textSearch);
                 LoadData(lstMatHangs.ToDatatable());
-                txtTimKiem.SelectAll();
-                txtTimKiem.Select();
+                TxtTimKiem.SelectAll();
+                TxtTimKiem.Select();
             }
             catch (Exception ex)
             {
@@ -388,8 +390,8 @@ namespace WH.GUI.ReturnGoodsSupplier
             var tongTien = ReturnGoodsSupplierServices.CalTongTien(MaHoaDon);
             labTongTien.Values.ExtraText = ExtendMethod.AdjustRound(decimal.ToDouble(tongTien))?.ToString(CultureInfo.InvariantCulture);
             txtTienChi.Text = ExtendMethod.AdjustRound(decimal.ToDouble(tongTien))?.ToString(CultureInfo.InvariantCulture);
-            txtTimKiem.SelectAll();
-            txtTimKiem.Select();
+            TxtTimKiem.SelectAll();
+            TxtTimKiem.Select();
         }
 
         private bool CheckTonToiThieu(int maMatHang, int slNhap, bool isCapNhat = false)
