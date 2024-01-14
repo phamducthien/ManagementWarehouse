@@ -401,14 +401,14 @@ namespace WH.GUI.ReturnGoodsSupplier
             ModelChiTiet = ReturnGoodsSupplierServices.GetModelChiTietTam(maMatHang, MaHoaDon);
             KhoMatHangModel = ReturnGoodsSupplierServices.GetModelKhoMatHang(maMatHang.ToString());
             var matHangModel = ReturnGoodsSupplierServices.GetModelMatHang(maMatHang.ToString());
-            var sltronghoadon = ModelChiTiet?.SOLUONGLE ?? 0;
+            var slTrongHoaDon = ModelChiTiet?.SOLUONGLE ?? 0;
 
             if (KhoMatHangModel != null)
             {
                 slTonKho = KhoMatHangModel.SOLUONGLE ?? 0;
             }
 
-            var soLuong = (int)(slTonKho - slNhap - sltronghoadon);
+            var soLuong = (int)(slTonKho - slNhap - slTrongHoaDon);
             if (isCapNhat)
             {
                 soLuong = (int)(slTonKho - slNhap);
@@ -437,16 +437,16 @@ namespace WH.GUI.ReturnGoodsSupplier
 
         private bool CheckTonToiThieu(int slNhap, bool isCapNhat = false)
         {
-            decimal sltronghoadon = 0;
+            decimal slTrongHoaDon = 0;
             decimal slTonKho = 0;
             ModelChiTiet = ReturnGoodsSupplierServices.GetModelChiTietTam(MatHangModel.MAMATHANG, MaHoaDon);
             KhoMatHangModel = ReturnGoodsSupplierServices.GetModelKhoMatHang(MatHangModel.MAMATHANG.ToString());
             var matHangModel = ReturnGoodsSupplierServices.GetModelMatHang(MatHangModel.MAMATHANG.ToString());
             if (ModelChiTiet != null)
-                sltronghoadon = ModelChiTiet.SOLUONGLE ?? 0;
+                slTrongHoaDon = ModelChiTiet.SOLUONGLE ?? 0;
             if (KhoMatHangModel != null)
                 slTonKho = KhoMatHangModel.SOLUONGLE ?? 0;
-            var soLuong = slTonKho - slNhap - sltronghoadon;
+            var soLuong = slTonKho - slNhap - slTrongHoaDon;
             if (isCapNhat)
                 soLuong = slTonKho - slNhap;
 
@@ -470,10 +470,10 @@ namespace WH.GUI.ReturnGoodsSupplier
 
         private void GetSoLuong()
         {
-            var hoadonxuatkhochitiets = ReturnGoodsSupplierServices.LoadHoaDonTam(MaHoaDon);
-            if (!hoadonxuatkhochitiets.isNullOrZero())
+            var hoaDonXuatKhoChiTiets = ReturnGoodsSupplierServices.LoadHoaDonTam(MaHoaDon);
+            if (!hoaDonXuatKhoChiTiets.isNullOrZero())
             {
-                SoLuong = hoadonxuatkhochitiets.OrderBy(s => s.GHICHU.ToInt()).Last().GHICHU
+                SoLuong = hoaDonXuatKhoChiTiets.OrderBy(s => s.GHICHU.ToInt()).Last().GHICHU
                     .ToInt();
             }
         }
