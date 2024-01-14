@@ -10,9 +10,9 @@
 
 namespace WH.Entity
 {
+    using Util.Pattern;
     using System;
     using System.Collections.Generic;
-    using Util.Pattern;
 
     public partial class HOADONXUATKHO : Repository.Pattern.Ef6.Entity
     {
@@ -29,7 +29,7 @@ namespace WH.Entity
         public Nullable<decimal> THANHTIENCHUACK_HD { get; set; }
         public Nullable<decimal> TIENCHIETKHAU_HD { get; set; }
         public Nullable<decimal> TIENKHUYENMAI_HD { get; set; }
-        public decimal? SOTIENTHANHTOAN_HD { get; set; }
+        public Nullable<decimal> SOTIENTHANHTOAN_HD { get; set; }
         public Nullable<decimal> SOTIENKHACHDUA_HD { get; set; }
         public Nullable<int> LOAIHOADON { get; set; }
         public Nullable<System.DateTime> HANTHANHTOAN { get; set; }
@@ -40,12 +40,14 @@ namespace WH.Entity
         public Nullable<bool> ISDELETE { get; set; }
         public Nullable<System.Guid> MAKHACHHANG { get; set; }
         public Nullable<int> MACA { get; set; }
+        public Nullable<int> MANHACUNGCAP { get; set; }
+        public Nullable<int> LOAIXUATKHO { get; set; }
         //Property TIMKIEM
         public string TIMKIEM
         {
             get
             {
-                return (("" + MAHOADONXUAT + ';' + THANHTIENCHUACK_HD + ';' + TIENCHIETKHAU_HD + ';' + TIENKHUYENMAI_HD + ';' + SOTIENTHANHTOAN_HD + ';' + SOTIENKHACHDUA_HD + ';' + LOAIHOADON + ';' + HANTHANHTOAN + ';' + GHICHU_HD + ';' + DATHANHTOAN + ';' + NGUOITAO + ';' + NGAYTAOHOADON + ';' + ISDELETE + ';' + MAKHACHHANG + ';' + MACA + ';') + ("" + MAHOADONXUAT + ';' + THANHTIENCHUACK_HD + ';' + TIENCHIETKHAU_HD + ';' + TIENKHUYENMAI_HD + ';' + SOTIENTHANHTOAN_HD + ';' + SOTIENKHACHDUA_HD + ';' + LOAIHOADON + ';' + HANTHANHTOAN + ';' + GHICHU_HD + ';' + DATHANHTOAN + ';' + NGUOITAO + ';' + NGAYTAOHOADON + ';' + ISDELETE + ';' + MAKHACHHANG + ';' + MACA + ';').ToUnsign()).Replace(" ", "").ToLower();
+                return (("" + MAHOADONXUAT + ';' + THANHTIENCHUACK_HD + ';' + TIENCHIETKHAU_HD + ';' + TIENKHUYENMAI_HD + ';' + SOTIENTHANHTOAN_HD + ';' + SOTIENKHACHDUA_HD + ';' + LOAIHOADON + ';' + HANTHANHTOAN + ';' + GHICHU_HD + ';' + DATHANHTOAN + ';' + NGUOITAO + ';' + NGAYTAOHOADON + ';' + ISDELETE + ';' + MAKHACHHANG + ';' + MACA + ';' + MANHACUNGCAP + ';' + LOAIXUATKHO + ';') + ("" + MAHOADONXUAT + ';' + THANHTIENCHUACK_HD + ';' + TIENCHIETKHAU_HD + ';' + TIENKHUYENMAI_HD + ';' + SOTIENTHANHTOAN_HD + ';' + SOTIENKHACHDUA_HD + ';' + LOAIHOADON + ';' + HANTHANHTOAN + ';' + GHICHU_HD + ';' + DATHANHTOAN + ';' + NGUOITAO + ';' + NGAYTAOHOADON + ';' + ISDELETE + ';' + MAKHACHHANG + ';' + MACA + ';' + MANHACUNGCAP + ';' + LOAIXUATKHO + ';').ToUnsign()).Replace(" ", "").ToLower();
             }
         }
 
@@ -53,7 +55,7 @@ namespace WH.Entity
         {
             get
             {
-                return ("" + MAHOADONXUAT + ';' + THANHTIENCHUACK_HD + ';' + TIENCHIETKHAU_HD + ';' + TIENKHUYENMAI_HD + ';' + SOTIENTHANHTOAN_HD + ';' + SOTIENKHACHDUA_HD + ';' + LOAIHOADON + ';' + HANTHANHTOAN + ';' + GHICHU_HD + ';' + DATHANHTOAN + ';' + NGUOITAO + ';' + NGAYTAOHOADON + ';' + ISDELETE + ';' + MAKHACHHANG + ';' + MACA + ';').Replace(" ", "").ToLower();
+                return ("" + MAHOADONXUAT + ';' + THANHTIENCHUACK_HD + ';' + TIENCHIETKHAU_HD + ';' + TIENKHUYENMAI_HD + ';' + SOTIENTHANHTOAN_HD + ';' + SOTIENKHACHDUA_HD + ';' + LOAIHOADON + ';' + HANTHANHTOAN + ';' + GHICHU_HD + ';' + DATHANHTOAN + ';' + NGUOITAO + ';' + NGAYTAOHOADON + ';' + ISDELETE + ';' + MAKHACHHANG + ';' + MACA + ';' + MANHACUNGCAP + ';' + LOAIXUATKHO + ';').Replace(" ", "").ToLower();
             }
         }
         public string IDUnit { get { return (MAHOADONXUAT).ToString(); } }
