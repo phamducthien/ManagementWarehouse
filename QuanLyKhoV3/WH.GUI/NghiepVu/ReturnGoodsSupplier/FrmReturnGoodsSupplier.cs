@@ -141,6 +141,11 @@ namespace WH.GUI.ReturnGoodsSupplier
             LoadDataAllMatHang();
         }
 
+        private void dgvHoaDon_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            dgvHoaDon.Rows[e.RowIndex].Cells[0].Value = e.RowIndex + 1;
+        }
+
         #endregion
 
         #region Actions
@@ -240,25 +245,38 @@ namespace WH.GUI.ReturnGoodsSupplier
                 if (frm.LstChiTietNhap.isNullOrZero()) return;
                 if (frm.LstChiTietNhap.Count <= 0) return;
 
+                /***
+                 * Sau khi chọn sản phẩm để xuất. Lấy những sản phẩm có số lượng lẻ > 0
+                 */
                 var tempHoaDonXuatKhoChiTiets = frm.LstChiTietNhap
                     .Where(x => x.SOLUONGLE > 0)
                     .ToList();
 
+                /***
+                 * Check tồn tối thiểu từng sản phẩm đã chọn
+                 * nếu trả về true thì thêm vào danh sách tempHoaDonXuatKhoChiTietsFinal để lưu vào database
+                 */
+                var tempHoaDonXuatKhoChiTietsFinal = new List<TEMP_HOADONHAPKHOCHITIET>();
                 foreach (var ct in tempHoaDonXuatKhoChiTiets)
                 {
                     var slNhap = ct.SOLUONGLE;
 
                     if (!CheckTonToiThieu((int)ct.MAMATHANG, (int)slNhap)) continue;
-
+                    
                     ct.MACHITIETHOADON = PrefixContext.MaChiTietHoaDon(MaHoaDon, (int)ct.MAMATHANG);
                     ct.ISDELETE = false;
+
+                    tempHoaDonXuatKhoChiTietsFinal.Add(ct);
                 }
 
-                var result = ReturnGoodsSupplierServices.NhapMatHangVaoHoaDonTam(MaHoaDon, tempHoaDonXuatKhoChiTiets, null);
-                if (result != MethodResult.Succeed)
-                    ShowMessage(IconMessageBox.Information, ReturnGoodsSupplierServices.ErrMsg);
-                else
-                    LoadHoaDon();
+                if (tempHoaDonXuatKhoChiTietsFinal.Any())
+                {
+                    var result = ReturnGoodsSupplierServices.NhapMatHangVaoHoaDonTam(MaHoaDon, tempHoaDonXuatKhoChiTietsFinal, null);
+                    if (result != MethodResult.Succeed)
+                        ShowMessage(IconMessageBox.Information, ReturnGoodsSupplierServices.ErrMsg);
+                    else
+                        LoadHoaDon();
+                }
             }
             catch (Exception ex)
             {
@@ -414,23 +432,13 @@ namespace WH.GUI.ReturnGoodsSupplier
                 soLuong = (int)(slTonKho - slNhap);
             }
 
-            if (soLuong < 0)
-            {
-                ShowMessage(IconMessageBox.Information,
-                    "Số lượng trong mặt hàng " + matHangModel.TENMATHANG + " trong kho chỉ còn " + soLuong +
-                    " mặt hàng. Không đủ số lượng mặt hàng này để xuất!!!");
-                return false;
-            }
-
             if (soLuong <= matHangModel.NGUONGNHAP)
             {
                 return ShowMessage(IconMessageBox.Question,
-                           "Số lượng trong mặt hàng " + matHangModel.TENMATHANG + " trong kho chỉ còn " + soLuong +
-                           " mặt hàng trong kho, đã thấp hơn số mặt hàng tối thiểu " +
-                           (matHangModel.NGUONGNHAP ?? -1).ToString("## 'mặt hàng'") +
-                           " !!! Bạn có muốn tiếp tục xuất mặt hàng này không?") ==
+                           "Số lượng mặt hàng " + matHangModel.TENMATHANG + " trong kho chỉ còn " + slTonKho +
+                           ", thấp hơn số lượng cần xuất " + slNhap +
+                           ". Bạn có muốn tiếp tục xuất mặt hàng này không?") ==
                        DialogResult.Yes;
-
             }
             return true;
         }

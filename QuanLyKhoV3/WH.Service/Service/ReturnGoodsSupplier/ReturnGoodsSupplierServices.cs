@@ -128,7 +128,6 @@ namespace WH.Service.ReturnGoodsSupplier
                             objct.CHIETKHAUTHEOTIEN = objct.THANHTIENTRUOCCHIETKHAU_CT * (decimal)objct.CHIETKHAUTHEOPHANTRAM;
                             objct.THANHTIENSAUCHIETKHAU_CT = objct.THANHTIENTRUOCCHIETKHAU_CT - objct.CHIETKHAUTHEOTIEN;
 
-
                             result = _tempHoaDonXuatKhoChiTietService.Modify(objct);
                             if (result != MethodResult.Succeed)
                                 break;
