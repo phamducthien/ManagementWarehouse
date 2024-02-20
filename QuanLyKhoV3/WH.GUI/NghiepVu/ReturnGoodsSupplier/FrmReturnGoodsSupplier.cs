@@ -262,7 +262,7 @@ namespace WH.GUI.ReturnGoodsSupplier
                     var slNhap = ct.SOLUONGLE;
 
                     if (!CheckTonToiThieu((int)ct.MAMATHANG, (int)slNhap)) continue;
-                    
+
                     ct.MACHITIETHOADON = PrefixContext.MaChiTietHoaDon(MaHoaDon, (int)ct.MAMATHANG);
                     ct.ISDELETE = false;
 
@@ -426,6 +426,14 @@ namespace WH.GUI.ReturnGoodsSupplier
                 slTonKho = KhoMatHangModel.SOLUONGLE ?? 0;
             }
 
+            if (slTonKho == 0)
+            {
+                ShowMessage(IconMessageBox.Information,
+                    "Số lượng mặt hàng " + matHangModel.TENMATHANG + " trong kho chỉ còn " + slTonKho +
+                    " mặt hàng. Không đủ số lượng mặt hàng này để xuất!!!");
+                return false;
+            }
+
             var soLuong = (int)(slTonKho - slNhap - slTrongHoaDon);
             if (isCapNhat)
             {
@@ -450,10 +458,13 @@ namespace WH.GUI.ReturnGoodsSupplier
             ModelChiTiet = ReturnGoodsSupplierServices.GetModelChiTietTam(MatHangModel.MAMATHANG, MaHoaDon);
             KhoMatHangModel = ReturnGoodsSupplierServices.GetModelKhoMatHang(MatHangModel.MAMATHANG.ToString());
             var matHangModel = ReturnGoodsSupplierServices.GetModelMatHang(MatHangModel.MAMATHANG.ToString());
+
             if (ModelChiTiet != null)
                 slTrongHoaDon = ModelChiTiet.SOLUONGLE ?? 0;
+
             if (KhoMatHangModel != null)
                 slTonKho = KhoMatHangModel.SOLUONGLE ?? 0;
+
             var soLuong = slTonKho - slNhap - slTrongHoaDon;
             if (isCapNhat)
                 soLuong = slTonKho - slNhap;
