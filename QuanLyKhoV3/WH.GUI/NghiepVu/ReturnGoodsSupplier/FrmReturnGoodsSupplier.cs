@@ -413,7 +413,7 @@ namespace WH.GUI.ReturnGoodsSupplier
             TxtTimKiem.Select();
         }
 
-        private bool CheckTonToiThieu(int maMatHang, int slNhap, bool isCapNhat = false)
+        private bool CheckTonToiThieu(int maMatHang, int slXuat, bool isCapNhat = false)
         {
             decimal slTonKho = 0;
             ModelChiTiet = ReturnGoodsSupplierServices.GetModelChiTietTam(maMatHang, MaHoaDon);
@@ -434,17 +434,17 @@ namespace WH.GUI.ReturnGoodsSupplier
                 return false;
             }
 
-            var soLuong = (int)(slTonKho - slNhap - slTrongHoaDon);
+            var soLuong = (int)(slTonKho - slXuat - slTrongHoaDon);
             if (isCapNhat)
             {
-                soLuong = (int)(slTonKho - slNhap);
+                soLuong = (int)(slTonKho - slXuat);
             }
 
             if (soLuong <= matHangModel.NGUONGNHAP)
             {
                  ShowMessage(IconMessageBox.Information,
-                           "Số lượng mặt hàng " + matHangModel.TENMATHANG + " trong kho chỉ còn " + slTonKho +
-                           ". Không đủ số lượng để xuất!!! ");
+                           $"Số lượng mặt hàng " + matHangModel.TENMATHANG + " trong kho chỉ còn " + slTonKho +
+                           $". Không đủ số lượng để xuất {slXuat} !!! ");
                  return false;
             }
             return true;
