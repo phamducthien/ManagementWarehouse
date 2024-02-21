@@ -27,6 +27,8 @@ namespace WH.Entity
         public Nullable<decimal> TIENVAT { get; set; }
         public Nullable<decimal> THANHTIENTRUOCCHIETKHAU_CT { get; set; }
         public Nullable<decimal> THANHTIENSAUCHIETKHAU_CT { get; set; }
+        public Nullable<double> CHIETKHAUTHEOPHANTRAM { get; set; }
+        public Nullable<decimal> CHIETKHAUTHEOTIEN { get; set; }
         public string GHICHU_CT { get; set; }
         public Nullable<bool> ISDELETE { get; set; }
     	//Property TIMKIEM

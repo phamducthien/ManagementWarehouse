@@ -113,6 +113,8 @@ namespace WH.Service.ReturnGoodsSupplier
                                 ISDELETE = ct.ISDELETE,
                                 THANHTIENTRUOCCHIETKHAU_CT = ct.THANHTIENTRUOCCHIETKHAU_CT,
                                 THANHTIENSAUCHIETKHAU_CT = ct.THANHTIENSAUCHIETKHAU_CT,
+                                CHIETKHAUTHEOPHANTRAM = 0,
+                                CHIETKHAUTHEOTIEN = 0,
                                 GHICHU = ct.GHICHU_CT
                             };
                             result = _tempHoaDonXuatKhoChiTietService.Add(orderExport);
