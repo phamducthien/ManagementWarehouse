@@ -442,11 +442,10 @@ namespace WH.GUI.ReturnGoodsSupplier
 
             if (soLuong <= matHangModel.NGUONGNHAP)
             {
-                return ShowMessage(IconMessageBox.Question,
+                 ShowMessage(IconMessageBox.Information,
                            "Số lượng mặt hàng " + matHangModel.TENMATHANG + " trong kho chỉ còn " + slTonKho +
-                           ", thấp hơn số lượng cần xuất " + slNhap +
-                           ". Bạn có muốn tiếp tục xuất mặt hàng này không?") ==
-                       DialogResult.Yes;
+                           ". Không đủ số lượng để xuất!!! ");
+                 return false;
             }
             return true;
         }
