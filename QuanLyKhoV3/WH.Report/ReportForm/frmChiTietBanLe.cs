@@ -123,8 +123,11 @@ namespace WH.Report.ReportForm
                 var data = _exe.Cmd_GetImportDetails(soLuongHdLoad, "", macodekhachhang,
                     batDau.ToString("yyyy/MM/dd"), ketThuc.ToString("yyyy/MM/dd"),
                     batDau.ToString("yyyy/MM/dd"));
-                data.TableName = batDau.ToString("dd_MM");
-                dsData.Add(data);
+                if (data != null)
+                {
+                    data.TableName = batDau.ToString("dd_MM");
+                    dsData.Add(data);
+                }
 
                 //for (var date = batDau.AddDays(1); date <= ketThuc; date = date.AddDays(1))
                 //{

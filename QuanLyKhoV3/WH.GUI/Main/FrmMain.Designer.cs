@@ -522,7 +522,6 @@
             this.btnThncc.Values.ExtraText = "Trả hàng nhà cung cấp";
             this.btnThncc.Values.Image = global::WH.GUI.Properties.Resources.Import;
             this.btnThncc.Values.Text = "TRẢ HÀNG NCC";
-            this.btnThncc.Click += new System.EventHandler(this.btnThncc_Click);
             // 
             // btnListExportWarehouse
             // 
