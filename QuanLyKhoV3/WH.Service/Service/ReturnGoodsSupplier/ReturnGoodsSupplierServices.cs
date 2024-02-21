@@ -125,7 +125,7 @@ namespace WH.Service.ReturnGoodsSupplier
                             objct.SOLUONGLE += ct.SOLUONGLE;
                             objct.DONGIASI = ct.DONGIA;
                             objct.THANHTIENTRUOCCHIETKHAU_CT = objct.SOLUONGLE * objct.DONGIASI;
-                            objct.CHIETKHAUTHEOTIEN = objct.THANHTIENTRUOCCHIETKHAU_CT * (decimal)objct.CHIETKHAUTHEOPHANTRAM;
+                            objct.CHIETKHAUTHEOTIEN = objct.THANHTIENTRUOCCHIETKHAU_CT * (decimal?)objct.CHIETKHAUTHEOPHANTRAM;
                             objct.THANHTIENSAUCHIETKHAU_CT = objct.THANHTIENTRUOCCHIETKHAU_CT - objct.CHIETKHAUTHEOTIEN;
 
                             result = _tempHoaDonXuatKhoChiTietService.Modify(objct);
@@ -313,37 +313,37 @@ namespace WH.Service.ReturnGoodsSupplier
 
             return result;
 
-            loi1:
+        loi1:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _hoaDonXuatKhoService.ErrMsg;
                 return MethodResult.Failed;
             }
-            loi2:
+        loi2:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _hoaDonXuatKhoChiTietService.ErrMsg;
                 return MethodResult.Failed;
             }
-            loi3:
+        loi3:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _phieuThuService.ErrMsg;
                 return MethodResult.Failed;
             }
-            loi5:
+        loi5:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _khoMatHangService.ErrMsg;
                 return MethodResult.Failed;
             }
-            loi4:
+        loi4:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = "Không có mặt hàng trong hóa đơn!";
                 return MethodResult.Failed;
             }
-            loi6:
+        loi6:
             {
                 _unitOfWork?.Rollback();
                 ErrMsg = _tempHoaDonXuatKhoChiTietService.ErrMsg;
