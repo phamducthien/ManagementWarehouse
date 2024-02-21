@@ -440,7 +440,7 @@ namespace WH.GUI.ReturnGoodsSupplier
                 soLuong = (int)(slTonKho - slXuat);
             }
 
-            if (soLuong <= 0)
+            if (soLuong < 0)
             {
                  ShowMessage(IconMessageBox.Information,
                            $"Số lượng mặt hàng " + matHangModel.TENMATHANG + " trong kho chỉ còn " + slTonKho +
